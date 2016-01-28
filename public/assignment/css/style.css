@@ -1,0 +1,8 @@
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+
+.navbar-inverse .navbar-nav>li>a.selectedNavbarLink {
+    color: white;
+}
