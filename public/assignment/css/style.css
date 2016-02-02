@@ -6,3 +6,8 @@
 .navbar-inverse .navbar-nav>li>a.selectedNavbarLink {
     color: white;
 }
+
+.margin-side{
+    margin-left: 10px;
+    margin-right: 10px;
+}
