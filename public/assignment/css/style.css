@@ -7,7 +7,12 @@
     color: white;
 }
 
-.margin-side{
+.margin-horizontal-pad {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.margin-vertical-pad{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
