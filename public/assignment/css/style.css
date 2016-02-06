@@ -20,3 +20,7 @@
 .make-top-border-solid{
     border-top-style: solid;
 }
+
+.align-to-center{
+    text-align: center;
+}
