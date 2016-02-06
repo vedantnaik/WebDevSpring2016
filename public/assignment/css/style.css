@@ -16,3 +16,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.make-top-border-solid{
+    border-top-style: solid;
+}
