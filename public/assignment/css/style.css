@@ -24,3 +24,10 @@
 .align-to-center{
     text-align: center;
 }
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: white;
+    background-color: #428bca;
+}
