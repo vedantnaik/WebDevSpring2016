@@ -2,14 +2,11 @@
  * Created by vedant on 2/21/16.
  */
 
-(function () {
-
+(function(){
     angular
         .module("FormBuilderApp")
-        .controller("MainController", MainController);
-
-    function MainController($scope, $location) {
-        $scope.$location = $location;
-    }
+        .controller("MainController", function ($scope, $location){
+            $scope.$location = $location;
+        });
 
 })();

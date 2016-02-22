@@ -5,23 +5,11 @@
 (function (){
 
     angular
-        .module("FormBuilderApp", [])
+        .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope, $location){
-        $scope.$location = $location
-
-        if ($location.url() == '/home')
-            $scope.activeHomeClass = 'active'
-
-        if ($location.url() == '/profile')
-            $scope.activeProfileClass = 'active'
-
-        if ($location.url() == '/admin')
-            $scope.activeAdminClass = 'active'
-
-        if ($location.url() == '/forms')
-            $scope.activeFormsClass = 'active'
+    function SidebarController($scope){
+        $scope.$location = $location;
     }
 
 })();

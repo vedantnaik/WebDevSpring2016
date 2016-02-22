@@ -5,11 +5,11 @@
 (function (){
 
     angular
-        .module("FormBuilderApp", [])
+        .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location){
-        $scope.currentLocation = $location
+    function HeaderController($scope){
+        $scope.$location = $location;
     }
 
 })();

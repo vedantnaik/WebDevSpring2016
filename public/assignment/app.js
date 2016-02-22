@@ -3,6 +3,7 @@
  */
 
 (function(){
+    console.log("App.js");
     angular
         .module("FormBuilderApp", ["ngRoute"]);
 })();
