@@ -9,7 +9,7 @@
         .controller("SidebarController", SidebarController);
 
     function SidebarController($scope, $location){
-        $scope.currentLocation = $location
+        $scope.$location = $location
 
         if ($location.url() == '/home')
             $scope.activeHomeClass = 'active'
