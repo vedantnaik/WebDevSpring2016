@@ -7,7 +7,6 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
 
         <title>Naik Vedant - Form Maker App</title>
 
@@ -28,19 +27,19 @@
         <script src="app.js"></script>
         <script src="config.js"></script>
 
-        <script src="admin/admin.controller.js"></script>
+        <script src="views/admin/admin.controller.js"></script>
 
-        <script src="admin/home.controller.js"></script>
+        <script src="views/home/home.controller.js"></script>
 
-        <script src="admin/forms.controller.js"></script>
-        <script src="admin/fields.controller.js"></script>
+        <script src="views/forms/forms.controller.js"></script>
+        <script src="views/forms/fields.controller.js"></script>
 
-        <script src="admin/login.controller.js"></script>
-        <script src="admin/profile.controller.js"></script>
-        <script src="admin/register.controller.js"></script>
+        <script src="views/users/login.controller.js"></script>
+        <script src="views/users/profile.controller.js"></script>
+        <script src="views/users/register.controller.js"></script>
 
-        <script src="admin/header.controller.js"></script>
-        <script src="admin/sidebar.controller.js"></script>
+        <script src="views/header/header.controller.js"></script>
+        <script src="views/sidebar/sidebar.controller.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -51,11 +50,11 @@
 
     <body ng-controller="MainController">
 
-        <div ng-include="navbar/navbar.view.html"></div>
+        <div ng-include="views/header/header.view.html"></div>
 
         <div class="container-fluid">
             <div class="row">
-                <div ng-include="sidebar/sidebar.view.html"></div>
+                <div ng-include="views/sidebar/sidebar.view.html"></div>
                 <div ng-view></div>
 
             </div>

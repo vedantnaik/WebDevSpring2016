@@ -21,9 +21,11 @@
                 templateUrl: "views/user/profile.view.html"
             })
             .when("/admin", {
-                templateUrl: "views/user/admin.view.html"
+                templateUrl: "views/admin/admin.view.html"
             })
-
+            .otherwise({
+                redirectTo: "/home"
+            });
     }
 
 })();
