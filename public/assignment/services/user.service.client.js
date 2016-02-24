@@ -6,10 +6,9 @@
 
     angular
         .module("FormBuilderApp")
-        .factory("UserSerivce", MovieService);
+        .factory("UserSerivce", UserService);
 
-    function MovieService($http) {
-
+    function UserService($http) {
         var fakeDataset = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                 "username":"alice",  "password":"alice",   "roles": ["student"]		},
@@ -23,6 +22,16 @@
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
         ]
 
-    }
 
+        var api = {
+            displayUsers : displayUsers
+        };
+
+        function displayUsers() {
+            for (user in fakeDataset){
+                console.log(user);
+            }
+        }
+
+    }
 })();
