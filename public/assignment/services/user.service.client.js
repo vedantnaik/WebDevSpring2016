@@ -24,14 +24,15 @@
                     "username":"ed",     "password":"ed",      "roles": ["student"]		}
             ],
             findUserByCredentials: findUserByCredentials,
-            setCurrentUser: setCurrentUser
+            setCurrentUser: setCurrentUser,
+            findAllUsers: findAllUser,
+            createUser: createUser,
+            deleteUserById: deleteUserById,
+            updateUser: updateUser
         };
         return model;
 
         function findUserByCredentials(username, password, callback) {
-
-            console.log("in findUserByCredentials");
-
             for (var userIndex in model.users){
                 var user = model.users[userIndex];
                 if(user.username === username){
@@ -46,11 +47,59 @@
         }
 
         function setCurrentUser(user){
-
-            console.log("in setCurrentUser");
-
             $rootScope.currentUser = user;
         }
 
+        function findAllUsers(callback){
+            callback(model.users);
+        }
+
+        function createUser(user, callback){
+            user['_id'] = user.username + (new Date).getTime();
+            model.users.push(user);
+            callback(user);
+        }
+
+        function deleteUserById(userId, callback){
+            var updatedUserList = [];
+
+            for (var userIndex in model.users) {
+                var user = model.users[userIndex];
+                if(user._id != userId){
+                    updatedUserList.push(user);
+                }
+            }
+
+            model.users = updatedUserList;
+            callback(model.users);
+        }
+
+        function updateUser(userId, user, callback){
+
+            for (var userIndex in model.users) {
+                if(model.users[userIndex]._id === userId){
+                    model.users[userIndex]._id = user._id;
+
+                    if(model.users[userIndex].firstName != user.firstName) {
+                        model.users[userIndex].firstName = user.firstName;
+                    }
+                    if(model.users[userIndex].lastName != user.lastName) {
+                        model.users[userIndex].lastName = user.lastName;
+                    }
+                    if(model.users[userIndex].username != user.username) {
+                        model.users[userIndex].username = user.username;
+                    }
+                    if(model.users[userIndex].password != user.password) {
+                        model.users[userIndex].password = user.password;
+                    }
+                    if(model.users[userIndex].roles != user.roles) {
+                        model.users[userIndex].roles = user.roles;
+                    }
+
+                    callback(model.users[userIndex]);
+                }
+            }
+
+        }
     }
 })();
