@@ -28,15 +28,16 @@
         };
         return model;
 
-        function findUserByCredentials(credentials) {
+        function findUserByCredentials(username, password, callback) {
 
-            console.log("in service");
+            console.log("in findUserByCredentials");
 
             for (var userIndex in model.users){
                 var user = model.users[userIndex];
-                if(user.username === credentials.username){
-                    if(user.password === credentials.password){
+                if(user.username === username){
+                    if(user.password === password){
                         console.log("SUCCESS : " + user);
+                        callback(user);
                         return user;
                     }
                 }
@@ -45,6 +46,9 @@
         }
 
         function setCurrentUser(user){
+
+            console.log("in setCurrentUser");
+
             $rootScope.currentUser = user;
         }
 
