@@ -25,7 +25,7 @@
             ],
             findUserByCredentials: findUserByCredentials,
             setCurrentUser: setCurrentUser,
-            findAllUsers: findAllUser,
+            findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser
@@ -57,6 +57,7 @@
         function createUser(user, callback){
             user['_id'] = user.username + (new Date).getTime();
             model.users.push(user);
+            console.log(model.users.length + " added " + user._id);
             callback(user);
         }
 
@@ -80,19 +81,19 @@
                 if(model.users[userIndex]._id === userId){
                     model.users[userIndex]._id = user._id;
 
-                    if(model.users[userIndex].firstName != user.firstName) {
+                    if(model.users[userIndex].firstName != user.firstName && user.firstName!= "") {
                         model.users[userIndex].firstName = user.firstName;
                     }
-                    if(model.users[userIndex].lastName != user.lastName) {
+                    if(model.users[userIndex].lastName != user.lastName && user.lastName!= "") {
                         model.users[userIndex].lastName = user.lastName;
                     }
-                    if(model.users[userIndex].username != user.username) {
+                    if(model.users[userIndex].username != user.username && user.username!= "") {
                         model.users[userIndex].username = user.username;
                     }
-                    if(model.users[userIndex].password != user.password) {
+                    if(model.users[userIndex].password != user.password && user.password!= "") {
                         model.users[userIndex].password = user.password;
                     }
-                    if(model.users[userIndex].roles != user.roles) {
+                    if(model.users[userIndex].roles != user.roles && user.roles!= []) {
                         model.users[userIndex].roles = user.roles;
                     }
 
