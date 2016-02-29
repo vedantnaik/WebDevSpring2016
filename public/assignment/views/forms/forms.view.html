@@ -30,60 +30,31 @@
 
                                 <tr>
                                     <td>
-                                        <input class="form-control" type="text" placeholder="Name"/>
+                                        <input ng-model="form.title" class="form-control" type="text" placeholder="Name"/>
                                     </td>
                                     <td>
-                                        <a href="#" class="margin-horizontal-pad">
+                                        <button ng-click="addForm(form)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-plus"></span>
-                                        </a>
-                                        <a href="#" class="margin-horizontal-pad">
+                                        </button>
+                                        <button ng-click="updateForm()" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-ok"></span>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr ng-repeat="form in formsForCurrentUser">
                                     <td>
-                                        <a href="fields.view.html">Registrations Form</a>
+                                        <a href="#/fields">{{form.title}}</a>
                                     </td>
                                     <td>
-                                        <a href="#" class="margin-horizontal-pad">
+                                        <button ng-click="deleteForm($index)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                        <a href="#" class="margin-horizontal-pad">
+                                        </button>
+                                        <button ng-click="selectForm($index)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <a href="fields.view.html">Contact List</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="margin-horizontal-pad">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                        <a href="#" class="margin-horizontal-pad">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <a href="fields.view.html">To-Do List</a>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="margin-horizontal-pad">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                        <a href="#" class="margin-horizontal-pad">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                    </td>
-                                </tr>
-
 
                             </tbody>
                         </table>

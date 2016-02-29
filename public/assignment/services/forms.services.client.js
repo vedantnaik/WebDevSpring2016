@@ -20,7 +20,13 @@
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            updateFormById: updateFormById,
+            doNothing: doNothing
+        }
+        return model;
+
+        function doNothing(form){
+            console.log("In do nothing")
         }
 
         function createFormForUser(userId, form, callback){
@@ -31,13 +37,16 @@
         }
 
         function findAllFormsForUser(userId, callback){
+            console.log("looking for forms for userid " + userId);
             var foundForms = [];
             for(var formIndex in model.forms){
                 if(model.forms[formIndex].userId === userId){
+                    console.log("found a form")
                     foundForms.push(model.forms[formIndex]);
                 }
             }
             callback(foundForms);
+            return foundForms;
         }
 
         function deleteFormById(formId, callback){
