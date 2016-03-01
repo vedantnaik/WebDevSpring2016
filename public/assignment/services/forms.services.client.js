@@ -63,6 +63,11 @@
 
             for (var formIndex in model.forms) {
                 if (model.forms[formIndex]._id === formId){
+
+                    console.log(model.forms[formIndex].userId);
+
+                    console.log("updated record  " + model.forms[formIndex].title + "[" + model.forms[formIndex]._id + "]" + " user " + model.forms[formIndex].userId);
+
                     model.forms[formIndex]._id = newForm._id;
 
                     if(model.forms[formIndex].title != newForm.title && newForm.title != "") {
@@ -72,6 +77,9 @@
                     if(model.forms[formIndex].userId != newForm.userId && newForm.userId != "") {
                         model.forms[formIndex].userId = newForm.userId;
                     }
+
+                    console.log("updated to  " + model.forms[formIndex].title + "[" + model.forms[formIndex]._id + "]" + " user " + model.forms[formIndex].userId);
+                    console.log("updated using  " + newForm.title + "[" + newForm._id + "]" + " user " + newForm.userId);
 
                     callback(model.forms[formIndex]);
                 }

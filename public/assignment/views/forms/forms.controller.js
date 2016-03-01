@@ -24,24 +24,27 @@
         }
 
         function updateForm(selectedForm){
-            console.log("in update form selected form id " + selectedForm._id);
+            console.log("updating " + selectedForm.title + "[" + selectedForm._id + "]" + " user " + selectedForm.userid);
+
             FormService.updateFormById(selectedForm._id, selectedForm, FormService.doNothing);
             $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
         }
 
         function deleteForm(index){
             console.log("in delete form");
-            FormService.deleteFormById($scope.formsForCurrentUser[$scope.selectedFormIndex], FormService.doNothing);
+            FormService.deleteFormById($scope.formsForCurrentUser[index]._id, FormService.doNothing);
+            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
         }
 
 
         function selectForm(index){
-            console.log("in select form");
             $scope.selectedFormIndex = index;
             $scope.selectedForm = {};
             $scope.selectedForm.title = $scope.formsForCurrentUser[index].title;
             $scope.selectedForm._id = $scope.formsForCurrentUser[index]._id;
-            $scope.selectedForm.userid = $scope.formsForCurrentUser[index].userid;
+            $scope.selectedForm.userId = $scope.currentUser._id;
+
+            console.log("selected " + $scope.selectedForm.title + " user " + $scope.selectedForm.userid);
 
         }
     }
