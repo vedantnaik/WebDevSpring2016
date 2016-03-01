@@ -56,10 +56,28 @@
         }
 
         function createUser(user, callback){
-            user['_id'] = user.username + (new Date).getTime();
-            model.users.push(user);
-            console.log(model.users.length + " added " + user._id);
-            callback(user);
+            var userToAdd = {};
+            userToAdd['_id'] = user.username + (new Date).getTime();
+
+            if (user.firstName) {
+                userToAdd['firstName'] = user.firstName;
+            }
+            if (user.lastName) {
+                userToAdd['lastName'] = user.lastName;
+            }
+            if (user.username) {
+                userToAdd['username'] = user.username;
+            }
+            if (user.password) {
+                userToAdd['password'] = user.password;
+            }
+            if (user.roles) {
+                userToAdd['roles'] = user.roles;
+            }
+
+            model.users.push(userToAdd);
+            console.log(model.users.length + " added " + userToAdd._id);
+            callback(userToAdd);
         }
 
         function deleteUserById(userId, callback){

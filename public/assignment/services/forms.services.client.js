@@ -30,9 +30,11 @@
         }
 
         function createFormForUser(userId, form, callback){
-            form['_id'] = (new Date).getTime();
-            form['userId'] = userId;
-            model.forms.push(form);
+            var formToAdd = {};
+            formToAdd['_id'] = (new Date).getTime();
+            formToAdd['userId'] = userId;
+            formToAdd['title'] = form['title'];
+            model.forms.push(formToAdd);
             callback(form);
         }
 
@@ -50,8 +52,8 @@
         }
 
         function deleteFormById(formId, callback){
-            for(var formIndex in model.forms){
-                if(model.forms[formIndex]._id === formId){
+            for (var formIndex in model.forms){
+                if (model.forms[formIndex]._id === formId){
                     callback(model.forms.splice(formIndex, 1));
                 }
             }
@@ -60,7 +62,7 @@
         function updateFormById(formId, newForm, callback){
 
             for (var formIndex in model.forms) {
-                if(model.forms[formIndex]._id === formId){
+                if (model.forms[formIndex]._id === formId){
                     model.forms[formIndex]._id = newForm._id;
 
                     if(model.forms[formIndex].title != newForm.title && newForm.title != "") {
@@ -71,7 +73,7 @@
                         model.forms[formIndex].userId = newForm.userId;
                     }
 
-                    callback(model.users[formIndex]);
+                    callback(model.forms[formIndex]);
                 }
             }
 

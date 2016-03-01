@@ -30,13 +30,13 @@
 
                                 <tr>
                                     <td>
-                                        <input ng-model="form.title" class="form-control" type="text" placeholder="Name"/>
+                                        <input ng-model="selectedForm.title" class="form-control" type="text" placeholder="Name"/>
                                     </td>
                                     <td>
-                                        <button ng-click="addForm(form)" class="margin-horizontal-pad">
+                                        <button ng-click="addForm(selectedForm)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
-                                        <button ng-click="updateForm()" class="margin-horizontal-pad">
+                                        <button ng-click="updateForm(selectedForm)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </button>
                                     </td>

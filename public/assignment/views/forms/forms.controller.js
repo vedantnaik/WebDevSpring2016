@@ -9,31 +9,41 @@
         .controller("FormController", FormController);
 
     function FormController(FormService, $scope, $rootScope, $location) {
-        $rootScope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+        if ($rootScope.currentUser) {
+            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+        }
 
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
-        function addForm(form){
-            FormService.createFormForUser($rootScope.currentUser._id, form, FormService.doNothing);
+        function addForm(selectedForm){
+            FormService.createFormForUser($rootScope.currentUser._id, selectedForm, FormService.doNothing);
+            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
         }
 
-        function updateForm(){
-            console.log("in update form");
+        function updateForm(selectedForm){
+            console.log("in update form selected form id " + selectedForm._id);
+            FormService.updateFormById(selectedForm._id, selectedForm, FormService.doNothing);
+            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
         }
 
-        function deleteForm(){
+        function deleteForm(index){
             console.log("in delete form");
+            FormService.deleteFormById($scope.formsForCurrentUser[$scope.selectedFormIndex], FormService.doNothing);
         }
 
 
-        function selectForm(){
+        function selectForm(index){
             console.log("in select form");
+            $scope.selectedFormIndex = index;
+            $scope.selectedForm = {};
+            $scope.selectedForm.title = $scope.formsForCurrentUser[index].title;
+            $scope.selectedForm._id = $scope.formsForCurrentUser[index]._id;
+            $scope.selectedForm.userid = $scope.formsForCurrentUser[index].userid;
+
         }
-
-
     }
 
 })();
