@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .controller("HeaderController", HeaderController);
 
     function HeaderController(UserService, $scope, $rootScope, $location){

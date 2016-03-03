@@ -4,7 +4,7 @@
 
 (function (){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .controller("LoginController", loginController);
 
     function loginController (UserService, $scope, $location, $rootScope){

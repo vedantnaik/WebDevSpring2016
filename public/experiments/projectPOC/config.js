@@ -3,7 +3,7 @@
  */
 
 (function(){
-    angular.module("FormBuilderApp")
+    angular.module("ProjectPOCApp")
         .config(Configuration);
 
     function Configuration ($routeProvider) {
@@ -23,15 +23,13 @@
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController"
             })
-            .when("/admin", {
-                templateUrl: "views/admin/admin.view.html"
+            .when("/quizzes", {
+                templateUrl: "views/quizzes/quizzes.view.html",
+                controller: "QuizController"
             })
-            .when("/forms", {
-                templateUrl: "views/forms/forms.view.html",
-                controller: "FormController"
-            })
-            .when("/fields", {
-                templateUrl: "views/forms/fields.view.html"
+            .when("/search", {
+                templateUrl: "views/search/search.view.html",
+                controller: "SearchController"
             })
             .otherwise({
                 redirectTo: "/home"

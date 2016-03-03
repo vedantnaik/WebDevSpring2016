@@ -5,7 +5,7 @@
 (function(){
 
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .factory("UserService", UserService);
 
     function UserService($rootScope) {

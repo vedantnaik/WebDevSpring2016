@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $scope, $rootScope, $location ) {

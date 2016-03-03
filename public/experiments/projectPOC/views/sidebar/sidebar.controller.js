@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .controller("SidebarController", SidebarController);
 
     function SidebarController($scope, $location){

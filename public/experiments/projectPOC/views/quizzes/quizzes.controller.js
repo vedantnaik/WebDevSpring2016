@@ -5,46 +5,46 @@
 (function () {
 
     angular
-        .module("FormBuilderApp")
-        .controller("FormController", FormController);
+        .module("ProjectPOCApp")
+        .controller("QuizController", QuizController);
 
-    function FormController(FormService, $scope, $rootScope, $location) {
+    function QuizController(QuizService, $scope, $rootScope, $location) {
         if ($rootScope.currentUser) {
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            $scope.quizzesForCurrentUser = QuizService.findAllQuizzesForUser($rootScope.currentUser._id, QuizService.doNothing);
         }
 
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        $scope.addQuiz = addQuiz;
+        $scope.updateQuiz = updateQuiz;
+        $scope.deleteQuiz = deleteQuiz;
+        $scope.selectQuiz = selectQuiz;
 
-        function addForm(selectedForm){
-            FormService.createFormForUser($rootScope.currentUser._id, selectedForm, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+        function addQuiz(selectedQuiz){
+            QuizService.createQuizForUser($rootScope.currentUser._id, selectedQuiz, QuizService.doNothing);
+            $scope.quizzesForCurrentUser = QuizService.findAllQuizzesForUser($rootScope.currentUser._id, QuizService.doNothing);
         }
 
-        function updateForm(selectedForm){
-            console.log("updating " + selectedForm.title + "[" + selectedForm._id + "]" + " user " + selectedForm.userid);
+        function updateQuiz(selectedQuiz){
+            console.log("updating " + selectedQuiz.title + "[" + selectedQuiz._id + "]" + " user " + selectedQuiz.userid);
 
-            FormService.updateFormById(selectedForm._id, selectedForm, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            QuizService.updateQuizById(selectedQuiz._id, selectedQuiz, QuizService.doNothing);
+            $scope.quizzesForCurrentUser = QuizService.findAllQuizzesForUser($rootScope.currentUser._id, QuizService.doNothing);
         }
 
-        function deleteForm(index){
-            console.log("in delete form");
-            FormService.deleteFormById($scope.formsForCurrentUser[index]._id, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+        function deleteQuiz(index){
+            console.log("in delete Quiz");
+            QuizService.deleteQuizById($scope.quizzesForCurrentUser[index]._id, QuizService.doNothing);
+            $scope.quizzesForCurrentUser = QuizService.findAllQuizzesForUser($rootScope.currentUser._id, QuizService.doNothing);
         }
 
 
-        function selectForm(index){
-            $scope.selectedFormIndex = index;
-            $scope.selectedForm = {};
-            $scope.selectedForm.title = $scope.formsForCurrentUser[index].title;
-            $scope.selectedForm._id = $scope.formsForCurrentUser[index]._id;
-            $scope.selectedForm.userId = $scope.currentUser._id;
+        function selectQuiz(index){
+            $scope.selectedQuizIndex = index;
+            $scope.selectedQuiz = {};
+            $scope.selectedQuiz.title = $scope.quizzesForCurrentUser[index].title;
+            $scope.selectedQuiz._id = $scope.quizzesForCurrentUser[index]._id;
+            $scope.selectedQuiz.userId = $scope.currentUser._id;
 
-            console.log("selected " + $scope.selectedForm.title + " user " + $scope.selectedForm.userid);
+            console.log("selected " + $scope.selectedQuiz.title + " user " + $scope.selectedQuiz.userid);
 
         }
     }

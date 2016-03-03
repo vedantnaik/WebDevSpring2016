@@ -4,7 +4,7 @@
 
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPOCApp")
         .controller("MainController", MainController);
 
     function MainController ($scope, $location){
