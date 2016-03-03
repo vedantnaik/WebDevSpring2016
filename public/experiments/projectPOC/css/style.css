@@ -1,0 +1,33 @@
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+
+.navbar-inverse .navbar-nav>li>a.selectedNavbarLink {
+    color: white;
+}
+
+.margin-horizontal-pad {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.margin-vertical-pad{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.make-top-border-solid{
+    border-top-style: solid;
+}
+
+.align-to-center{
+    text-align: center;
+}
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: white;
+    background-color: #428bca;
+}
