@@ -45,7 +45,6 @@
             $scope.selectedForm.userId = $scope.currentUser._id;
 
             console.log("selected " + $scope.selectedForm.title + " user " + $scope.selectedForm.userid);
-
         }
     }
 

@@ -15,7 +15,7 @@
     function ErgastService($http) {
 
         var model = {
-            apiData: [],
+            apiData: [],        // store data received from latest API call
             getDriversForSeason: getDriversForSeason,
             getDriverStandingForSeasonRound: getDriverStandingForSeasonRound,
             getConstructorStandingForSeasonRound: getConstructorStandingForSeasonRound
@@ -29,7 +29,7 @@
                 method: 'GET',
                 url: 'http://ergast.com/api/f1/'+season+'/Drivers.json'
             }).success(function(data){
-                console.log(data.MRData.DriverTable.Drivers);
+                model.apiData = data.MRData.DriverTable.Drivers;
                 callback(data.MRData.DriverTable.Drivers);
             });
 
@@ -43,7 +43,7 @@
                     .replace("SEASON", season)
                     .replace("ROUND", round)
             }).success(function(data){
-                console.log(data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+                model.apiData = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                 callback(data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
 
             });
@@ -58,7 +58,7 @@
                     .replace("SEASON", season)
                     .replace("ROUND", round)
             }).success(function(data){
-                console.log(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+                model.apiData = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
                 callback(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
             });

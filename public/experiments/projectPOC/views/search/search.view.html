@@ -3,6 +3,11 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
 
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#/search">Search</a></li>
+                <li ng-if="storeData" role="presentation"><a href="#/stored">Stored</a></li>
+            </ul>
+
             <h1 class="">Search</h1>
 
             <div>
@@ -43,6 +48,8 @@
                                 <th> Driver </th>
                                 <th> Constructor </th>
                                 <th> Nationality </th>
+
+                                <th> Action </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in standingSearchResult">
@@ -62,6 +69,18 @@
                                 <td>
                                     {{result.Driver.nationality}}
                                 </td>
+
+                                <td>
+                                    <div class="row">
+                                        <button ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-plus"></span> Store
+                                        </button>
+
+                                        <button ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-remove"></span> Hide
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -74,6 +93,9 @@
                             <th> Points </th>
                             <th> Constructor </th>
                             <th> Nationality </th>
+
+                            <th> Action </th>
+
                         </tr>
                         </thead>
                         <tbody ng-repeat="result in standingSearchResult">
@@ -89,6 +111,18 @@
                             </td>
                             <td>
                                 {{result.Constructor.nationality}}
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <button ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                        <span class="glyphicon glyphicon-plus"></span> Store
+                                    </button>
+
+                                    <button ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                        <span class="glyphicon glyphicon-remove"></span> Hide
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

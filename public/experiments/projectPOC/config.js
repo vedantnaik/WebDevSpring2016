@@ -31,6 +31,10 @@
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController"
             })
+            .when("/stored", {
+                templateUrl: "views/search/stored.view.html",
+                controller: "StoredController"
+            })
             .otherwise({
                 redirectTo: "/home"
             });
