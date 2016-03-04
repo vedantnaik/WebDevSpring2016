@@ -7,41 +7,83 @@
 
             <div>
 
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input ng-model="queryOn.season" class="form-control" type="text" placeholder="Season"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <input ng-model="queryOn.round" class="form-control" type="text" placeholder="Round"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <input ng-model="queryOn.championship" class="form-control" type="text" placeholder="Driver/Constructor"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <button ng-click="searchStanding(queryOn)" class="margin-horizontal-pad">
+                            <span class="glyphicon glyphicon-search"> Search </span>
+                        </button>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+
+                    <table ng-if="standingsSearchTypeDriver" class="table table-striped">
                         <thead>
-                        <tr>
-                            <th>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Quiz Name <span class="caret"></span>
-                                </button>
-                            </th>
-                            <th><button type="button" class="btn btn-default">
-                                Action
-                            </button></th>
-                        </tr>
+                            <tr>
+                                <th> Position </th>
+                                <th> Points </th>
+                                <th> Driver </th>
+                                <th> Constructor </th>
+                                <th> Nationality </th>
+                            </tr>
                         </thead>
-                        <tbody>
-
-                        <tr>
-                            <td>
-                                <input ng-model="queryOn.season" class="form-control" type="text" placeholder="Seasons"/>
-                            </td>
-                            <td>
-                                <button ng-click="searchDrivers(queryOn.season)" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>
-                            </td>
-                        </tr>
-
-                        <tr ng-repeat="result in driverSearchResult">
-                            <td>
-                                <label>{{result}}</label>
-                            </td>
-                        </tr>
-
+                        <tbody ng-repeat="result in standingSearchResult">
+                            <tr>
+                                <td>
+                                    {{result.position}}
+                                </td>
+                                <td>
+                                    {{result.points}}
+                                </td>
+                                <td>
+                                    <a href="{{result.Driver.url}}">{{result.Driver.givenName}} {{result.Driver.familyName}}</a>
+                                </td>
+                                <td>
+                                    <a href="{{result.Constructors[0].url}}">{{result.Constructors[0].name}}</a>
+                                </td>
+                                <td>
+                                    {{result.Driver.nationality}}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
+
+
+                    <table ng-if="!standingsSearchTypeDriver" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Position </th>
+                            <th> Points </th>
+                            <th> Constructor </th>
+                            <th> Nationality </th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in standingSearchResult">
+                        <tr>
+                            <td>
+                                {{result.position}}
+                            </td>
+                            <td>
+                                {{result.points}}
+                            </td>
+                            <td>
+                                <a href="result.Constructor.url">{{result.Constructor.name}}</a>
+                            </td>
+                            <td>
+                                {{result.Constructor.nationality}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
 
