@@ -10,7 +10,9 @@
 
     function FormController(FormService, $scope, $rootScope, $location) {
         if ($rootScope.currentUser) {
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
+                $scope.formsForCurrentUser = data;
+            });
         }
 
         $scope.addForm = addForm;
@@ -19,21 +21,34 @@
         $scope.selectForm = selectForm;
 
         function addForm(selectedForm){
-            FormService.createFormForUser($rootScope.currentUser._id, selectedForm, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            FormService.createFormForUser($rootScope.currentUser._id, selectedForm, function(newForm){
+
+                FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
+                    $scope.formsForCurrentUser = data;
+                });
+            });
         }
 
         function updateForm(selectedForm){
             console.log("updating " + selectedForm.title + "[" + selectedForm._id + "]" + " user " + selectedForm.userid);
 
-            FormService.updateFormById(selectedForm._id, selectedForm, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            FormService.updateFormById(selectedForm._id, selectedForm, function(updatedForm) {
+
+                FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
+                    $scope.formsForCurrentUser = data;
+                });
+            });
         }
 
         function deleteForm(index){
             console.log("in delete form");
-            FormService.deleteFormById($scope.formsForCurrentUser[index]._id, FormService.doNothing);
-            $scope.formsForCurrentUser = FormService.findAllFormsForUser($rootScope.currentUser._id, FormService.doNothing);
+            FormService.deleteFormById($scope.formsForCurrentUser[index]._id, function(updatedListOfForms){
+
+                FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
+                    $scope.formsForCurrentUser = data;
+                });
+            });
+
         }
 
 

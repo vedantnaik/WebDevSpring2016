@@ -20,14 +20,9 @@
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById,
-            doNothing: doNothing
+            updateFormById: updateFormById
         }
         return model;
-
-        function doNothing(form){
-            console.log("In do nothing")
-        }
 
         function createFormForUser(userId, form, callback){
             var formToAdd = {};
@@ -35,7 +30,7 @@
             formToAdd['userId'] = userId;
             formToAdd['title'] = form['title'];
             model.forms.push(formToAdd);
-            callback(form);
+            callback(formToAdd);
         }
 
         function findAllFormsForUser(userId, callback){
