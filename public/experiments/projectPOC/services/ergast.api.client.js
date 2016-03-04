@@ -16,9 +16,12 @@
 
         var model = {
             apiData: [],        // store data received from latest API call
+            storedData: [],     // data marked by user for storing as quiz facts
             getDriversForSeason: getDriversForSeason,
             getDriverStandingForSeasonRound: getDriverStandingForSeasonRound,
-            getConstructorStandingForSeasonRound: getConstructorStandingForSeasonRound
+            getConstructorStandingForSeasonRound: getConstructorStandingForSeasonRound,
+            addToStoredDataSet: addToStoredDataSet,
+            getStoredDataSet: getStoredDataSet
         };
         return model;
 
@@ -63,6 +66,14 @@
 
             });
 
+        }
+
+        function addToStoredDataSet(record){
+            model.storedData.push(record);
+        }
+
+        function getStoredDataSet(){
+            return model.storedData;
         }
 
     }

@@ -8,7 +8,7 @@
         .module("ProjectPOCApp")
         .controller("StoredController", StoredController);
 
-    function StoredController($scope, $rootScope, $location) {
+    function StoredController(ErgastService, $scope, $rootScope, $location) {
         console.log("in Stored Controller");
 
         $scope.setStandingsType = setStandingsType;
@@ -17,14 +17,11 @@
         $scope.championshipType = 'Drivers Championship';
         $scope.standingsSearchTypeDriver = true;
 
-        var driverStoredResult = $rootScope.storeData.filter(function(rec) {
-           return rec.recordType === 'd';
-        });
+        var storedData = ErgastService.getStoredDataSet();
 
-        var constructorStoredResult = $rootScope.storeData.filter(function(rec) {
-            return rec.recordType === 'c';
-        });
+        var driverStoredResult = storedData.filter(function (rec) {return rec.recordType === 'd';});
 
+        var constructorStoredResult = storedData.filter(function (rec) {return rec.recordType === 'c';});
 
         function setStandingsType(typ){
             console.log("cahnged to " + typ);

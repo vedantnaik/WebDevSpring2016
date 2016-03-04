@@ -11,10 +11,10 @@
     function SearchController(ErgastService, $scope, $rootScope, $location) {
         console.log("in Quiz Controller");
 
-        $rootScope.storeData = [];      // data marked by user for storing as quiz facts
-
         $scope.championshipType = 'Drivers Championship';
         $scope.standingsSearchTypeDriver = true;
+
+        $rootScope.dataStoredByUser = false;
 
         $scope.searchStanding = searchStanding;
         $scope.searchDrivers = searchDrivers;
@@ -61,6 +61,8 @@
         }
 
         function storeResult(index){
+            $rootScope.dataStoredByUser = true;
+
             var recordToPush = {};
 
             recordToPush.season = $scope.season;
@@ -89,13 +91,12 @@
                 recordToPush.nationality = $scope.standingSearchResult[index].Constructor.nationality;
             }
 
-            $rootScope.storeData.push(recordToPush);
+            ErgastService.addToStoredDataSet(recordToPush);
         }
 
 
 
         function hideResult(index){
-            console.log("deletig " + index);
             $scope.standingSearchResult.splice(index, 1);
         }
 

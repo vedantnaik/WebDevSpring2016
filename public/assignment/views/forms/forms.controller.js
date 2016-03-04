@@ -51,7 +51,6 @@
 
         }
 
-
         function selectForm(index){
             $scope.selectedFormIndex = index;
             $scope.selectedForm = {};
