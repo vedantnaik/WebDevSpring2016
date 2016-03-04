@@ -9,21 +9,31 @@
 
                 <div class="row">
                     <div class="col-sm-3">
-                        <input ng-model="queryOn.season" class="form-control" type="text" placeholder="Season"/>
+                        <input ng-model="queryOn.season" class="form-control align-to-center" type="text" placeholder="Season"/>
                     </div>
                     <div class="col-sm-3">
-                        <input ng-model="queryOn.round" class="form-control" type="text" placeholder="Round"/>
+                        <input ng-model="queryOn.round" class="form-control align-to-center " type="text" placeholder="Round"/>
                     </div>
                     <div class="col-sm-3">
-                        <input ng-model="queryOn.championship" class="form-control" type="text" placeholder="Driver/Constructor"/>
+
+                        <div>
+                            <button class="dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{championshipType}}<span class="caret margin-horizontal-pad"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="setStandingsType('Drivers Championship')">Drivers Championship</a></li>
+                                <li><a ng-click="setStandingsType('Constructors Championship')">Constructors Championship</a></li>
+                            </ul>
+                        </div>
+
                     </div>
                     <div class="col-sm-3">
-                        <button ng-click="searchStanding(queryOn)" class="margin-horizontal-pad">
+                        <button ng-click="searchStanding(queryOn)" class="form-control">
                             <span class="glyphicon glyphicon-search"> Search </span>
                         </button>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive margin-vertical-pad">
 
                     <table ng-if="standingsSearchTypeDriver" class="table table-striped">
                         <thead>

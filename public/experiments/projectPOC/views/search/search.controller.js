@@ -10,8 +10,13 @@
 
     function SearchController(ErgastService, $scope, $rootScope, $location) {
         console.log("in Quiz Controller");
+
+        $scope.championshipType = 'Drivers Championship';
+
+
         $scope.searchStanding = searchStanding;
         $scope.searchDrivers = searchDrivers;
+        $scope.setStandingsType = setStandingsType;
 
 
         function searchStanding(queryOn){
@@ -23,16 +28,12 @@
 
             console.log("in search");
 
-            if(queryOn.championship === "driver" ||
-                queryOn.championship === "Driver" ||
-                queryOn.championship === "d"){
+            if($scope.championshipType === 'Drivers Championship'){
                 ErgastService.getDriverStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
                     $scope.standingsSearchTypeDriver = true;
                     $scope.standingSearchResult = data;
                 });
-            } else if (queryOn.championship === "constructor" ||
-                        queryOn.championship === "Constructor" ||
-                        queryOn.championship === "c"){
+            } else if ($scope.championshipType === 'Constructors Championship'){
                 ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
                     $scope.standingsSearchTypeDriver = false;
                     $scope.standingSearchResult = data;
@@ -52,6 +53,11 @@
             });
 
             console.log("in search drivers " + $scope.driverSearchResult);
+        }
+
+
+        function setStandingsType(typ){
+            $scope.championshipType = typ;
         }
     }
 
