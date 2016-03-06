@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+            <h1 class="">Driver Details for {{driverId}}</h1>
+
+
+
+
+
+            <div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button ng-click="searchCircuits()" class="form-control">
+                            <span class="glyphicon glyphicon-search"> Circuits </span>
+                        </button>
+                    </div>
+
+                    <!--<div class="col-sm-3">-->
+                        <!--<button ng-click="searchConstructors()" class="form-control">-->
+                            <!--<span class="glyphicon glyphicon-search"> Constructors </span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-3">-->
+                        <!--<button ng-click="searchResults()" class="form-control">-->
+                            <!--<span class="glyphicon glyphicon-search"> Results </span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-3">-->
+                        <!--<button ng-click="searchStats()" class="form-control">-->
+                            <!--<span class="glyphicon glyphicon-search"> Stats </span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                </div>
+
+
+                <div ng-if="driverCircuitsData" class="table-responsive margin-vertical-pad">
+
+                    <h3>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced at the following circuits:</h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Circuit Name </th>
+                            <th> Location </th>
+                            <th> Country </th>
+                            <th> Lat/Long </th>
+
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in driverCircuitsData">
+                        <tr>
+                            <td>
+                               <a href="{{result.url}}"> {{result.circuitName}} </a>
+                            </td>
+                            <td>
+                                {{result.Location.locality}}
+                            </td>
+                            <td>
+                                {{result.Location.country}}
+                            </td>
+
+                            <td>
+                                {{result.Location.lat}} - {{result.Location.long}} [link to google map]
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+        </div>
+    </div>
+</div>

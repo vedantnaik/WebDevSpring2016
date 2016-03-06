@@ -35,6 +35,10 @@
                 templateUrl: "views/search/stored.view.html",
                 controller: "StoredController"
             })
+            .when('/driver/:driverId', {
+                templateUrl: "views/details/driver.view.html",
+                controller: "DriverController"
+            })
             .otherwise({
                 redirectTo: "/home"
             });
