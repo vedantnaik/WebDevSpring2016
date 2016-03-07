@@ -37,7 +37,8 @@
             getDriverInfo: getDriverInfo,
             getDriverCircuits: getDriverCircuits,
             getDriverConstructors: getDriverConstructors,
-            getDriverStatus: getDriverStatus
+            getDriverStatus: getDriverStatus,
+            getDriverResults: getDriverResults
 
         };
         return model;
@@ -132,6 +133,16 @@
                     .replace("DRIVERID", driverId)
             }).success(function (data) {
                 callback(data.MRData.StatusTable.Status);
+            });
+        }
+
+        function getDriverResults(driverId, callback) {
+            $http({
+                method: 'GET',
+                url: QUERY_DRIVER_DETAILS_RESULTS
+                    .replace("DRIVERID", driverId)
+            }).success(function (data) {
+                callback(data.MRData.RaceTable.Races);
             });
         }
     }

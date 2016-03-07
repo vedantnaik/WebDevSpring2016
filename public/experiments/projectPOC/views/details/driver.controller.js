@@ -22,6 +22,7 @@
         $scope.searchCircuits = searchCircuits;
         $scope.searchConstructors = searchConstructors;
         $scope.searchStatus = searchStatus;
+        $scope.searchResults = searchResults;
 
         function searchCircuits(){
             ErgastService.getDriverCircuits($scope.driverId, function(data){
@@ -44,6 +45,12 @@
             })
         }
 
+        function searchResults(){
+            ErgastService.getDriverResults($scope.driverId, function(data){
+                $scope.driverResultsData = data;
+                $scope.activeTable = "results";
+            })
+        }
     }
 
 })();
