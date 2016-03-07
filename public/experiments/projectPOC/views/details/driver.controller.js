@@ -10,21 +10,37 @@
 
     function DriverController(ErgastService, $scope, $rootScope, $location, $routeParams){
 
-        console.log("in driver controller");
-
+        // initial setup
         $scope.driverId = $routeParams.driverId;
-
         ErgastService.getDriverInfo($scope.driverId, function(driverInfo){
             $scope.driverInfo = driverInfo;
         })
 
+        $scope.activeTable = null;
+
+        // functions
         $scope.searchCircuits = searchCircuits;
-
-
+        $scope.searchConstructors = searchConstructors;
+        $scope.searchStatus = searchStatus;
 
         function searchCircuits(){
             ErgastService.getDriverCircuits($scope.driverId, function(data){
                 $scope.driverCircuitsData = data;
+                $scope.activeTable = "circuits";
+            })
+        }
+
+        function searchConstructors(){
+            ErgastService.getDriverConstructors($scope.driverId, function(data){
+                $scope.driverConstructorsData = data;
+                $scope.activeTable = "constructors";
+            })
+        }
+
+        function searchStatus(){
+            ErgastService.getDriverStatus($scope.driverId, function(data){
+                $scope.driverStatusData = data;
+                $scope.activeTable = "status";
             })
         }
 

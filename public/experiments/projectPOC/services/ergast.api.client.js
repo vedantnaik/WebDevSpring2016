@@ -35,7 +35,10 @@
 
             // driver details
             getDriverInfo: getDriverInfo,
-            getDriverCircuits: getDriverCircuits
+            getDriverCircuits: getDriverCircuits,
+            getDriverConstructors: getDriverConstructors,
+            getDriverStatus: getDriverStatus
+
         };
         return model;
 
@@ -91,9 +94,7 @@
         }
 
         // driver details
-
         function getDriverInfo(driverId, callback){
-
             $http({
                 method: 'GET',
                 url: QUERY_DRIVER_DETAILS
@@ -101,12 +102,10 @@
             }).success(function(data){
                 callback(data.MRData.DriverTable.Drivers[0]);
             });
-
         }
 
 
         function getDriverCircuits(driverId, callback){
-
             $http({
                 method: 'GET',
                 url: QUERY_DRIVER_DETAILS_CIRCUITS
@@ -114,9 +113,27 @@
             }).success(function(data){
                 callback(data.MRData.CircuitTable.Circuits);
             });
-
         }
 
+        function getDriverConstructors(driverId, callback){
+            $http({
+                method: 'GET',
+                url: QUERY_DRIVER_DETAILS_CONSTRUCTORS
+                    .replace("DRIVERID", driverId)
+            }).success(function (data){
+               callback(data.MRData.ConstructorTable.Constructors);
+            });
+        }
+
+        function getDriverStatus(driverId, callback) {
+            $http({
+                method: 'GET',
+                url: QUERY_DRIVER_DETAILS_STATUS
+                    .replace("DRIVERID", driverId)
+            }).success(function (data) {
+                callback(data.MRData.StatusTable.Status);
+            });
+        }
     }
 
 })();
