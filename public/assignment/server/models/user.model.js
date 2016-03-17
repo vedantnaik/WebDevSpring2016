@@ -10,6 +10,7 @@ module.exports = function(){
         createUser: createUser,
         findAllUsers: findAllUsers,
         findUserByUsername: findUserByUsername,
+        findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
         deleteUser: deleteUser
@@ -17,7 +18,7 @@ module.exports = function(){
 
     return api;
 
-    function createUser(user, callback){
+    function createUser(user){
         var userToAdd = {};
         userToAdd['_id'] = user.username + (new Date).getTime();
 
@@ -39,37 +40,41 @@ module.exports = function(){
 
         users.push(userToAdd);
         console.log(users.length + " added " + userToAdd._id);
-        callback(users);
+        //callback(users);
 
         return users;
     }
 
-    function findAllUsers(callback){
-        callback(users);
+    function findAllUsers(){
+        //callback(users);
         return users;
     }
 
-    function findUserByUsername(username, callback) {
+    function findUserByUsername(username) {
         for (var userIndex in users){
-            var user = users[userIndex];
-            if(user.username === username){
-                if(user.password === password){
-                    console.log("SUCCESS : " + user);
-                    callback(user);
-                    return user;
-                }
+            if(users[userIndex].username === username){
+                return users[userIndex];
             }
         }
         return null;
     }
 
-    function findUserByCredentials(credentials, callback) {
+    function findUserById(userId) {
+        for (var userIndex in users){
+            if(users[userIndex]._id === userId){
+                return users[userIndex];
+            }
+        }
+        return null;
+    }
+
+    function findUserByCredentials(credentials) {
         for (var userIndex in users){
             var user = users[userIndex];
             if(user.username === credentials.username){
                 if(user.password === credentials.password){
                     console.log("SUCCESS : found by credentials " + user);
-                    callback(user);
+                    //callback(user);
                     return user;
                 }
             }
@@ -77,7 +82,7 @@ module.exports = function(){
         return null;
     }
 
-    function updateUser(userId, user, callback){
+    function updateUser(userId, user){
 
         for (var userIndex in users) {
             if(users[userIndex]._id === userId){
@@ -99,19 +104,19 @@ module.exports = function(){
                     users[userIndex].roles = user.roles;
                 }
 
-                callback(users[userIndex]);
+                //callback(users[userIndex]);
             }
         }
     }
 
-    function deleteUser(userId, callback){
+    function deleteUser(userId){
         for (var userIndex in users) {
             var user = users[userIndex];
             if(user._id === userId){
                 users[userIndex].splice(userIndex, 1);
             }
         }
-        callback(users);
+        //callback(users);
     }
 
 }

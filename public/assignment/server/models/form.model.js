@@ -17,13 +17,13 @@ module.exports = function(){
 
     return api;
 
-    function createForm(form, callback){
+    function createForm(form){
         forms.push(form);
-        callback(form);
+        //callback(form);
         return forms;
     }
 
-    function updateFormById(formId, newForm, callback){
+    function updateFormById(formId, newForm){
 
         for (var formIndex in forms) {
             if (forms[formIndex]._id === formId){
@@ -45,7 +45,7 @@ module.exports = function(){
                 console.log("updated to  " + forms[formIndex].title + "[" + forms[formIndex]._id + "]" + " user " + forms[formIndex].userId);
                 console.log("updated using  " + newForm.title + "[" + newForm._id + "]" + " user " + newForm.userId);
 
-                callback(forms[formIndex]);
+                //callback(forms[formIndex]);
                 return forms[formIndex];
             }
         }
@@ -53,10 +53,11 @@ module.exports = function(){
         return null;
     }
 
-    function deleteFormById(formId, callback){
+    function deleteFormById(formId){
         for (var formIndex in forms){
             if (forms[formIndex]._id === formId){
-                callback(forms.splice(formIndex, 1));
+                forms.splice(formIndex, 1)
+                //callback(forms.splice(formIndex, 1));
             }
         }
     }
