@@ -57,18 +57,78 @@ module.exports=function(app,userModel){
 
     function getUserByUsername(req,res){
 
+        var username = req.query.username;
+
+        userModel.findUserByUsername(username)
+            .then(
+                function ( user ) {
+                    res.json(user);
+                    res.send(200);
+                }, function ( err ) {
+                    res.send(400).send(err);
+                }
+            );
+
+
     }
 
     function getUserByCredentials(req,res){
 
+        var credentials = { "username" : req.query.username,
+                            "password" : req.query.password };
+
+        userModel.findUserByCredentials(credentials)
+            .then(
+                function ( user ) {
+                    res.json(user);
+                    res.send(200);
+                }, function ( err ) {
+                    res.send(400).send(err);
+                }
+            );
     }
 
     function updateUser(req,res){
+
+        var user = req.body;
+        var userId = req.params.id;
+
+        userModel.updateUser(userId, user)
+            .then(
+                function ( doc ){
+                    res.send(200);
+                },
+                function ( err ){
+                    res.send(400).send(err);
+                }
+            );
 
     }
 
     function deleteUser(req,res){
 
+        var userId = req.params.id;
+
+        userModel.deleteUser(userId, user)
+            .then(
+                function ( doc ){
+
+                    userModel.findAllUsers()
+                        .then(
+                            function( allUsers ) {
+                                res.json(allUsers);
+                                res.send(200);
+                            },
+                            function( err ) {
+                                res.status(400).send(err);
+                            }
+                        );
+
+                },
+                function ( err ){
+                    res.send(400).send(err);
+                }
+            );
 
     }
 
