@@ -39,7 +39,7 @@ module.exports = function(){
 
         users.push(userToAdd);
         console.log(users.length + " added " + userToAdd._id);
-        callback(userToAdd);
+        callback(users);
 
         return users;
     }
