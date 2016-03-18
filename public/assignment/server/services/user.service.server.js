@@ -2,13 +2,13 @@
  * Created by vedant on 3/17/16.
  */
 
-module.exports=function(app,userModel){
+module.exports = function(app, userModel){
 
-    app.post('api/assignment/user', createUser);
+    app.post('/api/assignment/user', createUser);
     app.get('/api/assignment/user', getAllUsers);
     app.get('/api/assignment/user/:id', getUserById);
     app.get('/api/assignment/user?username=username', getUserByUsername);
-    app.get('/api/assignment/user?username=alice&password=wonderland', getUserByCredentials);
+    app.get('/api/assignment/user?username=username&password=password', getUserByCredentials);
     app.put('/api/assignment/user/:id', updateUser);
     app.delete('/api/assignment/user/:id', deleteUser);
 
@@ -77,6 +77,8 @@ module.exports=function(app,userModel){
         var credentials = { "username" : req.query.username,
                             "password" : req.query.password };
 
+        console.log("find  2  unme : " + credentials.username);
+
         userModel.findUserByCredentials(credentials)
             .then(
                 function ( user ) {
@@ -134,4 +136,4 @@ module.exports=function(app,userModel){
 
 
 
-}
+};
