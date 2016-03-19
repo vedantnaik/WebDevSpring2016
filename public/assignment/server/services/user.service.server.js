@@ -17,58 +17,67 @@ module.exports = function(app, userModel){
         var user = req.body;
         userModel.createUser(user);
 
-        userModel.findAllUsers()
-            .then(
-                function( allUsers ) {
-                    res.json(allUsers);
-                    res.send(200);
-                },
-                function( err ) {
-                    res.status(400).send(err);
-                }
-            );
+        res.json(user);
+        //userModel.findAllUsers()
+        //    .then(
+        //        function( allUsers ) {
+        //            res.json(allUsers);
+        //            res.send(200);
+        //        },
+        //        function( err ) {
+        //            res.status(400).send(err);
+        //        }
+        //    );
     }
 
     function getAllUsers(req,res){
-        userModel.findAllUsers()
-            .then(
-                function( allUsers ) {
-                    res.json(allUsers);
-                    res.send(200);
-                },
-                function( err ) {
-                    res.status(400).send(err);
-                }
-            );
+
+        res.json(userModel.findAllUsers());
+        //userModel.findAllUsers()
+        //    .then(
+        //        function( allUsers ) {
+        //            res.json(allUsers);
+        //            res.send(200);
+        //        },
+        //        function( err ) {
+        //            res.status(400).send(err);
+        //        }
+        //    );
     }
 
     function getUserById(req,res){
+
+
         var userId = req.params.id;
-        userModel.findUserById(userId)
-            .then(
-                function( user ) {
-                    res.json(user);
-                    res.send(200);
-                },
-                function( err ) {
-                    res.status(400).send(err);
-                }
-            );
+
+        res.json(userModel.findUserById(userId));
+
+        //userModel.findUserById(userId)
+        //    .then(
+        //        function( user ) {
+        //            res.json(user);
+        //            res.send(200);
+        //        },
+        //        function( err ) {
+        //            res.status(400).send(err);
+        //        }
+        //    );
     }
 
     function getUserByUsername(req,res){
 
         var username = req.query.username;
 
-        userModel.findUserByUsername(username)
-            .then(
-                function ( user ) {
-                    res.json(user);
-                    res.send(200);
-                }, function ( err ) {
-                    res.send(400).send(err);
-                }
-            );
+        res.json(userModel.findUserByUsername(username));
+        //userModel.findUserByUsername(username)
+        //    .then(
+        //        function ( user ) {
+        //            res.json(user);
+        //            res.send(200);
+        //        }, function ( err ) {
+        //            res.send(400).send(err);
+        //        }
+        //    );
 
 
     }
@@ -82,15 +91,17 @@ module.exports = function(app, userModel){
 
         console.log("find  2  unme : " + credentials.username);
 
-        userModel.findUserByCredentials(credentials)
-            .then(
-                function ( user ) {
-                    res.json(user);
-                    res.send(200);
-                }, function ( err ) {
-                    res.send(400).send(err);
-                }
-            );
+        res.json(userModel.findUserByCredentials(credentials));
+
+        //userModel.findUserByCredentials(credentials)
+        //    .then(
+        //        function ( user ) {
+        //            res.json(user);
+        //            res.send(200);
+        //        }, function ( err ) {
+        //            res.send(400).send(err);
+        //        }
+        //    );
     }
 
     function updateUser(req,res){
@@ -98,15 +109,19 @@ module.exports = function(app, userModel){
         var user = req.body;
         var userId = req.params.id;
 
-        userModel.updateUser(userId, user)
-            .then(
-                function ( doc ){
-                    res.send(200);
-                },
-                function ( err ){
-                    res.send(400).send(err);
-                }
-            );
+        userModel.updateUser(userId, user);
+
+        res.send(200);
+
+        //userModel.updateUser(userId, user)
+        //    .then(
+        //        function ( doc ){
+        //            res.send(200);
+        //        },
+        //        function ( err ){
+        //            res.send(400).send(err);
+        //        }
+        //    );
 
     }
 
@@ -114,26 +129,29 @@ module.exports = function(app, userModel){
 
         var userId = req.params.id;
 
-        userModel.deleteUser(userId, user)
-            .then(
-                function ( doc ){
+        userModel.deleteUser(userId, user);
 
-                    userModel.findAllUsers()
-                        .then(
-                            function( allUsers ) {
-                                res.json(allUsers);
-                                res.send(200);
-                            },
-                            function( err ) {
-                                res.status(400).send(err);
-                            }
-                        );
-
-                },
-                function ( err ){
-                    res.send(400).send(err);
-                }
-            );
+        res.json(200);
+        //userModel.deleteUser(userId, user)
+        //    .then(
+        //        function ( doc ){
+        //
+        //            userModel.findAllUsers()
+        //                .then(
+        //                    function( allUsers ) {
+        //                        res.json(allUsers);
+        //                        res.send(200);
+        //                    },
+        //                    function( err ) {
+        //                        res.status(400).send(err);
+        //                    }
+        //                );
+        //
+        //        },
+        //        function ( err ){
+        //            res.send(400).send(err);
+        //        }
+        //    );
 
     }
 
