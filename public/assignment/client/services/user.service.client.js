@@ -9,17 +9,17 @@
         .factory("UserService", UserService);
 
 
-    function UserService($rootScope, $http) {
+    function UserService($rootScope, $http, $location) {
         var service = {
-            createUser: createUser,
-            updateUser: updateUser,
-            deleteUserById: deleteUserById,
+            createUser : createUser,
+            updateUser : updateUser,
+            deleteUserById : deleteUserById,
 
-            findUserByCredentials: findUserByCredentials,
-            findAllUsers: findAllUsers,
+            findUserByCredentials : findUserByCredentials,
+            findAllUsers : findAllUsers,
 
-            setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            setCurrentUser : setCurrentUser,
+            getCurrentUser : getCurrentUser
         };
         return service;
 
@@ -28,7 +28,6 @@
             console.log("find unme : " + username);
 
             return $http.get('/api/assignment/user?username='+username+"&password="+password);
-
         }
 
 

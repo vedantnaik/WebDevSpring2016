@@ -12,7 +12,10 @@
         $scope.login = login;
 
         function login(user){
+            if(!user) {return;}
+
             console.log("1");
+
             UserService.findUserByCredentials(user.username, user.password)
                 .then(
                     function ( res ){

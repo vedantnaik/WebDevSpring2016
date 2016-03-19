@@ -39,10 +39,8 @@ module.exports = function(){
         }
 
         users.push(userToAdd);
-        console.log(users.length + " added " + userToAdd._id);
-        //callback(users);
 
-        return users;
+        return userToAdd;
     }
 
     function findAllUsers(){
@@ -104,9 +102,10 @@ module.exports = function(){
                     users[userIndex].roles = user.roles;
                 }
 
-                //callback(users[userIndex]);
+                return users[userIndex];
             }
         }
+        return null;
     }
 
     function deleteUser(userId){
@@ -116,7 +115,7 @@ module.exports = function(){
                 users[userIndex].splice(userIndex, 1);
             }
         }
-        //callback(users);
+        return users;
     }
 
 };
