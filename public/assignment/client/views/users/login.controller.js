@@ -12,7 +12,8 @@
         $scope.login = login;
 
         function login(user){
-            UserService.findUserByCredentials(user.username, user.password, UserService.setCurrentUser)
+            console.log("in login controller");
+            UserService.findUserByCredentials(user.username, user.password)
                 .then(
                     function ( res ){
                         if(res.data){

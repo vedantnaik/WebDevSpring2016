@@ -3,7 +3,7 @@
  */
 
 (function(){
-    "use strict";
+
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
@@ -24,13 +24,11 @@
         };
         return service;
 
-        function findUserByCredentials(username, password, callback) {
-
+        function findUserByCredentials(username, password) {
+            console.log("client service find by cred");
             console.log("find unme : " + username);
-            var user = $http.post("/api/assignment/user?username=" + username + "&password=" + password);
-            callback(user);
-            return user;
 
+            return $http.get('/api/assignment/user?username='+username+"&password="+password);
         }
 
         function loginUserByCredentials(username, password) {
@@ -49,30 +47,20 @@
             $rootScope.currentUser = user;
         }
 
-        function findAllUsers(callback){
-            callback($http.get('/api/assignment/user'));
+        function findAllUsers(){
+            return $http.get('/api/assignment/user');
         }
 
-        function createUser(user, callback){
-
-            $http.post("/api/assignment/user", user);
-
-            callback($http.get('/api/assignment/user'));
+        function createUser(user){
+            return $http.post('api/assignment/user',user);
         }
 
-        function deleteUserById(userId, callback){
-
-            $http.delete("/api/assignment/user/" + userId);
-
-            callback($http.get("/api/assignment/user"));
+        function deleteUserById(userId){
+            return $http.delete('/api/assignment/user/'+userId);
         }
 
-        function updateUser(userId, user, callback){
-
-            $http.put("/api/assignment/user/" + userId, user);
-
-            callback($http.get('/api/assignment/user/:id', userId));
-
+        function updateUser(userId, user){
+            return $http.put('/api/assignment/user/'+userId,user);
         }
 
         function getCurrentUser() {

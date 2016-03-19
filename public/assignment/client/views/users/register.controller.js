@@ -14,7 +14,7 @@
         function register(user) {
 
             var newUser = {"username": user.username, "password": user.password};
-            UserService.createUser(newUser, UserService.setCurrentUser);
+            UserService.createUser(newUser);
             $location.url("/profile");
         }
     }

@@ -13,7 +13,7 @@
         $scope.update = update;
 
         function update(user) {
-            UserService.updateUser(user._id, user, UserService.setCurrentUser);
+            UserService.updateUser(user._id, user);
         }
     }
 

@@ -13,6 +13,7 @@ module.exports = function(app, userModel){
     app.delete('/api/assignment/user/:id', deleteUser);
 
     function createUser(req,res){
+        console.log("in CREATE USER SERVER SERVICE");
         var user = req.body;
         userModel.createUser(user);
 
@@ -74,6 +75,8 @@ module.exports = function(app, userModel){
 
     function getUserByCredentials(req,res){
 
+        console.log("in server user service ");
+
         var credentials = { "username" : req.query.username,
                             "password" : req.query.password };
 
@@ -134,6 +137,4 @@ module.exports = function(app, userModel){
 
     }
 
-
-
-};
+}
