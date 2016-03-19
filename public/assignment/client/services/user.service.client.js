@@ -16,7 +16,6 @@
             deleteUserById: deleteUserById,
 
             findUserByCredentials: findUserByCredentials,
-            loginUserByCredentials: loginUserByCredentials,
             findAllUsers: findAllUsers,
 
             setCurrentUser: setCurrentUser,
@@ -25,22 +24,13 @@
         return service;
 
         function findUserByCredentials(username, password) {
-            console.log("client service find by cred");
+            console.log("2");
             console.log("find unme : " + username);
 
             return $http.get('/api/assignment/user?username='+username+"&password="+password);
+
         }
 
-        function loginUserByCredentials(username, password) {
-            var credentials = {
-                username: username,
-                password: password
-            }
-
-            $http.post("/api/assignment/login", credentials);
-
-            return $http.get('/api/assignment/user?username=' + username);
-        }
 
         function setCurrentUser(user){
             console.log("set user" + user.username);

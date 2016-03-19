@@ -75,7 +75,7 @@ module.exports = function(){
                 if(user.password === credentials.password){
                     console.log("SUCCESS : found by credentials " + user);
                     //callback(user);
-                    return user;
+                    return users[userIndex];
                 }
             }
         }

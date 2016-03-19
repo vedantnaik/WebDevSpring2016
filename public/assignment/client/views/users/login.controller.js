@@ -12,11 +12,12 @@
         $scope.login = login;
 
         function login(user){
-            console.log("in login controller");
+            console.log("1");
             UserService.findUserByCredentials(user.username, user.password)
                 .then(
                     function ( res ){
                         if(res.data){
+                            console.log(res.data);
                             $rootScope.currentUser = res.data;
                             $location.url("/profile");
                         } else {

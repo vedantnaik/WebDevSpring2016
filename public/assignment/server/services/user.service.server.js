@@ -31,7 +31,7 @@ module.exports = function(app, userModel){
     }
 
     function getAllUsers(req,res){
-
+        console.log("in GET ALL USERS");
         res.json(userModel.findAllUsers());
         //userModel.findAllUsers()
         //    .then(
@@ -154,5 +154,6 @@ module.exports = function(app, userModel){
         //    );
 
     }
+
 
 }
