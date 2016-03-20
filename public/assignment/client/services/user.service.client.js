@@ -32,7 +32,7 @@
 
 
         function setCurrentUser(user){
-            console.log("set user" + user.username);
+            console.log("USER SERVICE CLIENT : set user " + user.username);
             $rootScope.currentUser = user;
         }
 
@@ -49,8 +49,7 @@
         }
 
         function updateUser(userId, user){
-            console.log("CLIENT USER SERVICE " + userId);
-            return $http.put("/api/assignment/user/" + userId,user);
+            return $http.put("/api/assignment/user/" + userId, user);
         }
 
         function getCurrentUser() {

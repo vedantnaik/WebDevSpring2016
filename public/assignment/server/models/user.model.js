@@ -50,7 +50,7 @@ module.exports = function(){
 
     function findUserByUsername(username) {
         for (var userIndex in users){
-            if(users[userIndex].username === username){
+            if(users[userIndex].username == username){
                 return users[userIndex];
             }
         }
@@ -59,7 +59,7 @@ module.exports = function(){
 
     function findUserById(userId) {
         for (var userIndex in users){
-            if(users[userIndex]._id === userId){
+            if(users[userIndex]._id == userId){
                 return users[userIndex];
             }
         }
@@ -69,8 +69,8 @@ module.exports = function(){
     function findUserByCredentials(credentials) {
         for (var userIndex in users){
             var user = users[userIndex];
-            if(user.username === credentials.username){
-                if(user.password === credentials.password){
+            if(user.username == credentials.username){
+                if(user.password == credentials.password){
                     console.log("SUCCESS : found by credentials " + user);
                     //callback(user);
                     return users[userIndex];
@@ -83,8 +83,10 @@ module.exports = function(){
     function updateUser(userId, user){
         console.log("USER MODEL: UPDATE USER: " + userId);
 
+        console.log("beign for loop");
         for (var userIndex in users) {
-            if(users[userIndex]._id === userId){
+            console.log(users[userIndex]._id);
+            if(users[userIndex]._id == userId){
                 users[userIndex] = user;
                 console.log("UPDATED USER ON SERVER");
                 console.log(users[userIndex]);
@@ -97,7 +99,7 @@ module.exports = function(){
     function deleteUser(userId){
         for (var userIndex in users) {
             var user = users[userIndex];
-            if(user._id === userId){
+            if(user._id == userId){
                 users[userIndex].splice(userIndex, 1);
             }
         }

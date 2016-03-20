@@ -20,7 +20,6 @@
                 .then(
                     function ( res ){
                         if(res.data){
-                            console.log(res.data);
                             $rootScope.currentUser = res.data;
                             $location.url("/profile");
                         } else {
