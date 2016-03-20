@@ -10,9 +10,10 @@
 
     function FormController(FormService, $scope, $rootScope, $location) {
         if ($rootScope.currentUser) {
-            FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
-                $scope.formsForCurrentUser = data;
-            });
+            setCurrentUserForms();
+            //FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
+            //    $scope.formsForCurrentUser = data;
+            //});
         }
 
         $scope.addForm = addForm;
@@ -20,34 +21,75 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
-        function addForm(selectedForm){
-            FormService.createFormForUser($rootScope.currentUser._id, selectedForm, function(newForm){
 
-                FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
-                    $scope.formsForCurrentUser = data;
-                });
-            });
+        // scope functions
+
+        function addForm(selectedForm){
+
+            if(selectedForm){
+                FormService
+                    .createFormForUser($rootScope.currentUser._id, selectedForm)
+                    .then(
+                        function( res ){
+                            setCurrentUserForms();
+                        },
+                        function( err ){
+                            alert("Unable to add form!");
+                        }
+                    );
+            }
+
+            //FormService.createFormForUser($rootScope.currentUser._id, selectedForm, function(newForm){
+            //
+            //    FormService.findAllFormsForUser($rootScope.currentUser._id, function (data) {
+            //        $scope.formsForCurrentUser = data;
+            //    });
+            //});
         }
 
         function updateForm(selectedForm){
-            console.log("updating " + selectedForm.title + "[" + selectedForm._id + "]" + " user " + selectedForm.userid);
 
-            FormService.updateFormById(selectedForm._id, selectedForm, function(updatedForm) {
+            FormService
+                .updateFormById(selectedForm._id, selectedForm)
+                .then(
+                    function( res ){
+                        setCurrentUserForms();
+                    },
+                    function ( err ) {
+                        alert("Unable to update form!");
+                    }
+                );
 
-                FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
-                    $scope.formsForCurrentUser = data;
-                });
-            });
+
+
+            //FormService.updateFormById(selectedForm._id, selectedForm, function(updatedForm) {
+            //
+            //    FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
+            //        $scope.formsForCurrentUser = data;
+            //    });
+            //});
         }
 
         function deleteForm(index){
             console.log("in delete form");
-            FormService.deleteFormById($scope.formsForCurrentUser[index]._id, function(updatedListOfForms){
 
-                FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
-                    $scope.formsForCurrentUser = data;
-                });
-            });
+            FormService.deleteFormById($scope.formsForCurrentUser[index]._id)
+                .then(
+                    function ( res ) {
+                        setCurrentUserForms();
+                    },
+                    function ( err ) {
+                        alert("Unable to delete form!");
+                    }
+                );
+
+
+            //FormService.deleteFormById($scope.formsForCurrentUser[index]._id, function(updatedListOfForms){
+            //
+            //    FormService.findAllFormsForUser($rootScope.currentUser._id, function(data){
+            //        $scope.formsForCurrentUser = data;
+            //    });
+            //});
 
         }
 
@@ -59,6 +101,23 @@
             $scope.selectedForm.userId = $scope.currentUser._id;
 
             console.log("selected " + $scope.selectedForm.title + " user " + $scope.selectedForm.userid);
+        }
+
+
+        // helpers
+
+        function setCurrentUserForms(){
+            FormService.findAllFormsForUser($rootScope.currentUser._id)
+                .then(
+                    function ( res  ){
+                        if (res.data) {
+                            $scope.formsForCurrentUser = res.data;
+                        }
+                    },
+                    function ( err ) {
+                        alert("Unable to find user's forms!");
+                    }
+                );
         }
     }
 

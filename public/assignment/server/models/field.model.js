@@ -51,9 +51,13 @@ module.exports = function (uuid, formModel) {
                 formFields[fieldIndex] = fieldToUpdate;
             }
         }
-
     }
 
+
+    function findFieldsByFormId(formId){
+        var form = formModel.findFormById(formId);
+        return form.fields;
+    }
 
 
 }

@@ -8,80 +8,37 @@
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
-    function FormService(){
+    function FormService($http){
 
-        var model = {
-
-            forms: [
-                {"_id": "000", "title": "Contacts", "userId": 123},
-                {"_id": "010", "title": "ToDo",     "userId": 123},
-                {"_id": "020", "title": "CDs",      "userId": 234},
-            ],
+        var api = {
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
-            updateFormById: updateFormById
+            updateFormById: updateFormById,
+            findFormById: findFormById
         }
-        return model;
+        return api;
 
-        function createFormForUser(userId, form, callback){
-            var formToAdd = {};
-            formToAdd['_id'] = (new Date).getTime();
-            formToAdd['userId'] = userId;
-            formToAdd['title'] = form['title'];
-            model.forms.push(formToAdd);
-            callback(formToAdd);
+        function createFormForUser(userId, form){
+            return $http.post("/api/assignment/user/"+userId+"/form",form);
         }
 
-        function findAllFormsForUser(userId, callback){
+        function findAllFormsForUser(userId){
             console.log("looking for forms for userid " + userId);
-            var foundForms = [];
-            for(var formIndex in model.forms){
-                if(model.forms[formIndex].userId === userId){
-                    console.log("found a form")
-                    foundForms.push(model.forms[formIndex]);
-                }
-            }
-            callback(foundForms);
-            return foundForms;
+            return $http.get("/api/assignment/user/"+userId+"/form");
         }
 
-        function deleteFormById(formId, callback){
-            for (var formIndex in model.forms){
-                if (model.forms[formIndex]._id === formId){
-                    callback(model.forms.splice(formIndex, 1));
-                }
-            }
+        function deleteFormById(formId){
+            return $http.delete("/api/assignment/form/"+formId);
         }
 
-        function updateFormById(formId, newForm, callback){
+        function updateFormById(formId, newForm){
+            return $http.put("/api/assignment/form/"+formId,newForm);
+        }
 
-            for (var formIndex in model.forms) {
-                if (model.forms[formIndex]._id === formId){
-
-                    console.log(model.forms[formIndex].userId);
-
-                    console.log("updated record  " + model.forms[formIndex].title + "[" + model.forms[formIndex]._id + "]" + " user " + model.forms[formIndex].userId);
-
-                    model.forms[formIndex]._id = newForm._id;
-
-                    if(model.forms[formIndex].title != newForm.title && newForm.title != "") {
-                        model.forms[formIndex].title = newForm.title;
-                    }
-
-                    if(model.forms[formIndex].userId != newForm.userId && newForm.userId != "") {
-                        model.forms[formIndex].userId = newForm.userId;
-                    }
-
-                    console.log("updated to  " + model.forms[formIndex].title + "[" + model.forms[formIndex]._id + "]" + " user " + model.forms[formIndex].userId);
-                    console.log("updated using  " + newForm.title + "[" + newForm._id + "]" + " user " + newForm.userId);
-
-                    callback(model.forms[formIndex]);
-                }
-            }
-
+        function findFormById(formId){
+            return $http.get("/api/assignment/form/"+formId);
         }
 
     }
-
 })();
