@@ -15,6 +15,7 @@
             updateUser : updateUser,
             deleteUserById : deleteUserById,
 
+            findUserByUsername: findUserByUsername,
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
 
@@ -24,15 +25,14 @@
         return service;
 
         function findUserByCredentials(username, password) {
-            console.log("2");
-            console.log("find unme : " + username);
-
             return $http.get('/api/assignment/user?username='+username+"&password="+password);
         }
 
+        function findUserByUsername(username) {
+            return $http.get('/api/assignment/user?username='+username);
+        }
 
         function setCurrentUser(user){
-            console.log("USER SERVICE CLIENT : set user " + user.username);
             $rootScope.currentUser = user;
         }
 
@@ -41,7 +41,7 @@
         }
 
         function createUser(user){
-            return $http.post('api/assignment/user',user);
+            return $http.post('/api/assignment/user',user);
         }
 
         function deleteUserById(userId){

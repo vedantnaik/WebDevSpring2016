@@ -13,9 +13,41 @@
 
         function register(user) {
 
-            var newUser = {"username": user.username, "password": user.password};
-            UserService.createUser(newUser);
-            $location.url("/profile");
+            if(user.password != user.confirmPassword){
+                alert("Passwords do not match. Try Again!");
+
+            } else {
+
+                var userToCreate = {
+                    "username" : user.username,
+                    "password" : user.password,
+                    "email" : user.email
+                };
+
+                console.log(userToCreate);
+
+                UserService
+                    .createUser(userToCreate)
+                    .then(
+                        function ( resp ){
+                            // new user created
+                            UserService
+                                .findUserByUsername(userToCreate.username)
+                                .then(
+                                    function ( respGetNewUser ) {
+                                        $rootScope.currentUser = respGetNewUser.data;
+                                    },
+                                    function ( errGettingNewUser ) {
+                                        alert("Could not find newly created user on server");
+                                    });
+
+                            $location.url("/profile");
+                        },
+                        function ( err ) {
+                            // error creating new user
+                            alert("Unable to create new user. Try Again!");
+                        });
+            }
         }
     }
 
