@@ -23,6 +23,10 @@
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController"
             })
+            .when("/profile/:username?",{
+                templateUrl: "views/users/profile.view.html",
+                controller: "ProfileController"
+            })
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.html"
             })
@@ -31,7 +35,12 @@
                 controller: "FormController"
             })
             .when("/fields", {
-                templateUrl: "views/forms/fields.view.html"
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FieldsController"
+            })
+            .when("/form/:formId/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FieldsController"
             })
             .otherwise({
                 redirectTo: "/home"

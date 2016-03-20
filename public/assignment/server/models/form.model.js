@@ -26,7 +26,7 @@ module.exports = function(){
     function updateFormById(formId, newForm){
 
         for (var formIndex in forms) {
-            if (forms[formIndex]._id === formId){
+            if (forms[formIndex]._id == formId){
 
                 console.log(forms[formIndex].userId);
 
@@ -55,7 +55,7 @@ module.exports = function(){
 
     function deleteFormById(formId){
         for (var formIndex in forms){
-            if (forms[formIndex]._id === formId){
+            if (forms[formIndex]._id == formId){
                 forms.splice(formIndex, 1)
                 //callback(forms.splice(formIndex, 1));
             }
@@ -68,20 +68,24 @@ module.exports = function(){
 
     function findAllFormsForUser(userId){
         var formsForUser = [];
+        console.log("FIND ALL FORMS FOR USER");
+
+        console.log(forms);
 
         for (var formIndex in forms){
-            if (forms[formIndex].userId === userId){
+            if (forms[formIndex].userId == userId){
                 formsForUser.push(forms[formIndex]);
             }
         }
 
+        console.log(formsForUser);
         return formsForUser;
     }
 
     function findFormByTitle(formTitle){
 
         for (var formIndex in forms){
-            if (forms[formIndex].title === formTitle){
+            if (forms[formIndex].title == formTitle){
                 return forms[formIndex];
             }
         }
@@ -92,7 +96,7 @@ module.exports = function(){
     function findFormById(formId){
 
         for (var formIndex in forms){
-            if (forms[formIndex]._id === formId){
+            if (forms[formIndex]._id == formId){
                 return forms[formIndex];
             }
         }
