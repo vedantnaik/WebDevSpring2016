@@ -81,27 +81,13 @@ module.exports = function(){
     }
 
     function updateUser(userId, user){
+        console.log("USER MODEL: UPDATE USER: " + userId);
 
         for (var userIndex in users) {
             if(users[userIndex]._id === userId){
-                users[userIndex]._id = user._id;
-
-                if(users[userIndex].firstName != user.firstName && user.firstName!= "") {
-                    users[userIndex].firstName = user.firstName;
-                }
-                if(users[userIndex].lastName != user.lastName && user.lastName!= "") {
-                    users[userIndex].lastName = user.lastName;
-                }
-                if(users[userIndex].username != user.username && user.username!= "") {
-                    users[userIndex].username = user.username;
-                }
-                if(users[userIndex].password != user.password && user.password!= "") {
-                    users[userIndex].password = user.password;
-                }
-                if(users[userIndex].roles != user.roles && user.roles!= []) {
-                    users[userIndex].roles = user.roles;
-                }
-
+                users[userIndex] = user;
+                console.log("UPDATED USER ON SERVER");
+                console.log(users[userIndex]);
                 return users[userIndex];
             }
         }

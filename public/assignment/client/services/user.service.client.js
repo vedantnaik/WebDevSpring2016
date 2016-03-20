@@ -49,7 +49,8 @@
         }
 
         function updateUser(userId, user){
-            return $http.put('/api/assignment/user/'+userId,user);
+            console.log("CLIENT USER SERVICE " + userId);
+            return $http.put("/api/assignment/user/" + userId,user);
         }
 
         function getCurrentUser() {
