@@ -8,7 +8,7 @@ module.exports = function (uuid, formModel) {
 
     var api = {
         createFieldInForm: createFieldInForm,
-        deleteFeildInForm: deleteFeildInForm,
+        deleteFieldInForm: deleteFieldInForm,
         findFieldInForm: findFieldInForm,
         updateFieldInForm: updateFieldInForm,
         findFieldsByFormId: findFieldsByFormId
@@ -20,15 +20,16 @@ module.exports = function (uuid, formModel) {
         var form = formModel.findFormById(formId);
         field._id = uuid.v1();
         form.fields.push(field);
+        return form.fields;
     }
 
-    function deleteFeildInForm(formId, fieldId){
+    function deleteFieldInForm(formId, fieldId){
         var form = formModel.findFormById(formId);
         var formFields = form.fields;
 
         for(fieldIndex in formFields) {
             if(formFields[fieldIndex]._id == fieldId){
-                fields.splice(fieldIndex, 1);
+                formFields.splice(fieldIndex, 1);
             }
         }
     }

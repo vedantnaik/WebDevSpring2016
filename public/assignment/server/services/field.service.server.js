@@ -12,7 +12,6 @@ module.exports = function (app, formModel, fieldModel) {
 
 
     function getFieldsForFormIdById (req, res) {
-        console.log("GET FIELDS FOR FORM BY ID");
         //console.log(req.params);
         var formId = req.params.formId;
         res.json(fieldModel.findFieldsByFormId(formId));
@@ -27,7 +26,7 @@ module.exports = function (app, formModel, fieldModel) {
     function deleteFieldByIdInFormById (req, res) {
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
-        fieldModel.deleteFeildInForm(formId, fieldId);
+        fieldModel.deleteFieldInForm(formId, fieldId);
         res.send(200);
     }
 

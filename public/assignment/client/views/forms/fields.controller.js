@@ -16,8 +16,6 @@
         $scope.editField = editField;
 
         function init(){
-            console.log("find forms for user");
-            console.log($routeParams.formId);
 
             FieldService
                 .getFieldsForForm($routeParams.formId)
@@ -35,24 +33,41 @@
 
 
         function editField(field){
+
             $scope.field = field;
             var fieldOptions = [];
-            for (var optionIndex in $scope.field.options){
-                var str = $scope.field.options[optionIndex].label + ":" + $scope.field.options[optionIndex].value + "\n";
+            for (var option in $scope.field.options){
+                var str = $scope.field.options[option].label + ":" + $scope.field.options[option].value + "\n";
                 fieldOptions.push(str);
             }
             $scope.field.fieldOptions = fieldOptions;
+
+            // // need to fix
+            //var formId = $routeParams.formId;
+            //var fieldId = field._id;
+            //FieldService
+            //    .updateField(formId, fieldId, field)
+            //    .then(
+            //        function( res ){
+            //            init();
+            //        },
+            //        function( err ){
+            //            console.log("ERROR IN FIELD UPDATE");
+            //        }
+            //    );
+
         }
 
         function removeField(field){
+
             FieldService
                 .deleteFieldFromForm($routeParams.formId, field._id)
                 .then(
                     function( res ){
-                        $scope.fields = res.data;
+                        init();
                     },
                     function( err ){
-
+                        console.log("UNABLE TO REMOVE FIELD");
                     }
                 );
         }
@@ -116,26 +131,25 @@
             FieldService
                 .createFieldForForm($routeParams.formId, $scope.field)
                 .then(
-                    function(response){
-                        $scope.fields = response.data;
+                    function( res ){
+                        init();
                     },
                     function( err ){
-
+                        console.log("UNABLE TO CREATE FIELD");
                     }
                 );
         }
 
 
         function createField(field){
-            console.log(field);
             FieldService
                 .createFieldForForm($routeParams.formId, $scope.field)
                 .then(
                     function(response){
-
+                        init();
                     },
                     function( err ){
-
+                        console.log("UNABLE TO CREATE FIELD");
                     }
                 );
         }
