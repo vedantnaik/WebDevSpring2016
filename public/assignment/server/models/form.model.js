@@ -28,10 +28,6 @@ module.exports = function(){
         for (var formIndex in forms) {
             if (forms[formIndex]._id == formId){
 
-                console.log(forms[formIndex].userId);
-
-                console.log("updated record  " + forms[formIndex].title + "[" + forms[formIndex]._id + "]" + " user " + forms[formIndex].userId);
-
                 forms[formIndex]._id = newForm._id;
 
                 if(forms[formIndex].title != newForm.title && newForm.title != "") {
@@ -42,10 +38,6 @@ module.exports = function(){
                     forms[formIndex].userId = newForm.userId;
                 }
 
-                console.log("updated to  " + forms[formIndex].title + "[" + forms[formIndex]._id + "]" + " user " + forms[formIndex].userId);
-                console.log("updated using  " + newForm.title + "[" + newForm._id + "]" + " user " + newForm.userId);
-
-                //callback(forms[formIndex]);
                 return forms[formIndex];
             }
         }
@@ -57,7 +49,6 @@ module.exports = function(){
         for (var formIndex in forms){
             if (forms[formIndex]._id == formId){
                 forms.splice(formIndex, 1)
-                //callback(forms.splice(formIndex, 1));
             }
         }
     }
@@ -68,9 +59,6 @@ module.exports = function(){
 
     function findAllFormsForUser(userId){
         var formsForUser = [];
-        console.log("FIND ALL FORMS FOR USER");
-
-        console.log(forms);
 
         for (var formIndex in forms){
             if (forms[formIndex].userId == userId){
@@ -78,7 +66,6 @@ module.exports = function(){
             }
         }
 
-        console.log(formsForUser);
         return formsForUser;
     }
 

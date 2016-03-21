@@ -20,7 +20,7 @@
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
-
+        $scope.formFields = formFields;
 
         // scope functions
 
@@ -103,6 +103,9 @@
             console.log("selected " + $scope.selectedForm.title + " user " + $scope.selectedForm.userid);
         }
 
+        function formFields(form){
+            $location.url("/form/" + form._id + "/fields");
+        }
 
         // helpers
 

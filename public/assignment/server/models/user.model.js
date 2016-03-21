@@ -71,8 +71,6 @@ module.exports = function(){
             var user = users[userIndex];
             if(user.username == credentials.username){
                 if(user.password == credentials.password){
-                    console.log("SUCCESS : found by credentials " + user);
-                    //callback(user);
                     return users[userIndex];
                 }
             }
@@ -81,15 +79,9 @@ module.exports = function(){
     }
 
     function updateUser(userId, user){
-        console.log("USER MODEL: UPDATE USER: " + userId);
-
-        console.log("beign for loop");
         for (var userIndex in users) {
-            console.log(users[userIndex]._id);
             if(users[userIndex]._id == userId){
                 users[userIndex] = user;
-                console.log("UPDATED USER ON SERVER");
-                console.log(users[userIndex]);
                 return users[userIndex];
             }
         }

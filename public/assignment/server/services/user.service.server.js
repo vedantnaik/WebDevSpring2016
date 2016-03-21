@@ -37,8 +37,6 @@ module.exports = function(app, userModel){
 
     function getUserByCredentials(req,res){
 
-        console.log("GET USER BY CREDENTIALS");
-
         var credentials = { "username" : req.query.username,
                             "password" : req.query.password };
 
@@ -47,33 +45,27 @@ module.exports = function(app, userModel){
     }
 
     function getAllUsers(req,res){
-        console.log("in GET ALL USERS");
         res.json(userModel.findAllUsers());
-
     }
 
     function getUserByUsername(req,res){
-        console.log("GET USER BY USERNAME");
         var username = req.query.username;
         res.json(userModel.findUserByUsername(username));
     }
 
 
     function getUserById(req,res){
-        console.log("GET USER BY ID " + req.params.id);
         var userId = req.params.id;
         res.json(userModel.findUserById(userId));
     }
 
     function updateUser(req,res){
-        console.log("IN SERVER: UPDATE USER " + req.params.id);
         var user = req.body;
         var userId = req.params.id;
         res.json(userModel.updateUser(userId, user));
     }
 
     function deleteUser(req,res){
-        console.log("DELETE USER " + req.params.id);
         var userId = req.params.id;
         res.json(userModel.deleteUser(userId));
     }

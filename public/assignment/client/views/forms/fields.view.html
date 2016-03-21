@@ -1,3 +1,5 @@
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <div class="container-fluid">
     <div class="row">
 
@@ -10,258 +12,138 @@
                 <li role="presentation" class="active"><a href="#">Fields</a></li>
             </ul>
 
-            <div class="tab-content">
 
-                <div id="formsTab" class="tab-pane fade">
-                    <!-- Forms tab content is in forms.view.html page -->
+            <div ui-sortable>
+
+                <div ng-repeat="feild in fields" class="row">
+                    <div ng-switch="field.type">
+                        <div class="col-sm-6 col-md-6 main">
+                            <form>
+
+                                <div class="form-group">
+                                    <label>{{field.label}}</label>
+                                    <input ng-switch-when="TEXT" type="text"
+                                           class="form-control" placeholder={{field.placeholder}}>
+
+                                    <input ng-switch-when="EMAIL" type="email"
+                                           class="form-control" placeholder={{field.placeholder}}>
+
+                                    <select ng-switch-when="OPTIONS" class="form-control">
+                                        <option ng-repeat="option in field.options" value="option.value">{{option.label}}</option>
+                                    </select>
+
+                                    <textarea ng-switch-when="TEXTAREA" class="form-control" placeholder={{field.placeholder}}>
+                                    </textarea>
+
+                                    <input ng-switch-when="DATE" type="date" class="form-control"
+                                           placeholder={{field.placeholder}}>
+
+                                    <div ng-switch-when="CHECKBOXES" ng-repeat="option in field.options" class="form-group">
+                                        <input type="checkbox" value="option.value"/>
+                                        {{option.label}}
+                                    </div>
+
+                                    <div ng-switch-when="RADIOS">
+                                        <form class="form-group">
+                                            <div ng-repeat="option in field.options">
+                                                <input type="radio" name="option.value"
+                                                       value="option.value"/>
+                                                {{option.label}}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div class="col-sm-6 col-md-6 main">
+                            <button ng-click="editField(field)" type="button"
+                                    class="btn btn-primary glyphicon glyphicon-pencil"
+                                    data-toggle="modal" data-target="#myModal">
+                            </button>
+                            <button type="button" class="btn btn-success glyphicon glyphicon-plus">
+                            </button>
+                            <button ng-click="removeField(field)" type="button"
+                                    class="btn btn-danger glyphicon glyphicon-remove">
+                            </button>
+                            <button type="button" class="btn glyphicon glyphicon-menu-hamburger">
+                            </button>
+                        </div>
+
+
+                    </div><!-- ng-switch field type -->
+
                 </div>
 
-                <div id="fieldsTab" class="tab-pane active">
+            </div>
 
-                    <div class="row margin-vertical-pad">
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>First Name</label>
-                            </div>
+
+            <hr class="col-sm-8 col-md-8"/>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 main">
+                    <form>
+                        <div class="form-group">
+                            <label for="addfield">Add New Field:</label>
+                            <select ng-model="fieldType" class="form-control" id="addfield">
+                                <option value="singlelinetext">Single Line Text</option>
+                                <option value="date">Date</option>
+                                <option value="dropdown">Dropdown</option>
+                                <option value="checkboxes">Checkboxes</option>
+                                <option value="radiobuttons">Radio buttons</option>
+                                <option value="paragraphtextfield">Paragraph Text Field</option>
+                            </select>
                         </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-
-                                <input class="form-control" type="text" placeholder="First Name"/>
-
+                    </form>
+                </div>
+                <div class="col-sm-6 col-md-6 main">
+                    <br/>
+                    <button class="btn btn-success glyphicon glyphicon-plus"
+                            ng-click="addField(fieldType)" type="button">
+                    </button>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Field Properties</h4>
                             </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
+                            <div class="modal-body">
+                                <label for="label">
+                                    Label:
+                                </label>
+                                <input class="form-control" id="label"
+                                       ng-model="field.label" type="text"
+                                       value="field.label" placeholder = "Label">
+                            </div>
+                            <div ng-show="field.placeholder" class="modal-body">
+                                <label for="placeholder">
+                                    Placeholder:
+                                </label>
+                                <input class="form-control" id="placeholder"
+                                       ng-model="field.placeholder" type="text"
+                                       value="field.placeholder" placeholder = "Placeholder">
+                            </div>
+                            <div ng-show="field.options" class="modal-body">
+                                <label for="options">Options:</label>
+                                <textarea class="form-control" id="options"
+                                          ng-model="field.fieldOptions"
+                                          cols="40" rows="5">
+                                </textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" ng-click="createField(field)" type="button"
+                                        data-dismiss="modal">
+                                    Ok
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Cancel
+                                </button>
                             </div>
                         </div>
 
                     </div>
-
-                    <div class="row margin-vertical-pad">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>Last Name</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-
-                                <input class="form-control" type="text" placeholder="Last Name"/>
-
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row margin-vertical-pad">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>Date of Birth</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-
-                                <input class="form-control" type="date" placeholder="Date Of Birth"/>
-
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row margin-vertical-pad">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>Gender</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <div class="dropdown">
-                                    <button class="btn btn-default"
-                                            data-toggle="dropdown">
-                                        <label>Male</label>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" >
-                                        <li><a tabindex="-1" href="#">Male</a></li>
-                                        <li><a tabindex="-1" href="#">Female</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row margin-vertical-pad">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>Roles</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">Admin</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">Student</label>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">User</label>
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row margin-vertical-pad">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>License Agreement</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <div class="radio">
-                                    <label><input type="radio" name="laRadio" value=""> Yes</label>
-                                </div>
-                                <div class="radio">
-                                    <label><input type="radio" name="laRadio" value=""> No</label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row margin-vertical-pad make-top-border-solid">
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <label>Add New Field</label>
-                            </div>
-                        </div>
-
-                        <div class="row col-sm-12">
-                            <div class="col-sm-6">
-                                <div class="dropdown">
-                                    <button class="btn btn-default"
-                                            data-toggle="dropdown">
-                                        <label>Single Line</label>
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" >
-                                        <li><a tabindex="-1" href="#">Single Line</a></li>
-                                        <li><a tabindex="-1" href="#">Multiple Line</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 align-to-center">
-                                <a href="#" class="margin-horizontal-pad">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

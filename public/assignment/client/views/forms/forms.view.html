@@ -6,8 +6,12 @@
             <h1 class="">Forms</h1>
 
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Forms</a></li>
-                <li role="presentation"><a href="#/fields">Fields</a></li>
+                <li role="presentation" ng-class={'active':location.url()==='/forms'}>
+                    <a href="#">Forms</a>
+                </li>
+                <li role="presentation" ng-class={'active':location.url()==='/form/:formId/fields'}>
+                    <a href="">Fields</a>
+                </li>
             </ul>
 
             <div class="tab-content">
@@ -44,7 +48,7 @@
 
                                 <tr ng-repeat="form in formsForCurrentUser">
                                     <td>
-                                        <a href="#/fields">{{form.title}}</a>
+                                        <a ng-click="formFields(form)" href="">{{form.title}}</a>
                                     </td>
                                     <td>
                                         <button ng-click="deleteForm($index)" class="margin-horizontal-pad">

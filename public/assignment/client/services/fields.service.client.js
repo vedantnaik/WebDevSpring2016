@@ -25,6 +25,8 @@
         }
 
         function getFieldsForForm(formId){
+            //console.log("CLIENT SIDE GET FIELDS FOR FORM");
+            //console.log(formId);
             return $http.get("/api/assignment/form/" + formId + "/field");
         }
 

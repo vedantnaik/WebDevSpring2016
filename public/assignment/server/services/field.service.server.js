@@ -11,31 +11,33 @@ module.exports = function (app, formModel, fieldModel) {
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldByIdInFormById);
 
 
-    function getFieldsForFormIdById (res, req) {
+    function getFieldsForFormIdById (req, res) {
+        console.log("GET FIELDS FOR FORM BY ID");
+        //console.log(req.params);
         var formId = req.params.formId;
         res.json(fieldModel.findFieldsByFormId(formId));
     }
 
-    function getFieldByIdInFormById (res, req) {
+    function getFieldByIdInFormById (req, res) {
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
         res.json(fieldModel.findFieldInForm(formId,fieldId));
     }
 
-    function deleteFieldByIdInFormById (res, req) {
+    function deleteFieldByIdInFormById (req, res) {
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
         fieldModel.deleteFeildInForm(formId, fieldId);
         res.send(200);
     }
 
-    function addFieldInFormById (res, req) {
+    function addFieldInFormById (req, res) {
         var formId = req.params.formId;
         var field = req.body;
         res.json(fieldModel.createFieldInForm(formId, field));
     }
 
-    function updateFieldByIdInFormById(res, req) {
+    function updateFieldByIdInFormById(req, res) {
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
         var fieldToUpdate = req.body;
