@@ -15,6 +15,21 @@
         $scope.removeField = removeField;
         $scope.editField = editField;
 
+        $scope.setEditField = setEditField;
+
+        function setEditField(field){
+            $scope.editHuh = true;
+            $scope.oldField = field;
+
+            $scope.field = field;
+            var fieldOptions = [];
+            for (var option in $scope.field.options){
+                var str = $scope.field.options[option].label + ":" + $scope.field.options[option].value + "\n";
+                fieldOptions.push(str);
+            }
+            $scope.field.fieldOptions = fieldOptions;
+        }
+
         function init(){
 
             FieldService
@@ -34,27 +49,18 @@
 
         function editField(field){
 
-            $scope.field = field;
-            var fieldOptions = [];
-            for (var option in $scope.field.options){
-                var str = $scope.field.options[option].label + ":" + $scope.field.options[option].value + "\n";
-                fieldOptions.push(str);
-            }
-            $scope.field.fieldOptions = fieldOptions;
-
-            // // need to fix
-            //var formId = $routeParams.formId;
-            //var fieldId = field._id;
-            //FieldService
-            //    .updateField(formId, fieldId, field)
-            //    .then(
-            //        function( res ){
-            //            init();
-            //        },
-            //        function( err ){
-            //            console.log("ERROR IN FIELD UPDATE");
-            //        }
-            //    );
+            var formId = $routeParams.formId;
+            var fieldId = field._id;
+            FieldService
+                .updateField(formId, fieldId, field)
+                .then(
+                    function( res ){
+                        init();
+                    },
+                    function( err ){
+                        console.log("ERROR IN FIELD UPDATE");
+                    }
+                );
 
         }
 
@@ -142,16 +148,24 @@
 
 
         function createField(field){
-            FieldService
-                .createFieldForForm($routeParams.formId, $scope.field)
-                .then(
-                    function(response){
-                        init();
-                    },
-                    function( err ){
-                        console.log("UNABLE TO CREATE FIELD");
-                    }
-                );
+
+            if ($scope.editHuh){
+                $scope.editHuh = false;
+                editField(field);
+            } else {
+
+                FieldService
+                    .createFieldForForm($routeParams.formId, $scope.field)
+                    .then(
+                        function(response){
+                            init();
+                        },
+                        function( err ){
+                            console.log("UNABLE TO CREATE FIELD");
+                        }
+                    );
+            }
+
         }
     }
 })();
