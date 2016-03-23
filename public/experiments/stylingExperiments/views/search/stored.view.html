@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="#/search">Search</a></li>
+                <li ng-if="dataStoredByUser" role="presentation" class="active"><a href="#/Stored">Stored</a></li>
+            </ul>
+
+            <h1 class="">Stored Records</h1>
+
+            <div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+
+                        <div>
+                            <button class="dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{championshipType}}<span class="caret margin-horizontal-pad"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="setStandingsType('Drivers Championship')">Drivers Championship</a></li>
+                                <li><a ng-click="setStandingsType('Constructors Championship')">Constructors Championship</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4">
+                        <button ng-click="displayResults()" class="form-control">
+                            <span class="glyphicon glyphicon-search"> Display Stored </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive margin-vertical-pad">
+
+                    <table ng-if="standingsSearchTypeDriver" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Season </th>
+                            <th> Round </th>
+
+                            <th> Position </th>
+                            <th> Points </th>
+                            <th> Driver </th>
+                            <th> Constructor </th>
+                            <th> Nationality </th>
+
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in displayStoredResults">
+                        <tr>
+                            <td>
+                                {{result.season}}
+                            </td>
+                            <td>
+                                {{result.round}}
+                            </td>
+
+                            <td>
+                                {{result.position}}
+                            </td>
+                            <td>
+                                {{result.points}}
+                            </td>
+                            <td>
+                                <a href="{{result.driverUrl}}">{{result.givenName}} {{result.familyName}}</a>
+                            </td>
+                            <td>
+                                <a href="{{result.constructorUrl}}">{{result.constructorName}}</a>
+                            </td>
+                            <td>
+                                {{result.nationality}}
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table ng-if="!standingsSearchTypeDriver" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Season </th>
+                            <th> Round </th>
+
+                            <th> Position </th>
+                            <th> Points </th>
+                            <th> Constructor </th>
+                            <th> Nationality </th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in displayStoredResults">
+                        <tr>
+                            <td>
+                                {{result.season}}
+                            </td>
+                            <td>
+                                {{result.round}}
+                            </td>
+
+                            <td>
+                                {{result.position}}
+                            </td>
+                            <td>
+                                {{result.points}}
+                            </td>
+                            <td>
+                                <a href="result.constructorUrl">{{result.constructorName}}</a>
+                            </td>
+                            <td>
+                                {{result.nationality}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
