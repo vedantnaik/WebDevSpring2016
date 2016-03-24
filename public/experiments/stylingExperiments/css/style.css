@@ -58,17 +58,16 @@ body {
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
+    color: red;
 }
-/*.nav-sidebar > .active > a,*/
-/*.nav-sidebar > .active > a:hover,*/
-/*.nav-sidebar > .active > a:focus {*/
-    /*color: #fff;*/
-    /*background-color: red;*/
-/*}*/
-
-
-
-
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: white;
+    background-color: red;
+    font-size: larger;
+    font-style: italic;
+}
 
 
 /*
@@ -145,7 +144,9 @@ body {
     border-radius: 0;
     background-clip: padding-box;
     width: 100%;
-    background-color: black;
+    background-color: red;
+    font-style: oblique;
+    font-size: larger;
 }
 .navbar.stick {
     position: fixed;
@@ -175,6 +176,7 @@ body {
 }
 .navbar-collapse .navbar-nav > li > a {
     padding: 20px 30px;
+    color: black;
 }
 .dropdown ul.dropdown-menu {
     top: 85%;
@@ -227,6 +229,11 @@ body {
 .navbar-default .navbar-nav > .open > a:focus {
     background-color: white;
     color: red;
+}
+.navbar-inverse .navbar-brand {
+    color: black;
+    font-family: "Arial Black";
+    font-size: x-large;
 }
 /****************************************************************************************
 
@@ -311,10 +318,10 @@ h5 {
     font-size: 1.25rem;
 }
 a {
-    color: #bd1550;
+    color: indianred;
 }
 a:hover {
-    color: #e93675;
+    color: red;
 }
 .lead {
     font-weight: 300;
@@ -914,4 +921,53 @@ footer.entry-meta .meta-in {
     .container {
         max-width: 1080px;
     }
+}
+
+/*********************************************************************
+
+
+                                SEARCH PAGE / PILLS
+
+
+**********************************************************************/
+.nav-pills > li.active > a {
+    background-color: grey;
+}
+
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    background-color: red;
+}
+
+.form-control {
+    background: whitesmoke;
+    border-color: grey;
+}
+
+/*********************************************************************
+
+
+                                Tables
+
+
+**********************************************************************/
+
+th {
+    font-style: italic;
+    font-size: larger;
+    color: darkred;
+}
+
+
+
+/********************************************************************
+
+                        TEXT AREA FOCUS
+
+********************************************************************/
+
+.form-control:focus {
+    border-color: rgba(126, 0, 0, 0.8);
+    box-shadow: 0 1px 1px rgba(126, 0, 0, 0.075) inset, 0 0 8px rgba(126, 0, 0, 0.6);
+    outline: 0 none;
 }
