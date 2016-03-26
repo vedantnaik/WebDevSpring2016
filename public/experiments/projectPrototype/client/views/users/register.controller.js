@@ -5,10 +5,11 @@
 (function (){
 
     angular
-        .module("FormBuilderApp")
+        .module("ProjectPrototypeApp")
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $scope, $rootScope, $location ) {
+
         $scope.register = register;
 
         function register(user) {
@@ -23,6 +24,8 @@
                     "password" : user.password,
                     "email" : user.email
                 };
+
+                console.log(userToCreate);
 
                 UserService
                     .createUser(userToCreate)

@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+            <h1 class="">Quizzes</h1>
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">Quizzes</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div id="formsTab" class="tab-pane active">
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Quiz Name <span class="caret"></span>
+                                    </button></th>
+                                    <th><button type="button" class="btn btn-default">
+                                        Action
+                                    </button></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <input ng-model="selectedQuiz.title" class="form-control" type="text" placeholder="Name"/>
+                                    </td>
+                                    <td>
+                                        <button ng-click="addQuiz(selectedQuiz)" class="margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                        <button ng-click="updateQuiz(selectedQuiz)" class="margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr ng-repeat="quiz in quizzesForCurrentUser">
+                                    <td>
+                                        <a href="#/fields">{{quiz.title}}</a>
+                                    </td>
+                                    <td>
+                                        <button ng-click="deleteQuiz($index)" class="margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                        <button ng-click="selectQuiz($index)" class="margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="fieldsTab" class="tab-pane fade">
+
+                    <!-- Fields tab content is in fields.view.html page -->
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

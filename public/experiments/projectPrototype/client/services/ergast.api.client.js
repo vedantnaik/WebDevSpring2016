@@ -16,7 +16,7 @@
     var QUERY_DRIVER_DETAILS_STATUS = 'http://ergast.com/api/f1/drivers/DRIVERID/status.json';
 
     angular
-        .module("ProjectPOCApp")
+        .module("ProjectPrototypeApp")
         .factory("ErgastService", ErgastService);
 
     function ErgastService($http) {
