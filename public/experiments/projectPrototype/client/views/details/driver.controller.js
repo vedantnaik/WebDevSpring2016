@@ -32,7 +32,7 @@
 
         function searchCircuits(){
             ErgastService.getDriverCircuits($scope.driverId)
-                then.(
+                .then(
                     function( res ) {
                         $scope.driverCircuitsData = res.data.MRData.CircuitTable.Circuits;
                         $scope.activeTable = "circuits";
