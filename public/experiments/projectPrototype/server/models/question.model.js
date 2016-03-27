@@ -2,62 +2,62 @@
  * Created by vedant on 3/20/16.
  */
 
-var forms = require("./quiz.mock.json");
+var quizzes = require("./quiz.mock.json");
 
-module.exports = function (uuid, formModel) {
+module.exports = function (uuid, quizModel) {
 
     var api = {
-        createFieldInForm: createFieldInForm,
-        deleteFieldInForm: deleteFieldInForm,
-        findFieldInForm: findFieldInForm,
-        updateFieldInForm: updateFieldInForm,
-        findFieldsByFormId: findFieldsByFormId
+        createQuestionInQuiz: createQuestionInQuiz,
+        deleteQuestionInQuiz: deleteQuestionInQuiz,
+        findQuestionInQuiz: findQuestionInQuiz,
+        updateQuestionInQuiz: updateQuestionInQuiz,
+        findQuestionsByQuizId: findQuestionsByQuizId
     };
 
     return api;
 
-    function createFieldInForm(formId, field){
-        var form = formModel.findFormById(formId);
-        field._id = uuid.v1();
-        form.fields.push(field);
-        return form.fields;
+    function createQuestionInQuiz(quizId, question){
+        var quiz = quizModel.findQuizById(quizId);
+        question._id = uuid.v1();
+        quiz.questions.push(question);
+        return quiz.questions;
     }
 
-    function deleteFieldInForm(formId, fieldId){
-        var form = formModel.findFormById(formId);
-        var formFields = form.fields;
+    function deleteQuestionInQuiz(quizId, questionId){
+        var quiz = quizModel.findQuizById(quizId);
+        var quizQuestions = quiz.questions;
 
-        for(fieldIndex in formFields) {
-            if(formFields[fieldIndex]._id == fieldId){
-                formFields.splice(fieldIndex, 1);
+        for(questionIndex in quizQuestions) {
+            if(quizQuestions[questionIndex]._id == questionId){
+                quizQuestions.splice(questionIndex, 1);
             }
         }
     }
 
-    function findFieldInForm(formId, fieldId){
-        var form = formModel.findFormById(formId);
-        var formFields = form.fields;
-        for (fieldIndex in formFields) {
-            if (formFields[fieldIndex]._id == fieldId){
-                return formFields[fieldIndex];
+    function findQuestionInQuiz(quizId, questionId){
+        var quiz = quizModel.findQuizById(quizId);
+        var quizQuestions = quiz.questions;
+        for (questionIndex in quizQuestions) {
+            if (quizQuestions[questionIndex]._id == questionId){
+                return quizQuestions[questionIndex];
             }
         }
     }
 
-    function updateFieldInForm(formId, fieldId, fieldToUpdate){
-        var form = formModel.findFormById(formId);
-        var formFields = form.fields;
-        for(fieldIndex in formFields) {
-            if (formFields[fieldIndex]._id == fieldId){
-                formFields[fieldIndex] = fieldToUpdate;
+    function updateQuestionInQuiz(quizId, questionId, questionToUpdate){
+        var quiz = quizModel.findQuizById(quizId);
+        var quizQuestions = quiz.questions;
+        for(questionIndex in quizQuestions) {
+            if (quizQuestions[questionIndex]._id == questionId){
+                quizQuestions[questionIndex] = questionToUpdate;
             }
         }
     }
 
 
-    function findFieldsByFormId(formId){
-        var form = formModel.findFormById(formId);
-        return form.fields;
+    function findQuestionsByQuizId(quizId){
+        var quiz = quizModel.findQuizById(quizId);
+        return quiz.questions;
     }
 
 
