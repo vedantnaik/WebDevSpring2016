@@ -46,43 +46,55 @@
         function getDriversForSeason(season,callback){
             console.log("look for drivers in " + season);
 
-            $http({
-                method: 'GET',
-                url: 'http://ergast.com/api/f1/'+season+'/Drivers.json'
-            }).success(function(data){
-                model.apiData = data.MRData.DriverTable.Drivers;
-                callback(data.MRData.DriverTable.Drivers);
-            });
+            return $http.get("http://ergast.com/api/f1/"+season+"/Drivers.json");
+
+
+            //$http({
+            //    method: 'GET',
+            //    url: 'http://ergast.com/api/f1/'+season+'/Drivers.json'
+            //}).success(function(data){
+            //    model.apiData = data.MRData.DriverTable.Drivers;
+            //    callback(data.MRData.DriverTable.Drivers);
+            //});
 
         }
 
         function getDriverStandingForSeasonRound(season, round, callback){
 
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_STANDING_SEASON_ROUND
-                    .replace("SEASON", season)
-                    .replace("ROUND", round)
-            }).success(function(data){
-                model.apiData = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-                callback(data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+            return $http.get(QUERY_DRIVER_STANDING_SEASON_ROUND
+                                        .replace("SEASON", season)
+                                        .replace("ROUND", round));
 
-            });
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_STANDING_SEASON_ROUND
+            //        .replace("SEASON", season)
+            //        .replace("ROUND", round)
+            //}).success(function(data){
+            //    model.apiData = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+            //    callback(data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+            //
+            //});
 
         }
 
         function getConstructorStandingForSeasonRound(season, round, callback){
 
-            $http({
-                method: 'GET',
-                url: QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND
-                    .replace("SEASON", season)
-                    .replace("ROUND", round)
-            }).success(function(data){
-                model.apiData = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-                callback(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
-            });
+            return $http.get(QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND
+                                            .replace("SEASON", season)
+                                            .replace("ROUND", round));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND
+            //        .replace("SEASON", season)
+            //        .replace("ROUND", round)
+            //}).success(function(data){
+            //    model.apiData = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+            //    callback(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+            //
+            //});
 
         }
 
@@ -96,54 +108,74 @@
 
         // driver details
         function getDriverInfo(driverId, callback){
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_DETAILS
-                    .replace("DRIVERID", driverId)
-            }).success(function(data){
-                callback(data.MRData.DriverTable.Drivers[0]);
-            });
+
+            return $http.get(QUERY_DRIVER_DETAILS
+                                    .replace("DRIVERID", driverId));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_DETAILS
+            //        .replace("DRIVERID", driverId)
+            //}).success(function(data){
+            //    callback(data.MRData.DriverTable.Drivers[0]);
+            //});
         }
 
 
         function getDriverCircuits(driverId, callback){
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_DETAILS_CIRCUITS
-                    .replace("DRIVERID", driverId)
-            }).success(function(data){
-                callback(data.MRData.CircuitTable.Circuits);
-            });
+
+            return $http.get(QUERY_DRIVER_DETAILS_CIRCUITS
+                                    .replace("DRIVERID", driverId));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_DETAILS_CIRCUITS
+            //        .replace("DRIVERID", driverId)
+            //}).success(function(data){
+            //    callback(data.MRData.CircuitTable.Circuits);
+            //});
         }
 
         function getDriverConstructors(driverId, callback){
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_DETAILS_CONSTRUCTORS
-                    .replace("DRIVERID", driverId)
-            }).success(function (data){
-               callback(data.MRData.ConstructorTable.Constructors);
-            });
+
+            return $http.get(QUERY_DRIVER_DETAILS_CONSTRUCTORS
+                                    .replace("DRIVERID", driverId));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_DETAILS_CONSTRUCTORS
+            //        .replace("DRIVERID", driverId)
+            //}).success(function (data){
+            //   callback(data.MRData.ConstructorTable.Constructors);
+            //});
         }
 
         function getDriverStatus(driverId, callback) {
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_DETAILS_STATUS
-                    .replace("DRIVERID", driverId)
-            }).success(function (data) {
-                callback(data.MRData.StatusTable.Status);
-            });
+
+            return $http.get(QUERY_DRIVER_DETAILS_STATUS
+                                .replace("DRIVERID", driverId));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_DETAILS_STATUS
+            //        .replace("DRIVERID", driverId)
+            //}).success(function (data) {
+            //    callback(data.MRData.StatusTable.Status);
+            //});
         }
 
         function getDriverResults(driverId, callback) {
-            $http({
-                method: 'GET',
-                url: QUERY_DRIVER_DETAILS_RESULTS
-                    .replace("DRIVERID", driverId)
-            }).success(function (data) {
-                callback(data.MRData.RaceTable.Races);
-            });
+
+            return $http.get(QUERY_DRIVER_DETAILS_RESULTS
+                                    .replace("DRIVERID", driverId));
+
+            //$http({
+            //    method: 'GET',
+            //    url: QUERY_DRIVER_DETAILS_RESULTS
+            //        .replace("DRIVERID", driverId)
+            //}).success(function (data) {
+            //    callback(data.MRData.RaceTable.Races);
+            //});
         }
     }
 
