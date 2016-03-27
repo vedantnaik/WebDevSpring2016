@@ -14,7 +14,7 @@
         $scope.championshipType = 'Drivers Championship';
         $scope.standingsSearchTypeDriver = true;
 
-        $rootScope.dataStoredByUser = false;
+        $rootScope.dataStoredByUser = true;
 
         $scope.searchStanding = searchStanding;
         $scope.searchDrivers = searchDrivers;
@@ -98,7 +98,6 @@
         }
 
         function storeResult(index){
-            $rootScope.dataStoredByUser = true;
 
             var recordToPush = {};
 
@@ -128,7 +127,16 @@
                 recordToPush.nationality = $scope.standingSearchResult[index].Constructor.nationality;
             }
 
-            ErgastService.addToStoredDataSet(recordToPush);
+            //ErgastService.addToStoredDataSet(recordToPush);
+            FactService.createFactForUser($rootScope.currentUser._id, recordToPush)
+                .then(
+                    function ( res ) {
+
+                    },
+                    function ( err ) {
+                        alert("Unable to store fact to server");
+                    }
+                );
         }
 
 

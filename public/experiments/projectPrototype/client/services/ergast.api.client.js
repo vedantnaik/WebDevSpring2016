@@ -22,16 +22,12 @@
     function ErgastService($http) {
 
         var model = {
-            apiData: [],        // store data received from latest API call
-            storedData: [],     // data marked by user for storing as quiz facts
 
             getDriversForSeason: getDriversForSeason,
 
             // standings
             getDriverStandingForSeasonRound: getDriverStandingForSeasonRound,
             getConstructorStandingForSeasonRound: getConstructorStandingForSeasonRound,
-            addToStoredDataSet: addToStoredDataSet,
-            getStoredDataSet: getStoredDataSet,
 
             // driver details
             getDriverInfo: getDriverInfo,
@@ -44,8 +40,6 @@
         return model;
 
         function getDriversForSeason(season,callback){
-            console.log("look for drivers in " + season);
-
             return $http.get("http://ergast.com/api/f1/"+season+"/Drivers.json");
 
 
@@ -96,14 +90,6 @@
             //
             //});
 
-        }
-
-        function addToStoredDataSet(record){
-            model.storedData.push(record);
-        }
-
-        function getStoredDataSet(){
-            return model.storedData;
         }
 
         // driver details

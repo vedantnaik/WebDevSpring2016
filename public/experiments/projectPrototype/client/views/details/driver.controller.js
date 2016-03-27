@@ -12,9 +12,15 @@
 
         // initial setup
         $scope.driverId = $routeParams.driverId;
-        ErgastService.getDriverInfo($scope.driverId, function(driverInfo){
-            $scope.driverInfo = driverInfo;
-        })
+
+        ErgastService.getDriverInfo($scope.driverId)
+            .then(
+                function ( res ){
+                    $scope.driverInfo = res.data.MRData.DriverTable.Drivers[0];
+                }, function( err ) {
+                    console.log("UNABLE TO LOAD DRIVER INFO FROM ERGAST");
+                }
+            );
 
         $scope.activeTable = null;
 
@@ -25,31 +31,58 @@
         $scope.searchResults = searchResults;
 
         function searchCircuits(){
-            ErgastService.getDriverCircuits($scope.driverId, function(data){
-                $scope.driverCircuitsData = data;
-                $scope.activeTable = "circuits";
-            })
+            ErgastService.getDriverCircuits($scope.driverId)
+                then.(
+                    function( res ) {
+                        $scope.driverCircuitsData = res.data.MRData.CircuitTable.Circuits;
+                        $scope.activeTable = "circuits";
+                    },
+                    function( err ){
+                        console.log("UNABLE TO GET DRIVER'S CIRCUIT INFO");
+                    }
+                );
         }
 
         function searchConstructors(){
-            ErgastService.getDriverConstructors($scope.driverId, function(data){
-                $scope.driverConstructorsData = data;
-                $scope.activeTable = "constructors";
-            })
+
+            ErgastService.getDriverConstructors($scope.driverId)
+                .then(
+                    function ( res ) {
+                        $scope.driverConstructorsData = res.data.MRData.ConstructorTable.Constructors;
+                        $scope.activeTable = "constructors";
+                    },
+                    function ( err ) {
+                        console.log("UNABLE TO GET DRIVER'S CONSTRUCTORS INFO");
+                    }
+                );
         }
 
         function searchStatus(){
-            ErgastService.getDriverStatus($scope.driverId, function(data){
-                $scope.driverStatusData = data;
-                $scope.activeTable = "status";
-            })
+
+            ErgastService.getDriverStatus($scope.driverId)
+                .then(
+                    function( res ){
+                        $scope.driverStatusData = res.data.MRData.StatusTable.Status;
+                        $scope.activeTable = "status";
+                    },
+                    function( err ){
+                        console.log("UNABLE TO GET DRIVER'S STATUS INFO");
+                    }
+                );
         }
 
         function searchResults(){
-            ErgastService.getDriverResults($scope.driverId, function(data){
-                $scope.driverResultsData = data;
-                $scope.activeTable = "results";
-            })
+
+            ErgastService.getDriverResults($scope.driverId)
+                .then(
+                    function ( res ) {
+                        $scope.driverResultsData = res.data.MRData.RaceTable.Races;
+                        $scope.activeTable = "results";
+                    },
+                    function ( err ) {
+                        console.log("UNABLE TO GET DRIVER'S RESULT INFO");
+                    }
+                );
         }
     }
 

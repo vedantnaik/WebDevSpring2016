@@ -5,7 +5,7 @@
 
             <ul class="nav nav-pills">
                 <li role="presentation" class="active"><a href="#/search">Search</a></li>
-                <li ng-if="dataStoredByUser" role="presentation"><a href="#/stored">Stored</a></li>
+                <li ng-if="currentUser" role="presentation"><a href="#/stored">Stored</a></li>
             </ul>
 
             <h1 class="">Search</h1>
@@ -70,7 +70,14 @@
                                     {{result.Driver.nationality}}
                                 </td>
 
-                                <td>
+                                <td ng-if="!currentUser">
+                                    <div class="row">
+                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-9 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-info-sign"></span> Driver Info
+                                        </button></a>
+                                    </div>
+                                </td>
+                                <td ng-if="currentUser">
                                     <div class="row">
                                         <button ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-plus"></span> Store
@@ -98,7 +105,7 @@
                             <th> Constructor </th>
                             <th> Nationality </th>
 
-                            <th> Action </th>
+                            <th ng-if="currentUser"> Action </th>
 
                         </tr>
                         </thead>
@@ -119,11 +126,11 @@
 
                             <td>
                                 <div class="row">
-                                    <button ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                    <button ng-if="currentUser" ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
                                         <span class="glyphicon glyphicon-plus"></span> Store
                                     </button>
 
-                                    <button ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                    <button ng-if="currentUser" ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
                                         <span class="glyphicon glyphicon-remove"></span> Hide
                                     </button>
                                 </div>
