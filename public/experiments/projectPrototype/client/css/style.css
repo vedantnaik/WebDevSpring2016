@@ -44,8 +44,8 @@ body {
         padding: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-        background-color: #f5f5f5;
         border-right: 1px solid #eee;
+        background-color: #7C7C7C;
     }
 }
 
@@ -58,7 +58,12 @@ body {
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
-    color: red;
+    color: white;
+}
+.nav-sidebar > li > a:hover {
+    background-color: black;
+    font-size: larger;
+    font-style: italic;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
@@ -231,7 +236,7 @@ body {
     color: red;
 }
 .navbar-inverse .navbar-brand {
-    color: black;
+    color: #232323;
     font-family: "Arial Black";
     font-size: x-large;
 }
@@ -351,7 +356,7 @@ a:hover {
 
 **********************************************************************/
 #head {
-    background: #f4f4f4 url(../images/bg_head.jpg) top center;
+    background: #f4f4f4 url(../images/pitcrew.jpg) top center;
     background-size: cover;
     color: #7C7C7C;
     padding: 30px 0 35px 0;
@@ -931,12 +936,12 @@ footer.entry-meta .meta-in {
 
 **********************************************************************/
 .nav-pills > li.active > a {
-    background-color: grey;
+    background-color: red;
 }
 
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-    background-color: red;
+    background-color: orangered;
 }
 
 .form-control {
@@ -976,11 +981,15 @@ th {
 
 /********************************************************************
 
-                        TEXT AREA FOCUS
+                        IMAGES
 
 ********************************************************************/
 
-div.bkg-winner-image {
+div.stretch-redbull-image {
     height:100vh;
     background-image: url("../images/redbull_bw_back.jpg");
+}
+
+.index-background {
+    background-color: #ececec;
 }

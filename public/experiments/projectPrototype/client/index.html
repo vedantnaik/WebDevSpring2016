@@ -65,16 +65,12 @@
     <![endif]-->
 </head>
 
-<body ng-controller="MainController">
-<div ng-include="'views/header/header.view.html'"></div>
+<body ng-controller="MainController" class="index-background">
+    <div ng-include="'views/header/header.view.html'"></div>
+        <div class="row">
+            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+            <div ng-view></div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div ng-include="'views/sidebar/sidebar.view.html'"></div>
-        <div ng-view></div>
-
-    </div>
-</div>
-
-</body>
+        </div>
+    </body>
 </html>
