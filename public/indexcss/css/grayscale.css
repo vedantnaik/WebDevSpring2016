@@ -168,6 +168,10 @@ a:focus {
     font-size: 18px;
 }
 
+#about {
+    height:80vh;
+}
+
 @media(min-width:768px) {
     .intro {
         height: 100%;
@@ -259,6 +263,20 @@ a:focus {
 
 .content-section {
     padding-top: 100px;
+
+}
+
+.links-section {
+    width: 100%;
+    height: auto;
+    padding: 150px 0;
+    color: #fff;
+    background: url(../img/sahara.jpg) no-repeat center center scroll;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 .download-section {
@@ -272,6 +290,7 @@ a:focus {
     background-size: cover;
     -o-background-size: cover;
 }
+
 
 #map {
     width: 100%;

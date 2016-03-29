@@ -9,7 +9,7 @@
   <meta name="description" content="WebDevSpring2016">
   <meta name="author" content="Vedant Naik">
 
-  <title>Vedant Naik</title>
+  <title>Vedant Naik<g/title>
 
   <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -47,12 +47,24 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Welcome!<span class="sr-only">(current)</span></a></li>
-        <li><a href="assignment/client/index.html">Assignment</a></li>
-        <li><a href="experiments/projectPrototype/client/index.html">Project</a></li>
-        <li><a href="https://docs.google.com/document/d/1a15QPdhWnR1VqCIi1u2XxD6BA5t8g7w1QrBW7wjMjr0/edit">Project Proposal</a></li>
-        <li><a href="https://github.com/vedantnaik/WebDevSpring2016">GitHub</a></li>
+        <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+        <li class="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#about">About</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#cslinks">Important Links</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#github">GitHub</a>
+        </li>
+        <li>
+          <a class="page-scroll" href="#contact">Contact</a>
+        </li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->
@@ -96,18 +108,37 @@
         I realized I need to take up CS 5610! This website hosts
         <br>my assignments: <a href="assignment/client/index.html">Form Maker App,</a>
         <br>and a fun project: <a href="experiments/projectPrototype/client/index.html">F1 Explorer!</a>
+        <br>
+
       </p>
     </div>
   </div>
 </section>
 
+<!-- Links Section -->
+<section id="cslinks" class="links-section text-center">
+  <div class="links-section">
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-2">
+        <h2>Important Links</h2>
+        <ul class="list-inline">
+          <li><a href="assignment/client/index.html" class="btn btn-default btn-lg">Assignment</a></li>
+          <li><a href="experiments/projectPrototype/client/index.html" class="btn btn-default btn-lg">Project</a></li>
+          <li><a href="https://docs.google.com/document/d/1a15QPdhWnR1VqCIi1u2XxD6BA5t8g7w1QrBW7wjMjr0/edit" class="btn btn-default btn-lg">Project Proposal</a></li>
+          <li><a href="https://github.com/vedantnaik/WebDevSpring2016" class="btn btn-default btn-lg">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Download Section -->
-<section class="content-section text-center">
+<section id="github" class="content-section text-center">
   <div class="download-section">
     <div class="container">
       <div class="col-lg-8 col-lg-offset-2">
         <h2>Source Code</h2>
-        <p>You can view the source code for this project on Github.</p>
+        <p>You can view the source code for this website on Github.</p>
         <a href="https://github.com/vedantnaik/WebDevSpring2016" class="btn btn-default btn-lg">Visit Vedant's GitHub</a>
       </div>
     </div>
