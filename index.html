@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
+  <meta name="description" content="WebDevSpring2016">
+  <meta name="author" content="Vedant Naik">
 
-  <title>Naik Vedant</title>
+  <title>Vedant Naik</title>
 
-  <!-- Latest compiled and minified CSS -->
+  <!-- Bootstrap Core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-  <!-- Custom styles for this template -->
-  <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="indexcss/css/grayscale.css" rel="stylesheet">
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- Custom Fonts -->
+  <link href="indexcss/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<!-- Navigation -->
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+        <i class="fa fa-bars"></i>
       </button>
-      <a class="navbar-brand" href="#">Vedant Naik</a>
+      <a class="navbar-brand page-scroll" href="#page-top">
+        <i class="fa fa-play-circle"></i>  <span class="light">VEDANT</span> NAIK
+      </a>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Welcome!<span class="sr-only">(current)</span></a></li>
         <li><a href="assignment/client/index.html">Assignment</a></li>
@@ -48,37 +54,118 @@
         <li><a href="https://docs.google.com/document/d/1a15QPdhWnR1VqCIi1u2XxD6BA5t8g7w1QrBW7wjMjr0/edit">Project Proposal</a></li>
         <li><a href="https://github.com/vedantnaik/WebDevSpring2016">GitHub</a></li>
       </ul>
-    </div><!--/.nav-collapse -->
+    </div>
+    <!-- /.navbar-collapse -->
   </div>
+  <!-- /.container -->
 </nav>
 
-<div class="container">
-
-  <div class="col-md-12 jumbotron">
-
-    <div class="col-md-8">
-      <h1>Welcome!</h1>
-
-      <p>
-        My name is Vedant Naik. I am a Masters student at Northeastern University.
-        This is my CS 5610 course work.
-
-        Feel free to explore, and stay tuned for more!
-      </p>
-    </div>
-
-    <div class="col-md-4">
-      <img src="https://scontent.fphl1-1.fna.fbcdn.net/hphotos-xpt1/v/t1.0-9/12107713_10206066007943975_492330553272697234_n.jpg?oh=9b703beb8ea4e875d18c96c07e0b07db&oe=576FCB2E" width="100%" height="100%"/>
+<!-- Intro Header -->
+<header class="intro">
+  <div class="intro-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h1 class="brand-heading">WEB DEVELOPMENT</h1>
+          <p class="intro-text">
+            Feel free to explore, and stay tuned for more!.
+          </p>
+          <a href="#about" class="btn btn-circle page-scroll">
+            <i class="fa fa-angle-double-down animated"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
+</header>
 
-</div><!-- /.container -->
+<!-- About Section -->
+<section id="about" class="container content-section text-center">
+  <div class="row">
+    <div class="col-lg-4">
+      <img class="col-lg-12" src="indexcss/img/vedant.jpg">
+    </div>
+    <div class="col-lg-8">
+      <h2>About</h2>
+      <p>
+        My name is Vedant Naik. I am a Masters student at Northeastern University.
+        After a disastrous attempt to make my own website back in the Spring of 2015
+        <br>
+        <a href="http://vedantnaik.com/">vedantnaik.com</a>
+        <br>
+        I realized I need to take up CS 5610! This website hosts
+        <br>my assignments: <a href="assignment/client/index.html">Form Maker App,</a>
+        <br>and a fun project: <a href="experiments/projectPrototype/client/index.html">F1 Explorer!</a>
+      </p>
+    </div>
+  </div>
+</section>
 
+<!-- Download Section -->
+<section class="content-section text-center">
+  <div class="download-section">
+    <div class="container">
+      <div class="col-lg-8 col-lg-offset-2">
+        <h2>Source Code</h2>
+        <p>You can view the source code for this project on Github.</p>
+        <a href="https://github.com/vedantnaik/WebDevSpring2016" class="btn btn-default btn-lg">Visit Vedant's GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Contact Section -->
+<section id="contact" class="container content-section text-center">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <h2>Contact Vedant Naik</h2>
+      <p>Feel free to reach out and say hello!</p>
+      <ul class="list-inline banner-social-buttons">
+        <li>
+          <a href="https://twitter.com/vedantNAIK" class="btn btn-default btn-lg">
+            <i class="fa fa-twitter fa-fw"></i><span class="label">Twitter</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/naik.vedant" class="btn btn-default btn-lg">
+            <i class="fa fa-facebook fa-fw"></i><span class="label">Facebook</span></a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/vedantnaik" class="btn btn-default btn-lg">
+            <i class="fa fa-linkedin fa-fw"></i><span class="label">Linkedin</span></a>
+        </li>
+        <li>
+          <a href="https://github.com/vedantnaik/vn_public" class="btn btn-default btn-lg">
+            <i class="fa fa-github fa-fw"></i><span class="label">Github</span></a>
+        </li>
+        <li>
+          <a href="https://plus.google.com/+VedantNaik/" class="btn btn-default btn-lg">
+            <i class="fa fa-google-plus fa-fw"></i><span class="label">Google+</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container text-center">
+    <p>Copyright &copy; <a href"http://vedantnaik.com/">vedantnaik.com</a> 2016</p>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script src="indexcss/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="indexcss/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="indexcss/js/jquery.easing.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="indexcss/js/grayscale.js"></script>
+
 </body>
 
 </html>
