@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var public_folder = __dirname + '/public';
 var app = express();
 var uuid=require('node-uuid');
-var request = require('request');
 
 app.use(multer());
 app.use(bodyParser.json());
@@ -29,4 +28,3 @@ app.get('/', function(req, res){
 });
 
 app.listen(port, ipaddress);
-
