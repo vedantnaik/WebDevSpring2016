@@ -10,24 +10,26 @@
 
     function FieldController($routeParams, $scope, FieldService){
 
-        $scope.addField = addField;
-        $scope.createField = createField;
-        $scope.removeField = removeField;
-        $scope.editField = editField;
+        var vm = this;
 
-        $scope.setEditField = setEditField;
+        vm.addField = addField;
+        vm.createField = createField;
+        vm.removeField = removeField;
+        vm.editField = editField;
+
+        vm.setEditField = setEditField;
 
         function setEditField(field){
-            $scope.editHuh = true;
-            $scope.oldField = field;
+            vm.editHuh = true;
+            vm.oldField = field;
 
-            $scope.field = field;
+            vm.field = field;
             var fieldOptions = [];
-            for (var option in $scope.field.options){
-                var str = $scope.field.options[option].label + ":" + $scope.field.options[option].value + "\n";
+            for (var option in vm.field.options){
+                var str = vm.field.options[option].label + ":" + vm.field.options[option].value + "\n";
                 fieldOptions.push(str);
             }
-            $scope.field.fieldOptions = fieldOptions;
+            vm.field.fieldOptions = fieldOptions;
         }
 
         function init(){
@@ -36,7 +38,7 @@
                 .getFieldsForForm($routeParams.formId)
                 .then(
                     function( res ){
-                        $scope.fields = res.data;
+                        vm.fields = res.data;
                     },
                     function( err ){
                         console.log("ERROR IN FIELD CONTROLLER INIT");
@@ -81,27 +83,27 @@
 
         function addField(type){
             if (type == "singlelinetext"){
-                $scope.field = {
+                vm.field = {
                     label: "New Text Field",
                     type : "TEXT",
                     placeholder : "New Field"
                 }
             }
             else if (type == "paragraphtextfield"){
-                $scope.field = {
+                vm.field = {
                     label: "New Text Field",
                     type : "TEXTAREA",
                     placeholder : "New Field"
                 }
             }
             else if (type == "date"){
-                $scope.field = {
+                vm.field = {
                     label: "New Date Field",
                     type : "DATE"
                 }
             }
             else if (type == "dropdown"){
-                $scope.field = {
+                vm.field = {
                     label: "New Dropdown",
                     type : "OPTIONS",
                     options : [
@@ -112,7 +114,7 @@
                 }
             }
             else if (type == "checkboxes"){
-                $scope.field = {
+                vm.field = {
                     label: "New Checkboxes",
                     type : "CHECKBOXES",
                     options : [
@@ -123,7 +125,7 @@
                 }
             }
             else if (type == "radiobuttons"){
-                $scope.field = {
+                vm.field = {
                     label: "New Radio Buttons",
                     type : "RADIOS",
                     options : [
@@ -135,7 +137,7 @@
             }
 
             FieldService
-                .createFieldForForm($routeParams.formId, $scope.field)
+                .createFieldForForm($routeParams.formId, vm.field)
                 .then(
                     function( res ){
                         init();
@@ -149,13 +151,13 @@
 
         function createField(field){
 
-            if ($scope.editHuh){
-                $scope.editHuh = false;
+            if (vm.editHuh){
+                vm.editHuh = false;
                 editField(field);
             } else {
 
                 FieldService
-                    .createFieldForForm($routeParams.formId, $scope.field)
+                    .createFieldForForm($routeParams.formId, vm.field)
                     .then(
                         function(response){
                             init();

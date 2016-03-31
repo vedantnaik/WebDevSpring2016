@@ -5,7 +5,7 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
 
-            <h1 class="">Forms: Registration Form</h1>
+            <h1 class="page-header">Forms: Registration Form</h1>
 
             <ul class="nav nav-tabs">
                 <li role="presentation"><a href="#/forms">Forms</a></li>
@@ -15,7 +15,7 @@
 
             <div ui-sortable>
 
-                <div ng-repeat="field in fields" class="row">
+                <div ng-repeat="field in model.fields" class="row">
                     <div ng-switch="field.type">
                         <div class="col-sm-6 col-md-6 main">
                             <form>
@@ -58,13 +58,13 @@
 
                         <div class="col-sm-6 col-md-6 main">
                             <!--<button ng-click="editField(field)" type="button"-->
-                            <button ng-click="setEditField(field)" type="button"
+                            <button ng-click="model.setEditField(field)" type="button"
                                     class="btn btn-primary glyphicon glyphicon-pencil"
                                     data-toggle="modal" data-target="#myModal">
                             </button>
                             <button type="button" class="btn btn-success glyphicon glyphicon-plus">
                             </button>
-                            <button ng-click="removeField(field)" type="button"
+                            <button ng-click="model.removeField(field)" type="button"
                                     class="btn btn-danger glyphicon glyphicon-remove">
                             </button>
                             <button type="button" class="btn glyphicon glyphicon-menu-hamburger">
@@ -85,7 +85,7 @@
                     <form>
                         <div class="form-group">
                             <label for="addfield">Add New Field:</label>
-                            <select ng-model="fieldType" class="form-control" id="addfield">
+                            <select ng-model="model.fieldType" class="form-control" id="addfield">
                                 <option value="singlelinetext">Single Line Text</option>
                                 <option value="date">Date</option>
                                 <option value="dropdown">Dropdown</option>
@@ -99,7 +99,7 @@
                 <div class="col-sm-6 col-md-6 main">
                     <br/>
                     <button class="btn btn-success glyphicon glyphicon-plus"
-                            ng-click="addField(fieldType)" type="button">
+                            ng-click="model.addField(model.fieldType)" type="button">
                     </button>
                 </div>
                 <div class="modal fade" id="myModal" role="dialog">
@@ -114,26 +114,26 @@
                                     Label:
                                 </label>
                                 <input class="form-control" id="label"
-                                       ng-model="field.label" type="text"
-                                       value="field.label" placeholder = "Label">
+                                       ng-model="model.field.label" type="text"
+                                       value="model.field.label" placeholder = "Label">
                             </div>
-                            <div ng-show="field.placeholder" class="modal-body">
+                            <div ng-show="model.field.placeholder" class="modal-body">
                                 <label for="placeholder">
                                     Placeholder:
                                 </label>
                                 <input class="form-control" id="placeholder"
-                                       ng-model="field.placeholder" type="text"
-                                       value="field.placeholder" placeholder = "Placeholder">
+                                       ng-model="model.field.placeholder" type="text"
+                                       value="model.field.placeholder" placeholder = "Placeholder">
                             </div>
-                            <div ng-show="field.options" class="modal-body">
+                            <div ng-show="model.field.options" class="modal-body">
                                 <label for="options">Options:</label>
                                 <textarea class="form-control" id="options"
-                                          ng-model="field.fieldOptions"
+                                          ng-model="model.field.fieldOptions"
                                           cols="40" rows="5">
                                 </textarea>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-default" ng-click="createField(field)" type="button" data-dismiss="modal">
+                                <button class="btn btn-default" ng-click="model.createField(model.field)" type="button" data-dismiss="modal">
                                     Ok
                                 </button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
