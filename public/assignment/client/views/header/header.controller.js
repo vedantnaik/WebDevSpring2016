@@ -9,6 +9,7 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController(UserService, $scope, $rootScope, $location){
+
         $scope.$location = $location;
         $scope.logout = logout;
 

@@ -8,22 +8,22 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, $rootScope, $scope) {
+    function ProfileController(UserService, $rootScope, $scope, $location) {
 
-        //if(!$rootScope.currentUser){
-        //    $location.url("/home");
-        //}
+        var vm = this;
 
-        $scope.user = $rootScope.currentUser;
-        console.log("PROFILE CONTROLLER");
-        console.log($scope.user);
+        vm.update = update;
 
-        $scope.update = update;
+        vm.user = UserService
+            .getCurrentUser()
+            .then(function( res ){
+                console.log(res.data);
+                vm.user = res.data;
+            });
 
         function update(user) {
-            console.log("PROF CONTRL: UPDATE");
             UserService
-                .updateUser($rootScope.currentUser._id, user)
+                .updateUser(vm.user._id, user)
                 .then(
                     function ( resp ) {
                         if( resp.data ) {

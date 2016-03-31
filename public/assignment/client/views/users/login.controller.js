@@ -9,7 +9,11 @@
         .controller("LoginController", loginController);
 
     function loginController (UserService, $scope, $location, $rootScope){
-        $scope.login = login;
+
+        var vm = this;
+
+
+        vm.login = login;
 
         function login(user){
             if(!user) {return;}
@@ -19,10 +23,11 @@
                 .then(
                     function ( res ){
                         if(res.data){
-                            $rootScope.currentUser = res.data;
+                            UserService.setCurrentUser(res.data);
+                            //$rootScope.currentUser = res.data;
                             $location.url("/profile");
                         } else {
-                            $scope.errorMessage = "Unable to Login!";
+                            vm.errorMessage = "Unable to Login!";
                         }
                     },
                     function ( err ){

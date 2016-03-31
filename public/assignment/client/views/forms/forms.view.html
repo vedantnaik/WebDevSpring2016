@@ -3,7 +3,7 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
 
-            <h1 class="">Forms</h1>
+            <h1 class="page-header">Forms</h1>
 
             <ul class="nav nav-tabs">
                 <li role="presentation" ng-class={'active':location.url()==='/forms'}>
@@ -34,27 +34,27 @@
 
                                 <tr>
                                     <td>
-                                        <input ng-model="selectedForm.title" class="form-control" type="text" placeholder="Name"/>
+                                        <input ng-model="model.selectedForm.title" class="form-control" type="text" placeholder="Name"/>
                                     </td>
                                     <td>
-                                        <button ng-click="addForm(selectedForm)" class="margin-horizontal-pad">
+                                        <button ng-click="model.addForm(model.selectedForm)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
-                                        <button ng-click="updateForm(selectedForm)" class="margin-horizontal-pad">
+                                        <button ng-click="model.updateForm(model.selectedForm)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </button>
                                     </td>
                                 </tr>
 
-                                <tr ng-repeat="form in formsForCurrentUser">
+                                <tr ng-repeat="form in model.formsForCurrentUser">
                                     <td>
-                                        <a ng-click="formFields(form)" href="">{{form.title}}</a>
+                                        <a ng-click="model.formFields(form)" href="">{{form.title}}</a>
                                     </td>
                                     <td>
-                                        <button ng-click="deleteForm($index)" class="margin-horizontal-pad">
+                                        <button ng-click="model.deleteForm($index)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </button>
-                                        <button ng-click="selectForm($index)" class="margin-horizontal-pad">
+                                        <button ng-click="model.selectForm($index)" class="margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
                                     </td>

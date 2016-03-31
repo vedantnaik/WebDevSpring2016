@@ -9,7 +9,10 @@
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $scope, $rootScope, $location ) {
-        $scope.register = register;
+
+        var vm = this;
+
+        vm.register = register;
 
         function register(user) {
 
@@ -33,7 +36,7 @@
                                 .findUserByUsername(userToCreate.username)
                                 .then(
                                     function ( respGetNewUser ) {
-                                        $rootScope.currentUser = respGetNewUser.data;
+                                        UserService.setCurrentUser(respGetNewUser.data);
                                         $location.url("/profile");
                                     },
                                     function ( errGettingNewUser ) {
