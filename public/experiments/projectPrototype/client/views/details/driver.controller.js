@@ -8,7 +8,7 @@
         .module("ProjectPrototypeApp")
         .controller("DriverController", DriverController);
 
-    function DriverController(ErgastService, $scope, $rootScope, $location, $routeParams){
+    function DriverController(ErgastService, $scope, $rootScope, $location, $routeParams, $http){
 
         // initial setup
         $scope.driverId = $routeParams.driverId;
@@ -17,6 +17,7 @@
             .then(
                 function ( res ){
                     $scope.driverInfo = res.data.MRData.DriverTable.Drivers[0];
+
                 }, function( err ) {
                     console.log("UNABLE TO LOAD DRIVER INFO FROM ERGAST");
                 }
@@ -84,6 +85,7 @@
                     }
                 );
         }
+
     }
 
 })();
