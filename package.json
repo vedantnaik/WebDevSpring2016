@@ -29,7 +29,9 @@
     "body-parser": "~1.15.0",
     "https": "~1.0.0",
     "cookie-parser": "~1.4.1",
-    "node-uuid": "~1.4.7"
+    "node-uuid": "~1.4.7",
+    "mongoose": "~4.4.10",
+    "q": "~1.4.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],

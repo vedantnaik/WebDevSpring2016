@@ -25,6 +25,7 @@
         return service;
 
         function findUserByCredentials(username, password) {
+            //console.log("in FIND USER CLIENT SERVICE");
             return $http.get('/api/assignment/user?username='+username+"&password="+password);
         }
 
