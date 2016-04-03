@@ -31,7 +31,9 @@
     "cookie-parser": "~1.4.1",
     "node-uuid": "~1.4.7",
     "mongoose": "~4.4.10",
-    "q": "~1.4.1"
+    "q": "~1.4.1",
+    "express-session": "~1.13.0",
+    "session": "~0.1.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],

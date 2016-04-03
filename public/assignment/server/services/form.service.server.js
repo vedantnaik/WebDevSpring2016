@@ -2,41 +2,86 @@
  * Created by vedant on 3/20/16.
  */
 
-module.exports = function(app, formModel, uuid) {
+module.exports = function(app, formModel) {
 
     app.get("/api/assignment/user/:userId/form", getFormsByUserId);
     app.get("/api/assignment/form/:formId", getFormById);
     app.post("/api/assignment/user/:userId/form", createFormByUserId);
     app.put("/api/assignment/form/:formId", updateFormById);
     app.delete("/api/assignment/form/:formId", deleteFormById);
+    app.put("/api/assignment/form/:formId/field/", sortFields);
 
     function getFormsByUserId(req, res){
         var userId = req.params.userId;
-        res.json(formModel.findAllFormsForUser(userId));
+        formModel.findAllFormsForUser(userId)
+            .then(function (forms) {
+                    res.json(forms);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                });
     }
 
     function getFormById(req, res){
         var formId = req.params.formId;
-        res.json(formModel.findFormById(formId));
+        formModel.findFormById(formId)
+            .then(function(form) {
+                    res.json(form);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                });
     }
 
     function createFormByUserId(req, res){
         var userId = req.params.userId;
         var formToCreate = req.body;
-        formToCreate.fields = [];
-        formToCreate.userId = userId;
-        formToCreate._id = uuid.v1();
-        res.json(formModel.createForm(formToCreate));
+        formModel.createFormForUser(userId, formToCreate)
+            .then(
+                function (form) {
+                    res.json(form);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateFormById(req, res){
         var formId = req.params.formId;
         var updatedForm = req.body;
-        res.json(formModel.updateFormById(formId, updatedForm));
+        formModel.updateForm(formId, updatedForm)
+            .then(
+                function(doc) {
+                    res.json(doc);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                });
     }
 
     function deleteFormById(req, res){
         var formId = req.params.formId;
-        res.json(formModel.deleteFormById(formId));
+        formModel.deleteForm(formId)
+            .then(
+                function() {
+                    res.send(200);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                });
+    }
+
+    function sortFields(req,res){
+        var formId = req.params.formId;
+        var fields = req.body;
+        formModel.sortFields(formId, fields)
+            .then(
+                function(form) {
+                    res.json(form);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                });
     }
 }

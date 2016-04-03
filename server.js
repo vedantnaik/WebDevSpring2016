@@ -7,6 +7,7 @@ var public_folder = __dirname + '/public';
 var app = express();
 var uuid=require('node-uuid');
 var mongoose = require('mongoose');
+var session = require('express-session');
 
 var dbName = 'assignment';
 var connectionString = 'mongodb://localhost/' + dbName;
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(public_folder));
+//app.use(session({secret: process.env.PASSPORT_SECRET}));
 
 app.get('/assignment', function(req, res){
     res.sendfile('/assignment/client/index.html');
