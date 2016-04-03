@@ -12,11 +12,15 @@
 
         var vm = this;
 
+        vm.message = null;
 
         vm.login = login;
 
         function login(user){
-            if(!user) {return;}
+            vm.message = null;
+            if(!user) {vm.message = "Enter username and password!"; return;}
+            if(!user.username) {vm.message = "Enter username and password!"; return;}
+            if(!user.password) {vm.message = "Enter password!"; return;}
 
             UserService
                 .findUserByCredentials(user.username, user.password)
