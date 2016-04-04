@@ -7,6 +7,7 @@ var public_folder = __dirname + '/public';
 var app = express();
 var uuid=require('node-uuid');
 var mongoose = require('mongoose');
+var passport      = require('passport');
 var session = require('express-session');
 
 var dbName = 'assignment';
@@ -28,13 +29,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(public_folder));
-//app.use(session({secret: process.env.PASSPORT_SECRET}));
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.get('/assignment', function(req, res){
     res.sendfile('/assignment/client/index.html');
 });
 
-require('./public/assignment/server/app.js')(app, uuid, db, mongoose);
+require('./public/assignment/server/app.js')(app, db, mongoose);
 require('./public/experiments/projectPrototype/server/app.js')(app);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

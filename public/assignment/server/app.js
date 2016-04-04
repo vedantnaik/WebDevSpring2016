@@ -2,8 +2,6 @@
  * Created by vedant on 3/17/16.
  */
 
-var uuid = require('node-uuid');
-
 module.exports = function(app, db, mongoose){
 
     var userModel = require("./models/user.model.js")(db, mongoose);

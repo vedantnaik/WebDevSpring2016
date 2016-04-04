@@ -15,7 +15,8 @@
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
-            findFormById: findFormById
+            findFormById: findFormById,
+            sortFields: sortFields
         }
         return api;
 
@@ -40,5 +41,8 @@
             return $http.get("/api/assignment/form/"+formId);
         }
 
+        function sortFields(formId,fields){
+            return $http.put("/api/assignment/form/" + formId + "/field/", fields);
+        }
     }
 })();
