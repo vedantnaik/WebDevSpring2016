@@ -182,7 +182,7 @@
         function renderModal(fieldId){
             var fieldIndex;
             for (fieldIndex in vm.fields){
-                if(vm.fields[fieldIndex] === fieldId){
+                if(vm.fields[fieldIndex]._id === fieldId){
                     break;
                 }
             }
