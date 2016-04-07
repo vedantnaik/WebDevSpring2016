@@ -25,7 +25,7 @@
         }
 
         function findAllFormsForUser(userId){
-            console.log("looking for forms for userid " + userId);
+            //console.log("looking for forms for userid " + userId);
             return $http.get("/api/assignment/user/"+userId+"/form");
         }
 

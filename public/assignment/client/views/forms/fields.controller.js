@@ -132,7 +132,7 @@
                         updateFormFieldsListForUser();
                     },
                     function( err ){
-                        console.log("UNABLE TO CREATE FIELD");
+                        //console.log("UNABLE TO CREATE FIELD");
                     }
                 );
         }
@@ -162,8 +162,6 @@
             FormService
                 .sortFields(vm.formId,vm.fields)
                 .then(function (response) {
-                    console.log("after sorting");
-                    console.log(response.data)
                     vm.fields = response.data.fields;
                 });
         }
@@ -213,7 +211,7 @@
                             init();
                         },
                         function( err ){
-                            console.log("UNABLE TO CREATE FIELD");
+                            //console.log("UNABLE TO CREATE FIELD");
                         }
                     );
             }

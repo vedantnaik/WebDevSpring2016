@@ -5,9 +5,9 @@ var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var public_folder = __dirname + '/public';
 var app = express();
-var uuid=require('node-uuid');
+var uuid = require('node-uuid');
 var mongoose = require('mongoose');
-var passport      = require('passport');
+var passport = require('passport');
 var session = require('express-session');
 
 var dbName = 'assignment';

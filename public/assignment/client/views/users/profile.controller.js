@@ -19,11 +19,14 @@
             UserService
                 .getCurrentUser()
                 .then(function (res) {
-                    console.log(res.data);
                     var userFromServer = res.data;
                     if(userFromServer.phones) {
                         userFromServer.phones = makeCsvStringFromArray(userFromServer.phones);
                     }
+                    if(userFromServer.emails) {
+                        userFromServer.emails = makeCsvStringFromArray(userFromServer.emails);
+                    }
+
                     vm.user = userFromServer;
                 });
         }
@@ -31,12 +34,16 @@
 
         function update(user) {
 
-            console.log("UPDATE USER IN CONTROLLER: " + vm.user._id);
+            //console.log("UPDATE USER IN CONTROLLER: " + vm.user._id);
             vm.error = null;
             vm.message = null;
 
-            user.phones = splitByCommaAndTrim(user.phones);
-            //user.email = splitByCommaAndTrim(user.email);
+            if(user.phones.length > 0) {
+                user.phones = splitByCommaAndTrim(user.phones);
+            }
+            if(user.emails.length > 0) {
+                user.emails = splitByCommaAndTrim(user.emails);
+            }
 
             UserService
                 .updateUser(vm.user._id, user)
@@ -58,6 +65,7 @@
          * without spaces
          * */
         function splitByCommaAndTrim(csvString){
+            //console.log(csvString);
             var csvParts = csvString.split(",");
             var arrToReturn = [];
 

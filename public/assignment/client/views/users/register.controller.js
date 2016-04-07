@@ -18,8 +18,8 @@
 
         function register(user) {
 
-            console.log("register");
-            console.log(user);
+            //console.log("register");
+            //console.log(user);
             vm.message = null;
 
             if(!user) {vm.message = "Enter necessary details!"; return;}
@@ -30,7 +30,14 @@
             }
 
             var userToCreate = user;
-
+            if(userToCreate.emails) {
+                //userToCreate.emails = splitByCommaAndTrim(userToCreate.emails);
+                //console.log(userToCreate.emails);
+                userToCreate.emails = [userToCreate.emails];
+            } else {
+                vm.message = "Please enter an email id to register!";
+                return;
+            }
 
             UserService
                 .findUserByUsername(user.username)
@@ -63,9 +70,29 @@
                     }
                 });
 
+        }
 
 
+        /**
+         * Takes a comma separated value string and returns an array with each part
+         * without spaces
+         * */
+        function splitByCommaAndTrim(csvString){
+            var csvParts = csvString.split(",");
+            var arrToReturn = [];
 
+            for(var p in csvParts){
+                arrToReturn.push(csvParts[p].trim());
+            }
+            return arrToReturn;
+        }
+
+        function makeCsvStringFromArray(arr){
+            var strToReturn = "";
+            for(var a in arr){
+                strToReturn = strToReturn + ", " + arr[a];
+            }
+            return strToReturn.substr(2);
         }
     }
 

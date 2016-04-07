@@ -26,8 +26,6 @@ module.exports = function(db, mongoose){
 
         var deferred = q.defer();
 
-        console.log(user.email);
-
         UserModel.create(user, function(err, doc) {
             if (err) {
                 deferred.reject(err);
@@ -91,15 +89,13 @@ module.exports = function(db, mongoose){
     function updateUser(userId, user){
         var deferred = q.defer();
 
-
-
         // create new user
         var newUser = {
             username: user.username,
             password: user.password,
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email,
+            emails: user.emails,
             phones: user.phones
         };
 

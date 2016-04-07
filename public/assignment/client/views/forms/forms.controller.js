@@ -31,7 +31,7 @@
                                 function ( res  ){
                                     if (res.data) {
                                         vm.formsForCurrentUser = res.data;
-                                        console.log(vm.formsForCurrentUser);
+                                        //console.log(vm.formsForCurrentUser);
                                     }
                                 },
                                 function ( err ) {
@@ -87,8 +87,8 @@
         }
 
         function deleteForm(index){
-            console.log("in delete form");
-            console.log(vm.formsForCurrentUser[index]._id);
+            //console.log("in delete form");
+            //console.log(vm.formsForCurrentUser[index]._id);
 
             FormService.deleteFormById(vm.formsForCurrentUser[index]._id)
                 .then(
@@ -109,7 +109,7 @@
             vm.selectedForm._id = vm.formsForCurrentUser[index]._id;
             vm.selectedForm.userId = vm.user._id;
 
-            console.log("selected " + vm.selectedForm.title + " user " + vm.selectedForm.userid);
+            //console.log("selected " + vm.selectedForm.title + " user " + vm.selectedForm.userid);
         }
 
         function formFields(form){
