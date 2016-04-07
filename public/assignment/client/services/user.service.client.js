@@ -35,6 +35,8 @@
 
         function setCurrentUser(user){
             $rootScope.currentUser = user;
+            //console.log("SET CURRENT USER TO");
+            //console.log($rootScope.currentUser);
         }
 
         function findAllUsers(){
@@ -55,6 +57,8 @@
 
         function getCurrentUser() {
             var currentUsername = $rootScope.currentUser.username;
+            //console.log("GET CURRENT USER");
+            //console.log(currentUsername);
             return $http.get('/api/assignment/user?username='+currentUsername);
         }
     }

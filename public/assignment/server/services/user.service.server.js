@@ -54,6 +54,7 @@ module.exports = function(app, userModel){
         userModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
+                    req.session.currentUser = doc;
                     res.json(doc);
                 },
                 function ( err ) {
@@ -80,6 +81,7 @@ module.exports = function(app, userModel){
             .findUserByUsername(req.query.username)
             .then(
                 function (doc) {
+                    req.session.currentUser = doc;
                     res.json(doc);
                 },
                 function ( err ) {
@@ -93,6 +95,7 @@ module.exports = function(app, userModel){
         var user = model.findUserById(userId)
                         .then(
                             function(doc) {
+                                req.session.currentUser = doc;
                                 res.json(doc);
                             },
                             function(err) {
@@ -103,8 +106,6 @@ module.exports = function(app, userModel){
     }
 
     function updateUser(req,res){
-        var user = req.body;
-        var userId = req.params.id;
         var userId = req.params.id;
         var user = req.body;
         userModel

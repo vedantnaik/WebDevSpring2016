@@ -26,8 +26,9 @@ module.exports = function(db, mongoose){
 
         var deferred = q.defer();
 
+        console.log(user.email);
+
         UserModel.create(user, function(err, doc) {
-            console.log(doc);
             if (err) {
                 deferred.reject(err);
             } else {
@@ -68,8 +69,6 @@ module.exports = function(db, mongoose){
 
         var deferred = q.defer();
         UserModel.findById(userId, function(err, doc) {
-            console.log("found user by id in usermodel");
-            console.log(doc);
             if( err ) { deferred.reject(err); }
             else { deferred.resolve(doc); }
         });
@@ -91,6 +90,8 @@ module.exports = function(db, mongoose){
 
     function updateUser(userId, user){
         var deferred = q.defer();
+
+
 
         // create new user
         var newUser = {
