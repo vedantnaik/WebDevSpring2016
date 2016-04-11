@@ -101,7 +101,8 @@ module.exports = function(db, mongoose){
             password: user.password,
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email
+            email: user.email,
+            level: user.level
         };
 
         UserModel.update(

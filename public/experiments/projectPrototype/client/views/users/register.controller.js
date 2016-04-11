@@ -41,6 +41,8 @@
                             "Please try registering with another username.";
                         return;
                     } else {
+                        userToCreate.level = 1;
+
                         UserService
                             .createUser(userToCreate)
                             .then(

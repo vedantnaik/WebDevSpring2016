@@ -8,8 +8,15 @@
         .module("ProjectPrototypeApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($scope, $location){
+    function SidebarController(UserService, $scope, $rootScope, $location){
         $scope.$location = $location;
+
+        UserService
+            .getCurrentUser()
+            .then(function (res) {
+                var userFromServer = res.data;
+                $rootScope.currentUser = userFromServer;
+            });
     }
 
 })();

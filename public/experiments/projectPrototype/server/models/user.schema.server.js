@@ -10,6 +10,7 @@ module.exports = function(mongoose) {
         firstName: String,
         lastName: String,
         email: String,
+        level: { type: Number, default: 1}
     }, {collection: 'assignment.poc.user'});
     return UserSchema;
 };
