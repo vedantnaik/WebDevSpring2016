@@ -8,6 +8,8 @@ module.exports = function(mongoose) {
 
         userId: String, // fact stored for user
 
+        factType: String, // "DRR"
+
         driverId: String, // fact related to this driver
         constructorId: String,
         constructorName: String,
@@ -15,7 +17,6 @@ module.exports = function(mongoose) {
 
         season: Number,
         round: Number,
-
 
         gridPosition: Number,
         finishingPosition: Number,

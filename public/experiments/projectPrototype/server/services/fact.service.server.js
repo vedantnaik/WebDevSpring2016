@@ -12,13 +12,51 @@ module.exports = function(app, factModel, uuid) {
 
     function getFactsByUserId(req, res){
         var userId = req.params.userId;
-        res.json(factModel.findAllFactsForUser(userId));
+
+        //console.log("SEARCH FACTS FOR " + userId);
+        //var allFactsForUser = [];
+        //factModel
+        //    .findAllDriverRaceResultFactsForUser(userId)
+        //    .then(
+        //        function (drrFactsForUser) {
+        //            console.log("FOUND DRR");
+        //            allFactsForUser.concat(drrFactsForUser.data);
+        //            factModel
+        //                .findAllConstructorRaceResultFactsForUser(userId)
+        //                .then(
+        //                    function (crrFactsForUser) {
+        //                        console.log("FOUND CRR");
+        //                        console.log(crrFactsForUser);
+        //                        allFactsForUser.concat(crrFactsForUser.data);
+        //                    }, function (err) {
+        //                        res.status(400).send(err);
+        //                    }
+        //                );
+        //
+        //        },
+        //        function (err) {
+        //            factModel
+        //                .findAllConstructorRaceResultFactsForUser(userId)
+        //                .then(
+        //                    function (crrFactsForUser) {
+        //                        allFactsForUser.concat(crrFactsForUser.data);
+        //                    }, function (err) {
+        //                        res.status(400).send(err);
+        //                    }
+        //                );
+        //        }
+        //    );
+        //
+        //var r = {data: allFactsForUser}
+        //res.json(r);
     }
 
     function getFactById(req, res){
         var factId = req.params.factId;
         res.json(factModel.findFactById(factId));
     }
+
+
 
     function createFactByUserId(req, res){
         var userId = req.params.userId;

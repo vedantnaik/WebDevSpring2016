@@ -2,74 +2,288 @@
  * Created by vedant on 3/27/16.
  */
 
-var facts = [];
+var q = require("q");
 
+module.exports = function (db, mongoose) {
+    var DriverRaceResultSchema = require("./driver.raceresult.schema.server.js")(mongoose);
+    var DriverRaceResultModel = mongoose.model("POCDriverRaceResultFact", DriverRaceResultSchema);
 
-module.exports = function () {
+    var ConstructorRaceResultSchema = require("./constructor.raceresult.schema.server.js")(mongoose);
+    var ConstructorRaceResultModel = mongoose.model("POCConstructorRaceResultFact", ConstructorRaceResultSchema);
 
     var api = {
-        createFact: createFact,
-        updateFactById: updateFactById,
-        deleteFactById: deleteFactById,
-        findFactById: findFactById,
-        findAllFacts: findAllFacts,
-        findAllFactsForUser: findAllFactsForUser
+        // Driver race results
+        createDriverRaceResultFact: createDriverRaceResultFact,
+        updateDriverRaceResultFactById: updateDriverRaceResultFactById,
+        deleteDriverRaceResultFactById: deleteDriverRaceResultFactById,
+
+        findAllDriverRaceResultFacts: findAllDriverRaceResultFacts,
+        findAllDriverRaceResultFactsForUser: findAllDriverRaceResultFactsForUser,
+        findDriverRaceResultFactById: findDriverRaceResultFactById,
+
+        // Constructor race results
+        createConstructorRaceResultFact: createConstructorRaceResultFact,
+        updateConstructorRaceResultFactById: updateConstructorRaceResultFactById,
+        deleteConstructorRaceResultFactById: deleteConstructorRaceResultFactById,
+
+        findAllConstructorRaceResultFacts: findAllConstructorRaceResultFacts,
+        findAllConstructorRaceResultFactsForUser: findAllConstructorRaceResultFactsForUser,
+        findConstructorRaceResultFactById: findConstructorRaceResultFactById
     };
 
     return api;
 
-    function createFact(fact){
-        facts.push(fact);
-        return facts;
-    }
+    // Create Methods
+    function createDriverRaceResultFact(fact){
 
-    function updateFactById(factId, newFact){
+        var deferred = q.defer();
 
-        for (var factIndex in facts) {
-            if (facts[factIndex]._id == factId){
-
-                facts[factIndex]._id = newFact._id;
-
-
-                if(facts[factIndex].userId != newFact.userId && newFact.userId != "") {
-                    facts[factIndex].userId = newFact.userId;
+        DriverRaceResultModel
+            .create(fact, function(err, doc){
+                if(err){
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
                 }
+            });
 
-                return facts[factIndex];
-            }
-        }
-
-        return null;
+        return deferred.promise;
     }
 
-    function deleteFactById(factId){
-        for (var factIndex in facts){
-            if (facts[factIndex]._id == factId){
-                facts.splice(factIndex, 1)
-            }
-        }
+    function createConstructorRaceResultFact(fact){
+
+        var deferred = q.defer();
+
+        ConstructorRaceResultModel
+            .create(fact, function(err, doc){
+                if(err){
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            });
+
+        return deferred.promise;
     }
 
-    function findAllFacts() {
-        return facts;
+    // Update methods
+    function updateDriverRaceResultFactById(factId, fact){
+        var deferred = q.defer();
+
+        var updatedFact = {
+            userId: fact.userId, // fact stored for user
+
+            factType: fact.factType, // "DRR"
+
+            driverId: fact.driverId, // fact related to this driver
+            constructorId: fact.constructorId,
+            constructorName: fact.constructorName,
+            raceName: fact.raceName,
+
+            season: fact.season,
+            round: fact.round,
+
+            gridPosition: fact.gridPosition,
+            finishingPosition: fact.finishingPosition,
+            pointsEarned: fact.pointsEarned,
+        }
+
+        DriverRaceResultModel
+            .update(
+                {_id: factId},
+                {$set: updatedFact},
+                function(err, doc){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        DriverRaceResultModel
+                            .findById(factId, function(err, fact){
+                               if(err){
+                                   deferred.reject(err);
+                               } else {
+                                   deferred.resolve(fact);
+                               }
+                            });
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
-    function findAllFactsForUser(userId){
-        var factsForUser = [];
-        for (var factIndex in facts){
-            if (facts[factIndex].userId == userId){
-                factsForUser.push(facts[factIndex]);
-            }
+    function updateConstructorRaceResultFactById(factId, fact){
+        var deferred = q.defer();
+
+        var updatedFact = {
+            userId: fact.userId, // fact stored for user
+
+            factType: fact.factType, // "CRR"
+
+            constructorId: fact.constructorId, // fact related to this constructor
+
+            driverName_1: fact.driverName_1,
+            driverName_2: fact.driverName_2,
+
+            constructorName: fact.constructorName,
+            raceName: fact.raceName,
+
+            season: fact.season,
+            round: fact.round,
+
+            bestGridPosition: fact.bestGridPosition,            // better of both drivers
+            bestFinishingPosition: fact.bestFinishingPosition,  // better of both drivers
+            pointsEarned: fact.pointsEarned,                    // sum of both drivers
         }
-        return factsForUser;
+
+        ConstructorRaceResultModel
+            .update(
+                {_id: factId},
+                {$set: updatedFact},
+                function(err, doc){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        ConstructorRaceResultModel
+                            .findById(factId, function(err, fact){
+                                if(err){
+                                    deferred.reject(err);
+                                } else {
+                                    deferred.resolve(fact);
+                                }
+                            });
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
-    function findFactById(factId){
-        for (var factIndex in facts){
-            if (facts[factIndex]._id == factId){
-                return facts[factIndex];
+    // Delete Methods
+    function deleteDriverRaceResultFactById(factId){
+        var deferred = q.defer();
+        DriverRaceResultModel
+            .remove(
+            {_id: factId},
+            function(err, users){
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(users);
+                }
             }
-        }
-        return null;
+        );
+        return deferred.promise;
+    }
+
+    function deleteConstructorRaceResultFactById(factId){
+        var deferred = q.defer();
+        ConstructorRaceResultModel
+            .remove(
+                {_id: factId},
+                function(err, users){
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(users);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    // Search Methods
+    function findAllDriverRaceResultFacts() {
+        var deferred = q.defer();
+        DriverRaceResultModel
+            .find(function (err, driverRaceResultFacts){
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(driverRaceResultFacts);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findAllConstructorRaceResultFacts() {
+        var deferred = q.defer();
+        ConstructorRaceResultModel
+            .find(function (err, constructorRaceResultFacts){
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(constructorRaceResultFacts);
+                }
+            });
+        return deferred.promise;
+    }
+
+    // search for user
+
+    function findAllDriverRaceResultFactsForUser(userId){
+        var deferred = q.defer();
+        DriverRaceResultModel
+            .find(
+                { userId: userId },
+                function(err, drrFactsForUser) {
+                    if(err) {
+                        deferred.reject(err);
+                    }
+                    else {
+                        console.log("FOIND IN MODEL");
+                        console.log(drrFactsForUser);
+                        deferred.resolve(drrFactsForUser);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    function findAllConstructorRaceResultFactsForUser(userId){
+        var deferred = q.defer();
+        ConstructorRaceResultModel
+            .find(
+                { userId: userId },
+                function(err, crrFactsForUser) {
+                    if(err) {
+                        deferred.reject(err);
+                    }
+                    else {
+                        deferred.resolve(crrFactsForUser);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    // search by id
+    function findDriverRaceResultFactById(factId){
+        var deferred = q.defer();
+        DriverRaceResultModel
+            .findById(
+                factId,
+                function(err, doc){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    function findConstructorRaceResultFactById(factId){
+        var deferred = q.defer();
+        ConstructorRaceResultModel
+            .findById(
+                factId,
+                function(err, doc){
+                    if(err){
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 }
