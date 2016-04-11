@@ -13,6 +13,7 @@
         $scope.logout = logout;
 
         function logout(){
+            $rootScope.currentUser = null;
             UserService.setCurrentUser(null);
         }
 

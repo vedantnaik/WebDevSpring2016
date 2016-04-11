@@ -32,7 +32,8 @@
             })
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
-                controller: "SearchController"
+                controller: "SearchController",
+                controllerAs: "model"
             })
             .when("/stored", {
                 templateUrl: "views/search/stored.view.html",

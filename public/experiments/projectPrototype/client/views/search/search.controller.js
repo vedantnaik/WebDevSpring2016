@@ -8,20 +8,22 @@
         .module("ProjectPrototypeApp")
         .controller("SearchController", SearchController);
 
-    function SearchController(ErgastService, FactService, $scope, $rootScope, $location) {
+    function SearchController(ErgastService, FactService, $rootScope, $location) {
         console.log("in Quiz Controller");
 
-        $scope.championshipType = 'Drivers Championship';
-        $scope.standingsSearchTypeDriver = true;
+        var vm = this;
+        
+        vm.championshipType = 'Drivers Championship';
+        vm.standingsSearchTypeDriver = true;
 
         $rootScope.dataStoredByUser = true;
 
-        $scope.searchStanding = searchStanding;
-        $scope.searchDrivers = searchDrivers;
-        $scope.setStandingsType = setStandingsType;
+        vm.searchStanding = searchStanding;
+        vm.searchDrivers = searchDrivers;
+        vm.setStandingsType = setStandingsType;
 
-        $scope.storeResult = storeResult;
-        $scope.hideResult = hideResult;
+        vm.storeResult = storeResult;
+        vm.hideResult = hideResult;
 
 
         function searchStanding(queryOn){
@@ -30,18 +32,18 @@
                 queryOn.round = "last";
             }
 
-            $scope.season = queryOn.season;
-            $scope.round = queryOn.round;
+            vm.season = queryOn.season;
+            vm.round = queryOn.round;
 
             console.log("in search");
 
-            if($scope.championshipType === 'Drivers Championship'){
+            if(vm.championshipType === 'Drivers Championship'){
 
                 ErgastService.getDriverStandingForSeasonRound(queryOn.season, queryOn.round)
                     .then(
                         function( res ){
-                            $scope.standingsSearchTypeDriver = true;
-                            $scope.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+                            vm.standingsSearchTypeDriver = true;
+                            vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH DRIVER STANDINGS FOR ROUND");
@@ -50,16 +52,16 @@
 
 
                 //ErgastService.getDriverStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
-                //    $scope.standingsSearchTypeDriver = true;
-                //    $scope.standingSearchResult = data;
+                //    vm.standingsSearchTypeDriver = true;
+                //    vm.standingSearchResult = data;
                 //});
-            } else if ($scope.championshipType === 'Constructors Championship'){
+            } else if (vm.championshipType === 'Constructors Championship'){
 
                 ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round)
                     .then(
                         function( res ){
-                            $scope.standingsSearchTypeDriver = false;
-                            $scope.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+                            vm.standingsSearchTypeDriver = false;
+                            vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH CONSTRUCTOR STANDINGS FOR ROUND");
@@ -68,8 +70,8 @@
 
 
                 //ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
-                //    $scope.standingsSearchTypeDriver = false;
-                //    $scope.standingSearchResult = data;
+                //    vm.standingsSearchTypeDriver = false;
+                //    vm.standingSearchResult = data;
                 //});
             }
 
@@ -81,7 +83,7 @@
             ErgastService.getDriversForSeason(season)
                 .then(
                     function( res ){
-                        $scope.driverSearchResult = data;
+                        vm.driverSearchResult = data;
                     },
                     function( err ){
                         alert("Unable to search drivers for season.");
@@ -91,40 +93,40 @@
 
             //ErgastService.getDriversForSeason(season, function(data){
             //    console.log("in search drivers " + data);
-            //    $scope.driverSearchResult = data;
+            //    vm.driverSearchResult = data;
             //});
 
-            console.log("in search drivers " + $scope.driverSearchResult);
+            console.log("in search drivers " + vm.driverSearchResult);
         }
 
         function storeResult(index){
 
             var recordToPush = {};
 
-            recordToPush.season = $scope.season;
-            recordToPush.round = $scope.round;
+            recordToPush.season = vm.season;
+            recordToPush.round = vm.round;
 
-            if($scope.standingsSearchTypeDriver){
+            if(vm.standingsSearchTypeDriver){
 
                 recordToPush.recordType = 'd';
 
-                recordToPush.position = $scope.standingSearchResult[index].position;
-                recordToPush.points = $scope.standingSearchResult[index].points;
-                recordToPush.driverUrl = $scope.standingSearchResult[index].Driver.url;
-                recordToPush.givenName = $scope.standingSearchResult[index].Driver.givenName;
-                recordToPush.familyName = $scope.standingSearchResult[index].Driver.familyName;
-                recordToPush.nationality = $scope.standingSearchResult[index].Driver.nationality;
-                recordToPush.constructorUrl = $scope.standingSearchResult[index].Constructors[0].url;
-                recordToPush.constructorName = $scope.standingSearchResult[index].Constructors[0].name;
+                recordToPush.position = vm.standingSearchResult[index].position;
+                recordToPush.points = vm.standingSearchResult[index].points;
+                recordToPush.driverUrl = vm.standingSearchResult[index].Driver.url;
+                recordToPush.givenName = vm.standingSearchResult[index].Driver.givenName;
+                recordToPush.familyName = vm.standingSearchResult[index].Driver.familyName;
+                recordToPush.nationality = vm.standingSearchResult[index].Driver.nationality;
+                recordToPush.constructorUrl = vm.standingSearchResult[index].Constructors[0].url;
+                recordToPush.constructorName = vm.standingSearchResult[index].Constructors[0].name;
             } else {
 
                 recordToPush.recordType = 'c';
 
-                recordToPush.position = $scope.standingSearchResult[index].position;
-                recordToPush.points = $scope.standingSearchResult[index].points;
-                recordToPush.constructorUrl = $scope.standingSearchResult[index].Constructor.url;
-                recordToPush.constructorName = $scope.standingSearchResult[index].Constructor.name;
-                recordToPush.nationality = $scope.standingSearchResult[index].Constructor.nationality;
+                recordToPush.position = vm.standingSearchResult[index].position;
+                recordToPush.points = vm.standingSearchResult[index].points;
+                recordToPush.constructorUrl = vm.standingSearchResult[index].Constructor.url;
+                recordToPush.constructorName = vm.standingSearchResult[index].Constructor.name;
+                recordToPush.nationality = vm.standingSearchResult[index].Constructor.nationality;
             }
 
             //ErgastService.addToStoredDataSet(recordToPush);
@@ -142,12 +144,12 @@
 
 
         function hideResult(index){
-            $scope.standingSearchResult.splice(index, 1);
+            vm.standingSearchResult.splice(index, 1);
         }
 
 
         function setStandingsType(typ){
-            $scope.championshipType = typ;
+            vm.championshipType = typ;
         }
     }
 

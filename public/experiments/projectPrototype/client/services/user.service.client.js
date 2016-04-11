@@ -34,7 +34,11 @@
         }
 
         function setCurrentUser(user){
-            $rootScope.currentUser = user;
+            if(user) {
+                $rootScope.currentUser = user;
+            } else {
+                $http.post('/api/f1explorer/logout');
+            }
         }
 
         function findAllUsers(){
@@ -54,10 +58,7 @@
         }
 
         function getCurrentUser() {
-            console.log("LOGGED IN USER");
-            $rootScope.currentUser = $http.get('/api/f1explorer/loggedin');
-            console.log($rootScope.currentUser);
-            return $rootScope.currentUser;
+            return $http.get('/api/f1explorer/loggedin');
         }
     }
 })();

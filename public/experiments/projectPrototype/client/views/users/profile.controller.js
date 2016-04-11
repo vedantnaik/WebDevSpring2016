@@ -25,6 +25,8 @@
                     console.log("LOGGED IN USER FROM SERVER INIT PROFILE CONTROLLER");
                     console.log(userFromServer);
 
+                    $rootScope.currentUser = userFromServer;
+
                     vm.user = userFromServer;
                 });
         }

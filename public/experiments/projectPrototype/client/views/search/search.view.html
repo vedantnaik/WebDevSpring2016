@@ -23,24 +23,24 @@
 
                         <div>
                             <button class="dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                {{championshipType}}<span class="caret margin-horizontal-pad"></span>
+                                {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ng-click="setStandingsType('Drivers Championship')">Drivers Championship</a></li>
-                                <li><a ng-click="setStandingsType('Constructors Championship')">Constructors Championship</a></li>
+                                <li><a ng-click="model.setStandingsType('Drivers Championship')">Drivers Championship</a></li>
+                                <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
                             </ul>
                         </div>
 
                     </div>
                     <div class="col-sm-3">
-                        <button ng-click="searchStanding(queryOn)" class="form-control">
+                        <button ng-click="model.searchStanding(queryOn)" class="form-control">
                             <span class="glyphicon glyphicon-search"> Search </span>
                         </button>
                     </div>
                 </div>
                 <div class="table-responsive margin-vertical-pad">
 
-                    <table ng-if="standingsSearchTypeDriver" class="table table-striped">
+                    <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
                             <tr>
                                 <th> Position </th>
@@ -52,7 +52,7 @@
                                 <th> Action </th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="result in standingSearchResult">
+                        <tbody ng-repeat="result in model.standingSearchResult">
                             <tr>
                                 <td>
                                     {{result.position}}
@@ -79,11 +79,11 @@
                                 </td>
                                 <td ng-if="currentUser">
                                     <div class="row">
-                                        <button ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                        <button ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-plus"></span> Store
                                         </button>
 
-                                        <button ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                        <button ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
                                             <span class="glyphicon glyphicon-remove"></span> Hide
                                         </button>
 
@@ -97,7 +97,7 @@
                     </table>
 
 
-                    <table ng-if="!standingsSearchTypeDriver" class="table table-striped">
+                    <table ng-if="!model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
                         <tr>
                             <th> Position </th>
@@ -109,7 +109,7 @@
 
                         </tr>
                         </thead>
-                        <tbody ng-repeat="result in standingSearchResult">
+                        <tbody ng-repeat="result in model.standingSearchResult">
                         <tr>
                             <td>
                                 {{result.position}}
@@ -126,11 +126,11 @@
 
                             <td>
                                 <div class="row">
-                                    <button ng-if="currentUser" ng-click="storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                    <button ng-if="currentUser" ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
                                         <span class="glyphicon glyphicon-plus"></span> Store
                                     </button>
 
-                                    <button ng-if="currentUser" ng-click="hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                    <button ng-if="currentUser" ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
                                         <span class="glyphicon glyphicon-remove"></span> Hide
                                     </button>
                                 </div>
