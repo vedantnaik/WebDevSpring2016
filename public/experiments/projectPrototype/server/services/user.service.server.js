@@ -14,11 +14,22 @@ module.exports = function(app, userModel){
     app.put('/api/f1explorer/user/:id', updateUser);
     app.delete('/api/f1explorer/user/:id', deleteUser);
 
+    app.get('/api/f1explorer/loggedin', loggedin);
+    app.post('/api/f1explorer/logout', logout);
+
     function createUser(req,res){
         var user = req.body;
-        userModel.createUser(user);
-
-        res.json(userModel.findAllUsers());
+        userModel.createUser(user)
+            .then(
+                function( doc ) {
+                    console.log("USER CREATED user.service.server.js");
+                    console.log(doc);
+                    res.json(doc);
+                },
+                function( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUsersAll(req, res){
@@ -38,32 +49,106 @@ module.exports = function(app, userModel){
         var credentials = { "username" : req.query.username,
                             "password" : req.query.password };
 
-        res.json(userModel.findUserByCredentials(credentials));
+        userModel.findUserByCredentials(credentials)
+            .then(
+                function( doc ){
+                    console.log("FOUND USER BY CREDENTIALS user.service.server.js");
+                    console.log(doc);
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function( err ){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getAllUsers(req,res){
-        res.json(userModel.findAllUsers());
+        userModel.findAllUsers()
+            .then(
+                function( users ){
+                    res.json(users);
+                },
+                function( err ){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUserByUsername(req,res){
         var username = req.query.username;
-        res.json(userModel.findUserByUsername(username));
+
+        userModel.findUserByUsername(username)
+            .then(
+                function( doc ){
+                    console.log("FOUND USER BY USERNAME user.service.server.js");
+                    console.log(doc);
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function( err ){
+                    res.status(400).send(err);
+                }
+            );
     }
 
 
     function getUserById(req,res){
         var userId = req.params.id;
-        res.json(userModel.findUserById(userId));
+
+        userModel.findUserById(userId)
+            .then(
+                function (doc) {
+                    console.log("FOUND USER BY ID user.service.server.js");
+                    console.log(doc);
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateUser(req,res){
         var user = req.body;
         var userId = req.params.id;
-        res.json(userModel.updateUser(userId, user));
+
+        userModel
+            .updateUser(userId, user)
+            .then(
+                function (doc) {
+                    console.log("UPDATED USER user.service.server.js");
+                    console.log(doc);
+                    req.session.currentUser = doc;
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUser(req,res){
         var userId = req.params.id;
-        res.json(userModel.deleteUser(userId));
+
+        userModel.deleteUser(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function loggedin(req, res) {
+        res.json(req.session.currentUser);
+    }
+
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
     }
 }

@@ -8,26 +8,32 @@
         .controller("LoginController", loginController);
 
     function loginController (UserService, $scope, $location, $rootScope){
-        
 
-        $scope.login = login;
+        var vm = this;
+
+        vm.errorMessage = null;
+        vm.login = login;
 
         function login(user){
-            if(!user) {return;}
+            vm.errorMessage = null;
 
+            if(!user) {vm.errorMessage = "Enter username and password!"; return;}
+            if(!user.username) {vm.errorMessage = "Enter username and password!"; return;}
+            if(!user.password) {vm.errorMessage = "Enter password!"; return;}
 
             UserService
                 .findUserByCredentials(user.username, user.password)
                 .then(
                     function( res ){
                         if(res.data){
-                            $rootScope.currentUser = res.data;
+                            UserService.setCurrentUser(res.data);
                             $location.url("/profile");
                         } else {
-                            $scope.errorMessage = "Unable to Login!";
+                            vm.errorMessage = "Unable to Login!";
                         }
                     },
                     function( err ){
+                        vm.errorMessage = "Unable to Login!";
                         console.log("Unable to login.");
                     }
                 );

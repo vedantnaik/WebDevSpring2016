@@ -54,6 +54,9 @@
         }
 
         function getCurrentUser() {
+            console.log("LOGGED IN USER");
+            $rootScope.currentUser = $http.get('/api/f1explorer/loggedin');
+            console.log($rootScope.currentUser);
             return $rootScope.currentUser;
         }
     }

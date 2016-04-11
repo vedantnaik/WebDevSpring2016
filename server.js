@@ -21,8 +21,9 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
             process.env.OPENSHIFT_APP_NAME;
 }
 
-var db = mongoose.connect(connectionString);
 
+
+var db = mongoose.connect(connectionString);
 
 app.use(multer());
 app.use(bodyParser.json());
@@ -40,7 +41,7 @@ app.get('/assignment', function(req, res){
 });
 
 require('./public/assignment/server/app.js')(app, db, mongoose);
-require('./public/experiments/projectPrototype/server/app.js')(app);
+require('./public/experiments/projectPrototype/server/app.js')(app, db, mongoose);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
