@@ -86,7 +86,7 @@ module.exports = function (db, mongoose) {
             gridPosition: fact.gridPosition,
             finishingPosition: fact.finishingPosition,
             pointsEarned: fact.pointsEarned,
-        }
+        };
 
         DriverRaceResultModel
             .update(
@@ -132,7 +132,7 @@ module.exports = function (db, mongoose) {
             bestGridPosition: fact.bestGridPosition,            // better of both drivers
             bestFinishingPosition: fact.bestFinishingPosition,  // better of both drivers
             pointsEarned: fact.pointsEarned,                    // sum of both drivers
-        }
+        };
 
         ConstructorRaceResultModel
             .update(
@@ -224,12 +224,9 @@ module.exports = function (db, mongoose) {
             .find(
                 { userId: userId },
                 function(err, drrFactsForUser) {
-                    if(err) {
+                    if (err) {
                         deferred.reject(err);
-                    }
-                    else {
-                        console.log("FOIND IN MODEL");
-                        console.log(drrFactsForUser);
+                    } else {
                         deferred.resolve(drrFactsForUser);
                     }
                 }
@@ -243,10 +240,9 @@ module.exports = function (db, mongoose) {
             .find(
                 { userId: userId },
                 function(err, crrFactsForUser) {
-                    if(err) {
+                    if (err) {
                         deferred.reject(err);
-                    }
-                    else {
+                    } else {
                         deferred.resolve(crrFactsForUser);
                     }
                 }

@@ -99,8 +99,6 @@ module.exports = function(app, userModel){
         userModel.findUserById(userId)
             .then(
                 function (doc) {
-                    console.log("FOUND USER BY ID user.service.server.js");
-                    console.log(doc);
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
