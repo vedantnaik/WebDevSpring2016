@@ -9,19 +9,45 @@
         .controller("ProfileController", ProfileController);
 
     function ProfileController(UserService, $rootScope, $scope) {
-        $scope.user = $rootScope.currentUser;
-        $scope.update = update;
+
+        var vm  = this;
+
+        vm.error = null;
+        vm.message = null;
+        vm.update = update;
+
+        function init() {
+            UserService
+                .getCurrentUser()
+                .then(function (res) {
+                    var userFromServer = res.data;
+
+                    console.log("LOGGED IN USER FROM SERVER INIT PROFILE CONTROLLER");
+                    console.log(userFromServer);
+
+                    vm.user = userFromServer;
+                });
+        }
+        return init();
 
 
         function update(user) {
+
+            //console.log("UPDATE USER IN CONTROLLER: " + vm.user._id);
+            vm.error = null;
+            vm.message = null;
+
             UserService
-                .updateUser($rootScope.currentUser._id, user)
+                .updateUser(vm.user._id, user)
                 .then(
                     function ( resp ) {
                         if( resp.data ) {
                             UserService.setCurrentUser( resp.data );
+                            vm.message = "Your profile was updated successfully!";
+                            //console.log("Your profile was updated successfully!");
                         } else {
-                            alert ("Unable to update user. Try again!");
+                            vm.error = "Unable to update your profile. Try again!";
+                            //console.log("Unable to update your profile. Try again!");
                         }
                     });
         }
