@@ -21,23 +21,23 @@
 
 
         function createFactForUser(userId, fact){
-            return $http.post("/api/f1explorer/user/"+userId+"/fact",fact);
+            return $http.post("/api/f1explorer_poc/user/"+userId+"/fact",fact);
         }
 
         function findAllFactsForUser(userId){
-            return $http.get("/api/f1explorer/user/"+userId+"/fact");
+            return $http.get("/api/f1explorer_poc/user/"+userId+"/fact");
         }
 
         function deleteFactById(factId){
-            return $http.delete("/api/f1explorer/fact/"+factId);
+            return $http.delete("/api/f1explorer_poc/fact/"+factId);
         }
 
         function updateFactById(factId, newFact){
-            return $http.put("/api/f1explorer/fact/"+factId, newFact);
+            return $http.put("/api/f1explorer_poc/fact/"+factId, newFact);
         }
 
         function findFactById(factId){
-            return $http.get("/api/f1explorer/fact/"+factId);
+            return $http.get("/api/f1explorer_poc/fact/"+factId);
         }
 
     }

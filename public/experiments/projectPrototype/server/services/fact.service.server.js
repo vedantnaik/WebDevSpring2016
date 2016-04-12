@@ -4,11 +4,11 @@
 
 module.exports = function(app, factModel, uuid) {
 
-    app.get("/api/f1explorer/user/:userId/fact", getFactsByUserId);
-    app.get("/api/f1explorer/fact/:factId", getFactById);
-    app.post("/api/f1explorer/user/:userId/fact", createFactByUserId);
-    app.put("/api/f1explorer/fact/:factId", updateFactById);
-    app.delete("/api/f1explorer/fact/:factId", deleteFactById);
+    app.get("/api/f1explorer_poc/user/:userId/fact", getFactsByUserId);
+    app.get("/api/f1explorer_poc/fact/:factId", getFactById);
+    app.post("/api/f1explorer_poc/user/:userId/fact", createFactByUserId);
+    app.put("/api/f1explorer_poc/fact/:factId", updateFactById);
+    app.delete("/api/f1explorer_poc/fact/:factId", deleteFactById);
 
     function getAllFacts(req, res){
         // first find CRRs

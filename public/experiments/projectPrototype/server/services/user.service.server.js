@@ -4,18 +4,18 @@
 
 module.exports = function(app, userModel){
 
-    app.post('/api/f1explorer/user', createUser);
-    app.get('/api/f1explorer/user', getUsersAll);
+    app.post('/api/f1explorer_poc/user', createUser);
+    app.get('/api/f1explorer_poc/user', getUsersAll);
 
-    app.get('/api/f1explorer/user?username=username&password=password', getUserByCredentials);
-    app.get('/api/f1explorer/user?username=username', getUserByUsername);
-    app.get('/api/f1explorer/user/:id', getUserById);
+    app.get('/api/f1explorer_poc/user?username=username&password=password', getUserByCredentials);
+    app.get('/api/f1explorer_poc/user?username=username', getUserByUsername);
+    app.get('/api/f1explorer_poc/user/:id', getUserById);
 
-    app.put('/api/f1explorer/user/:id', updateUser);
-    app.delete('/api/f1explorer/user/:id', deleteUser);
+    app.put('/api/f1explorer_poc/user/:id', updateUser);
+    app.delete('/api/f1explorer_poc/user/:id', deleteUser);
 
-    app.get('/api/f1explorer/loggedin', loggedin);
-    app.post('/api/f1explorer/logout', logout);
+    app.get('/api/f1explorer_poc/loggedin', loggedin);
+    app.post('/api/f1explorer_poc/logout', logout);
 
     function createUser(req,res){
         var user = req.body;

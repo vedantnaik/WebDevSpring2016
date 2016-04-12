@@ -1,0 +1,147 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#/search">Search</a></li>
+                <li ng-if="currentUser" role="presentation"><a href="#/stored">Stored</a></li>
+            </ul>
+
+            <h1 class="">Search</h1>
+
+            <div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <input ng-model="queryOn.season" class="form-control align-to-center" type="text" placeholder="Season"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <input ng-model="queryOn.round" class="form-control align-to-center " type="text" placeholder="Round"/>
+                    </div>
+                    <div class="col-sm-3">
+
+                        <div>
+                            <button class="dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="model.setStandingsType('Drivers Championship')">Drivers Championship</a></li>
+                                <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <button ng-click="model.searchStanding(queryOn)" class="form-control">
+                            <span class="glyphicon glyphicon-search"> Search </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive margin-vertical-pad">
+
+                    <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Position </th>
+                                <th> Points </th>
+                                <th> Driver </th>
+                                <th> Constructor </th>
+                                <th> Nationality </th>
+
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="result in model.standingSearchResult">
+                            <tr>
+                                <td>
+                                    {{result.position}}
+                                </td>
+                                <td>
+                                    {{result.points}}
+                                </td>
+                                <td>
+                                    <a href="{{result.Driver.url}}">{{result.Driver.givenName}} {{result.Driver.familyName}}</a>
+                                </td>
+                                <td>
+                                    <a href="{{result.Constructors[0].url}}">{{result.Constructors[0].name}}</a>
+                                </td>
+                                <td>
+                                    {{result.Driver.nationality}}
+                                </td>
+
+                                <td ng-if="!currentUser">
+                                    <div class="row">
+                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-9 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-info-sign"></span> Driver Info
+                                        </button></a>
+                                    </div>
+                                </td>
+                                <td ng-if="currentUser">
+                                    <div class="row">
+                                        <button ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-plus"></span> Store
+                                        </button>
+
+                                        <button ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-remove"></span> Hide
+                                        </button>
+
+                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-3 margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-info-sign"></span> Driver Info
+                                        </button></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table ng-if="!model.standingsSearchTypeDriver" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Position </th>
+                            <th> Points </th>
+                            <th> Constructor </th>
+                            <th> Nationality </th>
+
+                            <th ng-if="currentUser"> Action </th>
+
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in model.standingSearchResult">
+                        <tr>
+                            <td>
+                                {{result.position}}
+                            </td>
+                            <td>
+                                {{result.points}}
+                            </td>
+                            <td>
+                                <a href="result.Constructor.url">{{result.Constructor.name}}</a>
+                            </td>
+                            <td>
+                                {{result.Constructor.nationality}}
+                            </td>
+
+                            <td>
+                                <div class="row">
+                                    <button ng-if="currentUser" ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                        <span class="glyphicon glyphicon-plus"></span> Store
+                                    </button>
+
+                                    <button ng-if="currentUser" ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                        <span class="glyphicon glyphicon-remove"></span> Hide
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

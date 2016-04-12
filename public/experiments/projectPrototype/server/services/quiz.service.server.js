@@ -4,11 +4,11 @@
 
 module.exports = function(app, quizModel, uuid) {
 
-    app.get("/api/f1explorer/user/:userId/quiz", getQuizsByUserId);
-    app.get("/api/f1explorer/quiz/:quizId", getQuizById);
-    app.post("/api/f1explorer/user/:userId/quiz", createQuizByUserId);
-    app.put("/api/f1explorer/quiz/:quizId", updateQuizById);
-    app.delete("/api/f1explorer/quiz/:quizId", deleteQuizById);
+    app.get("/api/f1explorer_poc/user/:userId/quiz", getQuizsByUserId);
+    app.get("/api/f1explorer_poc/quiz/:quizId", getQuizById);
+    app.post("/api/f1explorer_poc/user/:userId/quiz", createQuizByUserId);
+    app.put("/api/f1explorer_poc/quiz/:quizId", updateQuizById);
+    app.delete("/api/f1explorer_poc/quiz/:quizId", deleteQuizById);
 
     function getQuizsByUserId(req, res){
         var userId = req.params.userId;

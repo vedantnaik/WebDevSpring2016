@@ -4,11 +4,11 @@
 
 module.exports = function (app, quizModel, questionModel, uuid) {
 
-    app.get("/api/f1explorer/quiz/:quizId/question", getQuestionsForQuizIdById);
-    app.get("/api/f1explorer/quiz/:quizId/question/:questionId", getQuestionByIdInQuizById);
-    app.delete("/api/f1explorer/quiz/:quizId/question/:questionId", deleteQuestionByIdInQuizById);
-    app.post("/api/f1explorer/quiz/:quizId/question", addQuestionInQuizById);
-    app.put("/api/f1explorer/quiz/:quizId/question/:questionId", updateQuestionByIdInQuizById);
+    app.get("/api/f1explorer_poc/quiz/:quizId/question", getQuestionsForQuizIdById);
+    app.get("/api/f1explorer_poc/quiz/:quizId/question/:questionId", getQuestionByIdInQuizById);
+    app.delete("/api/f1explorer_poc/quiz/:quizId/question/:questionId", deleteQuestionByIdInQuizById);
+    app.post("/api/f1explorer_poc/quiz/:quizId/question", addQuestionInQuizById);
+    app.put("/api/f1explorer_poc/quiz/:quizId/question/:questionId", updateQuestionByIdInQuizById);
 
 
     function getQuestionsForQuizIdById (req, res) {

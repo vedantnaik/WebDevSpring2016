@@ -1,0 +1,178 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
+
+
+            <h1><a href="{{driverInfo.url}}">{{driverInfo.givenName}} {{driverInfo.familyName}}</a></h1>
+            <h2>{{driverInfo.permanentNumber}} {{driverInfo.code}} {{driverInfo.nationality}}</h2>
+
+            <div>
+                <div class="row">
+                    <button ng-click="searchCircuits()" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"> Circuits </span>
+                    </button>
+
+                    <button ng-click="searchConstructors()" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"> Constructors </span>
+                    </button>
+
+                    <button ng-click="searchStatus()" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"> Stats </span>
+                    </button>
+
+                    <button ng-click="searchResults()" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"> Results </span>
+                    </button>
+                </div>
+
+
+                <div ng-if="activeTable == 'circuits'" class="table-responsive margin-vertical-pad">
+
+                    <h3>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced at the following circuits:</h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Circuit Name </th>
+                                <th> Location </th>
+                                <th> Country </th>
+                                <th> Lat/Long </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="result in driverCircuitsData">
+                            <tr>
+                                <td>
+                                   <a href="{{result.url}}"> {{result.circuitName}} </a>
+                                </td>
+                                <td>
+                                    {{result.Location.locality}}
+                                </td>
+                                <td>
+                                    {{result.Location.country}}
+                                </td>
+
+                                <td>
+                                    {{result.Location.lat}} - {{result.Location.long}} [link to google map]
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div ng-if="activeTable == 'constructors'" class="table-responsive margin-vertical-pad">
+
+                    <h3>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced for the following teams:</h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Constructor </th>
+                                <th> Nationality </th>
+                                <th> External Link </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="result in driverConstructorsData">
+                            <tr>
+                                <td>
+                                    {{result.name}}
+                                </td>
+                                <td>
+                                    {{result.nationality}}
+                                </td>
+                                <td>
+                                    <a href="{{result.url}}"> Wiki </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div ng-if="activeTable == 'status'" class="table-responsive margin-vertical-pad">
+
+                    <h3>Found the following stats for {{driverInfo.givenName}} {{driverInfo.familyName}}:</h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Status </th>
+                                <th> Count </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="result in driverStatusData">
+                            <tr>
+                                <td>
+                                    {{result.status}}
+                                </td>
+                                <td>
+                                    {{result.count}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div ng-if="activeTable == 'results'" class="table-responsive margin-vertical-pad">
+
+                    <h3>Race Results for {{driverInfo.givenName}} {{driverInfo.familyName}}:</h3>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th> Date </th>
+                            <th> Circuit Name </th>
+                            <th> Venue </th>
+
+                            <th> Constructor </th>
+
+                            <th> Avg. Speed </th>
+                            <th> Fastest Lap Time </th>
+                            <th> Final time gap </th>
+
+
+                            <th> Grid Position </th>
+                            <th> Finising Position </th>
+                            <th> Points earned </th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="result in driverResultsData">
+                        <tr>
+                            <td>
+                                {{result.date}}
+                            </td>
+                            <td>
+                                <a href="{{result.Circuit.url}}"> {{result.Circuit.circuitName}} </a>
+                            </td>
+                            <td>
+                                {{result.Circuit.Location.locality}}, {{result.Circuit.Location.country}}, {{result.Circuit.Location.lat}} - {{result.Circuit.Location.long}} [link to google map]
+                            </td>
+                            <td>
+                                <a href="{{result.Results[0].Constructor.url}}">{{result.Results[0].Constructor.name}}</a>
+                            </td>
+                            <td>
+                                {{result.Results[0].FastestLap.AverageSpeed.speed}} {{result.Results[0].FastestLap.AverageSpeed.units}}
+                            </td>
+                            <td>
+                                {{result.Results[0].FastestLap.Time.time}}
+                            </td>
+                            <td>
+                                {{result.Results[0].Time.time}}
+                            </td>
+                            <td>
+                                {{result.Results[0].grid}}
+                            </td>
+                            <td>
+                                {{result.Results[0].position}}
+                            </td>
+                            <td>
+                                {{result.Results[0].points}}
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+        </div>
+    </div>
+</div>

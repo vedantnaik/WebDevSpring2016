@@ -7,8 +7,8 @@ module.exports = function(app, request) {
 
     // This server side service is to help users make "facts" out of a row they select from the search page.
 
-    app.get("/api/f1explorer/ergast/drrfact/:season/:round/:driverId", generateDriverRRFact);
-    app.get("/api/f1explorer/ergast/crrfact/:season/:round/:constructorId", generateConstructorRRFact);
+    app.get("/api/f1explorer_poc/ergast/drrfact/:season/:round/:driverId", generateDriverRRFact);
+    app.get("/api/f1explorer_poc/ergast/crrfact/:season/:round/:constructorId", generateConstructorRRFact);
 
     var QUERY_DRIVER_RACE_RESULT_SEASON_ROUND = "http://ergast.com/api/f1/SEASON/ROUND/drivers/DRIVERID/results.json";
     var QUERY_CONSTRUCTOR_RACE_RESULT_SEASON_ROUND = "http://ergast.com/api/f1/SEASON/ROUND/constructors/CONSTRUCTORID/results.json";

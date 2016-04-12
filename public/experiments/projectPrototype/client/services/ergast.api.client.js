@@ -101,11 +101,11 @@
         // SERVER CALLS
 
         function generateDriverRRFact(season, round, driverId) {
-            return $http.get("/api/f1explorer/ergast/drrfact/"+season+"/"+round+"/"+driverId);
+            return $http.get("/api/f1explorer_poc/ergast/drrfact/"+season+"/"+round+"/"+driverId);
         }
 
         function generateConstructorRRFact(season, round, constructorId) {
-            return $http.get("/api/f1explorer/ergast/crrfact/"+season+"/"+round+"/"+constructorId);
+            return $http.get("/api/f1explorer_poc/ergast/crrfact/"+season+"/"+round+"/"+constructorId);
         }
     }
 
