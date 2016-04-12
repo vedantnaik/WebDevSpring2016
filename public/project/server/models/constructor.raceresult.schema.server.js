@@ -11,6 +11,7 @@ module.exports = function(mongoose) {
         factType: String, // "CRR"
 
         constructorId: String, // fact related to this constructor
+        constructorNationality: String,
 
         driverName_1: String,
         driverName_2: String,

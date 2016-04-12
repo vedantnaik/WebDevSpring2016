@@ -76,6 +76,9 @@ module.exports = function (db, mongoose) {
             factType: fact.factType, // "DRR"
 
             driverId: fact.driverId, // fact related to this driver
+            driverName: fact.driverName,
+            driverNationality: fact.driverNationality,
+
             constructorId: fact.constructorId,
             constructorName: fact.constructorName,
             raceName: fact.raceName,
@@ -119,6 +122,7 @@ module.exports = function (db, mongoose) {
             factType: fact.factType, // "CRR"
 
             constructorId: fact.constructorId, // fact related to this constructor
+            constructorNationality: fact.constructorNationality,
 
             driverName_1: fact.driverName_1,
             driverName_2: fact.driverName_2,

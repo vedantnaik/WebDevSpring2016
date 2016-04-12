@@ -20,7 +20,7 @@
         vm.standingsSearchTypeDriver = true;
 
         function setStandingsType(typ){
-            console.log("cahnged to " + typ);
+            console.log("changed to " + typ);
             vm.championshipType = typ;
         }
 

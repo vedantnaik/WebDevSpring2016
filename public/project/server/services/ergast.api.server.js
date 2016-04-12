@@ -35,6 +35,9 @@ module.exports = function(app, request) {
                     drrFact.factType = "DRR"; // "DRR"
 
                     drrFact.driverId = info.MRData.RaceTable.driverId; // fact related to this driver
+                    drrFact.driverName = firstDriverName(info);
+                    drrFact.driverNationality = info.MRData.RaceTable.Races[0].Results[0].Driver.nationality;
+
                     drrFact.constructorId = info.MRData.RaceTable.Races[0].Results[0].Constructor.constructorId;
                     drrFact.constructorName = info.MRData.RaceTable.Races[0].Results[0].Constructor.name;
                     drrFact.raceName = info.MRData.RaceTable.Races[0].raceName;
@@ -76,6 +79,7 @@ module.exports = function(app, request) {
                     crrFact.factType = "CRR"; // "CRR"
 
                     crrFact.constructorId = info.MRData.RaceTable.constructorId; // fact related to this constructor
+                    crrFact.constructorNationality = info.MRData.RaceTable.Races[0].Results[0].Constructor.nationality;
 
                     crrFact.driverName_1 = firstDriverName(info);
                     crrFact.driverName_2 = secondDriverName(info);
