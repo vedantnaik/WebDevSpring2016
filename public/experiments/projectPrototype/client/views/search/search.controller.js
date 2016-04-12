@@ -12,7 +12,9 @@
         console.log("in Quiz Controller");
 
         var vm = this;
-        
+
+        vm.message = null;
+
         vm.championshipType = 'Drivers Championship';
         vm.standingsSearchTypeDriver = true;
 
@@ -27,6 +29,8 @@
 
 
         function searchStanding(queryOn){
+
+            vm.message = null;
 
             if(!queryOn.round || queryOn.round === ""){
                 queryOn.round = "last";
@@ -78,7 +82,7 @@
         }
 
         function searchDrivers(season){
-            console.log(season);
+            vm.message = null;
 
             ErgastService.getDriversForSeason(season)
                 .then(
@@ -101,60 +105,65 @@
 
         function storeResult(index){
 
+            vm.message = null;
+
+            console.log(vm.standingSearchResult[index]);
             var recordToPush = {};
 
-
             if(vm.standingsSearchTypeDriver){
+                ErgastService
+                    .generateDriverRRFact(vm.season,
+                                        vm.round,
+                                        vm.standingSearchResult[index].Driver.driverId)
+                    .then(
+                        function(res){
+                            recordToPush = res.data;
+                            recordToPush.userId = $rootScope.currentUser._id; // fact stored for user
+                            FactService
+                                .createFactForUser($rootScope.currentUser._id, recordToPush)
+                                .then(
+                                    function(res){
+                                        console.log("Fact stored in mongo");
+                                    },
+                                    function(err){
+                                        console.log("Unable to store fact");
+                                    }
+                                );
+                        },
+                        function(err){
+                            vm.message = "Unable to generate fact for this driver's race result.";
+                        }
+                    );
 
-                recordToPush.userId = $rootScope.currentUser._id; // fact stored for user
 
-                recordToPush.factType = "DRR"; // "DRR"
-
-                recordToPush.driverId = String, // fact related to this driver
-                recordToPush.constructorId= String;
-                recordToPush.constructorName= vm.standingSearchResult[index].Constructors[0].name;
-                recordToPush.raceName= String;
-
-                recordToPush.season = vm.season;
-                recordToPush.round = vm.round;
-
-
-                recordToPush.gridPosition= Number;
-                recordToPush.finishingPosition= vm.standingSearchResult[index].position;
-                recordToPush.pointsEarned= vm.standingSearchResult[index].points;
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                recordToPush.recordType = 'd';
-
-                recordToPush.position = vm.standingSearchResult[index].position;
-                recordToPush.points = vm.standingSearchResult[index].points;
-                recordToPush.driverUrl = vm.standingSearchResult[index].Driver.url;
-                recordToPush.givenName = vm.standingSearchResult[index].Driver.givenName;
-                recordToPush.familyName = vm.standingSearchResult[index].Driver.familyName;
-                recordToPush.nationality = vm.standingSearchResult[index].Driver.nationality;
-                recordToPush.constructorUrl = vm.standingSearchResult[index].Constructors[0].url;
-                recordToPush.constructorName = vm.standingSearchResult[index].Constructors[0].name;
             } else {
-
-                recordToPush.recordType = 'c';
-
-                recordToPush.position = vm.standingSearchResult[index].position;
-                recordToPush.points = vm.standingSearchResult[index].points;
-                recordToPush.constructorUrl = vm.standingSearchResult[index].Constructor.url;
-                recordToPush.constructorName = vm.standingSearchResult[index].Constructor.name;
-                recordToPush.nationality = vm.standingSearchResult[index].Constructor.nationality;
+                ErgastService
+                    .generateConstructorRRFact(vm.season,
+                                        vm.round,
+                                        vm.standingSearchResult[index].Constructor.constructorId)
+                    .then(
+                        function(res){
+                            recordToPush = res.data;
+                            recordToPush.userId = $rootScope.currentUser._id; // fact stored for user
+                            FactService
+                                .createFactForUser($rootScope.currentUser._id, recordToPush)
+                                .then(
+                                    function(res){
+                                        console.log("Fact stored in mongo");
+                                    },
+                                    function(err){
+                                        console.log("Unable to store fact");
+                                    }
+                                );
+                        },
+                        function(err){
+                            vm.message = "Unable to generate fact for this constructor's race result.";
+                        }
+                    );
             }
 
-            //ErgastService.addToStoredDataSet(recordToPush);
-            FactService.createFactForUser($rootScope.currentUser._id, recordToPush)
-                .then(
-                    function ( res ) {
+            console.log(recordToPush);
 
-                    },
-                    function ( err ) {
-                        alert("Unable to store fact to server");
-                    }
-                );
         }
 
 

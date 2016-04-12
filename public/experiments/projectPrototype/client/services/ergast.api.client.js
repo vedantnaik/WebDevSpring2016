@@ -15,10 +15,6 @@
     var QUERY_DRIVER_DETAILS_RESULTS = 'http://ergast.com/api/f1/drivers/DRIVERID/results.json';
     var QUERY_DRIVER_DETAILS_STATUS = 'http://ergast.com/api/f1/drivers/DRIVERID/status.json';
 
-    // query for facts
-    var QUERY_CONSTRUCTOR_RACE_RESULT_SEASON_ROUND = "http://ergast.com/api/f1/SEASON/ROUND/constructors/CONSTRUCTORID/results.json";
-    var QUERY_DRIVER_RACE_RESULT_SEASON_ROUND = "http://ergast.com/api/f1/SEASON/ROUND/drivers/DRIVERID/results.json";
-
     angular
         .module("ProjectPrototypeApp")
         .factory("ErgastService", ErgastService);
@@ -38,7 +34,12 @@
             getDriverCircuits: getDriverCircuits,
             getDriverConstructors: getDriverConstructors,
             getDriverStatus: getDriverStatus,
-            getDriverResults: getDriverResults
+            getDriverResults: getDriverResults,
+
+            // generate facts (from server side ergast.api)
+            // These calls involve some data processing. So we choose to move it to the server side
+            generateDriverRRFact: generateDriverRRFact,
+            generateConstructorRRFact: generateConstructorRRFact
 
         };
         return model;
@@ -97,6 +98,15 @@
 
         }
 
+        // SERVER CALLS
+
+        function generateDriverRRFact(season, round, driverId) {
+            return $http.get("/api/f1explorer/ergast/drrfact/"+season+"/"+round+"/"+driverId);
+        }
+
+        function generateConstructorRRFact(season, round, constructorId) {
+            return $http.get("/api/f1explorer/ergast/crrfact/"+season+"/"+round+"/"+constructorId);
+        }
     }
 
 })();
