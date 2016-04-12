@@ -4,7 +4,7 @@
 
 (function(){
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("MainController", MainController);
 
     function MainController ($scope, $location){

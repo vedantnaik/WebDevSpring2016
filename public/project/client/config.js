@@ -3,7 +3,7 @@
  */
 
 (function(){
-    angular.module("ProjectPrototypeApp")
+    angular.module("F1ExplorerApp")
         .config(Configuration);
 
     function Configuration ($routeProvider) {

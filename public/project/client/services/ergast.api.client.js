@@ -4,20 +4,21 @@
 
 (function(){
 
+    angular
+        .module("F1ExplorerApp")
+        .factory("ErgastService", ErgastService);
+
     // query standings
     var QUERY_DRIVER_STANDING_SEASON_ROUND = 'http://ergast.com/api/f1/SEASON/ROUND/driverStandings.json';
-    var QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND = 'http://ergast.com/api/f1/SEASON/ROUND/constructorStandings.json';
 
+    var QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND = 'http://ergast.com/api/f1/SEASON/ROUND/constructorStandings.json';
     // query driver details
     var QUERY_DRIVER_DETAILS = 'http://ergast.com/api/f1/drivers/DRIVERID.json';
     var QUERY_DRIVER_DETAILS_CIRCUITS = 'http://ergast.com/api/f1/drivers/DRIVERID/circuits.json';
     var QUERY_DRIVER_DETAILS_CONSTRUCTORS = 'http://ergast.com/api/f1/drivers/DRIVERID/constructors.json';
     var QUERY_DRIVER_DETAILS_RESULTS = 'http://ergast.com/api/f1/drivers/DRIVERID/results.json';
-    var QUERY_DRIVER_DETAILS_STATUS = 'http://ergast.com/api/f1/drivers/DRIVERID/status.json';
 
-    angular
-        .module("ProjectPrototypeApp")
-        .factory("ErgastService", ErgastService);
+    var QUERY_DRIVER_DETAILS_STATUS = 'http://ergast.com/api/f1/drivers/DRIVERID/status.json';
 
     function ErgastService($http) {
 

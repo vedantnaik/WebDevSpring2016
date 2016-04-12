@@ -2,46 +2,105 @@
  * Created by vedant on 3/20/16.
  */
 
-module.exports = function (app, quizModel, questionModel, uuid) {
+module.exports = function (app, questionModel, uuid) {
 
-    app.get("/api/f1explorer/quiz/:quizId/question", getQuestionsForQuizIdById);
-    app.get("/api/f1explorer/quiz/:quizId/question/:questionId", getQuestionByIdInQuizById);
-    app.delete("/api/f1explorer/quiz/:quizId/question/:questionId", deleteQuestionByIdInQuizById);
-    app.post("/api/f1explorer/quiz/:quizId/question", addQuestionInQuizById);
-    app.put("/api/f1explorer/quiz/:quizId/question/:questionId", updateQuestionByIdInQuizById);
+    app.get("/api/f1explorer/question/:questionId", getQuestionsById);
+    app.get("/api/f1explorer/quiz/:quizId/question/", getQuestionsInQuizById);
+    app.get("/api/f1explorer/user/:userId/question/", getQuestionsForUserById);
 
+    app.post("/api/f1explorer/question", addQuestion);
 
-    function getQuestionsForQuizIdById (req, res) {
-        //console.log(req.params);
-        var quizId = req.params.quizId;
-        res.json(questionModel.findQuestionsByQuizId(quizId));
-    }
+    app.put("/api/f1explorer/question/:questionId", updateQuestionById);
 
-    function getQuestionByIdInQuizById (req, res) {
+    app.delete("/api/f1explorer/question/:questionId", deleteQuestionById);
+
+    function getQuestionsById(req, res){
         var questionId = req.params.questionId;
-        var quizId = req.params.quizId;
-        res.json(questionModel.findQuestionInQuiz(quizId,questionId));
+
+        questionModel
+            .findQuestionById(questionId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function deleteQuestionByIdInQuizById (req, res) {
-        var questionId = req.params.questionId;
+    function getQuestionsInQuizById(req, res){
         var quizId = req.params.quizId;
-        questionModel.deleteQuestionInQuiz(quizId, questionId);
-        res.send(200);
+
+        questionModel
+            .findQuestionsByQuizId(quizId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function addQuestionInQuizById (req, res) {
-        var quizId = req.params.quizId;
+    function getQuestionsForUserById(req, res){
+        var userId = req.params.userId;
+
+        questionModel
+            .findQuestionsByUserId(userId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function addQuestion(req, res){
         var question = req.body;
-        res.json(questionModel.createQuestionInQuiz(quizId, question));
+        questionModel
+            .createQuestion(question)
+            .then(
+                function( doc ) {
+                    res.json(doc);
+                },
+                function( err ) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function updateQuestionByIdInQuizById(req, res) {
-        var questionId = req.params.questionId;
-        var quizId = req.params.quizId;
-        var questionToUpdate = req.body;
-        res.json(questionModel.updateQuestionInQuiz(quizId, questionId, questionToUpdate))
+    function updateQuestionById(req, res){
+        var question = req.body;
+        var questionId = req.params.id;
+
+        questionModel
+            .updateUser(questionId, question)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
+    function deleteQuestionById(req, res){
+        var questionId = req.params.id;
 
+        questionModel
+            .deleteQuestionById(questionId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 }

@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("RegisterController", RegisterController);
 
     function RegisterController(UserService, $scope, $rootScope, $location ) {

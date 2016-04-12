@@ -5,7 +5,7 @@
 (function () {
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("StoredController", StoredController);
 
     function StoredController(ErgastService, FactService, $scope, $rootScope, $location) {
@@ -15,16 +15,22 @@
 
         vm.setStandingsType = setStandingsType;
         vm.displayResults = displayResults;
+        vm.makeQuestion = makeQuestion;
+        vm.deleteStoredFact = deleteStoredFact;
+
+        vm.message = null;
 
         vm.championshipType = 'Drivers Championship';
         vm.standingsSearchTypeDriver = true;
 
         function setStandingsType(typ){
+            vm.message = null;
             console.log("changed to " + typ);
             vm.championshipType = typ;
         }
 
         function displayResults(){
+            vm.message = null;
 
             FactService.findAllFactsForUser($rootScope.currentUser._id)
                 .then(
@@ -51,6 +57,35 @@
                     }
                 );
 
+        }
+
+        function makeQuestion(factId){
+            vm.message = null;
+            FactService
+                .findFactById(factId)
+                .then(
+                    function(res){
+                        console.log(res.data);
+                    },
+                    function(err){
+                        console.log("Fact not found");
+                    }
+                );
+        }
+
+        function deleteStoredFact(factId, factAbout) {
+            vm.message = null;
+            FactService
+                .deleteFactById(factId)
+                .then(
+                    function(res){
+                        vm.message = "Deleted fact related to " + factAbout;
+                        displayResults();
+                    },
+                    function(err){
+                        vm.message = "There was some problem deleting this fact. Please try again.";
+                    }
+                );
         }
     }
 

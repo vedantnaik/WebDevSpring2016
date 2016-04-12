@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("ProfileController", ProfileController);
 
     function ProfileController(UserService, $rootScope, $scope) {

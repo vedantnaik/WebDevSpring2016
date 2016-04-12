@@ -5,7 +5,7 @@
 (function () {
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("SearchController", SearchController);
 
     function SearchController(ErgastService, FactService, $rootScope, $location) {
@@ -54,11 +54,6 @@
                         }
                     );
 
-
-                //ErgastService.getDriverStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
-                //    vm.standingsSearchTypeDriver = true;
-                //    vm.standingSearchResult = data;
-                //});
             } else if (vm.championshipType === 'Constructors Championship'){
 
                 ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round)
@@ -72,11 +67,6 @@
                         }
                     );
 
-
-                //ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round, function(data){
-                //    vm.standingsSearchTypeDriver = false;
-                //    vm.standingSearchResult = data;
-                //});
             }
 
         }
@@ -94,13 +84,6 @@
                     }
                 );
 
-
-            //ErgastService.getDriversForSeason(season, function(data){
-            //    console.log("in search drivers " + data);
-            //    vm.driverSearchResult = data;
-            //});
-
-            console.log("in search drivers " + vm.driverSearchResult);
         }
 
         function storeResult(index){
@@ -134,8 +117,6 @@
                             vm.message = "Unable to generate fact for this driver's race result.";
                         }
                     );
-
-
             } else {
                 ErgastService
                     .generateConstructorRRFact(vm.season,
@@ -161,8 +142,6 @@
                         }
                     );
             }
-
-            console.log(recordToPush);
 
         }
 

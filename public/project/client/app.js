@@ -5,5 +5,5 @@
 (function(){
     "use strict";
     angular
-        .module("ProjectPrototypeApp", ["ngRoute", "ui.sortable"]);
+        .module("F1ExplorerApp", ["ngRoute", "ui.sortable"]);
 })();

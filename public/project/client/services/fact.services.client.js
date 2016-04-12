@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .factory("FactService", FactService);
 
     function FactService($http){

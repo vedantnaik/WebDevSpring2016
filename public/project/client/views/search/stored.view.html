@@ -5,10 +5,13 @@
 
             <ul class="nav nav-pills">
                 <li role="presentation"><a href="#/search">Search</a></li>
-                <li ng-if="model.dataStoredByUser" role="presentation" class="active"><a href="#/Stored">Stored</a></li>
+                <li role="presentation" class="active"><a href="#/Stored">Stored</a></li>
             </ul>
 
-            <h1 class="page-header">Stored Records</h1>
+            <h1 class="page-header">Your stored facts</h1>
+            <p> Use these facts to build your own quiz! </p>
+
+            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
 
             <div>
 
@@ -24,7 +27,7 @@
                     </div>
                     <div class="col-sm-4">
                         <button ng-click="model.displayResults()" class="btn btn-default">
-                            <span class="glyphicon glyphicon-search"> Display Stored </span>
+                            <span class="glyphicon glyphicon-search"> </span> Display Stored
                         </button>
                     </div>
                 </div>
@@ -44,6 +47,8 @@
                             <th> Grid Position </th>
                             <th> Final Position </th>
                             <th> Points </th>
+
+                            <th> Actions </th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="result in model.displayStoredResults">
@@ -78,6 +83,15 @@
                                 <td>
                                     {{result.pointsEarned}}
                                 </td>
+
+                                <td>
+                                    <div class="row">
+                                        <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
+                                                class="btn btn-danger margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,6 +113,8 @@
                                 <th> Best Grid Position </th>
                                 <th> Best Final Position </th>
                                 <th> Total Points Earned </th>
+
+                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in model.displayStoredResults">
@@ -135,6 +151,15 @@
                                 </td>
                                 <td>
                                     {{result.pointsEarned}}
+                                </td>
+
+                                <td>
+                                    <div class="row">
+                                        <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
+                                                class="btn btn-danger margin-horizontal-pad">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

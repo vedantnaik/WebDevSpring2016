@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("SidebarController", SidebarController);
 
     function SidebarController(UserService, $scope, $rootScope, $location){

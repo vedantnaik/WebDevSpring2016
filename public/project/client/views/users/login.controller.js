@@ -4,7 +4,7 @@
 
 (function (){
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("LoginController", loginController);
 
     function loginController (UserService, $scope, $location, $rootScope){

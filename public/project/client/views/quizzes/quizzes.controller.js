@@ -5,7 +5,7 @@
 (function () {
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("QuizController", QuizController);
 
     function QuizController(QuizService, $scope, $rootScope, $location) {

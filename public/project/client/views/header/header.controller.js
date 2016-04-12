@@ -5,7 +5,7 @@
 (function (){
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("HeaderController", HeaderController);
 
     function HeaderController(UserService, $scope, $rootScope, $location){

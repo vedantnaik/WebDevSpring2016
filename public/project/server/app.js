@@ -9,7 +9,7 @@ module.exports = function(app, db, mongoose){
 
     var userModel = require("./models/user.model.js")(db, mongoose);
     var quizModel = require("./models/quiz.model.js")();
-    var questionModel = require("./models/question.model.js")();
+    var questionModel = require("./models/question.model.js")(db, mongoose);
     var factModel = require("./models/fact.model.js")(db, mongoose);
 
     var userService = require("./services/user.service.server.js")(app, userModel);

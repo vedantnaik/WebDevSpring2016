@@ -5,7 +5,7 @@
 (function () {
 
     angular
-        .module("ProjectPrototypeApp")
+        .module("F1ExplorerApp")
         .controller("DriverController", DriverController);
 
     function DriverController(ErgastService, $scope, $rootScope, $location, $routeParams, $http){
