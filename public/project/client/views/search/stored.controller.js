@@ -11,15 +11,17 @@
     function StoredController(ErgastService, FactService, $scope, $rootScope, $location) {
         console.log("in Stored Controller");
 
-        $scope.setStandingsType = setStandingsType;
-        $scope.displayResults = displayResults;
+        var vm = this;
 
-        $scope.championshipType = 'Drivers Championship';
-        $scope.standingsSearchTypeDriver = true;
+        vm.setStandingsType = setStandingsType;
+        vm.displayResults = displayResults;
+
+        vm.championshipType = 'Drivers Championship';
+        vm.standingsSearchTypeDriver = true;
 
         function setStandingsType(typ){
             console.log("cahnged to " + typ);
-            $scope.championshipType = typ;
+            vm.championshipType = typ;
         }
 
         function displayResults(){
@@ -27,18 +29,21 @@
             FactService.findAllFactsForUser($rootScope.currentUser._id)
                 .then(
                     function( res ){
-                        var storedData = res.data;
-                        var driverStoredResult = storedData.filter(function (rec) {return rec.recordType === 'd';});
-                        var constructorStoredResult = storedData.filter(function (rec) {return rec.recordType === 'c';});
 
-                        if($scope.championshipType === 'Drivers Championship') {
-                            $scope.standingsSearchTypeDriver = true;
-                            $scope.displayStoredResults = null;
-                            $scope.displayStoredResults = driverStoredResult;
+                        var storedData = res.data;
+                        var driverStoredResult = storedData
+                                                .filter(function (rec) {return rec.factType === 'DRR';});
+                        var constructorStoredResult = storedData
+                                                .filter(function (rec) {return rec.factType === 'CRR';});
+
+                        if(vm.championshipType === 'Drivers Championship') {
+                            vm.standingsSearchTypeDriver = true;
+                            vm.displayStoredResults = null;
+                            vm.displayStoredResults = driverStoredResult;
                         } else {
-                            $scope.standingsSearchTypeDriver = false;
-                            $scope.displayStoredResults = null;
-                            $scope.displayStoredResults = constructorStoredResult;
+                            vm.standingsSearchTypeDriver = false;
+                            vm.displayStoredResults = null;
+                            vm.displayStoredResults = constructorStoredResult;
                         }
                     },
                     function (err)  {

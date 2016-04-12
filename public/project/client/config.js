@@ -37,7 +37,8 @@
             })
             .when("/stored", {
                 templateUrl: "views/search/stored.view.html",
-                controller: "StoredController"
+                controller: "StoredController",
+                controllerAs: "model"
             })
             .when('/driver/:driverId', {
                 templateUrl: "views/details/driver.view.html",
