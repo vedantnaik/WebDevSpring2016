@@ -92,7 +92,6 @@ module.exports = function(app, userModel){
             );
     }
 
-
     function getUserById(req,res){
         var userId = req.params.id;
 

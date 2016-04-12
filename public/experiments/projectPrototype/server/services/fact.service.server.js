@@ -10,7 +10,6 @@ module.exports = function(app, factModel, uuid) {
     app.put("/api/f1explorer/fact/:factId", updateFactById);
     app.delete("/api/f1explorer/fact/:factId", deleteFactById);
 
-
     function getAllFacts(req, res){
         // first find CRRs
         factModel
@@ -160,7 +159,6 @@ module.exports = function(app, factModel, uuid) {
 
     function deleteFactById(req, res){
         var factId = req.params.factId;
-
 
         factModel
             .findDriverRaceResultFactById(factId)

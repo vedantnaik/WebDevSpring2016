@@ -103,10 +103,26 @@
 
             var recordToPush = {};
 
-            recordToPush.season = vm.season;
-            recordToPush.round = vm.round;
 
             if(vm.standingsSearchTypeDriver){
+
+                recordToPush.userId = $rootScope.currentUser._id; // fact stored for user
+
+                recordToPush.factType = "DRR"; // "DRR"
+
+                recordToPush.driverId = String, // fact related to this driver
+                recordToPush.constructorId= String;
+                recordToPush.constructorName= vm.standingSearchResult[index].Constructors[0].name;
+                recordToPush.raceName= String;
+
+                recordToPush.season = vm.season;
+                recordToPush.round = vm.round;
+
+
+                recordToPush.gridPosition= Number;
+                recordToPush.finishingPosition= vm.standingSearchResult[index].position;
+                recordToPush.pointsEarned= vm.standingSearchResult[index].points;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 recordToPush.recordType = 'd';
 

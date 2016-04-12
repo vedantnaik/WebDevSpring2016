@@ -3,6 +3,7 @@
  */
 
 var uuid = require('node-uuid');
+var request = require('request');
 
 module.exports = function(app, db, mongoose){
 
@@ -15,4 +16,6 @@ module.exports = function(app, db, mongoose){
     var quizService = require("./services/quiz.service.server.js")(app, quizModel, uuid);
     var questionService = require("./services/question.service.server.js")(app, quizModel, questionModel, uuid);
     var factService = require("./services/fact.service.server.js")(app, factModel, uuid);
+
+    var ergastService = require("./services/ergast.api.server.js")(app, request);
 };
