@@ -33,7 +33,7 @@
         function init(){
             vm.seasonsList = [];
             var currentYear = new Date().getFullYear();
-            for(var yr = 1951; yr <= currentYear; yr++){
+            for(var yr = currentYear; yr >= 1951; yr--){
                 vm.seasonsList.push(yr);
             }
             vm.queryOn.season = currentYear;
