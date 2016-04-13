@@ -11,37 +11,44 @@
     function QuizService($http){
 
         var api = {
-            createQuizForUser: createQuizForUser,
-            findAllQuizzesForUser: findAllQuizzesForUser,
-            deleteQuizById: deleteQuizById,
+            createQuizByUserId: createQuizByUserId,
             updateQuizById: updateQuizById,
-            findQuizById: findQuizById
+            deleteQuizById: deleteQuizById,
+
+            getAllQuizzes: getAllQuizzes,
+            getQuizById: getQuizById,
+            getQuizzesForUserByTitle: getQuizzesForUserByTitle,
+            getAllQuizzesForUser: getAllQuizzesForUser
         };
         return api;
 
-
-        function createQuizForUser(userId, quiz){
+        function createQuizByUserId(userId, quiz){
             return $http.post("/api/f1explorer/user/"+userId+"/quiz",quiz);
         }
 
-        function findAllQuizzesForUser(userId){
-            return $http.get("/api/f1explorer/user/"+userId+"/quiz");
+        function updateQuizById(quizId, updatedQuiz){
+            return $http.put("/api/f1explorer/quiz/"+quizId, updatedQuiz);
         }
 
         function deleteQuizById(quizId){
             return $http.delete("/api/f1explorer/quiz/"+quizId);
         }
 
-        function updateQuizById(quizId, newQuiz){
-
-            return $http.put("/api/f1explorer/quiz/"+quizId, newQuiz);
-
+        function getAllQuizzes(){
+            return $http.get("/api/f1explorer/quizzes/");
         }
 
-        function findQuizById(quizId){
+        function getQuizById(quizId){
             return $http.get("/api/f1explorer/quiz/"+quizId);
         }
 
+        function getQuizzesForUserByTitle(userId, quizTitle){
+            return $http.get("/api/f1explorer/quizzes/user/"+userId+"/quiz/"+quizTitle);
+        }
+
+        function getAllQuizzesForUser(userId){
+            return $http.get("/api/f1explorer/quizzes/user/"+userId);
+        }
     }
 
 })();

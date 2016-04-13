@@ -1,95 +1,141 @@
 /**
  * Created by vedant on 3/17/16.
  */
-var quizzes = require("./quiz.mock.json");
 
-module.exports = function(){
+var q = require("q");
+
+module.exports = function(db, mongoose){
+
+    var QuizSchema = require("./quiz.schema.server.js")(mongoose);
+    var QuizModel = mongoose.model('QuizModel', QuizSchema);
 
     var api = {
         createQuiz: createQuiz,
         updateQuizById: updateQuizById,
         deleteQuizById: deleteQuizById,
-        findAllQuizs: findAllQuizs,
-        findAllQuizsForUser: findAllQuizsForUser,
-        findQuizByTitle: findQuizByTitle,
-        findQuizById: findQuizById
+
+        findAllQuizzes: findAllQuizzes,
+        findQuizById: findQuizById,
+        findQuizzesForUserByTitle: findQuizzesForUserByTitle,
+        findAllQuizzesForUser: findAllQuizzesForUser
     };
 
     return api;
 
     function createQuiz(quiz){
-        quizzes.push(quiz);
-        //callback(quiz);
-        return quizzes;
+        var deferred = q.defer();
+        quiz.questions = [];
+        QuizModel.create(quiz,
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
     }
 
-    function updateQuizById(quizId, newQuiz){
+    function updateQuizById(quizId, updatedQuiz){
 
-        for (var quizIndex in quizzes) {
-            if (quizzes[quizIndex]._id == quizId){
+        var deferred = q.defer();
+        // create new quiz without an _id field
+        var newQuiz = {
+            userId: updatedQuiz.userId,
+            title: updatedQuiz.title
+        };
 
-                quizzes[quizIndex]._id = newQuiz._id;
-
-                if(quizzes[quizIndex].title != newQuiz.title && newQuiz.title != "") {
-                    quizzes[quizIndex].title = newQuiz.title;
-                }
-
-                if(quizzes[quizIndex].userId != newQuiz.userId && newQuiz.userId != "") {
-                    quizzes[quizIndex].userId = newQuiz.userId;
-                }
-
-                return quizzes[quizIndex];
-            }
+        if(updatedQuiz.questions){
+            newQuiz.questions = updatedQuiz.questions;
         }
 
-        return null;
+        QuizModel.update(
+            {_id: quizId},
+            {$set: newQuiz},
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
     }
 
     function deleteQuizById(quizId){
-        for (var quizIndex in quizzes){
-            if (quizzes[quizIndex]._id == quizId){
-                quizzes.splice(quizIndex, 1)
-            }
-        }
+        var deferred = q.defer();
+        QuizModel.remove(
+            {_id: quizId},
+            function(err, doc){
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
     }
 
-    function findAllQuizs() {
-        return quizzes;
+    function findAllQuizzes() {
+
+        var deferred = q.defer();
+        QuizModel.find(
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
+
     }
 
-    function findAllQuizsForUser(userId){
-        var quizzesForUser = [];
-
-        for (var quizIndex in quizzes){
-            if (quizzes[quizIndex].userId == userId){
-                quizzesForUser.push(quizzes[quizIndex]);
-            }
-        }
-
-        return quizzesForUser;
-    }
-
-    function findQuizByTitle(quizTitle){
-
-        for (var quizIndex in quizzes){
-            if (quizzes[quizIndex].title == quizTitle){
-                return quizzes[quizIndex];
-            }
-        }
-
-        return null;
-    }
 
     function findQuizById(quizId){
-
-        for (var quizIndex in quizzes){
-            if (quizzes[quizIndex]._id == quizId){
-                return quizzes[quizIndex];
-            }
-        }
-
-        return null;
+        var deferred = q.defer();
+        QuizModel.findById(quizId,
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
     }
 
+    function findQuizzesForUserByTitle(userId, quizTitle){
+        var deferred = q.defer();
+        QuizModel.find(
+            { userId: userId, title: quizTitle },
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
+    }
 
+    function findAllQuizzesForUser(userId){
+        var deferred = q.defer();
+        QuizModel.find(
+            { userId: userId },
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
+    }
 };
