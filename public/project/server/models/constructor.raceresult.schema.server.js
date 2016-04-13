@@ -26,6 +26,6 @@ module.exports = function(mongoose) {
         bestFinishingPosition: Number,  // better of both drivers
         pointsEarned: Number,           // sum of both drivers
 
-    }, {collection: 'project.raceresults.f1constructor'});
+    }, {collection: 'assignment.project.raceresults.f1constructor'});
     return ConstructorRaceResultSchema;
 };
