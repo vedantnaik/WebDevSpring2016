@@ -14,11 +14,7 @@
         var vm = this;
 
         vm.message = null;
-
-        vm.championshipType = 'Drivers Championship';
-        vm.standingsSearchTypeDriver = true;
-
-        $rootScope.dataStoredByUser = true;
+        vm.queryOn = {};
 
         vm.searchStanding = searchStanding;
         vm.searchDrivers = searchDrivers;
@@ -27,25 +23,48 @@
         vm.storeResult = storeResult;
         vm.hideResult = hideResult;
 
+        vm.seasonUpdated = seasonUpdated;
+        vm.roundUpdated = roundUpdated;
+
+        // Set data values
+        init();
+
+
+        function init(){
+            vm.seasonsList = [];
+            var currentYear = new Date().getFullYear();
+            for(var yr = 1951; yr <= currentYear; yr++){
+                vm.seasonsList.push(yr);
+            }
+            vm.queryOn.season = currentYear;
+
+            vm.roundsList = [];
+
+            updateRoundsDropDownList(currentYear);
+
+            vm.championshipType = 'Drivers';
+            vm.standingsSearchTypeDriver = true;
+
+            $rootScope.dataStoredByUser = true;
+        }
+
+
 
         function searchStanding(queryOn){
 
             vm.message = null;
 
-            if(!queryOn.round || queryOn.round === ""){
-                queryOn.round = "last";
-            }
+            vm.season = vm.queryOn.season;
+            vm.round = vm.queryOn.round;
 
-            vm.season = queryOn.season;
-            vm.round = queryOn.round;
 
-            console.log("in search");
+            if(vm.championshipType == 'Drivers'){
 
-            if(vm.championshipType === 'Drivers Championship'){
 
-                ErgastService.getDriverStandingForSeasonRound(queryOn.season, queryOn.round)
+                ErgastService.getDriverStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
+                            console.log("in search",vm.season, vm.round);
                             vm.standingsSearchTypeDriver = true;
                             vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
                         },
@@ -54,9 +73,9 @@
                         }
                     );
 
-            } else if (vm.championshipType === 'Constructors Championship'){
+            } else if (vm.championshipType == 'Constructors'){
 
-                ErgastService.getConstructorStandingForSeasonRound(queryOn.season, queryOn.round)
+                ErgastService.getConstructorStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
                             vm.standingsSearchTypeDriver = false;
@@ -90,7 +109,6 @@
 
             vm.message = null;
 
-            console.log(vm.standingSearchResult[index]);
             var recordToPush = {};
 
             if(vm.standingsSearchTypeDriver){
@@ -154,6 +172,36 @@
 
         function setStandingsType(typ){
             vm.championshipType = typ;
+        }
+
+        function seasonUpdated(season){
+            console.log("season updated to " + season);
+            vm.queryOn.season = season;
+            updateRoundsDropDownList(season);
+        }
+
+        function roundUpdated(round){
+            vm.queryOn.round = round;
+        }
+
+        // helpers
+
+        function updateRoundsDropDownList(forYear){
+            ErgastService
+                .getRaceResultsInSeason(forYear)
+                .then(
+                    function(res){
+                        vm.roundsList = [];
+                        var racesInSeasonSoFar = res.data.MRData.RaceTable.round;
+                        for(var r = 1; r <= racesInSeasonSoFar; r++){
+                            vm.roundsList.push(r);
+                        }
+                        vm.queryOn.round = racesInSeasonSoFar;
+                    },
+                    function(err){
+                        vm.message = "Some problem occured while connecting to our 3rd party API. Please try again";
+                    }
+                );
         }
     }
 

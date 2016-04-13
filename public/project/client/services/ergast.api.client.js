@@ -20,6 +20,9 @@
 
     var QUERY_DRIVER_DETAILS_STATUS = 'http://ergast.com/api/f1/drivers/DRIVERID/status.json';
 
+    var QUERY_GET_SEASON_RESULTS = 'http://ergast.com/api/f1/SEASON/last/results.json';
+
+
     function ErgastService($http) {
 
         var model = {
@@ -36,6 +39,9 @@
             getDriverConstructors: getDriverConstructors,
             getDriverStatus: getDriverStatus,
             getDriverResults: getDriverResults,
+
+            // minor api calls
+            getRaceResultsInSeason: getRaceResultsInSeason,
 
             // generate facts (from server side ergast.api)
             // These calls involve some data processing. So we choose to move it to the server side
@@ -98,6 +104,14 @@
                                     .replace("DRIVERID", driverId));
 
         }
+
+        // minor api calls
+
+        function getRaceResultsInSeason(season){
+            return $http.get(QUERY_GET_SEASON_RESULTS
+                                    .replace("SEASON", season));
+        }
+
 
         // SERVER CALLS
 

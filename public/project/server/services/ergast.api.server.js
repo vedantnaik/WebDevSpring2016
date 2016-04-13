@@ -18,7 +18,6 @@ module.exports = function(app, request) {
         var round = req.params.round;
         var driverId = req.params.driverId;
 
-        console.log("search ergast for season " + season);
         request(
             QUERY_DRIVER_RACE_RESULT_SEASON_ROUND
                 .replace("SEASON", season)

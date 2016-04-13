@@ -337,6 +337,26 @@ a:focus {
     background-color: red;
 }
 
+.btn-dropdown {
+    color: #000;
+    background-color: whitesmoke;
+    opacity: 10;
+}
+
+.btn-dropdown:hover {
+    transition: 2s;
+    background-color: #b6b6b6;
+    opacity: 50;
+}
+
+.search-fields-label {
+    font-style: italic;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+    font-stretch: expanded;
+}
+
+
 ul.banner-social-buttons {
     margin-top: 0;
 }
