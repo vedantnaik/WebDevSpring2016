@@ -32,7 +32,6 @@
                     .then(function (res) {
                         var loggedInUser = res.data;
 
-
                         QuizService
                             .getQuizzesForUserByTitle(loggedInUser._id, selectedQuiz.title)
                             .then(
@@ -42,7 +41,7 @@
                                         setCurrentUserQuizzes();
                                     } else {
                                         // user seems to have manually updated the
-
+                                        delete selectedQuiz['_id'];
 
                                         QuizService
                                             .createQuizByUserId(loggedInUser._id, selectedQuiz)
@@ -72,17 +71,44 @@
             vm.message = null;
 
             if(selectedQuiz){
-                QuizService
-                    .updateQuizById(selectedQuiz._id, selectedQuiz)
-                    .then(
-                        function( res ){
-                            vm.message = "Successfully updated " + selectedQuiz.title;
-                            setCurrentUserQuizzes();
-                        },
-                        function ( err ) {
-                            vm.message = "We were unable to update the quiz. Please try again.";
-                        }
-                    );
+
+                UserService
+                    .getCurrentUser()
+                    .then(function (res) {
+                        var loggedInUser = res.data;
+
+                        QuizService
+                            .getQuizzesForUserByTitle(loggedInUser._id, selectedQuiz.title)
+                            .then(
+                                function(res){
+                                    if(res.data.length > 0){
+                                        vm.message = "The quiz title has already been used. Please try with another title.";
+                                        setCurrentUserQuizzes();
+                                    } else {
+                                        QuizService
+                                            .updateQuizById(selectedQuiz._id, selectedQuiz)
+                                            .then(
+                                                function( res ){
+                                                    vm.message = "Successfully updated " + selectedQuiz.title;
+                                                    setCurrentUserQuizzes();
+                                                },
+                                                function ( err ) {
+                                                    vm.message = "We were unable to update the quiz. Please try again.";
+                                                }
+                                            );
+                                    }
+                                },
+                                function(err){
+
+                                }
+
+                            );
+
+
+                    });
+
+
+
             }
         }
 
