@@ -12,6 +12,6 @@ module.exports = function(mongoose) {
         title: String, // Name given to the quiz by its creator
         questions: [QuestionSchema],
 
-    }, {collection: 'assignment.project.quiz'});
+    }, {collection: 'project.quiz'});
     return QuizSchema;
 };

@@ -21,7 +21,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-var connectionString = 'mongodb://localhost/assignment';
+var connectionString = 'mongodb://localhost/webdev2016';
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString =
         process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +

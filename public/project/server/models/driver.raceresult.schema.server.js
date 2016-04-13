@@ -25,6 +25,6 @@ module.exports = function(mongoose) {
         finishingPosition: Number,
         pointsEarned: Number,
 
-    }, {collection: 'assignment.project.raceresults.driver'});
+    }, {collection: 'project.raceresults.driver'});
     return DriverRaceResultSchema;
 };

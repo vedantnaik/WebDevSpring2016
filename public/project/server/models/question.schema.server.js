@@ -16,6 +16,6 @@ module.exports = function(mongoose) {
         option_C: String,
         option_D: String
 
-    }, {collection: 'assignment.project.question'});
+    }, {collection: 'project.question'});
     return QuestionSchema;
 };

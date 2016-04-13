@@ -14,6 +14,6 @@ module.exports = function(mongoose) {
         numTeamsRacedFor: Number,
         numCircuitsRacedOn: Number,
 
-    }, {collection: 'assignment.project.fact'});
+    }, {collection: 'project.fact'});
     return FactSchema;
 };
