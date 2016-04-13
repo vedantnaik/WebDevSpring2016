@@ -921,7 +921,22 @@ th {
     color: darkred;
 }
 
+/* Spacing */
+.margin-vertical-pad{
+    padding-top: 1%;
+}
 
+.margin-horizontal-pad{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+/* scrolling */
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
 
 /********************************************************************
 

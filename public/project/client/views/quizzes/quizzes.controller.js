@@ -8,69 +8,114 @@
         .module("F1ExplorerApp")
         .controller("QuizController", QuizController);
 
-    function QuizController(QuizService, $scope, $rootScope, $location) {
-        if ($rootScope.currentUser) {
-            setCurrentUserQuizzes();
-        }
+    function QuizController(QuizService, UserService, $scope, $rootScope, $location) {
 
-        $scope.addQuiz = addQuiz;
-        $scope.updateQuiz = updateQuiz;
-        $scope.deleteQuiz = deleteQuiz;
-        $scope.selectQuiz = selectQuiz;
-        $scope.quizQuestions = quizQuestions;
+        var vm = this;
+
+        vm.addQuiz = addQuiz;
+        vm.updateQuiz = updateQuiz;
+        vm.deleteQuiz = deleteQuiz;
+        vm.selectQuiz = selectQuiz;
+        vm.quizQuestions = quizQuestions;
+
+        // initialize
+        setCurrentUserQuizzes();
 
         function addQuiz(selectedQuiz){
+            // create new quiz
+
+            vm.message = null;
+
             if(selectedQuiz){
-                QuizService
-                    .createQuizForUser($rootScope.currentUser._id, selectedQuiz)
-                    .then(
-                        function( res ){
-                            setCurrentUserQuizzes();
-                        },
-                        function( err ){
-                            alert("Unable to add quiz!");
-                        }
-                    );
+                UserService
+                    .getCurrentUser()
+                    .then(function (res) {
+                        var loggedInUser = res.data;
+
+
+                        QuizService
+                            .getQuizzesForUserByTitle(loggedInUser._id, selectedQuiz.title)
+                            .then(
+                                function(res){
+                                    if(res.data.length > 0){
+                                        vm.message = "The quiz title has already been used. Please try with another title.";
+                                        setCurrentUserQuizzes();
+                                    } else {
+                                        // user seems to have manually updated the
+
+
+                                        QuizService
+                                            .createQuizByUserId(loggedInUser._id, selectedQuiz)
+                                            .then(
+                                                function( res ){
+                                                    vm.message = "Successfully created " + selectedQuiz.title;
+                                                    setCurrentUserQuizzes();
+                                                },
+                                                function( err ){
+                                                    vm.message = "Sorry, we were unable to create the quiz. Please try again.";
+                                                    setCurrentUserQuizzes();
+                                                }
+                                            );
+                                    }
+                                },
+                                function(err){
+
+                                }
+
+                            );
+                    });
             }
         }
 
         function updateQuiz(selectedQuiz){
+            // update quiz
+            vm.message = null;
+
             if(selectedQuiz){
                 QuizService
                     .updateQuizById(selectedQuiz._id, selectedQuiz)
                     .then(
                         function( res ){
+                            vm.message = "Successfully updated " + selectedQuiz.title;
                             setCurrentUserQuizzes();
                         },
                         function ( err ) {
-                            alert("Unable to update quiz!");
+                            vm.message = "We were unable to update the quiz. Please try again.";
                         }
                     );
             }
         }
 
         function deleteQuiz(index){
+            vm.message = null;
+
+            var deleteQuizTitle = vm.quizzesForCurrentUser[index].title;
+
             QuizService
-                .deleteQuizById($scope.quizzesForCurrentUser[index]._id)
+                .deleteQuizById(vm.quizzesForCurrentUser[index]._id)
                 .then(
                     function ( res ) {
+                        vm.message = "Deleted quiz " + deleteQuizTitle;
                         setCurrentUserQuizzes();
                     },
                     function ( err ) {
-                        alert("Unable to delete quiz!");
+                        vm.message = "We were unable to delete " + deleteQuizTitle;
                     }
                 );
         }
 
 
         function selectQuiz(index){
-            $scope.selectedQuizIndex = index;
-            $scope.selectedQuiz = {};
-            $scope.selectedQuiz.title = $scope.quizzesForCurrentUser[index].title;
-            $scope.selectedQuiz._id = $scope.quizzesForCurrentUser[index]._id;
-            $scope.selectedQuiz.userId = $scope.currentUser._id;
+            vm.message = null;
 
-            console.log("selected " + $scope.selectedQuiz.title + " user " + $scope.selectedQuiz.userid);
+            QuizService
+                .getQuizById(vm.quizzesForCurrentUser[index]._id)
+                .then(
+                    function (res) {
+                        vm.selectedQuiz = res.data;
+                    }
+                );
+
         }
 
 
@@ -82,17 +127,30 @@
         // --------------- HELPERS --------------
 
         function setCurrentUserQuizzes(){
-            QuizService.findAllQuizzesForUser($rootScope.currentUser._id)
-                .then(
-                    function ( res  ){
-                        if (res.data) {
-                            $scope.quizzesForCurrentUser = res.data;
-                        }
-                    },
-                    function ( err ) {
-                        alert("Unable to find user's quizzes!");
-                    }
-                );
+            UserService
+                .getCurrentUser()
+                .then(function (res) {
+                    var loggedInUser = res.data;
+
+                    QuizService
+                        .getAllQuizzesForUser(loggedInUser._id)
+                        .then(
+                            function ( res  ){
+                                if (res.data) {
+                                    vm.quizzesForCurrentUser = res.data;
+                                    vm.selectedQuiz = null;
+
+                                    if (res.data.length == 0){
+                                        vm.message = "Seems like you do no have any quizzes yet. Go ahead! Make some!";
+                                    }
+
+                                }
+                            },
+                            function ( err ) {
+                                vm.message = "Seems like you do no have any quizzes yet. Go ahead! Make some!";
+                            }
+                        );
+                });
         }
     }
 

@@ -28,7 +28,8 @@
             })
             .when("/quizzes", {
                 templateUrl: "views/quizzes/quizzes.view.html",
-                controller: "QuizController"
+                controller: "QuizController",
+                controllerAs: "model"
             })
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
