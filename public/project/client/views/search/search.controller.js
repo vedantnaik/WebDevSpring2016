@@ -29,7 +29,6 @@
         // Set data values
         init();
 
-
         function init(){
             vm.seasonsList = [];
             var currentYear = new Date().getFullYear();
