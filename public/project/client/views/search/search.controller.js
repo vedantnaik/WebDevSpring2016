@@ -47,8 +47,6 @@
             $rootScope.dataStoredByUser = true;
         }
 
-
-
         function searchStanding(queryOn){
 
             vm.message = null;
