@@ -2,7 +2,7 @@
  * Created by vedant on 3/20/16.
  */
 
-module.exports = function(app, quizModel, uuid) {
+module.exports = function(app, quizModel) {
 
     app.post("/api/f1explorer/user/:userId/quiz", createQuizByUserId);
     app.put("/api/f1explorer/quiz/:quizId", updateQuizById);

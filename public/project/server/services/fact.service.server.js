@@ -2,7 +2,7 @@
  * Created by vedant on 3/27/16.
  */
 
-module.exports = function(app, factModel, uuid) {
+module.exports = function(app, factModel) {
 
     app.get("/api/f1explorer/user/:userId/fact", getFactsByUserId);
     app.get("/api/f1explorer/fact/:factId", getFactById);

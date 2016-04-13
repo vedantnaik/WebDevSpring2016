@@ -2,7 +2,7 @@
  * Created by vedant on 3/20/16.
  */
 
-module.exports = function (app, questionModel, uuid) {
+module.exports = function (app, questionModel) {
 
     app.get("/api/f1explorer/question/:questionId", getQuestionsById);
     app.get("/api/f1explorer/quiz/:quizId/question/", getQuestionsInQuizById);
