@@ -27,28 +27,37 @@ module.exports = function(app, request) {
                 if (!err && response.statusCode == 200) {
                     var info = JSON.parse(body);
 
-                    var drrFact = {};
+                    if(!info){
+                        res.status(400)
+                    } else if(!info.MRData){
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable){
+                        res.status(400)
+                    } else {
+                        var drrFact = {};
 
-                    //drrFact.userId: String; // fact stored for user
+                        //drrFact.userId: String; // fact stored for user
 
-                    drrFact.factType = "DRR"; // "DRR"
+                        drrFact.factType = "DRR"; // "DRR"
 
-                    drrFact.driverId = info.MRData.RaceTable.driverId; // fact related to this driver
-                    drrFact.driverName = firstDriverName(info);
-                    drrFact.driverNationality = info.MRData.RaceTable.Races[0].Results[0].Driver.nationality;
+                        drrFact.driverId = info.MRData.RaceTable.driverId; // fact related to this driver
+                        drrFact.driverName = firstDriverName(info);
+                        drrFact.driverNationality = info.MRData.RaceTable.Races[0].Results[0].Driver.nationality;
 
-                    drrFact.constructorId = info.MRData.RaceTable.Races[0].Results[0].Constructor.constructorId;
-                    drrFact.constructorName = info.MRData.RaceTable.Races[0].Results[0].Constructor.name;
-                    drrFact.raceName = info.MRData.RaceTable.Races[0].raceName;
+                        drrFact.constructorId = info.MRData.RaceTable.Races[0].Results[0].Constructor.constructorId;
+                        drrFact.constructorName = info.MRData.RaceTable.Races[0].Results[0].Constructor.name;
+                        drrFact.raceName = info.MRData.RaceTable.Races[0].raceName;
 
-                    drrFact.season = info.MRData.RaceTable.Races[0].season;
-                    drrFact.round = info.MRData.RaceTable.Races[0].round;
+                        drrFact.season = info.MRData.RaceTable.Races[0].season;
+                        drrFact.round = info.MRData.RaceTable.Races[0].round;
 
-                    drrFact.gridPosition = info.MRData.RaceTable.Races[0].Results[0].grid;
-                    drrFact.finishingPosition = info.MRData.RaceTable.Races[0].Results[0].position;
-                    drrFact.pointsEarned = info.MRData.RaceTable.Races[0].Results[0].points;
+                        drrFact.gridPosition = info.MRData.RaceTable.Races[0].Results[0].grid;
+                        drrFact.finishingPosition = info.MRData.RaceTable.Races[0].Results[0].position;
+                        drrFact.pointsEarned = info.MRData.RaceTable.Races[0].Results[0].points;
 
-                    res.send(drrFact);
+                        res.send(drrFact);
+                    }
+
                 } else {
                     res.status(400).send(err);
                 }
@@ -71,29 +80,37 @@ module.exports = function(app, request) {
                 if (!err && response.statusCode == 200) {
                     var info = JSON.parse(body);
 
-                    var crrFact = {};
+                    if(!info){
+                        res.status(400)
+                    } else if(!info.MRData){
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable){
+                        res.status(400)
+                    } else {
+                        var crrFact = {};
 
-                    //userId = String; // fact stored for user
+                        //userId = String; // fact stored for user
 
-                    crrFact.factType = "CRR"; // "CRR"
+                        crrFact.factType = "CRR"; // "CRR"
 
-                    crrFact.constructorId = info.MRData.RaceTable.constructorId; // fact related to this constructor
-                    crrFact.constructorNationality = info.MRData.RaceTable.Races[0].Results[0].Constructor.nationality;
+                        crrFact.constructorId = info.MRData.RaceTable.constructorId; // fact related to this constructor
+                        crrFact.constructorNationality = info.MRData.RaceTable.Races[0].Results[0].Constructor.nationality;
 
-                    crrFact.driverName_1 = firstDriverName(info);
-                    crrFact.driverName_2 = secondDriverName(info);
+                        crrFact.driverName_1 = firstDriverName(info);
+                        crrFact.driverName_2 = secondDriverName(info);
 
-                    crrFact.constructorName = info.MRData.RaceTable.Races[0].Results[0].Constructor.name;
-                    crrFact.raceName = info.MRData.RaceTable.Races[0].raceName;
+                        crrFact.constructorName = info.MRData.RaceTable.Races[0].Results[0].Constructor.name;
+                        crrFact.raceName = info.MRData.RaceTable.Races[0].raceName;
 
-                    crrFact.season = info.MRData.RaceTable.season;
-                    crrFact.round = info.MRData.RaceTable.round;
+                        crrFact.season = info.MRData.RaceTable.season;
+                        crrFact.round = info.MRData.RaceTable.round;
 
-                    crrFact.bestGridPosition = calculateBestGridPos(info);       // better of both drivers
-                    crrFact.bestFinishingPosition = calculateBestFinishingPosition(info);  // better of both drivers
-                    crrFact.pointsEarned = calculateTotalPointsOfRace(info);           // sum of both drivers
+                        crrFact.bestGridPosition = calculateBestGridPos(info);       // better of both drivers
+                        crrFact.bestFinishingPosition = calculateBestFinishingPosition(info);  // better of both drivers
+                        crrFact.pointsEarned = calculateTotalPointsOfRace(info);           // sum of both drivers
 
-                    res.send(crrFact);
+                        res.send(crrFact);
+                    }
                 } else {
                     res.status(400).send(err);
                 }

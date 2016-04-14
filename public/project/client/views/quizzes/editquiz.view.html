@@ -38,13 +38,10 @@
                                         <th> Race Name </th>
 
                                         <th> Driver </th>
-                                        <th> Nationality </th>
 
                                         <th> Constructor </th>
 
-                                        <th> Grid Position </th>
                                         <th> Final Position </th>
-                                        <th> Points </th>
 
                                         <th> Actions </th>
                                     </tr>
@@ -61,22 +58,13 @@
                                         <td>
                                             {{result.driverName}}
                                         </td>
-                                        <td>
-                                            {{result.driverNationality}}
-                                        </td>
 
                                         <td>
                                             {{result.constructorName}}
                                         </td>
 
                                         <td>
-                                            {{result.gridPosition}}
-                                        </td>
-                                        <td>
                                             {{result.finishingPosition}}
-                                        </td>
-                                        <td>
-                                            {{result.pointsEarned}}
                                         </td>
 
                                         <td>
@@ -84,6 +72,10 @@
                                                 <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
                                                         class="btn btn-danger margin-horizontal-pad">
                                                     <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                                <button ng-click="model.convertDRRFactToQuestion(result._id)"
+                                                        class="btn btn-action margin-horizontal-pad">
+                                                    <span class="glyphicon glyphicon-arrow-right"></span>
                                                 </button>
                                             </div>
                                         </td>
@@ -101,12 +93,7 @@
                                         <th> Constructor </th>
                                         <th> Nationality </th>
 
-                                        <th> Driver 1 </th>
-                                        <th> Driver 2 </th>
-
-                                        <th> Best Grid Position </th>
                                         <th> Best Final Position </th>
-                                        <th> Total Points Earned </th>
 
                                         <th> Actions </th>
                                     </tr>
@@ -128,20 +115,7 @@
                                         </td>
 
                                         <td>
-                                            {{result.driverName_1}}
-                                        </td>
-                                        <td>
-                                            {{result.driverName_2}}
-                                        </td>
-
-                                        <td>
-                                            {{result.bestGridPosition}}
-                                        </td>
-                                        <td>
                                             {{result.bestFinishingPosition}}
-                                        </td>
-                                        <td>
-                                            {{result.pointsEarned}}
                                         </td>
 
                                         <td>
@@ -149,6 +123,10 @@
                                                 <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
                                                         class="btn btn-danger margin-horizontal-pad">
                                                     <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                                <button ng-click="model.convertCRRFactToQuestion(result._id)"
+                                                        class="btn btn-action margin-horizontal-pad">
+                                                    <span class="glyphicon glyphicon-arrow-right"></span>
                                                 </button>
                                             </div>
                                         </td>
@@ -160,6 +138,52 @@
 
                     </div>
 
+                    <div class="row col-sm-6 col-xs-12">
+
+                        <div class="table-responsive margin-vertical-pad">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th> Question </th>
+
+                                    <th> Option A </th>
+                                    <th> Option B </th>
+                                    <th> Option C </th>
+                                    <th> Option D </th>
+
+                                    <th> Answer </th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="question in model.questionsInThisQuiz">
+                                <tr>
+                                    <td>
+                                        {{question.questionContent}}
+                                    </td>
+                                    <td>
+                                        {{question.option_A}}
+                                    </td>
+
+                                    <td>
+                                        {{question.option_B}}
+                                    </td>
+
+                                    <td>
+                                        {{question.option_C}}
+                                    </td>
+
+                                    <td>
+                                        {{question.option_D}}
+                                    </td>
+
+                                    <td>
+                                        {{question.answer}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

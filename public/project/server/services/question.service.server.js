@@ -466,6 +466,7 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         .then(
                             function(questionsForQuiz){
                                 foundQuiz.questions = questionsForQuiz;
+                                console.log("updating quiz " + foundQuiz.title + " to have all new questions");
                                 quizModel
                                     .updateQuizById(foundQuiz._id, foundQuiz);
                             }

@@ -23,34 +23,70 @@ module.exports = function (db, mongoose, quizModel) {
     function createQuestion(question){
         var deferred = q.defer();
 
-        var optionsArray = shuffleArray([question.option_A, question.option_B,
-            question.option_C, question.option_D]);
+        QuestionModel
+            .find({ questionContent: question.questionContent,
+                    quizId: question.quizId },
+                function(err, doc) {
+                    console.log(question.quizId);
+                    console.log(doc);
+                    if(doc.length > 0) {
+                        // similar question already exists
+                        console.log("REJECT FROM Q MODEL");
 
-        var newQuestion = {
-            questionContent: question.questionContent, // Text asking the question
+                        deferred.reject();
+                    } else {
+                        var optionsArray = shuffleArray([question.option_A, question.option_B,
+                            question.option_C, question.option_D]);
 
-            option_A: optionsArray[0],
-            option_B: optionsArray[1],
-            option_C: optionsArray[2],
-            option_D: optionsArray[3]
-        };
+                        var newQuestion = {
+                            questionContent: question.questionContent, // Text asking the question
 
-        if(question.userId){
-            newQuestion.userId = question.userId;
-        }
+                            option_A: optionsArray[0],
+                            option_B: optionsArray[1],
+                            option_C: optionsArray[2],
+                            option_D: optionsArray[3]
+                        };
 
-        if(question.quizId){
-            newQuestion.quizId = question.quizId;
-        }
+                        if(question.userId){
+                            newQuestion.userId = question.userId;
+                        }
 
-        QuestionModel.create(newQuestion,
-            function(err, doc){
-                if (err) {
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
-                }
-            });
+                        if(question.quizId){
+                            newQuestion.quizId = question.quizId;
+                        }
+
+                        QuestionModel.create(newQuestion,
+                            function(err, doc){
+                                if (err) {
+                                    deferred.reject(err);
+                                } else {
+
+                                    quizModel
+                                        .findQuizById(newQuestion.quizId)
+                                        .then(
+                                            function(foundQuiz){
+                                                QuestionModel
+                                                    .find({quizId: newQuestion.quizId},
+                                                        function (err, doc) {
+                                                            if (err) {
+
+                                                            } else {
+                                                                foundQuiz.questions = doc;
+                                                                deferred.resolve(doc);
+                                                            }
+                                                        }
+
+                                                    );
+                                            },
+                                            function(err){
+                                                console.log("Unable to add newly created question to quiz.");
+                                            }
+                                        );
+
+                                }
+                            });
+                    }
+                });
         return deferred.promise;
     }
 
@@ -165,5 +201,7 @@ module.exports = function (db, mongoose, quizModel) {
         }
         return input;
     }
+
+
 
 }

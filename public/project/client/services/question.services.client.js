@@ -19,6 +19,9 @@
             addQuestion: addQuestion,
             updateQuestion: updateQuestion,
             deleteQuestionById: deleteQuestionById,
+
+            makeDRRFactQuestion: makeDRRFactQuestion,
+            makeCRRFactQuestion: makeCRRFactQuestion
         };
         return service;
 
@@ -44,6 +47,14 @@
 
         function deleteQuestionById(questionId){
             return $http.delete("/api/f1explorer/question/"+questionId);
+        }
+
+        function makeDRRFactQuestion(factId, quizId){
+            return $http.post("/api/f1explorer/question/fromDrrFact/"+factId+"/addtoquiz/"+quizId);
+        }
+
+        function makeCRRFactQuestion(factId, quizId){
+            return $http.post("/api/f1explorer/question/fromCrrFact/"+factId+"/addtoquiz/"+quizId);
         }
     }
 })();

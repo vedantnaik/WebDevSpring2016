@@ -9,14 +9,16 @@
         .module("F1ExplorerApp")
         .controller("EditQuizController", EditQuizController);
 
-    function EditQuizController(QuizService, UserService, FactService, $routeParams, $rootScope, $location) {
+    function EditQuizController(QuizService, UserService, FactService, QuestionService, $routeParams, $rootScope, $location) {
 
         var vm = this;
 
         vm.setStandingsType = setStandingsType;
         vm.displayResults = displayResults;
-        vm.makeQuestion = makeQuestion;
         vm.deleteStoredFact = deleteStoredFact;
+
+        vm.convertDRRFactToQuestion = convertDRRFactToQuestion;
+        vm.convertCRRFactToQuestion = convertCRRFactToQuestion;
 
         vm.message = null;
 
@@ -40,6 +42,28 @@
                         vm.message = "Sorry, we could not find the quiz you are looking for."
                     }
                 );
+
+            console.log("Search for questions under " + vm.quizToEditId);
+            QuestionService
+                .findQuestionsInQuizById(vm.quizToEditId)
+                .then(
+                    function(res){
+                        vm.questionsInThisQuiz = res.data;
+                    }
+                );
+
+            UserService
+                .getCurrentUser()
+                .then(
+                    function (res) {
+                        var userFromServer = res.data;
+                        vm.userEditingTheQuiz = userFromServer;
+                    },
+                    function (err) {
+
+                    }
+                );
+
 
         }
 
@@ -80,20 +104,6 @@
 
         }
 
-        function makeQuestion(factId){
-            vm.message = null;
-            FactService
-                .findFactById(factId)
-                .then(
-                    function(res){
-                        console.log(res.data);
-                    },
-                    function(err){
-                        console.log("Fact not found");
-                    }
-                );
-        }
-
         function deleteStoredFact(factId, factAbout) {
             vm.message = null;
             FactService
@@ -110,7 +120,35 @@
         }
 
 
+        // making questions
 
+        function convertDRRFactToQuestion(factId){
+            QuestionService
+                .makeDRRFactQuestion(factId, vm.quizToEditId)
+                .then(
+                    function(res){
+                        init();
+                        vm.message = "We have converted this fact into a question for youe quiz!";
+                    },
+                    function(err){
+                        vm.message = "Could not convert this fact into a question. Please try again.";
+                    }
+                );
+        }
+
+        function convertCRRFactToQuestion(factId){
+            QuestionService
+                .makeCRRFactQuestion(factId, vm.quizToEditId)
+                .then(
+                    function(res){
+                        init();
+                        vm.message = "We have converted this fact into a question for youe quiz!";
+                    },
+                    function(err){
+                        vm.message = "Could not convert this fact into a question. Please try again.";
+                    }
+                );
+        }
     }
 
 })();

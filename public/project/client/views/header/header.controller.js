@@ -53,6 +53,7 @@
                         + "/" + $scope.latestRound
                         + "/" + $scope.championshipType);
         }
+
     }
 
 })();

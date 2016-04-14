@@ -20,11 +20,15 @@
                     <a href="#/quizzes">Quiz
                     </a>
                 </li>
-                <li ng-class='active'
+                <li ng-class="{'active': $location.url().toString().indexOf('/search') > -1}"
                     ng-click="goToSearchPage()">
                     <a href="">Search</a>
                 </li>
 
+                <li ng-if="currentUser"
+                    ng-class="{'active': $location.url() == '/stored'}">
+                    <a href="#/stored">Stored</a>
+                </li>
 
                 <li ng-if="!currentUser"
                     ng-class="{'active': $location.url() == '/register'}">
