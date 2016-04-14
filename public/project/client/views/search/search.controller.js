@@ -8,57 +8,65 @@
         .module("F1ExplorerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController(ErgastService, FactService, $rootScope, $location) {
-        console.log("in Quiz Controller");
+    function SearchController(ErgastService, FactService, $rootScope, $routeParams, $location) {
 
         var vm = this;
 
         vm.message = null;
-        vm.queryOn = {};
-
         vm.searchStanding = searchStanding;
+
         vm.searchDrivers = searchDrivers;
         vm.setStandingsType = setStandingsType;
-
         vm.storeResult = storeResult;
-        vm.hideResult = hideResult;
 
+        vm.hideResult = hideResult;
         vm.seasonUpdated = seasonUpdated;
+
         vm.roundUpdated = roundUpdated;
 
         // Set data values
         init();
 
         function init(){
+            vm.queryOn = { season:  $routeParams.season,
+                           round:   $routeParams.round };
+
+            vm.championshipType = $routeParams.championship;
+
+            // load all seasons so far
+            // Fun Fact : Formula 1 started in the year 1951!
             vm.seasonsList = [];
             var currentYear = new Date().getFullYear();
             for(var yr = currentYear; yr >= 1951; yr--){
                 vm.seasonsList.push(yr);
             }
-            vm.queryOn.season = currentYear;
 
+            // update rounds list to a list of races that happened that season
             vm.roundsList = [];
+            updateRoundsDropDownList($routeParams.season);
 
-            updateRoundsDropDownList(currentYear);
+            // update the table based on the vm.queryOn and vm.championshipType values
+            searchStanding();
 
-            vm.championshipType = 'Drivers';
-            vm.standingsSearchTypeDriver = true;
-
-            $rootScope.dataStoredByUser = true;
+            // show drivers table if championship type is drivers
+            vm.standingsSearchTypeDriver = (vm.championshipType == 'Drivers');
         }
 
-        function searchStanding(queryOn){
-
+        function searchStanding(){
             vm.message = null;
 
             vm.season = vm.queryOn.season;
             vm.round = vm.queryOn.round;
 
+            // update the URL to maintain these values even when we navigate away
+            $location.url("/search/"
+                + vm.season
+                + "/" + vm.round
+                + "/" + vm.championshipType);
 
             if(vm.championshipType == 'Drivers'){
-
-
-                ErgastService.getDriverStandingForSeasonRound(vm.season, vm.round)
+                ErgastService
+                    .getDriverStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
                             console.log("in search",vm.season, vm.round);
@@ -71,7 +79,6 @@
                     );
 
             } else if (vm.championshipType == 'Constructors'){
-
                 ErgastService.getConstructorStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
@@ -82,9 +89,7 @@
                             console.log("UNABLE TO SEARCH CONSTRUCTOR STANDINGS FOR ROUND");
                         }
                     );
-
             }
-
         }
 
         function searchDrivers(season){
@@ -99,11 +104,9 @@
                         alert("Unable to search drivers for season.");
                     }
                 );
-
         }
 
         function storeResult(index){
-
             vm.message = null;
 
             var recordToPush = {};
@@ -160,19 +163,15 @@
 
         }
 
-
-
         function hideResult(index){
             vm.standingSearchResult.splice(index, 1);
         }
-
 
         function setStandingsType(typ){
             vm.championshipType = typ;
         }
 
         function seasonUpdated(season){
-            console.log("season updated to " + season);
             vm.queryOn.season = season;
             updateRoundsDropDownList(season);
         }
@@ -182,7 +181,6 @@
         }
 
         // helpers
-
         function updateRoundsDropDownList(forYear){
             ErgastService
                 .getRaceResultsInSeason(forYear)
@@ -193,7 +191,6 @@
                         for(var r = 1; r <= racesInSeasonSoFar; r++){
                             vm.roundsList.push(r);
                         }
-                        vm.queryOn.round = racesInSeasonSoFar;
                     },
                     function(err){
                         vm.message = "Some problem occured while connecting to our 3rd party API. Please try again";

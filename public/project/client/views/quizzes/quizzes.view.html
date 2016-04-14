@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="main" >
+        <div class="main">
 
             <h1 class="page-header">Quizzes</h1>
 
             <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
 
             <div class="tab-content">
-                <div id="formsTab" class="tab-pane active">
+                <div id="quizTab" class="tab-pane active">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -27,11 +27,11 @@
                                     </td>
                                     <td>
                                         <button ng-click="model.addQuiz(model.selectedQuiz)"
-                                                class="btn btn-toolbar margin-horizontal-pad">
+                                                class="btn btn-toolbar">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
                                         <button ng-click="model.updateQuiz(model.selectedQuiz)"
-                                                class="btn btn-toolbar margin-horizontal-pad">
+                                                class="btn btn-toolbar">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </button>
                                     </td>
@@ -42,10 +42,12 @@
                                         <a href="#/fields">{{quiz.title}}</a>
                                     </td>
                                     <td>
-                                        <button ng-click="model.deleteQuiz($index)" class="margin-horizontal-pad">
+                                        <button ng-click="model.deleteQuiz($index)"
+                                                class="btn btn-toolbar">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </button>
-                                        <button ng-click="model.selectQuiz($index)" class="margin-horizontal-pad">
+                                        <button ng-click="model.selectQuiz($index)"
+                                                class="btn btn-toolbar">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </button>
                                     </td>

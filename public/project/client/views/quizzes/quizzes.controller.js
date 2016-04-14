@@ -33,14 +33,15 @@
                         var loggedInUser = res.data;
 
                         QuizService
-                            .getQuizzesForUserByTitle(loggedInUser._id, selectedQuiz.title)
+                            .getQuizzesByTitle(selectedQuiz.title)
                             .then(
                                 function(res){
                                     if(res.data.length > 0){
                                         vm.message = "The quiz title has already been used. Please try with another title.";
                                         setCurrentUserQuizzes();
                                     } else {
-                                        // user seems to have manually updated the
+                                        // user seems to have manually updated the title of selected quiz
+                                        // so store it as a new quiz by deleting the _id
                                         delete selectedQuiz['_id'];
 
                                         QuizService
@@ -78,7 +79,7 @@
                         var loggedInUser = res.data;
 
                         QuizService
-                            .getQuizzesForUserByTitle(loggedInUser._id, selectedQuiz.title)
+                            .getQuizzesByTitle(selectedQuiz.title)
                             .then(
                                 function(res){
                                     if(res.data.length > 0){
@@ -166,7 +167,7 @@
                                     vm.quizzesForCurrentUser = res.data;
                                     vm.selectedQuiz = null;
 
-                                    if (res.data.length == 0){
+                                    if (vm.message == null && res.data.length == 0){
                                         vm.message = "Seems like you do no have any quizzes yet. Go ahead! Make some!";
                                     }
 

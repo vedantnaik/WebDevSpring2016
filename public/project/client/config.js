@@ -31,7 +31,7 @@
                 controller: "QuizController",
                 controllerAs: "model"
             })
-            .when("/search", {
+            .when("/search/:season?/:round?/:championship?", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
                 controllerAs: "model"

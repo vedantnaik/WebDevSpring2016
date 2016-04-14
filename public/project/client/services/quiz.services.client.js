@@ -17,6 +17,7 @@
 
             getAllQuizzes: getAllQuizzes,
             getQuizById: getQuizById,
+            getQuizzesByTitle: getQuizzesByTitle,
             getQuizzesForUserByTitle: getQuizzesForUserByTitle,
             getAllQuizzesForUser: getAllQuizzesForUser
         };
@@ -40,6 +41,11 @@
 
         function getQuizById(quizId){
             return $http.get("/api/f1explorer/quiz/"+quizId);
+        }
+
+
+        function getQuizzesByTitle(quizTitle){
+            return $http.get("/api/f1explorer/quizzes/quiz/"+quizTitle);
         }
 
         function getQuizzesForUserByTitle(userId, quizTitle){

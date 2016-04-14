@@ -8,9 +8,30 @@
         .module("F1ExplorerApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController(UserService, $scope, $rootScope, $location){
+    function HeaderController(UserService, ErgastService, $scope, $rootScope, $location){
         $scope.$location = $location;
         $scope.logout = logout;
+        $scope.goToSearchPage = goToSearchPage;
+
+        function init(){
+            // show the latest driver results on search page
+
+            $scope.latestSeason = new Date().getFullYear();
+
+            ErgastService
+                .getRaceResultsInSeason($scope.latestSeason)
+                .then(
+                    function(res){
+                        $scope.latestRound = res.data.MRData.RaceTable.round;
+                    }
+                );
+
+            $scope.championshipType = "Drivers";
+        }
+
+
+        init();
+
 
         UserService
             .getCurrentUser()
@@ -25,6 +46,13 @@
             UserService.setCurrentUser(null);
         }
 
+        function goToSearchPage(){
+
+            $location.url("/search/"
+                        + $scope.latestSeason
+                        + "/" + $scope.latestRound
+                        + "/" + $scope.championshipType);
+        }
     }
 
 })();

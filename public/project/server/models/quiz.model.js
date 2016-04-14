@@ -16,6 +16,7 @@ module.exports = function(db, mongoose){
 
         findAllQuizzes: findAllQuizzes,
         findQuizById: findQuizById,
+        findQuizzesByTitle: findQuizzesByTitle,
         findQuizzesForUserByTitle: findQuizzesForUserByTitle,
         findAllQuizzesForUser: findAllQuizzesForUser
     };
@@ -98,6 +99,21 @@ module.exports = function(db, mongoose){
     function findQuizById(quizId){
         var deferred = q.defer();
         QuizModel.findById(quizId,
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function findQuizzesByTitle(quizTitle){
+        var deferred = q.defer();
+        QuizModel.find(
+            { title: quizTitle },
             function(err, doc) {
                 if(err) {
                     deferred.reject(err);

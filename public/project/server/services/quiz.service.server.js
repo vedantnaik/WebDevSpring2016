@@ -10,6 +10,7 @@ module.exports = function(app, quizModel) {
 
     app.get("/api/f1explorer/quizzes/", getAllQuizzes);
     app.get("/api/f1explorer/quiz/:quizId", getQuizById);
+    app.get("/api/f1explorer/quizzes/quiz/:quizTitle", getQuizzesByTitle);
     app.get("/api/f1explorer/quizzes/user/:userId/quiz/:quizTitle",
         getQuizzesForUserByTitle);
     app.get("/api/f1explorer/quizzes/user/:userId", getAllQuizzesForUser);
@@ -81,6 +82,21 @@ module.exports = function(app, quizModel) {
 
         quizModel
             .findQuizById(quizId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function getQuizzesByTitle(req, res){
+        var quizTitle = req.params.quizTitle;
+
+        quizModel
+            .findQuizzesByTitle(quizTitle)
             .then(
                 function(doc){
                     res.json(doc);
