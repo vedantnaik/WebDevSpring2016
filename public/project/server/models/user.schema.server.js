@@ -14,3 +14,7 @@ module.exports = function(mongoose) {
     }, {collection: 'project.user'});
     return UserSchema;
 };
+
+
+// user score
+// quizes taken list

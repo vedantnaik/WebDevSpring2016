@@ -4,7 +4,7 @@
 
 var q = require("q");
 
-module.exports = function (db, mongoose) {
+module.exports = function (db, mongoose, quizModel) {
 
     var QuestionSchema = require("./question.schema.server.js")(mongoose);
     var QuestionModel = mongoose.model('QuestionModel', QuestionSchema);
@@ -125,11 +125,11 @@ module.exports = function (db, mongoose) {
                 if(err){
                     deferred.reject(err);
                 } else {
-                    QuestionModel.findById(questionId, function(err, user) {
+                    QuestionModel.findById(questionId, function(err, quest) {
                         if(err){
                             deferred.reject(err);
                         } else {
-                            deferred.resolve(user);
+                            deferred.resolve(quest);
                         }
                     });
                 }
