@@ -39,7 +39,8 @@
 
                                 <tr ng-repeat="quiz in model.quizzesForCurrentUser">
                                     <td>
-                                        <a href="#/fields">{{quiz.title}}</a>
+                                        <button ng-click="model.goToEditQuiz(quiz._id)"
+                                                class="btn btn-action col-sm-12 col-xs-12">{{quiz.title}}</button>
                                     </td>
                                     <td>
                                         <button ng-click="model.deleteQuiz($index)"

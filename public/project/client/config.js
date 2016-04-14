@@ -28,7 +28,12 @@
             })
             .when("/quizzes", {
                 templateUrl: "views/quizzes/quizzes.view.html",
-                controller: "QuizController",
+                controller: "QuizzesController",
+                controllerAs: "model"
+            })
+            .when("/quizzes/editQuiz/:quizId?", {
+                controller: "EditQuizController",
+                templateUrl: "views/quizzes/editquiz.view.html",
                 controllerAs: "model"
             })
             .when("/search/:season?/:round?/:championship?", {

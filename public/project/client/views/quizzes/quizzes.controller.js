@@ -6,9 +6,9 @@
 
     angular
         .module("F1ExplorerApp")
-        .controller("QuizController", QuizController);
+        .controller("QuizzesController", QuizzesController);
 
-    function QuizController(QuizService, UserService, $scope, $rootScope, $location) {
+    function QuizzesController(QuizService, UserService, $scope, $rootScope, $location) {
 
         var vm = this;
 
@@ -16,7 +16,7 @@
         vm.updateQuiz = updateQuiz;
         vm.deleteQuiz = deleteQuiz;
         vm.selectQuiz = selectQuiz;
-        vm.quizQuestions = quizQuestions;
+        vm.goToEditQuiz = goToEditQuiz;
 
         // initialize
         setCurrentUserQuizzes();
@@ -146,9 +146,10 @@
         }
 
 
-        function quizQuestions(quiz){
-            $location.url("/quiz/" + quiz._id + "/fields");
+        function goToEditQuiz(quizId){
+            $location.url("/quizzes/editQuiz/" + quizId);
         }
+
 
 
         // --------------- HELPERS --------------
