@@ -10,7 +10,155 @@
             <div class="tab-content">
                 <div id="editQuizTab" class="tab-pane active">
 
-                    
+                    <div class="row col-sm-6 col-xs-12">
+
+                        <div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="dropdown-toggle btn btn-default col-sm-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a ng-click="model.setStandingsType('Drivers Championship')">Drivers Championship</a></li>
+                                        <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button ng-click="model.displayResults()" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-search"> </span> Display Stored
+                                    </button>
+                                </div>
+                            </div>
+                            <div ng-if="model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th> Season </th>
+                                        <th> Race Name </th>
+
+                                        <th> Driver </th>
+                                        <th> Nationality </th>
+
+                                        <th> Constructor </th>
+
+                                        <th> Grid Position </th>
+                                        <th> Final Position </th>
+                                        <th> Points </th>
+
+                                        <th> Actions </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="result in model.displayStoredResults">
+                                    <tr>
+                                        <td>
+                                            {{result.season}}
+                                        </td>
+                                        <td>
+                                            {{result.raceName}}
+                                        </td>
+
+                                        <td>
+                                            {{result.driverName}}
+                                        </td>
+                                        <td>
+                                            {{result.driverNationality}}
+                                        </td>
+
+                                        <td>
+                                            {{result.constructorName}}
+                                        </td>
+
+                                        <td>
+                                            {{result.gridPosition}}
+                                        </td>
+                                        <td>
+                                            {{result.finishingPosition}}
+                                        </td>
+                                        <td>
+                                            {{result.pointsEarned}}
+                                        </td>
+
+                                        <td>
+                                            <div class="row">
+                                                <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
+                                                        class="btn btn-danger margin-horizontal-pad">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div ng-if="!model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th> Season </th>
+                                        <th> Race Name </th>
+
+                                        <th> Constructor </th>
+                                        <th> Nationality </th>
+
+                                        <th> Driver 1 </th>
+                                        <th> Driver 2 </th>
+
+                                        <th> Best Grid Position </th>
+                                        <th> Best Final Position </th>
+                                        <th> Total Points Earned </th>
+
+                                        <th> Actions </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="result in model.displayStoredResults">
+                                    <tr>
+                                        <td>
+                                            {{result.season}}
+                                        </td>
+                                        <td>
+                                            {{result.raceName}}
+                                        </td>
+
+                                        <td>
+                                            {{result.constructorName}}
+                                        </td>
+                                        <td>
+                                            {{result.constructorNationality}}
+                                        </td>
+
+                                        <td>
+                                            {{result.driverName_1}}
+                                        </td>
+                                        <td>
+                                            {{result.driverName_2}}
+                                        </td>
+
+                                        <td>
+                                            {{result.bestGridPosition}}
+                                        </td>
+                                        <td>
+                                            {{result.bestFinishingPosition}}
+                                        </td>
+                                        <td>
+                                            {{result.pointsEarned}}
+                                        </td>
+
+                                        <td>
+                                            <div class="row">
+                                                <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
+                                                        class="btn btn-danger margin-horizontal-pad">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
