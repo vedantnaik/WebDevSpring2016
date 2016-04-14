@@ -40,6 +40,7 @@ module.exports = function (db, mongoose, quizModel) {
 
                         var newQuestion = {
                             questionContent: question.questionContent, // Text asking the question
+                            answer: question.answer,
 
                             option_A: optionsArray[0],
                             option_B: optionsArray[1],
@@ -139,6 +140,7 @@ module.exports = function (db, mongoose, quizModel) {
 
         var newQuestion = {
             questionContent: question.questionContent, // Text asking the question
+            answer: question.answer,
 
             option_A: optionsArray[0],
             option_B: optionsArray[1],

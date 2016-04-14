@@ -231,6 +231,7 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         }
                     }
 
+                    questionToCreate.answer = fact.driverName;
                     questionToCreate.option_A = fact.driverName;
                     questionToCreate.option_B = fourFakeOptions[0];
                     questionToCreate.option_C = fourFakeOptions[1];
@@ -261,6 +262,8 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                             // break;       //<-- Uncomment  if only the first term has to be removed
                         }
                     }
+
+                    questionToCreate.answer = fact.driverName;
                     questionToCreate.option_A = fact.driverName;
                     questionToCreate.option_B = failSafeOptions[0];
                     questionToCreate.option_C = failSafeOptions[1];
@@ -342,6 +345,7 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         }
                     }
 
+                    questionToCreate.answer = fact.constructorName;
                     questionToCreate.option_A = fact.constructorName;
                     questionToCreate.option_B = fourFakeOptions[0];
                     questionToCreate.option_C = fourFakeOptions[1];
@@ -372,6 +376,8 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                             // break;       //<-- Uncomment  if only the first term has to be removed
                         }
                     }
+
+                    questionToCreate.answer = fact.constructorName;
                     questionToCreate.option_A = fact.constructorName;
                     questionToCreate.option_B = failSafeOptions[0];
                     questionToCreate.option_C = failSafeOptions[1];
