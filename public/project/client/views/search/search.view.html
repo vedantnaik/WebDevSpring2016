@@ -3,7 +3,19 @@
 
         <div class="main" >
 
-            <h1 class="">Search</h1>
+            <div class="header row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="">Season progress!</h1>
+                    <p> Here you will find details of any season's standings as the rounds progressed! </p>
+                </div>
+
+                <div class="col-sm-6 col-xs-12 alert alert-info"
+                     ng-show="model.message" role="alert">
+                    {{model.message}}
+                </div>
+            </div>
+
+
 
             <div>
 
@@ -51,6 +63,22 @@
                         </button>
                     </div>
                 </div>
+
+                <div>
+
+                    <div class="row">
+                        <div class="margin-vertical-pad col-sm-9 col-xs-12"></div>
+
+                        <div class="margin-vertical-pad col-xs-12 col-sm-3">
+                            <button class="col-sm-6 col-xs-6 btn btn-info" ng-click="model.goBackOneRace()">
+                                <span class="glyphicon glyphicon-backward"> Previous Race </span>
+                            </button>
+                            <button class="col-sm-6 col-xs-6 btn btn-info" ng-click="model.goAheadOneRace()">
+                                Next Race <span class="glyphicon glyphicon-forward"></span>
+                            </button>
+                        </div>
+                    </div>
+
                 <div class="table-responsive margin-vertical-pad">
 
                     <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">

@@ -24,6 +24,9 @@
 
         vm.roundUpdated = roundUpdated;
 
+        vm.goBackOneRace = goBackOneRace;
+        vm.goAheadOneRace = goAheadOneRace;
+
         // Set data values
         init();
 
@@ -196,6 +199,36 @@
                         vm.message = "Some problem occured while connecting to our 3rd party API. Please try again";
                     }
                 );
+        }
+
+        function goBackOneRace(){
+            vm.message = null;
+
+            console.log(vm.roundsList.indexOf(+vm.queryOn.round));
+
+            if( vm.roundsList.indexOf(+vm.queryOn.round) == 0 ){
+                vm.message = "This was the first round of " + vm.queryOn.season + " season.";
+            } else {
+                $location.url("/search/"
+                    + vm.season
+                    + "/" + (+vm.round - 1)
+                    + "/" + vm.championshipType);
+            }
+        }
+
+        function goAheadOneRace(){
+            vm.message = null;
+
+            console.log(vm.roundsList.indexOf(+vm.queryOn.round));
+
+            if ( vm.roundsList.indexOf(+vm.queryOn.round) == (vm.roundsList.length - 1) ){
+                vm.message = "This was the last round of " + vm.queryOn.season + " season.";
+            } else {
+                $location.url("/search/"
+                    + vm.season
+                    + "/" + (+vm.round + 1)
+                    + "/" + vm.championshipType);
+            }
         }
     }
 

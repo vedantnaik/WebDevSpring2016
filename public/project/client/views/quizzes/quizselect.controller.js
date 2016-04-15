@@ -20,21 +20,52 @@
 
         function init() {
 
-            QuizService
-                .getPublishedQuizzes()
+            UserService
+                .getCurrentUser()
                 .then(
-                    function(quizData){
-                        vm.allQuizzes = quizData.data;
+                    function (userData) {
+                        vm.userWhoWantsToPlay = userData.data;
+                        QuizService
+                            .getPublishedQuizzes()
+                            .then(
+                                function(quizData){
+                                    // filter out quizzes created by this user
+                                    vm.allQuizzes = quizData.data
+                                        .filter(
+                                            function (quizRec) {
+                                                return quizRec.userId !== vm.userWhoWantsToPlay._id;
+                                            }
+                                        );
+
+                                    vm.allQuizzes
+                                        .forEach(function(eachQuiz){
+                                            if(vm.userWhoWantsToPlay.quizzesTakenListOfIds.indexOf(eachQuiz._id) > -1){
+                                                eachQuiz.alreadyPlayed = true;
+                                            } else {
+                                                eachQuiz.alreadyPlayed = false;
+                                            }
+
+                                        });
+                                },
+                                function(err){
+                                    vm.message = "Unable to find list of our quizzes. Please try after sometime. Or create one!";
+                                }
+                            );
                     },
-                    function(err){
-                        vm.message = "Unable to find list of our quizzes. Please try after sometime. Or create one!";
+                    function (err) {
+
                     }
                 );
+
         }
 
 
         function selectToPlay(quizId){
-            $location.url("/quizzes/playQuiz/" + quizId);
+            if(vm.userWhoWantsToPlay.quizzesTakenListOfIds.indexOf(quizId) > -1){
+                vm.message = "Looks like you have already played this quiz. Please try another one.";
+            } else {
+                $location.url("/quizzes/playQuiz/" + quizId);
+            }
         }
     }
 

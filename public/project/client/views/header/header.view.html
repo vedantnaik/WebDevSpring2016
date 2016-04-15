@@ -19,9 +19,9 @@
                     ng-class="{'active': $location.url() == '/quizzes/quizSelect/'}">
                     <a href="#/quizzes/quizSelect">Play!</a>
                 </li>
-                <li ng-if="currentUser"
+                <li ng-if="currentUser && currentUser.level > 2"
                     ng-class="{'active': $location.url() == '/quizzes'}">
-                    <a href="#/quizzes">Quiz Editor</a>
+                    <a href="#/quizzes">Quiz Builder</a>
                 </li>
                 <li ng-class="{'active': $location.url().toString().indexOf('/search') > -1}"
                     ng-click="goToSearchPage()">

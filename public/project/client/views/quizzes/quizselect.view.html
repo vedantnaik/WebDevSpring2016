@@ -20,8 +20,16 @@
 
                     <tr ng-repeat="quiz in model.allQuizzes">
                         <td>
-                            <button ng-click="model.selectToPlay(quiz._id)"
-                                    class="btn btn-default col-sm-12 col-xs-12">{{quiz.title}}</button>
+                            <button ng-if="!quiz.alreadyPlayed"
+                                    ng-click="model.selectToPlay(quiz._id)"
+                                    class="btn btn-default col-sm-12 col-xs-12">
+                                {{quiz.title}}
+                            </button>
+
+                            <button ng-if="quiz.alreadyPlayed"
+                                    class="btn btn-block col-sm-12 col-xs-12">
+                                {{quiz.title}} | Complete
+                            </button>
                         </td>
 
                     </tr>

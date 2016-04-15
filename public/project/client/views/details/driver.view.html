@@ -5,7 +5,7 @@
 
 
             <h1><a href="{{driverInfo.url}}">{{driverInfo.givenName}} {{driverInfo.familyName}}</a></h1>
-            <h2>{{driverInfo.permanentNumber}} {{driverInfo.code}} {{driverInfo.nationality}}</h2>
+            <h3>{{driverInfo.permanentNumber}} {{driverInfo.code}} {{driverInfo.nationality}}</h3>
 
             <div>
                 <div class="row">
@@ -29,7 +29,7 @@
 
                 <div ng-if="activeTable == 'circuits'" class="table-responsive margin-vertical-pad">
 
-                    <h3>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced at the following circuits:</h3>
+                    <p>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced at the following circuits:</p>
 
                     <table class="table table-striped">
                         <thead>
@@ -62,7 +62,7 @@
 
                 <div ng-if="activeTable == 'constructors'" class="table-responsive margin-vertical-pad">
 
-                    <h3>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced for the following teams:</h3>
+                    <p>{{driverInfo.givenName}} {{driverInfo.familyName}} has raced for the following teams:</p>
 
                     <table class="table table-striped">
                         <thead>
@@ -90,7 +90,7 @@
 
                 <div ng-if="activeTable == 'status'" class="table-responsive margin-vertical-pad">
 
-                    <h3>Found the following stats for {{driverInfo.givenName}} {{driverInfo.familyName}}:</h3>
+                    <p>Found the following stats for {{driverInfo.givenName}} {{driverInfo.familyName}}:</p>
 
                     <table class="table table-striped">
                         <thead>
@@ -114,7 +114,7 @@
 
                 <div ng-if="activeTable == 'results'" class="table-responsive margin-vertical-pad">
 
-                    <h3>Race Results for {{driverInfo.givenName}} {{driverInfo.familyName}}:</h3>
+                    <p>Race Results for {{driverInfo.givenName}} {{driverInfo.familyName}}:</p>
 
                     <table class="table table-striped">
                         <thead>

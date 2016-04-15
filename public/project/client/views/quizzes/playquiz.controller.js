@@ -82,6 +82,7 @@
                     var userFromServer = res.data;
                     vm.userWhoPlayed = userFromServer;
 
+                    vm.userWhoPlayed.quizzesTakenListOfIds.push(vm.quizToPlayId);
                     vm.userWhoPlayed.score = +vm.userWhoPlayed.score + +totalScore;
 
                     var userLevel = +vm.userWhoPlayed.level;
