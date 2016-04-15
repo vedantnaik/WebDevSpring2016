@@ -964,3 +964,21 @@ div.stretch-redbull-image {
 .index-background {
     background-color: #ececec;
 }
+
+
+#quizEditorStoredPanel {
+    margin: 20px;
+    padding: 10px;
+    border: solid;
+}
+
+#quizEditorQuestionsPanel {
+    margin: 20px;
+    padding: 10px;
+    border: solid;
+}
+
+.correct-answer-field {
+    font-size: larger;
+    color: #4cae4c;
+}

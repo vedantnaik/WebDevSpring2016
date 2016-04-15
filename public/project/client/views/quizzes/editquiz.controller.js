@@ -49,6 +49,7 @@
                 .then(
                     function(res){
                         vm.questionsInThisQuiz = res.data;
+                        console.log(vm.questionsInThisQuiz);
                     }
                 );
 
@@ -58,11 +59,14 @@
                     function (res) {
                         var userFromServer = res.data;
                         vm.userEditingTheQuiz = userFromServer;
+                        displayResults();
                     },
                     function (err) {
 
                     }
                 );
+
+
 
 
         }
@@ -77,7 +81,7 @@
         function displayResults(){
             vm.message = null;
 
-            FactService.findAllFactsForUser($rootScope.currentUser._id)
+            FactService.findAllFactsForUser(vm.userEditingTheQuiz._id)
                 .then(
                     function( res ){
 

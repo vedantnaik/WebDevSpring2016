@@ -126,8 +126,11 @@ module.exports = function(app, request) {
     }
 
     function secondDriverName(info){
-        return info.MRData.RaceTable.Races[0].Results[1].Driver.givenName
-            + " " + info.MRData.RaceTable.Races[0].Results[1].Driver.familyName;
+        if(info.MRData.RaceTable.Races[0].Results[1]) {
+            return info.MRData.RaceTable.Races[0].Results[1].Driver.givenName
+                + " " + info.MRData.RaceTable.Races[0].Results[1].Driver.familyName;
+        }
+        return "No second driver";
     }
 
     function calculateBestGridPos(info){

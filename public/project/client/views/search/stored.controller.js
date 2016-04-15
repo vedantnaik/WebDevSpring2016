@@ -29,6 +29,7 @@
             vm.championshipType = typ;
         }
 
+
         function displayResults(){
             vm.message = null;
 

@@ -102,6 +102,8 @@ module.exports = function(db, mongoose){
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            quizzesTakenListOfIds: user.quizzesTakenListOfIds,
+            score: user.score,
             level: user.level
         };
 

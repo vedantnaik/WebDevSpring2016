@@ -11,11 +11,10 @@
                 <div id="editQuizTab" class="tab-pane active">
 
                     <div class="row col-sm-6 col-xs-12">
-
-                        <div>
+                        <div id="quizEditorStoredPanel">
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 col-xs-12">
                                     <button class="dropdown-toggle btn btn-default col-sm-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
                                     </button>
@@ -24,7 +23,7 @@
                                         <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-xs-12">
                                     <button ng-click="model.displayResults()" class="btn btn-default">
                                         <span class="glyphicon glyphicon-search"> </span> Display Stored
                                     </button>
@@ -93,7 +92,7 @@
                                         <th> Constructor </th>
                                         <th> Nationality </th>
 
-                                        <th> Best Final Position </th>
+                                        <th> Best Position </th>
 
                                         <th> Actions </th>
                                     </tr>
@@ -139,50 +138,50 @@
                     </div>
 
                     <div class="row col-sm-6 col-xs-12">
+                        <div  id="quizEditorQuestionsPanel">
+                            <div class="table-responsive margin-vertical-pad">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-sm-2"> Question </th>
 
-                        <div class="table-responsive margin-vertical-pad">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th> Question </th>
+                                        <th> Option A </th>
+                                        <th> Option B </th>
+                                        <th> Option C </th>
+                                        <th> Option D </th>
 
-                                    <th> Option A </th>
-                                    <th> Option B </th>
-                                    <th> Option C </th>
-                                    <th> Option D </th>
+                                        <th> Answer </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="question in model.questionsInThisQuiz">
+                                    <tr>
+                                        <td class="col-sm-12 col-xs-12">
+                                            {{question.questionContent}}
+                                        </td>
+                                        <td>
+                                            {{question.option_A}}
+                                        </td>
 
-                                    <th> Answer </th>
-                                </tr>
-                                </thead>
-                                <tbody ng-repeat="question in model.questionsInThisQuiz">
-                                <tr>
-                                    <td>
-                                        {{question.questionContent}}
-                                    </td>
-                                    <td>
-                                        {{question.option_A}}
-                                    </td>
+                                        <td>
+                                            {{question.option_B}}
+                                        </td>
 
-                                    <td>
-                                        {{question.option_B}}
-                                    </td>
+                                        <td>
+                                            {{question.option_C}}
+                                        </td>
 
-                                    <td>
-                                        {{question.option_C}}
-                                    </td>
+                                        <td>
+                                            {{question.option_D}}
+                                        </td>
 
-                                    <td>
-                                        {{question.option_D}}
-                                    </td>
-
-                                    <td>
-                                        {{question.answer}}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                        <td class="correct-answer-field">
+                                            {{question.answer}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
