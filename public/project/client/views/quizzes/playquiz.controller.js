@@ -74,7 +74,8 @@
 
             console.log(totalScore);
             console.log("Done evaluating");
-            // TODO: update user profile with new score
+
+            $location.url("/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore);
         }
     }
 

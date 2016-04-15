@@ -46,6 +46,11 @@
                 controller: "QuizSelectController",
                 controllerAs: "model"
             })
+            .when("/quizzes/playQuiz/:quizId?/score/:totalScore?", {
+                templateUrl: "views/quizzes/quizresult.view.html",
+                controller: "QuizResultController",
+                controllerAs: "model"
+            })
             .when("/search/:season?/:round?/:championship?", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",

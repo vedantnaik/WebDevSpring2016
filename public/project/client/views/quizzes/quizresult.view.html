@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="main">
+
+            <h1 class="page-header">You just played: {{model.quizJustPlayed.title}}!</h1>
+
+            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
+
+            <div ng-if="model.positiveScore" class="jumbotron">
+
+                positive score
+
+                {{model.resultMessage}}
+                {{model.totalScoreMessage}}
+                {{model.nextLevelMessage}}
+
+            </div>
+
+
+            <div ng-if="!model.positiveScore" class="jumbotron">
+
+                negative score
+
+                {{model.resultMessage}}
+                {{model.totalScoreMessage}}
+                {{model.nextLevelMessage}}
+
+            </div>
+
+            <div id="quiz-result-footer-div" class="row col-sm-12 col-xs-12">
+                <div class="col-sm-4 col-xs-4">
+                </div>
+
+                <div class="col-sm-4 col-xs-4">
+                </div>
+
+                <button class="col-sm-4 col-xs-4 btn btn-success"
+                        >
+                    Proceed
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
