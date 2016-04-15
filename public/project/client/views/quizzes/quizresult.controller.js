@@ -12,8 +12,6 @@
 
         var vm = this;
 
-        vm.message = null;
-
         init();
 
         function init() {

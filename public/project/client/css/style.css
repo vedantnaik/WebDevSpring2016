@@ -983,6 +983,57 @@ div.stretch-redbull-image {
     color: #4cae4c;
 }
 
+
+.card-container {
+    height: 200px;
+}
+
+.card {
+    margin: 15px;
+}
+
+.card-block {
+    padding: 25px;
+}
+
+.card-tips {
+    background-color: mediumseagreen;
+    height: 300px;
+}
+
+.card-result {
+    background-color: blueviolet;
+    color: white;
+    height: 300px;
+}
+.card-result-h4 {
+    color: white;
+}
+
+.card-poor-result {
+    background-color: indianred;
+    color: white;
+    height: 300px;
+}
+
+.card-progress {
+    background-color: slategrey;
+    color: white;
+    height: 300px;
+}
+.card-progress-h4 {
+    color: white;
+}
+
+.text-muted {
+    color: whitesmoke;
+}
+
+#quiz-result-footer-div{
+    margin: 42.5px;
+    padding: 25px;
+}
+
 @media screen and (max-width: 490px) {
 
     .dont-show-on-mobile {

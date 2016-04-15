@@ -15,8 +15,6 @@
                 </div>
             </div>
 
-
-
             <div>
 
                 <div class="row">
@@ -65,30 +63,29 @@
 
                 </div>
 
-                <div>
+                <!-- prev next row -->
+                <div class="row margin-vertical-pad">
 
-                    <div class="row margin-vertical-pad">
+                    <div class="col-sm-2"></div>
 
-                        <div class="col-sm-2"></div>
-
-                        <div class="col-sm-3 col-xs-6">
-                            <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goBackOneRace()">
-                                <span class="glyphicon glyphicon-backward"></span> Previous Race
-                            </button>
-                        </div>
-
-                        <div class="col-sm-2"></div>
-
-                        <div class="col-sm-3 col-xs-6">
-                            <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goAheadOneRace()">
-                                Next Race <span class="glyphicon glyphicon-forward"></span>
-                            </button>
-                        </div>
-
-                        <div class="col-sm-2"></div>
+                    <div class="col-sm-3 col-xs-6">
+                        <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goBackOneRace()">
+                            <span class="glyphicon glyphicon-backward"></span> Previous Race
+                        </button>
                     </div>
 
-                <div class="table-responsive margin-vertical-pad">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3 col-xs-6">
+                        <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goAheadOneRace()">
+                            Next Race <span class="glyphicon glyphicon-forward"></span>
+                        </button>
+                    </div>
+
+                    <div class="col-sm-2"></div>
+                </div>
+
+                <div ng-if="model.standingSearchResult" class="table-responsive margin-vertical-pad">
 
                     <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
@@ -149,43 +146,43 @@
 
                     <table ng-if="!model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
-                        <tr>
-                            <th class="dont-show-on-mobile"> Position </th>
-                            <th> Points </th>
-                            <th> Constructor </th>
-                            <th class="dont-show-on-mobile"> Nationality </th>
+                            <tr>
+                                <th class="dont-show-on-mobile"> Position </th>
+                                <th> Points </th>
+                                <th> Constructor </th>
+                                <th class="dont-show-on-mobile"> Nationality </th>
 
-                            <th ng-if="currentUser"> Action </th>
+                                <th ng-if="currentUser"> Action </th>
 
-                        </tr>
+                            </tr>
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
-                        <tr>
-                            <td class="dont-show-on-mobile">
-                                {{result.position}}
-                            </td>
-                            <td>
-                                {{result.points}}
-                            </td>
-                            <td>
-                                <a href="result.Constructor.url">{{result.Constructor.name}}</a>
-                            </td>
-                            <td class="dont-show-on-mobile">
-                                {{result.Constructor.nationality}}
-                            </td>
+                            <tr>
+                                <td class="dont-show-on-mobile">
+                                    {{result.position}}
+                                </td>
+                                <td>
+                                    {{result.points}}
+                                </td>
+                                <td>
+                                    <a href="result.Constructor.url">{{result.Constructor.name}}</a>
+                                </td>
+                                <td class="dont-show-on-mobile">
+                                    {{result.Constructor.nationality}}
+                                </td>
 
-                            <td>
-                                <div class="row">
-                                    <button ng-if="currentUser" ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
-                                        <span class="glyphicon glyphicon-plus"></span> Store
-                                    </button>
+                                <td>
+                                    <div class="row">
+                                        <button ng-if="currentUser" ng-click="model.storeResult($index)" class="btn btn-success col-sm-6 col-xs-12">
+                                            <span class="glyphicon glyphicon-plus"></span> Store
+                                        </button>
 
-                                    <button ng-if="currentUser" ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
-                                        <span class="glyphicon glyphicon-remove"></span> Hide
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                                        <button ng-if="currentUser" ng-click="model.hideResult($index)" class="btn btn-danger col-sm-6 col-xs-12">
+                                            <span class="glyphicon glyphicon-remove"></span> Hide
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
