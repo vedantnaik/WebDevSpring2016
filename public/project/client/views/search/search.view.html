@@ -20,63 +20,72 @@
             <div>
 
                 <div class="row">
-                    <div class="margin-vertical-pad col-sm-3 col-xs-12" data-toggle="tooltip" title="Select Season">
+                    <div class="margin-vertical-pad col-sm-4 col-xs-12" data-toggle="tooltip" title="Select Season">
                         <button class="col-sm-12 col-xs-12 dropdown-toggle btn btn-default" type="button" id="seasonDropDownMenu"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             {{model.queryOn.season}}
                             <span class="caret margin-horizontal-pad"></span>
                         </button>
                         <ul class="dropdown-menu scrollable-menu" aria-labelledby="seasonDropDownMenu">
-                            <li ng-repeat="season in model.seasonsList">
+                            <li ng-repeat="season in model.seasonsList"
+                                class="col-sm-12 col-xs-12">
                                 <a ng-click="model.seasonUpdated(season)">{{season}}</a>
                             </li>
                         </ul>
                     </div>
 
 
-                    <div class="margin-vertical-pad col-sm-3 col-xs-12" data-toggle="tooltip" title="Select Round">
+                    <div class="margin-vertical-pad col-sm-4 col-xs-12" data-toggle="tooltip" title="Select Round">
                         <button class="col-sm-12 col-xs-12 dropdown-toggle btn btn-default" type="button" id="roundDropDownMenu"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             {{model.queryOn.round}}
                             <span class="caret margin-horizontal-pad"></span>
                         </button>
                         <ul class="dropdown-menu scrollable-menu" aria-labelledby="roundDropDownMenu">
-                            <li ng-repeat="round in model.roundsList">
+                            <li ng-repeat="round in model.roundsList"
+                                class="col-sm-12 col-xs-12">
                                 <a ng-click="model.roundUpdated(round)">{{round}}</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="margin-vertical-pad col-sm-3 col-xs-12" data-toggle="tooltip" title="Select Championship Type">
+                    <div class="margin-vertical-pad col-sm-4 col-xs-12" data-toggle="tooltip" title="Select Championship Type">
                         <button class="col-sm-12 col-xs-12 dropdown-toggle btn btn-default" type="button" id="championshipTypeDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="championshipTypeDropDown">
-                            <li><a ng-click="model.setStandingsType('Drivers')">Drivers</a></li>
-                            <li><a ng-click="model.setStandingsType('Constructors')">Constructors</a></li>
+                        <ul class="dropdown-menu scrollable-menu" aria-labelledby="championshipTypeDropDown">
+                            <li class="col-sm-12 col-xs-12">
+                                <a ng-click="model.setStandingsType('Drivers')">Drivers</a>
+                            </li>
+                            <li class="col-sm-12 col-xs-12">
+                                <a ng-click="model.setStandingsType('Constructors')">Constructors</a>
+                            </li>
                         </ul>
                     </div>
 
-                    <div class="margin-vertical-pad col-xs-12 col-sm-3">
-                        <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.searchStanding()" class="form-control">
-                            <span class="glyphicon glyphicon-search"> Search </span>
-                        </button>
-                    </div>
                 </div>
 
                 <div>
 
-                    <div class="row">
-                        <div class="margin-vertical-pad col-sm-9 col-xs-12"></div>
+                    <div class="row margin-vertical-pad">
 
-                        <div class="margin-vertical-pad col-xs-12 col-sm-3">
-                            <button class="col-sm-6 col-xs-6 btn btn-info" ng-click="model.goBackOneRace()">
+                        <div class="col-sm-2"></div>
+
+                        <div class="col-sm-3 col-xs-6">
+                            <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goBackOneRace()">
                                 <span class="glyphicon glyphicon-backward"> Previous Race </span>
                             </button>
-                            <button class="col-sm-6 col-xs-6 btn btn-info" ng-click="model.goAheadOneRace()">
+                        </div>
+
+                        <div class="col-sm-2"></div>
+
+                        <div class="col-sm-3 col-xs-6">
+                            <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goAheadOneRace()">
                                 Next Race <span class="glyphicon glyphicon-forward"></span>
                             </button>
                         </div>
+
+                        <div class="col-sm-2"></div>
                     </div>
 
                 <div class="table-responsive margin-vertical-pad">

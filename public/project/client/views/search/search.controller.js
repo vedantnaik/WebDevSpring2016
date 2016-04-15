@@ -172,15 +172,18 @@
 
         function setStandingsType(typ){
             vm.championshipType = typ;
+            searchStanding();
         }
 
         function seasonUpdated(season){
             vm.queryOn.season = season;
             updateRoundsDropDownList(season);
+            searchStanding();
         }
 
         function roundUpdated(round){
             vm.queryOn.round = round;
+            searchStanding();
         }
 
         // helpers
@@ -209,10 +212,8 @@
             if( vm.roundsList.indexOf(+vm.queryOn.round) == 0 ){
                 vm.message = "This was the first round of " + vm.queryOn.season + " season.";
             } else {
-                $location.url("/search/"
-                    + vm.season
-                    + "/" + (+vm.round - 1)
-                    + "/" + vm.championshipType);
+                vm.queryOn.round = (+vm.round - 1);
+                searchStanding();
             }
         }
 
@@ -224,10 +225,8 @@
             if ( vm.roundsList.indexOf(+vm.queryOn.round) == (vm.roundsList.length - 1) ){
                 vm.message = "This was the last round of " + vm.queryOn.season + " season.";
             } else {
-                $location.url("/search/"
-                    + vm.season
-                    + "/" + (+vm.round + 1)
-                    + "/" + vm.championshipType);
+                vm.queryOn.round = (+vm.round + 1);
+                searchStanding();
             }
         }
     }
