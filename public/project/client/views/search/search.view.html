@@ -73,7 +73,7 @@
 
                         <div class="col-sm-3 col-xs-6">
                             <button class="col-sm-12 col-xs-12 btn btn-info" ng-click="model.goBackOneRace()">
-                                <span class="glyphicon glyphicon-backward"> Previous Race </span>
+                                <span class="glyphicon glyphicon-backward"></span> Previous Race
                             </button>
                         </div>
 
@@ -93,18 +93,18 @@
                     <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
                             <tr>
-                                <th> Position </th>
+                                <th class="dont-show-on-mobile"> Position </th>
                                 <th> Points </th>
                                 <th> Driver </th>
                                 <th> Constructor </th>
-                                <th> Nationality </th>
+                                <th class="dont-show-on-mobile"> Nationality </th>
 
                                 <th> Action </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
                             <tr>
-                                <td>
+                                <td class="dont-show-on-mobile">
                                     {{result.position}}
                                 </td>
                                 <td>
@@ -116,29 +116,29 @@
                                 <td>
                                     <a href="{{result.Constructors[0].url}}">{{result.Constructors[0].name}}</a>
                                 </td>
-                                <td>
+                                <td class="dont-show-on-mobile">
                                     {{result.Driver.nationality}}
                                 </td>
 
                                 <td ng-if="!currentUser">
                                     <div class="row">
-                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-9 margin-horizontal-pad">
+                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-9">
                                             <span class="glyphicon glyphicon-info-sign"></span> Driver Info
                                         </button></a>
                                     </div>
                                 </td>
                                 <td ng-if="currentUser">
                                     <div class="row">
-                                        <button ng-click="model.storeResult($index)" class="btn btn-success col-sm-3 margin-horizontal-pad">
+                                        <button ng-click="model.storeResult($index)" class="btn btn-success col-sm-4 col-xs-12">
                                             <span class="glyphicon glyphicon-plus"></span> Store
                                         </button>
 
-                                        <button ng-click="model.hideResult($index)" class="btn btn-danger col-sm-3 margin-horizontal-pad">
+                                        <button ng-click="model.hideResult($index)" class="btn btn-danger col-sm-4 col-xs-12">
                                             <span class="glyphicon glyphicon-remove"></span> Hide
                                         </button>
 
-                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-3 margin-horizontal-pad">
-                                            <span class="glyphicon glyphicon-info-sign"></span> Driver Info
+                                        <a href="#/driver/{{result.Driver.driverId}}"><button class="btn btn-info col-sm-4 col-xs-12">
+                                            <span class="glyphicon glyphicon-info-sign"></span> More
                                         </button></a>
                                     </div>
                                 </td>
@@ -150,10 +150,10 @@
                     <table ng-if="!model.standingsSearchTypeDriver" class="table table-striped">
                         <thead>
                         <tr>
-                            <th> Position </th>
+                            <th class="dont-show-on-mobile"> Position </th>
                             <th> Points </th>
                             <th> Constructor </th>
-                            <th> Nationality </th>
+                            <th class="dont-show-on-mobile"> Nationality </th>
 
                             <th ng-if="currentUser"> Action </th>
 
@@ -161,7 +161,7 @@
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
                         <tr>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.position}}
                             </td>
                             <td>
@@ -170,7 +170,7 @@
                             <td>
                                 <a href="result.Constructor.url">{{result.Constructor.name}}</a>
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.Constructor.nationality}}
                             </td>
 

@@ -982,3 +982,10 @@ div.stretch-redbull-image {
     font-size: larger;
     color: #4cae4c;
 }
+
+@media screen and (max-width: 490px) {
+
+    .dont-show-on-mobile {
+        display:none;
+    }
+}
