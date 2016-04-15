@@ -44,7 +44,8 @@ module.exports = function(db, mongoose){
         // create new quiz without an _id field
         var newQuiz = {
             userId: updatedQuiz.userId,
-            title: updatedQuiz.title
+            title: updatedQuiz.title,
+            publishedStatus: updatedQuiz.publishedStatus
         };
 
         if(updatedQuiz.questions){

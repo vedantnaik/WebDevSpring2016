@@ -31,8 +31,6 @@ module.exports = function (db, mongoose, quizModel) {
                     console.log(doc);
                     if(doc.length > 0) {
                         // similar question already exists
-                        console.log("REJECT FROM Q MODEL");
-
                         deferred.reject();
                     } else {
                         var optionsArray = shuffleArray([question.option_A, question.option_B,
@@ -70,17 +68,17 @@ module.exports = function (db, mongoose, quizModel) {
                                                     .find({quizId: newQuestion.quizId},
                                                         function (err, doc) {
                                                             if (err) {
-
+                                                                deferred.reject(err);
                                                             } else {
                                                                 foundQuiz.questions = doc;
                                                                 deferred.resolve(doc);
                                                             }
                                                         }
-
                                                     );
                                             },
                                             function(err){
                                                 console.log("Unable to add newly created question to quiz.");
+                                                deferred.reject(err);
                                             }
                                         );
 
@@ -178,6 +176,7 @@ module.exports = function (db, mongoose, quizModel) {
 
     function deleteQuestion(questionId){
         var deferred = q.defer();
+
         QuestionModel.remove(
             {_id: questionId},
             function(err, users){

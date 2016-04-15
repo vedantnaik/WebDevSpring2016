@@ -161,8 +161,10 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
     function deleteQuestionById(req, res){
         var questionId = req.params.questionId;
 
+        console.log("DELETE QUESTION SERVICE SERVER " + questionId);
+
         questionModel
-            .deleteQuestionById(questionId)
+            .deleteQuestion(questionId)
             .then(
                 function (doc) {
                     res.json(doc);

@@ -29,9 +29,17 @@ module.exports = function(app, request) {
 
                     if(!info){
                         res.status(400)
-                    } else if(!info.MRData){
+                    } else if(!info.MRData) {
                         res.status(400)
-                    } else if(!info.MRData.RaceTable){
+                    } else if(!info.MRData.RaceTable) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0]) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0].Results[0]) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0].Results[0].Constructor) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0].Results[0].Driver) {
                         res.status(400)
                     } else {
                         var drrFact = {};
@@ -82,9 +90,15 @@ module.exports = function(app, request) {
 
                     if(!info){
                         res.status(400)
-                    } else if(!info.MRData){
+                    } else if(!info.MRData) {
                         res.status(400)
-                    } else if(!info.MRData.RaceTable){
+                    } else if(!info.MRData.RaceTable) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0]) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0].Results[0]) {
+                        res.status(400)
+                    } else if(!info.MRData.RaceTable.Races[0].Results[0].Constructor) {
                         res.status(400)
                     } else {
                         var crrFact = {};

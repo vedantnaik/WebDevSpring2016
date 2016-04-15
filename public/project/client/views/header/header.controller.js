@@ -27,19 +27,16 @@
                 );
 
             $scope.championshipType = "Drivers";
+
+            UserService
+                .getCurrentUser()
+                .then(function (res) {
+                    var userFromServer = res.data;
+                    $rootScope.currentUser = userFromServer;
+                });
         }
 
-
         init();
-
-
-        UserService
-            .getCurrentUser()
-            .then(function (res) {
-                var userFromServer = res.data;
-                $rootScope.currentUser = userFromServer;
-            });
-
 
         function logout(){
             $rootScope.currentUser = null;

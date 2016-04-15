@@ -20,6 +20,9 @@
         vm.convertDRRFactToQuestion = convertDRRFactToQuestion;
         vm.convertCRRFactToQuestion = convertCRRFactToQuestion;
 
+        vm.deleteAllQuestions = deleteAllQuestions;
+        vm.publishQuiz = publishQuiz;
+
         vm.message = null;
 
         vm.championshipType = 'Drivers Championship';
@@ -152,6 +155,34 @@
                         vm.message = "Could not convert this fact into a question. Please try again.";
                     }
                 );
+        }
+
+        function deleteAllQuestions(listOfQuestions){
+            vm.message = null;
+
+            for(var questionIndex in listOfQuestions){
+
+                console.log(listOfQuestions[questionIndex]._id);
+
+                QuestionService
+                    .deleteQuestionById(listOfQuestions[questionIndex]._id)
+                    .then(
+                        function(res){
+                            console.log("Deleted");
+                            init();
+                        },function(err){
+                            vm.message = "There was some error deleting questions from this quiz.";
+                        }
+                    );
+            }
+
+            console.log("Deleted for complete");
+            init();
+        }
+
+        function publishQuiz(){
+            vm.message = null;
+
         }
     }
 

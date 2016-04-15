@@ -12,6 +12,8 @@ module.exports = function(mongoose) {
         title: String, // Name given to the quiz by its creator
         questions: [QuestionSchema],
 
+        publishedStatus: { type: String, default: "NOT_PUBLISED"},
+
     }, {collection: 'project.quiz'});
     return QuizSchema;
 };
