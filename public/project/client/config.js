@@ -32,8 +32,18 @@
                 controllerAs: "model"
             })
             .when("/quizzes/editQuiz/:quizId?", {
-                controller: "EditQuizController",
                 templateUrl: "views/quizzes/editquiz.view.html",
+                controller: "EditQuizController",
+                controllerAs: "model"
+            })
+            .when("/quizzes/playQuiz/:quizId?", {
+                templateUrl: "views/quizzes/playquiz.view.html",
+                controller: "PlayQuizController",
+                controllerAs: "model"
+            })
+            .when("/quizzes/quizSelect/", {
+                templateUrl: "views/quizzes/quizselect.view.html",
+                controller: "QuizSelectController",
                 controllerAs: "model"
             })
             .when("/search/:season?/:round?/:championship?", {

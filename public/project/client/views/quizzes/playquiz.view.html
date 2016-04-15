@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="main">
+
+            <h1 class="page-header">You're playing: {{model.quizToPlay.title}}!</h1>
+
+            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+
+                    <thead>
+                    <tr>
+                        <th class="col-sm-2"> Question </th>
+
+                        <th> Option A </th>
+                        <th> Option B </th>
+                        <th> Option C </th>
+                        <th> Option D </th>
+
+                        <th> Answer </th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="question in model.questionsInThisQuiz">
+                    <tr>
+                        <td class="col-sm-12 col-xs-12">
+                            {{question.questionContent}}
+                        </td>
+                        <td>
+                            {{question.option_A}}
+                        </td>
+
+                        <td>
+                            {{question.option_B}}
+                        </td>
+
+                        <td>
+                            {{question.option_C}}
+                        </td>
+
+                        <td>
+                            {{question.option_D}}
+                        </td>
+
+                        <td class="correct-answer-field">
+                            {{question.answer}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

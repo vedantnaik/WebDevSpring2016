@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="main">
+
+            <h1 class="page-header">Select a quiz to play!</h1>
+
+            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
+
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th> Pick a quiz to get started </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="quiz in model.allQuizzes">
+                        <td>
+                            <button ng-click="model.selectToPlay(quiz._id)"
+                                    class="btn btn-default col-sm-12 col-xs-12">{{quiz.title}}</button>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
