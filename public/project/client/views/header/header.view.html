@@ -16,6 +16,10 @@
                     <a href="#/admin">Admin</a>
                 </li>
                 <li ng-if="currentUser"
+                    ng-class="{'active': $location.url() == '/quizzes/quizSelect/'}">
+                    <a href="#/quizzes/quizSelect">Play!</a>
+                </li>
+                <li ng-if="currentUser"
                     ng-class="{'active': $location.url() == '/quizzes'}">
                     <a href="#/quizzes">Quiz Editor</a>
                 </li>

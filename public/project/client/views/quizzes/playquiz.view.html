@@ -11,44 +11,55 @@
                 <table class="table table-striped">
 
                     <thead>
-                    <tr>
-                        <th class="col-sm-2"> Question </th>
-
-                        <th> Option A </th>
-                        <th> Option B </th>
-                        <th> Option C </th>
-                        <th> Option D </th>
-
-                        <th> Answer </th>
-                    </tr>
+                        <tr>
+                            <th class="col-sm-2"> Question </th>
+                            <th ng-repeat="option in ['A','B','C','D']">
+                                {{option}}
+                            </th>
+                        </tr>
                     </thead>
                     <tbody ng-repeat="question in model.questionsInThisQuiz">
                     <tr>
-                        <td class="col-sm-12 col-xs-12">
+                        <td class="col-sm-4 col-xs-4">
                             {{question.questionContent}}
                         </td>
-                        <td>
-                            {{question.option_A}}
-                        </td>
+                        <td ng-repeat="option in question.options"
+                            class="btn-group col-sm-2 col-xs-2"
+                            data-toggle="buttons">
 
-                        <td>
-                            {{question.option_B}}
-                        </td>
+                            <label class="btn btn-action"
+                                   ng-class="{'active':question.selectedAnswer==option}"
+                                   ng-click="model.updatedSelectedAnwer($parent.$index, option)">
+                                <input type="radio"
+                                       value="{{option}}"
+                                       ng-model="question.selectedAnswer">
+                                {{option}}
+                            </label>
 
-                        <td>
-                            {{question.option_C}}
-                        </td>
-
-                        <td>
-                            {{question.option_D}}
-                        </td>
-
-                        <td class="correct-answer-field">
-                            {{question.answer}}
+                            <!--<input type="radio"-->
+                                   <!--ng-model="question.selectedAnswer"-->
+                                   <!--name="name" value="{{option}}"-->
+                                   <!--required />-->
+                            <!--{{option}}-->
                         </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div id="play-quiz-footer-div" class="row col-sm-12 col-xs-12">
+                <button class="col-sm-4 col-xs-4 btn btn-danger"
+                        ng-click="model.clearAllSelections()">
+                    Clear all selections
+                </button>
+
+                <div class="col-sm-4 col-xs-4 btn btn-toolbar">
+                </div>
+
+                <button class="col-sm-4 col-xs-4 btn btn-success"
+                        ng-click="model.submitAnswers()">
+                    Submit!
+                </button>
             </div>
 
 

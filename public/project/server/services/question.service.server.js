@@ -447,7 +447,12 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                     var fourFakeOptionsList = [];
                     var constructorRaceResultsList = info.MRData.RaceTable.Races[0].Results;
                     for (var drresultIndex in constructorRaceResultsList){
-                        fourFakeOptionsList.push(constructorRaceResultsList[drresultIndex].Constructor.name);
+
+                        var candidateName = constructorRaceResultsList[drresultIndex].Constructor.name;
+
+                        if(fourFakeOptionsList.indexOf(candidateName) == -1) {
+                            fourFakeOptionsList.push(constructorRaceResultsList[drresultIndex].Constructor.name);
+                        }
 
                         if(fourFakeOptionsList.length == 4){
                             break;

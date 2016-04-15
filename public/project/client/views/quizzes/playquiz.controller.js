@@ -14,6 +14,11 @@
 
         vm.message = null;
 
+        vm.updatedSelectedAnwer = updatedSelectedAnwer;
+        vm.clearAllSelections = clearAllSelections;
+        vm.submitAnswers = submitAnswers;
+
+
         init();
 
         function init() {
@@ -26,12 +31,50 @@
                     function(quizData){
                         vm.quizToPlay = quizData.data;
                         vm.questionsInThisQuiz = vm.quizToPlay.questions;
+
+                        vm.questionsInThisQuiz
+                            .forEach(function(ques){
+                                ques.selectedAnswer = "";
+                                ques.options = [ques.option_A, ques.option_B, ques.option_C, ques.option_D];
+                            });
                     },
                     function(err){
                         vm.message = "Unable to find this quiz. Please try some other quiz";
                     }
                 );
 
+        }
+
+        function updatedSelectedAnwer(questionIndex, selectedOption){
+            //console.log(questionIndex, selectedOption);
+            vm.questionsInThisQuiz[questionIndex].selectedAnswer = selectedOption;
+        }
+
+        function clearAllSelections(){
+            vm.questionsInThisQuiz
+                .forEach(function(ques){
+                    ques.selectedAnswer = "";
+                });
+        }
+
+        function submitAnswers(){
+            console.log("Start evaluating");
+
+            var totalScore = 0;
+            vm.questionsInThisQuiz
+                .forEach(function(ques){
+                    if (ques.selectedAnswer != "") {
+                        if (ques.selectedAnswer == ques.answer) {
+                            totalScore = totalScore + 10;
+                        } else {
+                            totalScore = totalScore - 5;
+                        }
+                    }
+                });
+
+            console.log(totalScore);
+            console.log("Done evaluating");
+            // TODO: update user profile with new score
         }
     }
 
