@@ -8,7 +8,7 @@
         .module("F1ExplorerApp")
         .controller("StoredController", StoredController);
 
-    function StoredController(ErgastService, FactService, $scope, $rootScope, $location) {
+    function StoredController(UserService, FactService) {
         console.log("in Stored Controller");
 
         var vm = this;
@@ -23,40 +23,59 @@
         vm.championshipType = 'Drivers Championship';
         vm.standingsSearchTypeDriver = true;
 
+
+        function init(){
+            displayResults();
+        }
+
+        init();
+
         function setStandingsType(typ){
             vm.message = null;
             console.log("changed to " + typ);
             vm.championshipType = typ;
         }
 
-
         function displayResults(){
             vm.message = null;
 
-            FactService.findAllFactsForUser($rootScope.currentUser._id)
+            UserService
+                .getCurrentUser()
                 .then(
-                    function( res ){
+                    function (res) {
+                        vm.userViewingStored = res.data;
 
-                        var storedData = res.data;
-                        var driverStoredResult = storedData
-                                                .filter(function (rec) {return rec.factType === 'DRR';});
-                        var constructorStoredResult = storedData
-                                                .filter(function (rec) {return rec.factType === 'CRR';});
+                        FactService.findAllFactsForUser(vm.userViewingStored._id)
+                            .then(
+                                function( res ){
 
-                        if(vm.championshipType === 'Drivers Championship') {
-                            vm.standingsSearchTypeDriver = true;
-                            vm.displayStoredResults = null;
-                            vm.displayStoredResults = driverStoredResult;
-                        } else {
-                            vm.standingsSearchTypeDriver = false;
-                            vm.displayStoredResults = null;
-                            vm.displayStoredResults = constructorStoredResult;
-                        }
+                                    var storedData = res.data;
+                                    var driverStoredResult = storedData
+                                        .filter(function (rec) {return rec.factType === 'DRR';});
+                                    var constructorStoredResult = storedData
+                                        .filter(function (rec) {return rec.factType === 'CRR';});
+
+                                    if(vm.championshipType === 'Drivers Championship') {
+                                        vm.standingsSearchTypeDriver = true;
+                                        vm.displayStoredResults = null;
+                                        vm.displayStoredResults = driverStoredResult;
+                                    } else {
+                                        vm.standingsSearchTypeDriver = false;
+                                        vm.displayStoredResults = null;
+                                        vm.displayStoredResults = constructorStoredResult;
+                                    }
+                                },
+                                function (err)  {
+                                    console.log("UNABLE TO GET STORED FACTS TO CLIENT SIDE");
+                                }
+                            );
+
                     },
-                    function (err)  {
-                        console.log("UNABLE TO GET STORED FACTS TO CLIENT SIDE");
+                    function (err) {
+                        vm.message = "You need to be logged in to view stored facts.";
                     }
                 );
+
 
         }
 

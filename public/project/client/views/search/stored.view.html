@@ -9,10 +9,9 @@
             <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
 
             <div>
-
                 <div class="row">
-                    <div class="col-sm-6">
-                        <button class="dropdown-toggle btn btn-default col-sm-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <div class="col-sm-6 col-xs-12 margin-vertical-pad">
+                        <button class="dropdown-toggle btn btn-default col-sm-12 col-xs-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -20,13 +19,14 @@
                             <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm-4">
-                        <button ng-click="model.displayResults()" class="btn btn-default">
+                    <div class="col-sm-4 col-xs-12 margin-vertical-pad">
+                        <button ng-click="model.displayResults()" class="btn btn-info col-sm-12 col-xs-12">
                             <span class="glyphicon glyphicon-search"> </span> Display Stored
                         </button>
                     </div>
                 </div>
-                <div ng-if="model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
+                <div ng-if="model.standingsSearchTypeDriver"
+                     class="table-responsive margin-vertical-pad">
                     <table class="table table-striped">
                         <thead>
                         <tr>

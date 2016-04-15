@@ -39,13 +39,34 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
 
         DriverRaceResultModel
-            .create(fact, function(err, doc){
-                if(err){
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
+            .find(
+                {   userId: fact.userId,
+                    factType: fact.factType,
+                    driverName: fact.driverName,
+                    season: fact.season,
+                    round: fact.round
+                },
+                function(err, drrFactsForUser) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+
+                        if(drrFactsForUser.length > 0){
+                            // user has already stored this fact
+                            deferred.reject();
+                        } else {
+                            DriverRaceResultModel
+                                .create(fact, function(err, doc){
+                                    if(err){
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                });
+                        }
+                    }
                 }
-            });
+            );
 
         return deferred.promise;
     }
@@ -55,13 +76,34 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
 
         ConstructorRaceResultModel
-            .create(fact, function(err, doc){
-                if(err){
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(doc);
+            .find(
+                {   userId: fact.userId,
+                    factType: fact.factType,
+                    constructorName: fact.constructorName,
+                    season: fact.season,
+                    round: fact.round
+                },
+                function(err, crrFactsForUser) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+
+                        if(crrFactsForUser.length > 0){
+                            // user has already stored this fact
+                            deferred.reject();
+                        } else {
+                            ConstructorRaceResultModel
+                                .create(fact, function(err, doc){
+                                    if(err){
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc);
+                                    }
+                                });
+                        }
+                    }
                 }
-            });
+            );
 
         return deferred.promise;
     }
