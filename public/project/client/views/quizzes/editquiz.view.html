@@ -3,9 +3,17 @@
 
         <div class="main">
 
-            <h1 class="page-header">{{model.quizToEdit.title}}</h1>
+            <div class="header row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="page-header">{{model.quizToEdit.title}}</h1>
+                    <h2> Current status of the quiz : {{model.quizToEdit.publishedStatus}} </h2>
+                </div>
 
-            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
+                <div class="col-sm-6 col-xs-12 alert alert-info"
+                     ng-show="model.message" role="alert">
+                    {{model.message}}
+                </div>
+            </div>
 
             <div class="tab-content">
                 <div id="editQuizTab" class="tab-pane active">
@@ -183,12 +191,17 @@
                             </div>
 
                             <div id="quiz-staging-div" class="row col-sm-12 col-xs-12">
-                                <button class="col-sm-6 col-xs-6 btn btn-danger"
+                                <button class="col-sm-4 col-xs-4 btn btn-danger"
                                         ng-click="model.deleteAllQuestions(model.questionsInThisQuiz)">
                                     Clear all questions
                                 </button>
 
-                                <button class="col-sm-6 col-xs-6 btn btn-success"
+                                <button class="col-sm-4 col-xs-4 btn btn-toolbar"
+                                        ng-click="model.unpublishQuiz()">
+                                    Unpublish quiz
+                                </button>
+
+                                <button class="col-sm-4 col-xs-4 btn btn-success"
                                         ng-click="model.publishQuiz()">
                                     Publish quiz
                                 </button>
