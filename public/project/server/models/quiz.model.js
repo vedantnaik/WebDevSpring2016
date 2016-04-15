@@ -18,7 +18,9 @@ module.exports = function(db, mongoose){
         findQuizById: findQuizById,
         findQuizzesByTitle: findQuizzesByTitle,
         findQuizzesForUserByTitle: findQuizzesForUserByTitle,
-        findAllQuizzesForUser: findAllQuizzesForUser
+        findAllQuizzesForUser: findAllQuizzesForUser,
+
+        findAllPublishedQuizzes: findAllPublishedQuizzes
     };
 
     return api;
@@ -145,6 +147,21 @@ module.exports = function(db, mongoose){
         var deferred = q.defer();
         QuizModel.find(
             { userId: userId },
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                else {
+                    deferred.resolve(doc);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function findAllPublishedQuizzes(){
+        var deferred = q.defer();
+        QuizModel.find(
+            { publishedStatus: "PUBLISHED" },
             function(err, doc) {
                 if(err) {
                     deferred.reject(err);

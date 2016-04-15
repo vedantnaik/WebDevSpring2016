@@ -19,7 +19,9 @@
             getQuizById: getQuizById,
             getQuizzesByTitle: getQuizzesByTitle,
             getQuizzesForUserByTitle: getQuizzesForUserByTitle,
-            getAllQuizzesForUser: getAllQuizzesForUser
+            getAllQuizzesForUser: getAllQuizzesForUser,
+            getPublishedQuizzes: getPublishedQuizzes
+
         };
         return api;
 
@@ -54,6 +56,10 @@
 
         function getAllQuizzesForUser(userId){
             return $http.get("/api/f1explorer/quizzes/user/"+userId);
+        }
+
+        function getPublishedQuizzes() {
+            return $http.get("/api/f1explorer/quizzes/published/");
         }
     }
 

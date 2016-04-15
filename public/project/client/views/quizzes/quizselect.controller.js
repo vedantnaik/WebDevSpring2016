@@ -21,7 +21,7 @@
         function init() {
 
             QuizService
-                .getAllQuizzes()
+                .getPublishedQuizzes()
                 .then(
                     function(quizData){
                         vm.allQuizzes = quizData.data;

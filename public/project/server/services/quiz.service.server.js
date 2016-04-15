@@ -15,6 +15,7 @@ module.exports = function(app, quizModel) {
         getQuizzesForUserByTitle);
     app.get("/api/f1explorer/quizzes/user/:userId", getAllQuizzesForUser);
 
+    app.get("/api/f1explorer/quizzes/published/", getPublishedQuizzes);
 
     function createQuizByUserId(req, res){
         var userId = req.params.userId;
@@ -128,6 +129,20 @@ module.exports = function(app, quizModel) {
 
         quizModel
             .findAllQuizzesForUser(userId)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function getPublishedQuizzes(req, res){
+
+        quizModel
+            .findAllPublishedQuizzes()
             .then(
                 function(doc){
                     res.json(doc);

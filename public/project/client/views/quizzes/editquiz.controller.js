@@ -235,14 +235,13 @@
 
                         if(quizToPublish.questions.length < 1){
                             quizToPublish.publishedStatus = "NOT PUBLISHED";
-                            //vm.message = "Please add some questions to your quiz before publishing.";
+                            vm.message = "Please add some questions to your quiz before publishing.";
 
                             QuizService                     // update quiz as unpublished
                                 .updateQuizById(vm.quizToEditId, quizToPublish)
                                 .then(
                                     function (unpublishedRes) {
                                         init();
-                                        //"Your quiz is no longer published. Add questions to publish a quiz.";
                                     },
                                     function (err) {
                                         vm.message = "Unable to update the status of your quiz. Please try again.";
