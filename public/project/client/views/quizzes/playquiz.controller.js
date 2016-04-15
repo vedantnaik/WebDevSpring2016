@@ -75,7 +75,38 @@
             console.log(totalScore);
             console.log("Done evaluating");
 
-            $location.url("/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore);
+
+            UserService
+                .getCurrentUser()
+                .then(function (res) {
+                    var userFromServer = res.data;
+                    vm.userWhoPlayed = userFromServer;
+
+                    vm.userWhoPlayed.score = +vm.userWhoPlayed.score + +totalScore;
+
+                    var userLevel = +vm.userWhoPlayed.level;
+                    var userScore = +vm.userWhoPlayed.score;
+                    var userNextLevelScore = userLevel * 100;
+
+                    var locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/false";
+                    if ((userScore - userNextLevelScore) > 0) {
+                        vm.userWhoPlayed.level = +vm.userWhoPlayed.level + 1;
+                        $rootScope.currentUser.level = vm.userWhoPlayed.level;
+                        locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/true";
+                    }
+
+                    UserService
+                        .updateUser(vm.userWhoPlayed._id, vm.userWhoPlayed)
+                        .then(
+                            function (res) {
+                                // user status updated
+                                $location.url(locationUrlStr);
+                            },
+                            function (err) {
+                                // unable to update user status
+                            }
+                        );
+                });
         }
     }
 

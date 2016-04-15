@@ -19,6 +19,7 @@
         function init() {
             vm.quizPlayedId = $routeParams.quizId;
             vm.quizPlayedScore = $routeParams.totalScore;
+            vm.levelUpCelebrations = $routeParams.levelFlag;
 
             QuizService
                 .getQuizById(vm.quizPlayedId)
@@ -43,33 +44,23 @@
                                         vm.resultMessage = "Congratulations! You scored " + vm.quizPlayedScore + " points!";
                                     }
 
-                                    vm.userWhoPlayed.score = +vm.userWhoPlayed.score
-                                        + +vm.quizPlayedScore;
-
                                     vm.totalScoreMessage = "Your total score so far is " + vm.userWhoPlayed.score;
 
                                     var userLevel = +vm.userWhoPlayed.level;
                                     var userScore = +vm.userWhoPlayed.score;
                                     var userNextLevelScore = userLevel * 100;
+                                    var rem = userNextLevelScore - userScore;
 
-                                    if ((userScore - userNextLevelScore) < 0) {
-                                        var rem = userNextLevelScore - userScore;
-                                        vm.nextLevelMessage = "You are " + rem + " points away from the next level.";
-                                    } else {
-                                        vm.userWhoPlayed.level = +vm.userWhoPlayed.level + 1;
+                                    vm.nextLevelMessage = "You are " + rem + " points away from the next level.";
+
+                                    if(vm.levelUpCelebrations == "true") {
                                         vm.nextLevelMessage = "Its time to celebrate! You have levelled up!";
-                                        vm.levelUpCelebrations = true;
-                                        $rootScope.currentUser.level = vm.userWhoPlayed.level;
                                     }
-
                                 } else {
                                     // looser
                                     vm.positiveScore = false;
 
                                     vm.resultMessage = "Things didn't go well. You scored " + vm.quizPlayedScore;
-
-                                    vm.userWhoPlayed.score = +vm.userWhoPlayed.score
-                                        + +vm.quizPlayedScore;
 
                                     vm.totalScoreMessage = "Your total score so far is " + vm.userWhoPlayed.score;
 
@@ -79,17 +70,6 @@
                                     var rem = userNextLevelScore - userScore;
                                     vm.nextLevelMessage = "You are " + rem + " points away from the next level.";
                                 }
-
-                                UserService
-                                    .updateUser(vm.userWhoPlayed._id, vm.userWhoPlayed)
-                                    .then(
-                                        function (res) {
-                                            // user status updated
-                                        },
-                                        function (err) {
-                                            // unable to update user status
-                                        }
-                                    );
                             });
                     }
                 );

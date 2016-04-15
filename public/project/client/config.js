@@ -46,7 +46,7 @@
                 controller: "QuizSelectController",
                 controllerAs: "model"
             })
-            .when("/quizzes/playQuiz/:quizId?/score/:totalScore?", {
+            .when("/quizzes/playQuiz/:quizId?/score/:totalScore?/lvlUp/:levelFlag?", {
                 templateUrl: "views/quizzes/quizresult.view.html",
                 controller: "QuizResultController",
                 controllerAs: "model"
