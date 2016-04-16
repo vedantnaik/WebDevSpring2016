@@ -235,6 +235,8 @@ body {
     left: 0;
     opacity: .85;
 }
+
+
 .navbar-collapse {
     -webkit-border-radius: 0;
     -webkit-background-clip: padding-box;
@@ -503,6 +505,10 @@ img {
     color: #bd1550;
     border-color: #bd1550;
 }
+.btn-stored {
+    background-color: #00d4b4
+}
+
 .btn-lg {
     padding: 15px 60px;
     font-size: 12px;

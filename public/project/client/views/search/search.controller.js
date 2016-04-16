@@ -27,6 +27,8 @@
         vm.goBackOneRace = goBackOneRace;
         vm.goAheadOneRace = goAheadOneRace;
 
+        vm.deleteFact = deleteFact;
+
         vm.processing = null;
 
         // Set data values
@@ -58,7 +60,7 @@
         }
 
         function searchStanding(){
-            vm.message = null;
+            //vm.message = null;
 
             vm.season = vm.queryOn.season;
             vm.round = vm.queryOn.round;
@@ -106,6 +108,7 @@
                                                                             && myFact.season == vm.queryOn.season
                                                                             && myFact.round == vm.queryOn.round){
                                                                                 apiResult.alreadyStored = true;
+                                                                                apiResult.factId = myFact._id;
                                                                             }
                                                                         }
                                                                     );
@@ -158,6 +161,7 @@
                                                                             && myFact.season == vm.queryOn.season
                                                                             && myFact.round == vm.queryOn.round){
                                                                                 apiResult.alreadyStored = true;
+                                                                                apiResult.factId = myFact._id;
                                                                             }
                                                                         }
                                                                     );
@@ -309,6 +313,20 @@
                 vm.queryOn.round = (+vm.round + 1);
                 searchStanding();
             }
+        }
+
+        function deleteFact(factIdToDelete) {
+            FactService
+                .deleteFactById(factIdToDelete)
+                .then(
+                    function(res){
+                        vm.message = "Deleted stored fact.";
+                        searchStanding()
+                    },
+                    function(err){
+                        vm.message = "There was some problem deleting this fact. Please try again.";
+                    }
+                );
         }
     }
 
