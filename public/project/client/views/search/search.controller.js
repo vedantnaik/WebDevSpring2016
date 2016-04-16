@@ -27,6 +27,8 @@
         vm.goBackOneRace = goBackOneRace;
         vm.goAheadOneRace = goAheadOneRace;
 
+        vm.processing = null;
+
         // Set data values
         init();
 
@@ -100,6 +102,7 @@
                                                                     myFacts.forEach(
                                                                         function(myFact){
                                                                             if(myFact.driverName == apiName
+                                                                            && myFact.factType == "DRR"
                                                                             && myFact.season == vm.queryOn.season
                                                                             && myFact.round == vm.queryOn.round){
                                                                                 apiResult.alreadyStored = true;
@@ -151,6 +154,7 @@
                                                                     myFacts.forEach(
                                                                         function(myFact){
                                                                             if(myFact.constructorName == apiName
+                                                                            && myFact.factType == "CRR"
                                                                             && myFact.season == vm.queryOn.season
                                                                             && myFact.round == vm.queryOn.round){
                                                                                 apiResult.alreadyStored = true;

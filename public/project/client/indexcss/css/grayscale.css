@@ -329,12 +329,17 @@ a:focus {
     background-color: transparent;
 }
 
-.btn-default:hover,
-.btn-default:focus {
+.btn-default:hover {
     border: 1px solid orangered;
     outline: 0;
     color: #000;
     background-color: red;
+}
+
+.btn-default:focus {
+    border: 1px solid orangered;
+    outline: 0;
+    color: #000;
 }
 
 .btn-dropdown {

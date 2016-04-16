@@ -75,6 +75,8 @@
                                                                 vm.displayStoredResults = null;
                                                                 vm.displayStoredResults = constructorStoredResult;
                                                             }
+
+                                                            displayResults();
                                                         },
                                                         function (err)  {
                                                             console.log("UNABLE TO GET STORED FACTS TO CLIENT SIDE");
@@ -100,6 +102,7 @@
             vm.message = null;
             console.log("changed to " + typ);
             vm.championshipType = typ;
+            displayResults();
         }
 
         function displayResults(){

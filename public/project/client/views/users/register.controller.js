@@ -83,7 +83,8 @@
                                         .then(
                                             function ( respGetNewUser ) {
                                                 UserService.setCurrentUser(respGetNewUser.data);
-                                                $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);$location.url("/profile");
+                                                $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);
+                                                $location.url("/profile");
                                             },
                                             function ( errGettingNewUser ) {
                                                 vm.errorMessage = "Some problem occurred. Please try again later";

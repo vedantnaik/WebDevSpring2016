@@ -5,8 +5,10 @@
 
             <div class="header row">
                 <div class="col-sm-6 col-xs-12">
-                    <h1 class="page-header">{{model.quizToEdit.title}}</h1>
-                    <h2> Current status of the quiz : {{model.quizToEdit.publishedStatus}} </h2>
+                    <h1 class="page-header"> {{model.quizToEdit.title}} </h1>
+                    <h3>Quiz Editor</h3>
+
+                    <h4> Current status of the quiz : {{model.quizToEdit.publishedStatus}} </h4>
                 </div>
 
                 <div class="col-sm-6 col-xs-12 alert alert-info"
@@ -22,8 +24,8 @@
                         <div id="quizEditorStoredPanel">
 
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12">
-                                    <button class="dropdown-toggle btn btn-default col-sm-12" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <div class="col-sm-12 col-xs-12">
+                                    <button class="dropdown-toggle btn btn-default col-sm-12 col-xs-12 search-view-button" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -31,11 +33,11 @@
                                         <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-4 col-xs-12">
-                                    <button ng-click="model.displayResults()" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-search"> </span> Display Stored
-                                    </button>
-                                </div>
+                                <!--<div class="col-sm-6 col-xs-12">-->
+                                    <!--<button ng-click="model.displayResults()" class="btn btn-info search-view-button col-xs-12 col-sm-12">-->
+                                        <!--<span class="glyphicon glyphicon-search"> </span> Display Stored-->
+                                    <!--</button>-->
+                                <!--</div>-->
                             </div>
                             <div ng-if="model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
                                 <table class="table table-striped">

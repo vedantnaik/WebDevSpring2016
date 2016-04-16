@@ -151,7 +151,6 @@ body {
     width: 100%;
     font-style: oblique;
     font-size: larger;
-
 }
 .navbar-team-mercedese {
     background-image:
@@ -275,7 +274,6 @@ body {
     color: #DB1414;
     font-family: "Arial Black";
     font-size: x-large;
-
 
     /*background: transparent;*/
 
@@ -1122,4 +1120,8 @@ div.stretch-redbull-image {
     .dont-show-on-mobile {
         display:none;
     }
+}
+
+.search-view-button {
+    font-size: medium;
 }
