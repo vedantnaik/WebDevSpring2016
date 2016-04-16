@@ -100,7 +100,7 @@
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
-                            <tr>
+                            <tr ng-class="{'info': currentUser.supportConstructor == result.Constructors[0].name}">
                                 <td class="dont-show-on-mobile">
                                     {{result.position}}
                                 </td>
@@ -161,7 +161,7 @@
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
-                            <tr>
+                            <tr ng-class="{'info': currentUser.supportConstructor == result.Constructor.name}">
                                 <td class="dont-show-on-mobile">
                                     {{result.position}}
                                 </td>
