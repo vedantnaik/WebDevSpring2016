@@ -126,10 +126,14 @@
                                 </td>
                                 <td ng-if="currentUser">
                                     <div class="row">
-                                        <button ng-click="model.storeResult($index)" class="btn btn-success col-sm-4 col-xs-12">
+                                        <button ng-if="!result.alreadyStored" ng-click="model.storeResult($index)"
+                                                class="btn btn-success col-sm-4 col-xs-12">
                                             <span class="glyphicon glyphicon-plus"></span> Store
                                         </button>
-
+                                        <button ng-if="result.alreadyStored"
+                                                class="btn btn-success col-sm-4 col-xs-12">
+                                            <span class="glyphicon glyphicon-chevron-right"></span> Stored!
+                                        </button>
                                         <button ng-click="model.hideResult($index)" class="btn btn-danger col-sm-4 col-xs-12">
                                             <span class="glyphicon glyphicon-remove"></span> Hide
                                         </button>
@@ -173,10 +177,12 @@
 
                                 <td>
                                     <div class="row">
-                                        <button ng-if="currentUser" ng-click="model.storeResult($index)" class="btn btn-success col-sm-6 col-xs-12">
+                                        <button ng-if="currentUser && !result.alreadyStored" ng-click="model.storeResult($index)" class="btn btn-success col-sm-6 col-xs-12">
                                             <span class="glyphicon glyphicon-plus"></span> Store
                                         </button>
-
+                                        <button ng-if="result.alreadyStored" class="btn btn-success col-sm-6 col-xs-12">
+                                            <span class="glyphicon glyphicon-chevron-right"></span> Stored!
+                                        </button>
                                         <button ng-if="currentUser" ng-click="model.hideResult($index)" class="btn btn-danger col-sm-6 col-xs-12">
                                             <span class="glyphicon glyphicon-remove"></span> Hide
                                         </button>

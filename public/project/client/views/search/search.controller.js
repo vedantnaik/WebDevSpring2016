@@ -8,7 +8,7 @@
         .module("F1ExplorerApp")
         .controller("SearchController", SearchController);
 
-    function SearchController(ErgastService, FactService, $rootScope, $routeParams, $location) {
+    function SearchController(ErgastService, FactService, UserService, $rootScope, $routeParams, $location) {
 
         var vm = this;
 
@@ -75,6 +75,44 @@
                             console.log("in search",vm.season, vm.round);
                             vm.standingsSearchTypeDriver = true;
                             vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+
+                            UserService
+                                .getCurrentUser()
+                                .then(
+                                    function(userRes){
+                                        if(userRes.data){
+                                            var loggedInUser = userRes.data;
+                                            FactService
+                                                .findAllFactsForUser(loggedInUser._id)
+                                                .then(
+                                                    function(factsRes){
+                                                        var myFacts = factsRes.data;
+
+                                                        myFacts.filter(function (myFact) {
+                                                            return myFact.factType == "DRR";
+                                                        });
+
+                                                        vm.standingSearchResult
+                                                            .forEach(
+                                                                function(apiResult){
+                                                                    var apiName = apiResult.Driver.givenName + " " + apiResult.Driver.familyName;
+
+                                                                    myFacts.forEach(
+                                                                        function(myFact){
+                                                                            if(myFact.driverName == apiName
+                                                                            && myFact.season == vm.queryOn.season
+                                                                            && myFact.round == vm.queryOn.round){
+                                                                                apiResult.alreadyStored = true;
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
+                                                            );
+                                                    }
+                                                );
+                                        }
+                                    }
+                                );
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH DRIVER STANDINGS FOR ROUND");
@@ -87,6 +125,44 @@
                         function( res ){
                             vm.standingsSearchTypeDriver = false;
                             vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+
+                            UserService
+                                .getCurrentUser()
+                                .then(
+                                    function(userRes){
+                                        if(userRes.data){
+                                            var loggedInUser = userRes.data;
+                                            FactService
+                                                .findAllFactsForUser(loggedInUser._id)
+                                                .then(
+                                                    function(factsRes){
+                                                        var myFacts = factsRes.data;
+
+                                                        myFacts.filter(function (myFact) {
+                                                           return myFact.factType == "CRR";
+                                                        });
+
+                                                        vm.standingSearchResult
+                                                            .forEach(
+                                                                function(apiResult){
+                                                                    var apiName = apiResult.Constructor.name;
+
+                                                                    myFacts.forEach(
+                                                                        function(myFact){
+                                                                            if(myFact.constructorName == apiName
+                                                                            && myFact.season == vm.queryOn.season
+                                                                            && myFact.round == vm.queryOn.round){
+                                                                                apiResult.alreadyStored = true;
+                                                                            }
+                                                                        }
+                                                                    );
+                                                                }
+                                                            );
+                                                    }
+                                                );
+                                        }
+                                    }
+                                );
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH CONSTRUCTOR STANDINGS FOR ROUND");
@@ -127,10 +203,10 @@
                                 .createFactForUser($rootScope.currentUser._id, recordToPush)
                                 .then(
                                     function(res){
-                                        console.log("Fact stored in mongo");
+                                        searchStanding();
                                     },
                                     function(err){
-                                        console.log("Unable to store fact");
+                                        vm.message = "Unable to store fact";
                                     }
                                 );
                         },
@@ -151,10 +227,10 @@
                                 .createFactForUser($rootScope.currentUser._id, recordToPush)
                                 .then(
                                     function(res){
-                                        console.log("Fact stored in mongo");
+                                        searchStanding();
                                     },
                                     function(err){
-                                        console.log("Unable to store fact");
+                                        vm.message = "Unable to store fact";
                                     }
                                 );
                         },
