@@ -8,49 +8,54 @@
             <div ng-if="model.positiveScore" class="jumbotron">
 
                 <div class="card-container">
-                    <div class="card card-result col-sm-3 col-xs-12">
-                        <div class="card-block">
-                            <h4 class="card-title card-result-h4">Quiz Result</h4>
-                            <p class="card-text">
-                                {{model.resultMessage}}
-                            </p>
-                            <p class="card-text">
-                                <small class="text-muted">Great Job!</small>
-                            </p>
+                    <div class=" col-sm-4 col-xs-12">
+                        <div class="card card-result">
+                            <div class="card-block">
+                                <h4 class="card-title card-result-h4">Quiz Result</h4>
+                                <p class="card-text">
+                                    {{model.resultMessage}}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">Great Job!</small>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card card-tips col-sm-3 col-xs-12">
-                        <div class="card-block">
-                            <h4 class="card-title">Tips:</h4>
-                            <p class="card-text">
-                                {{model.nextLevelMessage}}
-                            </p>
-                            <p class="card-text">
-                                <small class="text-muted">Beyond level 5, you get to be a Quiz Master!
-                                    Make your own quizzes using the "Quiz Builder!"</small>
-                            </p>
+                    <div class=" col-sm-4 col-xs-12">
+                        <div class="card card-tips">
+                            <div class="card-block">
+                                <h4 class="card-title">Tips:</h4>
+                                <p class="card-text">
+                                    {{model.nextLevelMessage}}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">Beyond level 5, you get to be a Quiz Master!
+                                        Make your own quizzes using the "Quiz Builder!"</small>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card card-progress col-sm-3 col-xs-12">
-                        <div class="card-block">
-                            <h4 class="card-title card-progress-h4">Your progress so far</h4>
-                            <p class="card-text">
-                                {{model.totalScoreMessage}}
-                            </p>
-                            <p class="card-text">
-                                <small class="text-muted">Keep playing more quizzes to improve your score!</small>
-                            </p>
+                    <div class=" col-sm-4 col-xs-12">
+                        <div class="card card-progress">
+                            <div class="card-block">
+                                <h4 class="card-title card-progress-h4">Your progress so far</h4>
+                                <p class="card-text">
+                                    {{model.totalScoreMessage}}
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">Keep playing more quizzes to improve your score!</small>
+                                </p>
+                            </div>
+
+                            <a href="#/home">
+                                <button class="col-sm-12 col-xs-12 btn btn-success">
+                                    Proceed to home
+                                </button>
+                            </a>
                         </div>
-
-                        <a href="#/home">
-                            <button class="col-sm-12 col-xs-12 btn btn-success">
-                                Proceed to home
-                            </button>
-                        </a>
                     </div>
-
                 </div>
             </div>
 

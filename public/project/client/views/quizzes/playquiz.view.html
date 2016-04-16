@@ -19,38 +19,36 @@
                         </tr>
                     </thead>
                     <tbody ng-repeat="question in model.questionsInThisQuiz">
-                    <tr>
-                        <td class="col-sm-4 col-xs-4">
-                            {{question.questionContent}}
-                        </td>
-                        <td ng-repeat="option in question.options"
-                            class="btn-group col-sm-2 col-xs-2"
-                            data-toggle="buttons">
+                        <tr>
+                            <td class="col-sm-4 col-xs-4">
+                                {{question.questionContent}}
+                            </td>
+                            <td ng-repeat="option in question.options"
+                                class="btn-group col-sm-2 col-xs-2"
+                                data-toggle="buttons">
 
-                            <label class="btn btn-action"
-                                   ng-class="{'active':question.selectedAnswer==option}"
-                                   ng-click="model.updatedSelectedAnwer($parent.$index, option)">
-                                <input type="radio"
-                                       value="{{option}}"
-                                       ng-model="question.selectedAnswer">
-                                {{option}}
-                            </label>
-                        </td>
-                    </tr>
+                                <label class="btn btn-action"
+                                       ng-class="{'active':question.selectedAnswer==option}"
+                                       ng-click="model.updatedSelectedAnwer($parent.$index, option)">
+                                    <input type="radio"
+                                           value="{{option}}"
+                                           ng-model="question.selectedAnswer">
+                                    {{option}}
+                                </label>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
             <div id="play-quiz-footer-div" class="row col-sm-12 col-xs-12">
-                <button class="col-sm-4 col-xs-4 btn btn-danger"
+                <button class="col-sm-4 col-xs-6 btn btn-danger"
                         ng-click="model.clearAllSelections()">
                     Clear all selections
                 </button>
 
-                <div class="col-sm-4 col-xs-4">
-                </div>
 
-                <button class="col-sm-4 col-xs-4 btn btn-success"
+                <button class="col-sm-4 col-sm-push-4 col-xs-6 btn btn-success"
                         ng-click="model.submitAnswers()">
                     Submit!
                 </button>
