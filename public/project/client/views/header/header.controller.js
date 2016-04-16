@@ -33,6 +33,7 @@
                 .then(function (res) {
                     var userFromServer = res.data;
                     $rootScope.currentUser = userFromServer;
+                    setTeamColors(userFromServer.supportConstructor);
                 });
         }
 
@@ -41,6 +42,7 @@
         function logout(){
             $rootScope.currentUser = null;
             UserService.setCurrentUser(null);
+            setTeamColors("Ferrari");
         }
 
         function goToSearchPage(){
@@ -51,6 +53,41 @@
                         + "/" + $scope.championshipType);
         }
 
+        // helpers
+
+        $scope.$on('newUserTheme', function(event, msg) {
+            setTeamColors(msg);
+        });
+
+        function setTeamColors(constructorTeam) {
+            if (constructorTeam == "Mercedes") {
+                $scope.teamColorsForUser = 'navbar-team-mercedese';
+            } else if (constructorTeam == "Ferrari") {
+                $scope.teamColorsForUser = 'navbar-team-ferrari';
+            } else if (constructorTeam == "Red Bull") {
+                $scope.teamColorsForUser = 'navbar-team-red-bull';
+            } else if (constructorTeam == "Force India") {
+                $scope.teamColorsForUser = 'navbar-team-force-india';
+            } else if (constructorTeam == "Williams") {
+                $scope.teamColorsForUser = 'navbar-team-williams';
+            } else if (constructorTeam == "Haas F1 Team") {
+                $scope.teamColorsForUser = 'navbar-team-haas';
+            } else if (constructorTeam == "Toro Rosso") {
+                $scope.teamColorsForUser = 'navbar-team-toro-rosso';
+            } else if (constructorTeam == "McLaren") {
+                $scope.teamColorsForUser = 'navbar-team-mclaren';
+            } else if (constructorTeam == "Renault") {
+                $scope.teamColorsForUser = 'navbar-team-renault';
+            } else if (constructorTeam == "Sauber") {
+                $scope.teamColorsForUser = 'navbar-team-sauber';
+            } else if (constructorTeam == "Manor Marussia") {
+                $scope.teamColorsForUser = 'navbar-team-manor';
+            } else {
+                $scope.teamColorsForUser = 'navbar-team-ferrari';
+            }
+
+
+        }
     }
 
 })();

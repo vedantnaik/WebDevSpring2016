@@ -149,9 +149,86 @@ body {
     border-radius: 0;
     background-clip: padding-box;
     width: 100%;
-    background-color: #454545;
     font-style: oblique;
     font-size: larger;
+
+}
+.navbar-team-mercedese {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #0DC8A9
+            );
+}
+.navbar-team-ferrari {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, red
+            );
+}
+.navbar-team-red-bull {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #590EA4
+            );
+}
+.navbar-team-force-india {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #FF8000
+            );
+}
+.navbar-team-williams {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #1519E9
+            );
+}
+.navbar-team-haas {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, grey
+            );
+}
+.navbar-team-toro-rosso {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #0F1066
+            );
+}
+.navbar-team-mclaren {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, black
+            );
+}
+.navbar-team-renault {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #C1BD3A
+            );
+}
+.navbar-team-sauber {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, blue
+            );
+}
+.navbar-team-manor {
+    background-image:
+            linear-gradient(
+                    to right,
+                    black, #007AE5
+            );
 }
 .navbar.stick {
     position: fixed;
@@ -180,11 +257,12 @@ body {
     display: inline-block;
 }
 .navbar-collapse .navbar-nav > li > a:hover {
-    color: red;
+    color: ghostwhite;
+    background-color: darkslategrey;
 }
 .navbar-collapse .navbar-nav > li > a {
     padding: 20px 30px;
-    color: white;
+    color: lightgrey;
 }
 .dropdown ul.dropdown-menu {
     top: 85%;
@@ -194,10 +272,15 @@ body {
     padding: 5px 30px;
 }
 .navbar-inverse .navbar-brand {
-    color: red;
+    color: #DB1414;
     font-family: "Arial Black";
     font-size: x-large;
+
+
+    /*background: transparent;*/
+
 }
+
 /****************************************************************************************
 
 
@@ -985,15 +1068,15 @@ div.stretch-redbull-image {
 
 
 .card-container {
-    height: 200px;
+    height: 300px;
 }
 
 .card {
-    margin: 15px;
+    /*margin: 10px;*/
 }
 
 .card-block {
-    padding: 25px;
+    padding: 20px;
 }
 
 .card-tips {
@@ -1004,7 +1087,7 @@ div.stretch-redbull-image {
 .card-result {
     background-color: blueviolet;
     color: white;
-    height: 300px;
+    /*height: 300px;*/
 }
 .card-result-h4 {
     color: white;
@@ -1013,13 +1096,13 @@ div.stretch-redbull-image {
 .card-poor-result {
     background-color: indianred;
     color: white;
-    height: 300px;
+    /*height: 300px;*/
 }
 
 .card-progress {
     background-color: slategrey;
     color: white;
-    height: 300px;
+    /*height: 300px;*/
 }
 .card-progress-h4 {
     color: white;

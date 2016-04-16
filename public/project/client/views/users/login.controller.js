@@ -27,6 +27,7 @@
                     function( res ){
                         if(res.data){
                             UserService.setCurrentUser(res.data);
+                            $rootScope.$broadcast('newUserTheme', res.data.supportConstructor);
                             $location.url("/profile");
                         } else {
                             vm.errorMessage = "Unable to Login!";
