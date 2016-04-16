@@ -22,18 +22,22 @@
                         <tr>
                             <td class="col-sm-4 col-xs-4">
                                 {{question.questionContent}}
+                                <!--<p ng-if="model.submittedAnswersToServer"> {{question.answer}} </p>-->
                             </td>
                             <td ng-repeat="option in question.options"
                                 class="btn-group col-sm-2 col-xs-2"
                                 data-toggle="buttons">
 
-                                <label class="btn btn-action"
+                                <label class="btn btn-action col-sm-12 col-xs-12"
                                        ng-class="{'active':question.selectedAnswer==option}"
                                        ng-click="model.updatedSelectedAnwer($parent.$index, option)">
                                     <input type="radio"
                                            value="{{option}}"
                                            ng-model="question.selectedAnswer">
-                                    {{option}}
+                                    <p class="quiz-options-field"
+                                       ng-class="{'correct-answer-field': model.submittedAnswersToServer && option==question.answer}">
+                                        {{option}}
+                                    </p>
                                 </label>
                             </td>
                         </tr>
@@ -42,15 +46,23 @@
             </div>
 
             <div id="play-quiz-footer-div" class="row col-sm-12 col-xs-12">
-                <button class="col-sm-4 col-xs-6 btn btn-danger"
+                <button ng-if="!model.submittedAnswersToServer"
+                        class="col-sm-4 col-xs-6 btn btn-danger"
                         ng-click="model.clearAllSelections()">
                     Clear all selections
                 </button>
 
 
-                <button class="col-sm-4 col-sm-push-4 col-xs-6 btn btn-success"
+                <button ng-if="!model.submittedAnswersToServer"
+                        class="col-sm-4 col-sm-push-4 col-xs-6 btn btn-info"
                         ng-click="model.submitAnswers()">
                     Submit!
+                </button>
+
+                <button ng-if="model.submittedAnswersToServer"
+                        class="col-sm-4 col-sm-push-8 col-xs-6 btn btn-success"
+                        ng-click="model.proceedToResults()">
+                    Proceed to results
                 </button>
             </div>
 

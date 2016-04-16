@@ -18,12 +18,14 @@
         vm.clearAllSelections = clearAllSelections;
         vm.submitAnswers = submitAnswers;
 
+        vm.proceedToResults = proceedToResults;
 
         init();
 
         function init() {
 
             vm.quizToPlayId = $routeParams.quizId;
+            vm.submittedAnswersToServer = false;
 
             QuizService
                 .getQuizById(vm.quizToPlayId)
@@ -101,13 +103,20 @@
                         .then(
                             function (res) {
                                 // user status updated
-                                $location.url(locationUrlStr);
+                                //$location.url(locationUrlStr);
+
+                                vm.resultURLString = locationUrlStr;
+                                vm.submittedAnswersToServer = true;
                             },
                             function (err) {
                                 // unable to update user status
                             }
                         );
                 });
+        }
+
+        function proceedToResults() {
+            $location.url(vm.resultURLString);
         }
     }
 

@@ -1125,3 +1125,9 @@ div.stretch-redbull-image {
 .search-view-button {
     font-size: medium;
 }
+
+.quiz-options-field {
+    font-size: inherit;
+    line-height: inherit;
+    margin: inherit;
+}
