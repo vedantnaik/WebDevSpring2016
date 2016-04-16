@@ -38,6 +38,23 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Who do you want to support this season? :</label>
+                    <div class="btn-group col-sm-10">
+                        <button type="button"
+                                class="btn btn-dropdown dropdown-toggle col-sm-12"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{model.userChoosesToSupport}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="season in model.constructorOptions"
+                                class="col-sm-12 col-xs-12">
+                                <a ng-click="model.selectedConstructor(season)">{{season}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <!--<a role="button" ng-click="displayUsers()" type="submit" class="btn btn-default col-sm-12" href="profile.view.html">Register</a>-->
                         <button ng-click="model.register(model.user)" type="submit" class="btn btn-default col-sm-12">Register</button>

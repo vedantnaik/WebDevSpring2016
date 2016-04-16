@@ -120,7 +120,8 @@
                     );
 
             } else if (vm.championshipType == 'Constructors'){
-                ErgastService.getConstructorStandingForSeasonRound(vm.season, vm.round)
+                ErgastService
+                    .getConstructorStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
                             vm.standingsSearchTypeDriver = false;

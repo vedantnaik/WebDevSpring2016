@@ -8,13 +8,41 @@
         .module("F1ExplorerApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController(UserService, $scope, $rootScope, $location ) {
+    function RegisterController(UserService, ErgastService, $scope, $rootScope, $location ) {
 
         var vm = this;
 
         vm.errorMessage = null;
 
         vm.register = register;
+        vm.selectedConstructor = selectedConstructor;
+
+        function init() {
+            var currentYear = new Date().getFullYear();
+            vm.constructorOptions = [];
+
+            ErgastService
+                .getConstructorStandingForSeasonRound(currentYear, "last")
+                .then(
+                    function (latestSeasonRes) {
+                        var currentSeasonList = latestSeasonRes.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+                        vm.userChoosesToSupport = currentSeasonList[0].Constructor.name;
+                        currentSeasonList
+                            .forEach(
+                                function (constr) {
+                                    vm.constructorOptions.push(constr.Constructor.name);
+                                }
+                            );
+                    },
+                    function (err){
+                        // couldn't talk to Ergast
+                        vm.constructorOptions = ["Williams", "Haas F1 Team", "Toro Rosso", "Renault", "Mercedes", "Ferrari", "McLaren", "Force India", "Sauber", "Manor Marussia", "Red Bull"]
+                    }
+                );
+
+        }
+
+        init();
 
         function register(user) {
 
@@ -32,6 +60,8 @@
                 vm.errorMessage = "Please enter an email id to register!";
                 return;
             }
+
+            user.supportConstructor = vm.userChoosesToSupport;
 
             UserService
                 .findUserByUsername(user.username)
@@ -68,6 +98,10 @@
                     }
                 });
 
+        }
+
+        function selectedConstructor(constructor){
+            vm.userChoosesToSupport = constructor;
         }
     }
 
