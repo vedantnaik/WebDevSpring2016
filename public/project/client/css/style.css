@@ -495,7 +495,7 @@ img {
 .btn-action {
     font-weight: bold;
     background: transparent!important;
-    border: 1px solid #333;
+    border: 2px solid #333;
     text-shadow: none;
 }
 .btn-action:hover,
@@ -506,7 +506,19 @@ img {
     border-color: #bd1550;
 }
 .btn-stored {
-    background-color: #00d4b4
+    background-color: #00d4b4;
+}
+.btn-add-new-plus {
+    background-color: rgba(71, 51, 242, 0.5);
+}
+.btn-update-existing {
+    background-color:rgba(131, 242, 46, 0.78)
+}
+.btn-select-to-edit {
+    background-color: rgba(56, 154, 242, 0.74);
+}
+.btn-delete-in-row {
+    background-color:rgba(242, 70, 56, 0.58);
 }
 
 .btn-lg {
@@ -1075,10 +1087,6 @@ div.stretch-redbull-image {
     height: 300px;
 }
 
-.card {
-    /*margin: 10px;*/
-}
-
 .card-block {
     padding: 20px;
 }
@@ -1091,7 +1099,6 @@ div.stretch-redbull-image {
 .card-result {
     background-color: blueviolet;
     color: white;
-    /*height: 300px;*/
 }
 .card-result-h4 {
     color: white;
@@ -1100,7 +1107,6 @@ div.stretch-redbull-image {
 .card-poor-result {
     background-color: indianred;
     color: white;
-    /*height: 300px;*/
 }
 
 .card-progress {
@@ -1121,19 +1127,41 @@ div.stretch-redbull-image {
     padding: 25px;
 }
 
-@media screen and (max-width: 490px) {
-
-    .dont-show-on-mobile {
-        display:none;
-    }
-}
-
 .search-view-button {
-    font-size: medium;
+    font-size: small;
 }
 
 .quiz-options-field {
     font-size: inherit;
     line-height: inherit;
     margin: inherit;
+}
+
+.alert-info {
+    color: white;
+    border-radius: 0px;
+    background-color: forestgreen;
+    border-color: green;
+}
+
+
+/*
+Making tables responsive
+*/
+
+@media screen and (max-width: 790px) {
+
+    .dont-show-on-mobile {
+        display:none;
+    }
+}
+
+.hide-btn-txt-in-mobile{
+    display: inline;
+}
+
+@media (max-width: 990px) {
+    .hide-btn-txt-in-mobile {
+        visibility: collapse;
+    }
 }

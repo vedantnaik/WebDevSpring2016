@@ -4,62 +4,67 @@
 
         <div class="main">
 
-            <h1 class="page-header">Quizzes</h1>
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="page-header">Quiz Builder</h1>
+                    <p> Build and publish your own quiz! <br>
+                        Use your stored facts to make quizzes for everyone to play. </p>
+                </div>
 
-            <div ng-show="model.message" class="alert alert-info" role="alert">
-                {{model.message}}
+                <div class="col-sm-6 col-xs-12 alert alert-info"
+                     ng-show="model.message" role="alert">
+                    {{model.message}}
+                </div>
             </div>
 
-            <div class="tab-content">
-                <div class="container">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th> Quiz Title </th>
-                                    <th> Action </th>
-                                </tr>
-                            </thead>
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Quiz Title </th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
 
-                            <tbody>
-                                <tr>    <!-- Table top row for interactions -->
-                                    <td>
-                                        <input ng-model="model.selectedQuiz.title"
-                                               class="form-control"
-                                               type="text" placeholder="Quiz Title"/>
-                                    </td>
-                                    <td>
-                                        <button ng-click="model.addQuiz(model.selectedQuiz)"
-                                                class="btn btn-toolbar col-sm-6 col-xs-6">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </button>
-                                        <button ng-click="model.updateQuiz(model.selectedQuiz)"
-                                                class="btn btn-toolbar col-sm-6 col-xs-6">
-                                            <span class="glyphicon glyphicon-ok"></span>
-                                        </button>
-                                    </td>
-                                </tr>
+                        <tbody>
+                            <tr>    <!-- Table top row for interactions -->
+                                <td>
+                                    <input ng-model="model.selectedQuiz.title"
+                                           class="form-control"
+                                           type="text" placeholder="Quiz Title"/>
+                                </td>
+                                <td>
+                                    <button ng-click="model.addQuiz(model.selectedQuiz)"
+                                            class="btn btn-add-new-plus col-sm-6 col-xs-6">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button ng-click="model.updateQuiz(model.selectedQuiz)"
+                                            class="btn btn-update-existing col-sm-6 col-xs-6">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </button>
+                                </td>
+                            </tr>
 
-                                <tr ng-repeat="quiz in model.quizzesForCurrentUser">
-                                    <td>
-                                        <button ng-click="model.goToEditQuiz(quiz._id)"
-                                                class="btn btn-action col-sm-12 col-xs-12">{{quiz.title}}</button>
-                                    </td>
-                                    <td>
-                                        <button ng-click="model.deleteQuiz($index)"
-                                                class="btn btn-toolbar col-sm-6 col-xs-6">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>
-                                        <button ng-click="model.selectQuiz($index)"
-                                                class="btn btn-toolbar col-sm-6 col-xs-6">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tr ng-repeat="quiz in model.quizzesForCurrentUser">
+                                <td>
+                                    <button ng-click="model.goToEditQuiz(quiz._id)"
+                                            class="btn btn-action col-sm-12 col-xs-12">{{quiz.title}}</button>
+                                </td>
+                                <td>
+                                    <button ng-click="model.deleteQuiz($index)"
+                                            class="btn btn-delete-in-row col-sm-6 col-xs-6">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                    <button ng-click="model.selectQuiz($index)"
+                                            class="btn btn-select-to-edit col-sm-6 col-xs-6">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </td>
+                            </tr>
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

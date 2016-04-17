@@ -3,10 +3,18 @@
 
         <div class="main">
 
-            <h1 class="page-header">Select a quiz to play!</h1>
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="page-header">Quizzes</h1>
+                    <p> Test your F1 knowledge! <br>
+                        Select a quiz to play </p>
+                </div>
 
-            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
-
+                <div class="col-sm-6 col-xs-12 alert alert-info"
+                     ng-show="model.message" role="alert">
+                    {{model.message}}
+                </div>
+            </div>
 
             <div class="container">
                 <div class="table-responsive">

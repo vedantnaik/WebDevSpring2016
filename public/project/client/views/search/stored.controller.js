@@ -13,14 +13,14 @@
 
         var vm = this;
 
-        vm.setStandingsType = setStandingsType;
+        vm.toggleStandingsType = toggleStandingsType;
         vm.displayResults = displayResults;
         vm.makeQuestion = makeQuestion;
         vm.deleteStoredFact = deleteStoredFact;
 
         vm.message = null;
 
-        vm.championshipType = 'Drivers Championship';
+        vm.championshipType = 'Drivers';
         vm.standingsSearchTypeDriver = true;
 
 
@@ -30,14 +30,16 @@
 
         init();
 
-        function setStandingsType(typ){
-            vm.message = null;
-            console.log("changed to " + typ);
-            vm.championshipType = typ;
+        function toggleStandingsType(){
+            if (vm.championshipType == 'Drivers') {
+                vm.championshipType = 'Constructors';
+            } else {
+                vm.championshipType = 'Drivers';
+            }
+            displayResults();
         }
 
         function displayResults(){
-            vm.message = null;
 
             UserService
                 .getCurrentUser()
@@ -55,7 +57,7 @@
                                     var constructorStoredResult = storedData
                                         .filter(function (rec) {return rec.factType === 'CRR';});
 
-                                    if(vm.championshipType === 'Drivers Championship') {
+                                    if(vm.championshipType === 'Drivers') {
                                         vm.standingsSearchTypeDriver = true;
                                         vm.displayStoredResults = null;
                                         vm.displayStoredResults = driverStoredResult;

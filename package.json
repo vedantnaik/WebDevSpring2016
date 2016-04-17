@@ -35,7 +35,8 @@
     "express-session": "~1.13.0",
     "session": "~0.1.0",
     "passport": "~0.3.2",
-    "request": "~2.71.0"
+    "request": "~2.71.0",
+    "ng-if-bootstrap-grid": "~0.1.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
