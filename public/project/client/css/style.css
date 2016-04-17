@@ -80,7 +80,8 @@ body {
  */
 
 .main {
-    padding: 20px;
+    padding: 2px;
+    padding-top: 100px;
 }
 @media (min-width: 990px) {
     .main {
@@ -1061,7 +1062,9 @@ div.stretch-redbull-image {
 }
 
 .index-background {
-    background-color: #ececec;
+    background-image: url('../images/drivers_header_bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 

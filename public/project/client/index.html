@@ -66,12 +66,14 @@
         <![endif]-->
     </head>
 
-    <body ng-controller="MainController" class="index-background">
-        <div ng-include="'views/header/header.view.html'"></div>
-        <div class="container-fluid">
-            <div class="row">
-                <div ng-view></div>
+    <div class="container-fluid index-background">
+        <body ng-controller="MainController" style="background-color: transparent">
+            <div ng-include="'views/header/header.view.html'"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div ng-view></div>
+                </div>
             </div>
-        </div>
-    </body>
+        </body>
+    </div>
 </html>
