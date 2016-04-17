@@ -1182,3 +1182,14 @@ Making tables responsive
         visibility: collapse;
     }
 }
+
+#quiz-question {
+    color: white;
+    padding: 20px;
+    padding-left: 50px;
+}
+
+.quiz-players-options {
+    font-size: medium;
+    padding: 10px;
+}

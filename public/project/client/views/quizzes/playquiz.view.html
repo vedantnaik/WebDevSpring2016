@@ -3,70 +3,70 @@
 
         <div class="main">
 
-            <h1 class="page-header">You're playing: {{model.quizToPlay.title}}!</h1>
-
-            <div ng-show="model.message" class="alert alert-info" role="alert">{{model.message}}</div>
-
-            <div class="table-responsive">
-                <table class="table table-striped">
-
-                    <thead>
-                        <tr>
-                            <th class="col-sm-2"> Question </th>
-                            <th ng-repeat="option in ['A','B','C','D']">
-                                {{option}}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="question in model.questionsInThisQuiz">
-                        <tr>
-                            <td class="col-sm-4 col-xs-4">
-                                {{question.questionContent}}
-                                <!--<p ng-if="model.submittedAnswersToServer"> {{question.answer}} </p>-->
-                            </td>
-                            <td ng-repeat="option in question.options"
-                                class="btn-group col-sm-2 col-xs-2"
-                                data-toggle="buttons">
-
-                                <label class="btn btn-action col-sm-12 col-xs-12"
-                                       ng-class="{'active':question.selectedAnswer==option}"
-                                       ng-click="model.updatedSelectedAnwer($parent.$index, option)">
-                                    <input type="radio"
-                                           value="{{option}}"
-                                           ng-model="question.selectedAnswer">
-                                    <p class="quiz-options-field"
-                                       ng-class="{'correct-answer-field': model.submittedAnswersToServer && option==question.answer}">
-                                        {{option}}
-                                    </p>
-                                </label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <h3>You're playing:</h3>
+                    <h1 class="page-header">{{model.quizToPlay.title}}!</h1>
+                </div>
             </div>
 
-            <div id="play-quiz-footer-div" class="row col-sm-12 col-xs-12">
-                <button ng-if="!model.submittedAnswersToServer"
-                        class="col-sm-4 col-xs-6 btn btn-danger"
-                        ng-click="model.clearAllSelections()">
-                    Clear all selections
-                </button>
+            <div class="container">
+                <div class="table-responsive">
+                    <div class="table">
+
+                        <div ng-repeat="question in model.questionsInThisQuiz">
+                            <div class="row">
+                                <div id="quiz-question"
+                                     ng-class="teamColorsForUser"
+                                     class="col-sm-12 col-xs-12 margin-vertical-pad h4">
+                                    {{$index + 1}}. {{question.questionContent}}
+                                </div>
+
+                                <div ng-repeat="option in question.options"
+                                    class="btn-group col-sm-6 col-xs-12"
+                                    data-toggle="buttons">
+
+                                    <label class="btn btn-action col-sm-12 col-xs-12 quiz-players-options"
+                                           ng-class="{'active':question.selectedAnswer==option}"
+                                           ng-click="model.updatedSelectedAnwer($parent.$index, option)">
+                                        <input type="radio"
+                                               value="{{option}}"
+                                               ng-model="question.selectedAnswer">
+                                        <p class="quiz-options-field"
+                                           ng-class="{'correct-answer-field': model.submittedAnswersToServer && option==question.answer}">
+                                            {{option}}
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="play-quiz-footer-div" class="container-fluid">
+                    <div class="align-to-center">
+                        <button ng-if="!model.submittedAnswersToServer"
+                                class="col-sm-6 col-xs-12 btn btn-danger quiz-players-options"
+                                ng-click="model.clearAllSelections()">
+                            Clear all selections
+                        </button>
 
 
-                <button ng-if="!model.submittedAnswersToServer"
-                        class="col-sm-4 col-sm-push-4 col-xs-6 btn btn-info"
-                        ng-click="model.submitAnswers()">
-                    Submit!
-                </button>
+                        <button ng-if="!model.submittedAnswersToServer"
+                                class="col-sm-6 col-xs-12 btn btn-info quiz-players-options"
+                                ng-click="model.submitAnswers()">
+                            Submit!
+                        </button>
 
-                <button ng-if="model.submittedAnswersToServer"
-                        class="col-sm-4 col-sm-push-8 col-xs-6 btn btn-success"
-                        ng-click="model.proceedToResults()">
-                    Proceed to results
-                </button>
+                        <button ng-if="model.submittedAnswersToServer"
+                                class="col-sm-12 col-xs-12 btn btn-success"
+                                ng-click="model.proceedToResults()">
+                            Proceed to results
+                        </button>
+                    </div>
+                </div>
+
             </div>
-
-
         </div>
     </div>
 </div>
