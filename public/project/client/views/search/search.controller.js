@@ -29,12 +29,22 @@
 
         vm.deleteFact = deleteFact;
 
+        vm.userSearching = null;
+
         vm.processing = null;
 
         // Set data values
         init();
 
         function init(){
+            UserService
+                .getCurrentUser()
+                .then(
+                    function(userRes){
+                        if(userRes.data){
+                            vm.userSearching = userRes.data;
+                        }});
+
             vm.queryOn = { season:  $routeParams.season,
                            round:   $routeParams.round };
 

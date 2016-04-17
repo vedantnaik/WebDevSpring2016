@@ -6,22 +6,27 @@
             <div class="container">
                 <div class="col-sm-6 col-xs-12">
                     <h1 class="page-header">Your stored facts</h1>
-                    <p> Use these facts to build your own quiz! </p>
+                    <p> Use these facts to build your own quiz! <br>
+                        Toggle between "Driver" and "Constructor" facts</p>
                 </div>
 
                 <div class="col-sm-6 col-xs-12 alert alert-info"
                      ng-show="model.message" role="alert">
                     {{model.message}}
                 </div>
+
+                <a href="javascript:history.back()">
+                    <button class="col-sm-12 col-xs-12 btn btn-action search-view-button"
+                            type="button">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Go back to Search
+                    </button>
+                </a>
             </div>
 
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-xs-12 margin-vertical-pad">
-                        <h5>
-                            Toggle Championship type
-                        </h5>
-
                         <button class="btn btn-default col-sm-12 col-xs-12" type="button"
                                 ng-click="model.toggleStandingsType()">
                             {{model.championshipType}}

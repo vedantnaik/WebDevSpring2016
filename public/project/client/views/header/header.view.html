@@ -28,11 +28,6 @@
                     <a href="">Search</a>
                 </li>
 
-                <li ng-if="currentUser"
-                    ng-class="{'active': $location.url() == '/stored'}">
-                    <a href="#/stored">Stored</a>
-                </li>
-
                 <li ng-if="!currentUser"
                     ng-class="{'active': $location.url() == '/register'}">
                     <a href="#/register">Register</a>

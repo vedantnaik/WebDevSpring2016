@@ -13,6 +13,14 @@
                      ng-show="model.message" role="alert">
                     {{model.message}}
                 </div>
+
+                <a href="#/stored">
+                    <button class="col-sm-12 col-xs-12 btn btn-action search-view-button"
+                            type="button" ng-if="model.userSearching">
+                        Go to my Stored Facts
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </a>
             </div>
 
             <div class="container">
