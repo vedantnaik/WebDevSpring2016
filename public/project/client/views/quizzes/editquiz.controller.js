@@ -13,9 +13,10 @@
 
         var vm = this;
 
-        vm.setStandingsType = setStandingsType;
+        vm.toggleStandingsType = toggleStandingsType;
         vm.displayResults = displayResults;
         vm.deleteStoredFact = deleteStoredFact;
+        vm.hideResult = hideResult;
 
         vm.convertDRRFactToQuestion = convertDRRFactToQuestion;
         vm.convertCRRFactToQuestion = convertCRRFactToQuestion;
@@ -26,7 +27,7 @@
 
         vm.message = null;
 
-        vm.championshipType = 'Drivers Championship';
+        vm.championshipType = 'Drivers';
         vm.standingsSearchTypeDriver = true;
 
 
@@ -66,7 +67,7 @@
                                                             var constructorStoredResult = storedData
                                                                 .filter(function (rec) {return rec.factType === 'CRR';});
 
-                                                            if(vm.championshipType === 'Drivers Championship') {
+                                                            if(vm.championshipType === 'Drivers') {
                                                                 vm.standingsSearchTypeDriver = true;
                                                                 vm.displayStoredResults = null;
                                                                 vm.displayStoredResults = driverStoredResult;
@@ -98,15 +99,16 @@
         }
 
 
-        function setStandingsType(typ){
-            vm.message = null;
-            console.log("changed to " + typ);
-            vm.championshipType = typ;
+        function toggleStandingsType(){
+            if (vm.championshipType == 'Drivers') {
+                vm.championshipType = 'Constructors';
+            } else {
+                vm.championshipType = 'Drivers';
+            }
             displayResults();
         }
 
         function displayResults(){
-            vm.message = null;
 
             FactService.findAllFactsForUser(vm.userEditingTheQuiz._id)
                 .then(
@@ -118,13 +120,33 @@
                         var constructorStoredResult = storedData
                             .filter(function (rec) {return rec.factType === 'CRR';});
 
-                        if(vm.championshipType === 'Drivers Championship') {
+                        if(vm.championshipType === 'Drivers') {
                             vm.standingsSearchTypeDriver = true;
                             vm.displayStoredResults = null;
+
+                            driverStoredResult
+                                .forEach(
+                                    function (eachFact) {
+                                        eachFact.readableFact = eachFact.season + " " +
+                                            eachFact.raceName + " " + eachFact.driverName +
+                                            " finished at " + eachFact.finishingPosition;
+                                    }
+                                );
+
                             vm.displayStoredResults = driverStoredResult;
                         } else {
                             vm.standingsSearchTypeDriver = false;
                             vm.displayStoredResults = null;
+
+                            constructorStoredResult
+                                .forEach(
+                                    function (eachFact) {
+                                        eachFact.readableFact = eachFact.season + " " +
+                                            eachFact.raceName + " " + eachFact.constructorName +
+                                            " finished at " + eachFact.bestFinishingPosition;
+                                    }
+                                );
+
                             vm.displayStoredResults = constructorStoredResult;
                         }
                     },
@@ -150,6 +172,18 @@
                 );
         }
 
+        function hideResult(index){
+            vm.displayStoredResults.splice(index, 1);
+        }
+
+        function updateQuizTable(){
+            QuestionService
+                .findQuestionsInQuizById(vm.quizToEditId)
+                .then(
+                    function(res) {
+                        vm.questionsInThisQuiz = res.data;
+                    });
+        }
 
         // making questions
 
@@ -158,7 +192,7 @@
                 .makeDRRFactQuestion(factId, vm.quizToEditId)
                 .then(
                     function(res){
-                        init();
+                        updateQuizTable();
                         vm.message = "We have converted this fact into a question for youe quiz!";
                     },
                     function(err){
@@ -172,7 +206,7 @@
                 .makeCRRFactQuestion(factId, vm.quizToEditId)
                 .then(
                     function(res){
-                        init();
+                        updateQuizTable();
                         vm.message = "We have converted this fact into a question for youe quiz!";
                     },
                     function(err){
@@ -217,7 +251,7 @@
                     .deleteQuestionById(listOfQuestions[questionIndex]._id)
                     .then(
                         function(res){
-                            init();
+                            updateQuizTable();
                         },function(err){
                             vm.message = "There was some error deleting questions from this quiz.";
                         }

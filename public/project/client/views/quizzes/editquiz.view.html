@@ -3,12 +3,15 @@
 
         <div class="main">
 
-            <div class="header row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="page-header"> {{model.quizToEdit.title}} </h1>
-                    <h3>Quiz Editor</h3>
 
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="page-header">{{model.quizToEdit.title}}</h1>
+                    <h3>Quiz Editor</h3>
                     <h4> Current status of the quiz : {{model.quizToEdit.publishedStatus}} </h4>
+                    <p> Building your quiz is so simple! <br>
+                        Just hit the arrow next to a fact to generate a question.<br>
+                        When you are done, review the questions and publish your quiz! </p>
                 </div>
 
                 <div class="col-sm-6 col-xs-12 alert alert-info"
@@ -17,73 +20,74 @@
                 </div>
             </div>
 
-            <div class="tab-content">
-                <div id="editQuizTab" class="tab-pane active">
 
-                    <div class="row col-sm-6 col-xs-12">
+            <div class="container">
+
+                <div class="container-fluid">
+                    <div class="row">
                         <div id="quizEditorStoredPanel">
 
                             <div class="row">
                                 <div class="col-sm-12 col-xs-12">
-                                    <button class="dropdown-toggle btn btn-default col-sm-12 col-xs-12 search-view-button" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        {{model.championshipType}}<span class="caret margin-horizontal-pad"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a ng-click="model.setStandingsType('Drivers Championship')">Drivers Championship</a></li>
-                                        <li><a ng-click="model.setStandingsType('Constructors Championship')">Constructors Championship</a></li>
-                                    </ul>
+                                    <h5 align="center">
+                                        Fact to Question generator
+                                    </h5>
                                 </div>
-                                <!--<div class="col-sm-6 col-xs-12">-->
-                                    <!--<button ng-click="model.displayResults()" class="btn btn-info search-view-button col-xs-12 col-sm-12">-->
-                                        <!--<span class="glyphicon glyphicon-search"> </span> Display Stored-->
-                                    <!--</button>-->
-                                <!--</div>-->
+
+                                <div class="col-sm-12 col-xs-12 margin-vertical-pad">
+                                    <button class="col-sm-12 col-xs-12 btn btn-default search-view-button"
+                                            type="button"
+                                            ng-click="model.toggleStandingsType()">
+                                        {{model.championshipType}}
+                                    </button>
+                                </div>
                             </div>
                             <div ng-if="model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
-                                <table class="table table-striped">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th> Season </th>
-                                            <th> Race Name </th>
+                                            <th class="show-only-on-mobile"> Fact </th>
 
-                                            <th> Driver </th>
-
-                                            <th> Constructor </th>
-
-                                            <th> Final Position </th>
+                                            <th class="dont-show-on-mobile"> Season </th>
+                                            <th class="dont-show-on-mobile"> Race Name </th>
+                                            <th class="dont-show-on-mobile"> Driver </th>
+                                            <th class="dont-show-on-mobile"> Constructor </th>
+                                            <th class="dont-show-on-mobile"> Final Position </th>
 
                                             <th> Actions </th>
                                         </tr>
                                     </thead>
                                     <tbody ng-repeat="result in model.displayStoredResults">
                                         <tr>
-                                            <td>
+                                            <td class="show-only-on-mobile">
+                                                {{result.readableFact}}
+                                            </td>
+
+                                            <td class="dont-show-on-mobile">
                                                 {{result.season}}
                                             </td>
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.raceName}}
                                             </td>
-
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.driverName}}
                                             </td>
-
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.constructorName}}
                                             </td>
-
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.finishingPosition}}
                                             </td>
 
                                             <td>
                                                 <div class="row">
-                                                    <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
-                                                            class="btn btn-danger margin-horizontal-pad">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <!--<button ng-click="model.deleteStoredFact(result._id, result.driverName)"-->
+                                                    <button ng-click="model.hideResult($index)"
+                                                            class="btn btn-delete-in-row">
+                                                        <span class="glyphicon glyphicon-filter"></span>
                                                     </button>
                                                     <button ng-click="model.convertDRRFactToQuestion(result._id)"
-                                                            class="btn btn-action margin-horizontal-pad">
+                                                            class="btn btn-add-new-plus">
                                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                                     </button>
                                                 </div>
@@ -93,48 +97,51 @@
                                 </table>
                             </div>
                             <div ng-if="!model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
-                                <table class="table table-striped">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th> Season </th>
-                                            <th> Race Name </th>
+                                            <th class="show-only-on-mobile"> Fact </th>
 
-                                            <th> Constructor </th>
-                                            <th> Nationality </th>
-
-                                            <th> Best Position </th>
+                                            <th class="dont-show-on-mobile"> Season </th>
+                                            <th class="dont-show-on-mobile"> Race Name </th>
+                                            <th class="dont-show-on-mobile"> Constructor </th>
+                                            <th class="dont-show-on-mobile"> Nationality </th>
+                                            <th class="dont-show-on-mobile"> Best Position </th>
 
                                             <th> Actions </th>
                                         </tr>
                                     </thead>
                                     <tbody ng-repeat="result in model.displayStoredResults">
                                         <tr>
-                                            <td>
+                                            <td class="show-only-on-mobile">
+                                                {{result.readableFact}}
+                                            </td>
+
+                                            <td class="dont-show-on-mobile">
                                                 {{result.season}}
                                             </td>
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.raceName}}
                                             </td>
-
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.constructorName}}
                                             </td>
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.constructorNationality}}
                                             </td>
-
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{result.bestFinishingPosition}}
                                             </td>
 
                                             <td>
                                                 <div class="row">
-                                                    <button ng-click="model.deleteStoredFact(result._id, result.driverName)"
-                                                            class="btn btn-danger margin-horizontal-pad">
-                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    <!--<button ng-click="model.deleteStoredFact(result._id, result.driverName)"-->
+                                                    <button ng-click="model.hideResult($index)"
+                                                            class="btn btn-delete-in-row">
+                                                        <span class="glyphicon glyphicon-filter"></span>
                                                     </button>
                                                     <button ng-click="model.convertCRRFactToQuestion(result._id)"
-                                                            class="btn btn-action margin-horizontal-pad">
+                                                            class="btn btn-add-new-plus">
                                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                                     </button>
                                                 </div>
@@ -146,45 +153,49 @@
                         </div>
                     </div>
 
-                    <div class="row col-sm-6 col-xs-12">
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
                         <div  id="quizEditorQuestionsPanel" class="row">
                             <div class="container-fluid">
                                 <div class="table-responsive margin-vertical-pad">
-                                    <table class="table table-striped">
+                                    <table class="table">
                                         <thead>
                                         <tr>
                                             <th class="col-sm-2"> Question </th>
 
-                                            <th> Option A </th>
-                                            <th> Option B </th>
-                                            <th> Option C </th>
-                                            <th> Option D </th>
+                                            <th class="dont-show-on-mobile"> Option A </th>
+                                            <th class="dont-show-on-mobile"> Option B </th>
+                                            <th class="dont-show-on-mobile"> Option C </th>
+                                            <th class="dont-show-on-mobile"> Option D </th>
 
-                                            <th> Answer </th>
+                                            <th class="dont-show-on-mobile"> Answer </th>
                                         </tr>
                                         </thead>
                                         <tbody ng-repeat="question in model.questionsInThisQuiz">
                                         <tr>
                                             <td class="col-sm-12 col-xs-12">
                                                 {{question.questionContent}}
+                                                <div class="show-ans-txt-in-mobile"> <br>{{question.answer}} </div>
                                             </td>
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{question.option_A}}
                                             </td>
 
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{question.option_B}}
                                             </td>
 
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{question.option_C}}
                                             </td>
 
-                                            <td>
+                                            <td class="dont-show-on-mobile">
                                                 {{question.option_D}}
                                             </td>
 
-                                            <td class="correct-answer-field">
+                                            <td class="correct-answer-field dont-show-on-mobile">
                                                 {{question.answer}}
                                             </td>
                                         </tr>
@@ -192,20 +203,23 @@
                                     </table>
                                 </div>
 
-                                <div id="quiz-staging-div" class="row col-sm-12 col-xs-12">
-                                    <button class="col-sm-4 col-xs-4 btn btn-danger"
+                                <div id="quiz-staging-div" class="row">
+                                    <button class="col-sm-4 col-xs-4 btn btn-danger search-view-button"
                                             ng-click="model.deleteAllQuestions(model.questionsInThisQuiz)">
-                                        Clear all questions
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                        <div class="hide-btn-txt-in-mobile"> Clear all questions</div>
                                     </button>
 
-                                    <button class="col-sm-4 col-xs-4 btn btn-toolbar"
+                                    <button class="col-sm-4 col-xs-4 btn btn-warning search-view-button"
                                             ng-click="model.unpublishQuiz()">
-                                        Unpublish quiz
+                                        <span class="glyphicon glyphicon-tent"></span>
+                                        <div class="hide-btn-txt-in-mobile"> Unpublish quiz</div>
                                     </button>
 
-                                    <button class="col-sm-4 col-xs-4 btn btn-success"
+                                    <button class="col-sm-4 col-xs-4 btn btn-success search-view-button"
                                             ng-click="model.publishQuiz()">
-                                        Publish quiz
+                                        <span class="glyphicon glyphicon-send"></span>
+                                        <div class="hide-btn-txt-in-mobile"> Publish quiz</div>
                                     </button>
                                 </div>
                             </div>
@@ -213,9 +227,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-
+            </div> <!-- both containers inside this -->
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
         .module("F1ExplorerApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController(UserService, ErgastService, $rootScope, $scope) {
+    function ProfileController(UserService, ErgastService, $rootScope, $location) {
 
         var vm  = this;
 

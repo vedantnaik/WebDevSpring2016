@@ -49,12 +49,14 @@
                             <tr ng-repeat="quiz in model.quizzesForCurrentUser">
                                 <td>
                                     <button ng-click="model.goToEditQuiz(quiz._id)"
-                                            class="btn btn-action col-sm-12 col-xs-12">{{quiz.title}}</button>
+                                            class="btn btn-action col-sm-12 col-xs-12 search-view-button">
+                                        <span class="glyphicon glyphicon-cog"></span> {{quiz.title}}
+                                    </button>
                                 </td>
                                 <td>
                                     <button ng-click="model.deleteQuiz($index)"
                                             class="btn btn-delete-in-row col-sm-6 col-xs-6">
-                                        <span class="glyphicon glyphicon-remove"></span>
+                                        <span class="glyphicon glyphicon-trash"></span>
                                     </button>
                                     <button ng-click="model.selectQuiz($index)"
                                             class="btn btn-select-to-edit col-sm-6 col-xs-6">

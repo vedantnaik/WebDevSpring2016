@@ -1142,6 +1142,7 @@ div.stretch-redbull-image {
     border-radius: 0px;
     background-color: forestgreen;
     border-color: green;
+    /*position: fixed;*/
 }
 
 
@@ -1149,9 +1150,14 @@ div.stretch-redbull-image {
 Making tables responsive
 */
 
-@media screen and (max-width: 790px) {
-
+@media screen and (max-width: 990px) {
     .dont-show-on-mobile {
+        display:none;
+    }
+}
+
+@media screen and (min-width: 990px) {
+    .show-only-on-mobile {
         display:none;
     }
 }
@@ -1162,6 +1168,17 @@ Making tables responsive
 
 @media (max-width: 990px) {
     .hide-btn-txt-in-mobile {
+        visibility: collapse;
+    }
+}
+
+.show-ans-txt-in-mobile{
+    display: inline;
+    color: green;
+}
+
+@media (min-width: 990px) {
+    .show-ans-txt-in-mobile {
         visibility: collapse;
     }
 }
