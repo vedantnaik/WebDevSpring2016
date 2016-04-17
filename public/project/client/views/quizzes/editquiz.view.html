@@ -90,7 +90,7 @@
                                                             class="btn btn-delete-in-row">
                                                         <span class="glyphicon glyphicon-filter"></span>
                                                     </button>
-                                                    <button ng-click="model.convertDRRFactToQuestion(result._id)"
+                                                    <button ng-click="model.convertDRRFactToQuestion(result._id, $index)"
                                                             class="btn btn-add-new-plus">
                                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                                     </button>
@@ -144,7 +144,7 @@
                                                             class="btn btn-delete-in-row">
                                                         <span class="glyphicon glyphicon-filter"></span>
                                                     </button>
-                                                    <button ng-click="model.convertCRRFactToQuestion(result._id)"
+                                                    <button ng-click="model.convertCRRFactToQuestion(result._id, $index)"
                                                             class="btn btn-add-new-plus">
                                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                                     </button>

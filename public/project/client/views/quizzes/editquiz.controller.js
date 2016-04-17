@@ -187,12 +187,13 @@
 
         // making questions
 
-        function convertDRRFactToQuestion(factId){
+        function convertDRRFactToQuestion(factId, index){
             QuestionService
                 .makeDRRFactQuestion(factId, vm.quizToEditId)
                 .then(
                     function(res){
                         updateQuizTable();
+                        vm.displayStoredResults.splice(index, 1);
                         vm.message = "We have converted this fact into a question for your quiz!";
                     },
                     function(err){
@@ -201,12 +202,13 @@
                 );
         }
 
-        function convertCRRFactToQuestion(factId){
+        function convertCRRFactToQuestion(factId, index){
             QuestionService
                 .makeCRRFactQuestion(factId, vm.quizToEditId)
                 .then(
                     function(res){
                         updateQuizTable();
+                        vm.displayStoredResults.splice(index, 1);
                         vm.message = "We have converted this fact into a question for your quiz!";
                     },
                     function(err){
