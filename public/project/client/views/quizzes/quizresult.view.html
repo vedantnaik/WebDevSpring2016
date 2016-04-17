@@ -3,12 +3,19 @@
 
         <div class="main">
 
-            <h1 class="page-header">You just played: {{model.quizJustPlayed.title}}!</h1>
+            <div class="container">
+                <div class="col-sm-6 col-xs-12">
+                    <h3>You just played:</h3>
+                    <h1 class="page-header">{{model.quizJustPlayed.title}}!</h1>
+                </div>
+            </div>
 
-            <div ng-if="model.positiveScore" class="jumbotron">
+            <div class="container">
 
+                <br>
+                <br>
                 <div class="card-container">
-                    <div class=" col-sm-4 col-xs-12">
+                    <div ng-if="model.positiveScore" class="col-sm-4 col-xs-12">
                         <div class="card card-result">
                             <div class="card-block">
                                 <h4 class="card-title card-result-h4">Quiz Result</h4>
@@ -19,52 +26,17 @@
                                     <small class="text-muted">Great Job!</small>
                                 </p>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class=" col-sm-4 col-xs-12">
-                        <div class="card card-tips">
-                            <div class="card-block">
-                                <h4 class="card-title">Tips:</h4>
-                                <p class="card-text">
-                                    {{model.nextLevelMessage}}
-                                </p>
-                                <p class="card-text">
-                                    <small class="text-muted">Beyond level 2, you get to be a Quiz Master!
-                                        Make your own quizzes using the "Quiz Builder!"</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" col-sm-4 col-xs-12">
-                        <div class="card card-progress">
-                            <div class="card-block">
-                                <h4 class="card-title card-progress-h4">Your progress so far</h4>
-                                <p class="card-text">
-                                    {{model.totalScoreMessage}}
-                                </p>
-                                <p class="card-text">
-                                    <small class="text-muted">Keep playing more quizzes to improve your score!</small>
-                                </p>
-                            </div>
-
-                            <a href="#/home">
-                                <button class="col-sm-12 col-xs-12 btn btn-success">
-                                    Proceed to home
+                            <a href="#/quizzes/quizSelect/">
+                                <button class="col-sm-12 col-xs-12 btn btn-info search-view-button">
+                                    Try another quiz
                                 </button>
                             </a>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
-            <div ng-if="!model.positiveScore" class="jumbotron">
-
-                <div class="card-container">
-
-                    <div class="col-sm-4 col-xs-12">
+                    <div ng-if="!model.positiveScore" class="col-sm-4 col-xs-12">
                         <div class="card card-poor-result">
                             <div class="card-block">
                                 <h4 class="card-title card-result-h4">Quiz Result</h4>
@@ -75,10 +47,17 @@
                                     <small class="text-muted">Better luck next time</small>
                                 </p>
                             </div>
+
+                            <a href="#/quizzes/quizSelect/">
+                                <button class="col-sm-12 col-xs-12 btn btn-info search-view-button">
+                                    Try another quiz
+                                </button>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="col-sm-4 col-xs-12">
+
+                    <div class=" col-sm-4 col-xs-12">
                         <div class="card card-tips">
                             <div class="card-block">
                                 <h4 class="card-title">Tips:</h4>
@@ -105,23 +84,15 @@
                                 </p>
                             </div>
 
-                            <a href="#/quizzes/quizSelect/">
-                                <button class="col-sm-6 col-xs-6 btn btn-info">
-                                    Try another quiz
-                                </button>
-                            </a>
-
                             <a href="#/home">
-                                <button class="col-sm-6 col-xs-6 btn btn-success">
+                                <button class="col-sm-12 col-xs-12 btn btn-success search-view-button">
                                     Proceed to home
                                 </button>
                             </a>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

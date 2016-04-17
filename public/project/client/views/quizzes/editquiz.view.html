@@ -32,6 +32,10 @@
                                     <h5 align="center">
                                         Fact to Question generator
                                     </h5>
+                                    <div class="col-sm-12 col-xs-12"
+                                         ng-show="model.message" role="alert">
+                                        <strong>Note:</strong> {{model.message}}
+                                    </div>
                                 </div>
 
                                 <div class="col-sm-12 col-xs-12 margin-vertical-pad">
@@ -204,22 +208,21 @@
                                 </div>
 
                                 <div id="quiz-staging-div" class="row">
-                                    <button class="col-sm-4 col-xs-4 btn btn-danger search-view-button"
+                                    <button class="col-sm-6 col-xs-12 btn btn-danger search-view-button"
                                             ng-click="model.deleteAllQuestions(model.questionsInThisQuiz)">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                        <div class="hide-btn-txt-in-mobile"> Clear all questions</div>
+                                        <span class="glyphicon glyphicon-trash"></span> Clear all questions
                                     </button>
 
-                                    <button class="col-sm-4 col-xs-4 btn btn-warning search-view-button"
+                                    <button class="col-sm-6 col-xs-12 btn btn-warning search-view-button"
+                                            ng-if="model.quizToEdit.publishedStatus=='PUBLISHED'"
                                             ng-click="model.unpublishQuiz()">
-                                        <span class="glyphicon glyphicon-tent"></span>
-                                        <div class="hide-btn-txt-in-mobile"> Unpublish quiz</div>
+                                        <span class="glyphicon glyphicon-tent"></span> Unpublish quiz
                                     </button>
 
-                                    <button class="col-sm-4 col-xs-4 btn btn-success search-view-button"
+                                    <button class="col-sm-6 col-xs-12 btn btn-success search-view-button"
+                                            ng-if="model.quizToEdit.publishedStatus=='NOT PUBLISHED'"
                                             ng-click="model.publishQuiz()">
-                                        <span class="glyphicon glyphicon-send"></span>
-                                        <div class="hide-btn-txt-in-mobile"> Publish quiz</div>
+                                        <span class="glyphicon glyphicon-send"></span> Publish quiz
                                     </button>
                                 </div>
                             </div>

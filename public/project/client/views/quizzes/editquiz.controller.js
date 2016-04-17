@@ -193,10 +193,10 @@
                 .then(
                     function(res){
                         updateQuizTable();
-                        vm.message = "We have converted this fact into a question for youe quiz!";
+                        vm.message = "We have converted this fact into a question for your quiz!";
                     },
                     function(err){
-                        vm.message = "Could not convert this fact into a question. Please try again.";
+                        vm.message = "Could not convert this fact into a question. It probably already exists in this quiz.";
                     }
                 );
         }
@@ -207,7 +207,7 @@
                 .then(
                     function(res){
                         updateQuizTable();
-                        vm.message = "We have converted this fact into a question for youe quiz!";
+                        vm.message = "We have converted this fact into a question for your quiz!";
                     },
                     function(err){
                         vm.message = "Could not convert this fact into a question. Please try again.";
