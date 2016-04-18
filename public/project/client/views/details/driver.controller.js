@@ -10,33 +10,41 @@
 
     function DriverController(ErgastService, $scope, $rootScope, $location, $routeParams, $http){
 
-        // initial setup
-        $scope.driverId = $routeParams.driverId;
+        var vm  = this;
 
-        ErgastService.getDriverInfo($scope.driverId)
+        // initial setup
+        vm.driverId = $routeParams.driverId;
+
+        ErgastService.getDriverInfo(vm.driverId)
             .then(
                 function ( res ){
-                    $scope.driverInfo = res.data.MRData.DriverTable.Drivers[0];
+                    vm.driverInfo = res.data.MRData.DriverTable.Drivers[0];
 
                 }, function( err ) {
                     console.log("UNABLE TO LOAD DRIVER INFO FROM ERGAST");
                 }
             );
 
-        $scope.activeTable = null;
+        vm.activeTable = null;
 
         // functions
-        $scope.searchCircuits = searchCircuits;
-        $scope.searchConstructors = searchConstructors;
-        $scope.searchStatus = searchStatus;
-        $scope.searchResults = searchResults;
+        vm.searchCircuits = searchCircuits;
+        vm.searchConstructors = searchConstructors;
+        vm.searchStatus = searchStatus;
+        vm.searchResults = searchResults;
+
+        function init(){
+            searchResults();
+        }
+
+        init();
 
         function searchCircuits(){
-            ErgastService.getDriverCircuits($scope.driverId)
+            ErgastService.getDriverCircuits(vm.driverId)
                 .then(
                     function( res ) {
-                        $scope.driverCircuitsData = res.data.MRData.CircuitTable.Circuits;
-                        $scope.activeTable = "circuits";
+                        vm.driverCircuitsData = res.data.MRData.CircuitTable.Circuits;
+                        vm.activeTable = "circuits";
                     },
                     function( err ){
                         console.log("UNABLE TO GET DRIVER'S CIRCUIT INFO");
@@ -46,11 +54,11 @@
 
         function searchConstructors(){
 
-            ErgastService.getDriverConstructors($scope.driverId)
+            ErgastService.getDriverConstructors(vm.driverId)
                 .then(
                     function ( res ) {
-                        $scope.driverConstructorsData = res.data.MRData.ConstructorTable.Constructors;
-                        $scope.activeTable = "constructors";
+                        vm.driverConstructorsData = res.data.MRData.ConstructorTable.Constructors;
+                        vm.activeTable = "constructors";
                     },
                     function ( err ) {
                         console.log("UNABLE TO GET DRIVER'S CONSTRUCTORS INFO");
@@ -60,11 +68,11 @@
 
         function searchStatus(){
 
-            ErgastService.getDriverStatus($scope.driverId)
+            ErgastService.getDriverStatus(vm.driverId)
                 .then(
                     function( res ){
-                        $scope.driverStatusData = res.data.MRData.StatusTable.Status;
-                        $scope.activeTable = "status";
+                        vm.driverStatusData = res.data.MRData.StatusTable.Status;
+                        vm.activeTable = "status";
                     },
                     function( err ){
                         console.log("UNABLE TO GET DRIVER'S STATUS INFO");
@@ -74,11 +82,11 @@
 
         function searchResults(){
 
-            ErgastService.getDriverResults($scope.driverId)
+            ErgastService.getDriverResults(vm.driverId)
                 .then(
                     function ( res ) {
-                        $scope.driverResultsData = res.data.MRData.RaceTable.Races;
-                        $scope.activeTable = "results";
+                        vm.driverResultsData = res.data.MRData.RaceTable.Races;
+                        vm.activeTable = "results";
                     },
                     function ( err ) {
                         console.log("UNABLE TO GET DRIVER'S RESULT INFO");

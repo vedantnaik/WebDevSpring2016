@@ -5,30 +5,82 @@
 
             <div class="container">
                 <div ng-if="model.user"
-                     class="card card-inverse pull-left col-sm-6 col-xs-12">
-                    <div id="homepage-user-card" class="card-img-overlay">
-                        <h3 class="card-title" ng-if="model.user.firstName">Hi, {{model.user.firstName}}</h3>
-                        <p class="card-text-info">
-                            Username: <strong class="pull-right">{{model.user.username}}</strong> <br>
-                            Level: <strong class="pull-right">{{model.user.level}}</strong><br>
-                            Total Points Scored: <strong class="pull-right">{{model.user.score}}</strong><br>
-                            Number of quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
-                        </p>
+                     class="card card-inverse pull-left col-sm-12 col-xs-12">
+                    <div id="homepage-user-card" class="card-img-overlay container-fluid">
+                        <div class="col-sm-6 col-xs-12">
+                            <h3 class="card-title" ng-if="model.user.firstName">Hi, {{model.user.firstName}}</h3>
+                            <p class="card-text-info">
+                                Username: <strong class="pull-right">{{model.user.username}}</strong> <br>
+                                Level: <strong class="pull-right">{{model.user.level}}</strong><br>
+                                Total Points Scored: <strong class="pull-right">{{model.user.score}}</strong><br>
+                                Number of quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Monitor your progress in the leader board</small></p>
+                        </div>
 
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <div class="user-nav-button-container col-sm-6 col-xs-12">
+                            <a href="#/search/{{model.latestRaceSeason}}/{{model.latestRaceRound}}/Drivers">
+                                <button class="col-sm-12 col-xs-12 btn btn-user-nav"
+                                        type="button">
+                                    Season Progress!
+                                </button>
+                            </a>
+
+                            <a href="#/quizzes/quizSelect">
+                                <button class="col-sm-12 col-xs-12 btn btn-user-nav"
+                                        type="button">
+                                    Play!
+                                </button>
+                            </a>
+
+                            <a href="#/quizzes">
+                                <button class="col-sm-12 col-xs-12 btn btn-user-nav"
+                                        type="button">
+                                    Quiz Builder
+                                </button>
+                            </a>
+
+                            <a href="#/profile">
+                                <button class="col-sm-12 col-xs-12 btn btn-user-nav"
+                                        type="button">
+                                    My Account
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card card-inverse pull-left col-sm-6 col-xs-12">
-                    <div ng-class="model.teamColorsCard">
-                        <img ng-src="{{model.teamImageDataSrc}}" alt="My Image" />
+
+                <div ng-if="!model.user"
+                     class="card card-inverse pull-left col-sm-12 col-xs-12">
+                    <div id="guest-user-card" class="card-img-overlay">
+                        <h3 class="card-title">Welcome to F1 Explorer</h3>
                         <p class="card-text-info">
-                            iSupport: <strong class="pull-right">{{model.userChoosesToSupport}}</strong> <br>
-                            Standing: <strong class="pull-right">{{model.myConstructorStanding}}</strong><br>
-                            Constructor points this season: <strong class="pull-right">{{model.constructorPoints}}</strong><br>
+                            Formula 1 so unbelievably technical.
+                            It is the effort of, the world's top 22 drivers working with the top 11 constructor teams,
+                            to develop the ultimate racing machines. <br>
+                            This year, these glorious cars will fight against
+                            each other around 21 state of the art race tracks around the world!
+                            <br>
+                            Follow the action on our <a href="#/search/{{model.latestRaceSeason}}/{{model.latestRaceRound}}/Drivers">Season Progress</a> tool. <br>
+                            - This tool will let you go to ANY season and ANY round and see how the drivers and constructors performed at that point in time <br>
+                            - You will also be able to view details such about any driver
+                            - Links to wiki pages of drivers, constructors and even Grand Prix locations are provided here! <br>
+                            <br>
+                            With an F1 Explorer account you can: <br>
+                            - Store facts about drivers and constructors form any race in the history of F1. <br>
+                            - Use these stored facts to build and publish your own quizzes. <br>
+                            - Play Quizzes posted by other users and climb up the leader board! <br>
+                            - Get all the information you need via 'Dashboard' (Customized for you!) <br>
+                            - Choose the team you want to support this season using iSupport from your account <br>
+                            - Your F1 Explorer experience will be heavily moulded according to the team you select! <br>
+                            <br>
+                            Go ahead, try it out! <br>
+                            <a href="#/register">Register</a> or <a href="#/login">Login</a> for more fun features!
+
                         </p>
 
-                        <p class="card-text"><small class="text-muted">Last update from Seaosn: {{model.latestRaceSeason}} Round: {{model.latestRaceRound}}</small></p>
+                        <p class="card-text"><small class="text-muted">F1 Explorer is free and always will be!</small></p>
                     </div>
                 </div>
 
@@ -39,15 +91,16 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <th> Rank </th>
-                                    <th> User </th>
-                                    <th> Level </th>
-                                    <th> Score </th>
+                                <th> Rank </th>
+                                <th> User </th>
+                                <th> Level </th>
+                                <th> Score </th>
                                 </thead>
 
                                 <tbody>
 
-                                <tr ng-repeat="user in model.leaderBoard">
+                                <tr ng-repeat="user in model.leaderBoard"
+                                    ng-class="{'info': model.user.username == user.username}">
                                     <td>
                                         {{$index + 1}}
                                     </td>
@@ -67,10 +120,21 @@
 
                         </div>
 
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
 
+                <div class="card card-inverse pull-left col-sm-6 col-xs-12">
+                    <div ng-class="model.teamColorsCard">
+                        <img ng-src="{{model.teamImageDataSrc}}" alt="My Image" />
+                        <p class="card-text-info">
+                            iSupport: <strong class="pull-right">{{model.userChoosesToSupport}}</strong> <br>
+                            Standing: <strong class="pull-right">{{model.myConstructorStanding}}</strong><br>
+                            Constructor points this season: <strong class="pull-right">{{model.constructorPoints}}</strong><br>
+                        </p>
+
+                        <p class="card-text"><small class="text-muted">Last update from Seaosn: {{model.latestRaceSeason}} Round: {{model.latestRaceRound}}</small></p>
+                    </div>
+                </div>
 
             </div>
         </div>

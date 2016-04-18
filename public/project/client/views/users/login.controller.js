@@ -11,15 +11,15 @@
 
         var vm = this;
 
-        vm.errorMessage = null;
+        vm.message = null;
         vm.login = login;
 
         function login(user){
-            vm.errorMessage = null;
+            vm.message = null;
 
-            if(!user) {vm.errorMessage = "Enter username and password!"; return;}
-            if(!user.username) {vm.errorMessage = "Enter username and password!"; return;}
-            if(!user.password) {vm.errorMessage = "Enter password!"; return;}
+            if(!user) {vm.message = "Enter username and password!"; return;}
+            if(!user.username) {vm.message = "Enter username and password!"; return;}
+            if(!user.password) {vm.message = "Enter password!"; return;}
 
             UserService
                 .findUserByCredentials(user.username, user.password)
@@ -28,13 +28,13 @@
                         if(res.data){
                             UserService.setCurrentUser(res.data);
                             $rootScope.$broadcast('newUserTheme', res.data.supportConstructor);
-                            $location.url("/profile");
+                            $location.url("/home");
                         } else {
-                            vm.errorMessage = "Unable to Login!";
+                            vm.message = "Unable to Login!";
                         }
                     },
                     function( err ){
-                        vm.errorMessage = "Unable to Login!";
+                        vm.message = "Unable to Login!";
                         console.log("Unable to login.");
                     }
                 );

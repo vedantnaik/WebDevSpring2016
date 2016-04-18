@@ -11,21 +11,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse ">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="currentUser && currentUser.roles.indexOf('admin') >= 0"
-                    ng-class="{'active': $location.url() == '/admin'}">
-                    <a href="#/admin">Admin</a>
-                </li>
+
                 <li ng-if="currentUser"
-                    ng-class="{'active': $location.url() == '/quizzes/quizSelect/'}">
-                    <a href="#/quizzes/quizSelect">Play!</a>
+                    ng-class="{'active': $location.url() == '/home'}">
+                    <a href="#/home">
+                        Dashboard
+                    </a>
                 </li>
-                <li ng-if="currentUser && currentUser.level > 0"
-                    ng-class="{'active': $location.url() == '/quizzes'}">
-                    <a href="#/quizzes">Quiz Builder</a>
-                </li>
+
                 <li ng-class="{'active': $location.url().toString().indexOf('/search') > -1}"
                     ng-click="goToSearchPage()">
-                    <a href="">Search</a>
+                    <a href="">Season Progress</a>
                 </li>
 
                 <li ng-if="!currentUser"
@@ -36,12 +32,7 @@
                     ng-class="{'active': $location.url() == '/login'}">
                     <a href="#/login">Login</a>
                 </li>
-                <li ng-if="currentUser"
-                    ng-class="{'active': $location.url() == '/profile'}">
-                    <a href="#/profile">
-                        Hi, {{currentUser.username}} [Lvl: {{currentUser.level}}]
-                    </a>
-                </li>
+
                 <li ng-if="currentUser && currentUser.roles.indexOf('admin') >= 0"
                     ng-class="{'active': $location.url() == '/admin'}">
                     <a href="#/admin">Admin</a>

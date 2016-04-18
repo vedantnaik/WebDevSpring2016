@@ -65,7 +65,8 @@
             })
             .when('/driver/:driverId', {
                 templateUrl: "views/details/driver.view.html",
-                controller: "DriverController"
+                controller: "DriverController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

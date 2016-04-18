@@ -13,6 +13,7 @@
 
         var vm  = this;
 
+        vm.goToSearchPage = goToSearchPage;
 
         function init() {
 
@@ -21,10 +22,14 @@
                 .then(function (res) {
                     var userFromServer = res.data;
 
-                    $rootScope.currentUser = userFromServer;
 
-                    vm.user = userFromServer;
-                    vm.userChoosesToSupport = vm.user.supportConstructor;
+                    $rootScope.currentUser = userFromServer;
+                    if (userFromServer) {
+                        vm.user = userFromServer;
+                        vm.userChoosesToSupport = vm.user.supportConstructor;
+                    } else {
+                        vm.userChoosesToSupport = "Ferrari";
+                    }
                     var currentYear = new Date().getFullYear();
                     vm.constructorOptions = [];
                     vm.myConstructorStanding = null;
@@ -116,6 +121,14 @@
                 vm.teamColorsCard = 'constructor-card-ferrari';
                 vm.teamImageDataSrc = 'images/ferrari_team_card.jpg';
             }
+        }
+
+        function goToSearchPage(){
+
+            $location.url("/search/"
+                + vm.latestRaceSeason
+                + "/" + vm.latestRaceRound
+                + "/Drivers");
         }
     }
 

@@ -12,7 +12,7 @@
 
         var vm = this;
 
-        vm.errorMessage = null;
+        vm.message = null;
 
         vm.register = register;
         vm.selectedConstructor = selectedConstructor;
@@ -46,18 +46,18 @@
 
         function register(user) {
 
-            vm.errorMessage = null;
+            vm.message = null;
 
-            if(!user) {vm.errorMessage = "Enter necessary details!"; return;}
+            if(!user) {vm.message = "Enter necessary details!"; return;}
 
             if(user.password != user.confirmPassword){
-                vm.errorMessage = "Passwords do not match. Try Again!";
+                vm.message = "Passwords do not match. Try Again!";
                 return;
             }
 
             var userToCreate = user;
             if(!userToCreate.email) {
-                vm.errorMessage = "Please enter an email id to register!";
+                vm.message = "Please enter an email id to register!";
                 return;
             }
 
@@ -67,7 +67,7 @@
                 .findUserByUsername(user.username)
                 .then(function(res){
                     if(res.data) {
-                        vm.errorMessage = "We're sorry, another user has already taken this username! " +
+                        vm.message = "We're sorry, another user has already taken this username! " +
                             "Please try registering with another username.";
                         return;
                     } else {
@@ -84,17 +84,17 @@
                                             function ( respGetNewUser ) {
                                                 UserService.setCurrentUser(respGetNewUser.data);
                                                 $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);
-                                                $location.url("/profile");
+                                                $location.url("/home");
                                             },
                                             function ( errGettingNewUser ) {
-                                                vm.errorMessage = "Some problem occurred. Please try again later";
+                                                vm.message = "Some problem occurred. Please try again later";
                                                 alert("Could not find newly created user on server");
                                             });
                                 },
                                 function ( err ) {
                                     // error creating new user
                                     // alert("Unable to create new user. Try Again!");
-                                    vm.errorMessage = "Unable to register user. Please try again later.";
+                                    vm.message = "Unable to register user. Please try again later.";
                                 });
                     }
                 });
