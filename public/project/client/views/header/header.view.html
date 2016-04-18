@@ -33,10 +33,6 @@
                     <a href="#/login">Login</a>
                 </li>
 
-                <li ng-if="currentUser && currentUser.roles.indexOf('admin') >= 0"
-                    ng-class="{'active': $location.url() == '/admin'}">
-                    <a href="#/admin">Admin</a>
-                </li>
                 <li ng-if="currentUser" ng-click="logout()">
                     <a href="#/">Logout</a>
                 </li>

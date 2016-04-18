@@ -15,6 +15,13 @@
                                 Total Points Scored: <strong class="pull-right">{{model.user.score}}</strong><br>
                                 Number of quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
                             </p>
+
+                            <p ng-if="model.user.level == 1">
+                                <strong>Pro Tip! </strong> <br>
+                                Play more quizzes to reach Level 2.<br>
+                                This will give you access to the quiz builder tool!
+                            </p>
+
                             <p class="card-text"><small class="text-muted">Monitor your progress in the leader board</small></p>
                         </div>
 
@@ -33,7 +40,7 @@
                                 </button>
                             </a>
 
-                            <a href="#/quizzes">
+                            <a ng-if="model.user.level > 1" href="#/quizzes">
                                 <button class="col-sm-12 col-xs-12 btn btn-user-nav"
                                         type="button">
                                     Quiz Builder
