@@ -49,7 +49,6 @@
                         <tr>
                             <th> Circuit Name </th>
                             <th> Location </th>
-                            <th> Country </th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="result in model.driverCircuitsData">
@@ -58,10 +57,9 @@
                                 <a href="{{result.url}}"> {{result.circuitName}} </a>
                             </td>
                             <td>
-                                {{result.Location.locality}}
-                            </td>
-                            <td>
-                                {{result.Location.country}}
+                                <a href="http://maps.google.com/?q={{result.circuitName}} {{result.Location.locality}}, {{result.Location.country}}">
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{result.Location.locality}}, {{result.Location.country}}
+                                </a>
                             </td>
                         </tr>
                         </tbody>
@@ -77,19 +75,15 @@
                         <tr>
                             <th> Constructor </th>
                             <th> Nationality </th>
-                            <th> External Link </th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="result in model.driverConstructorsData">
                         <tr>
                             <td>
-                                {{result.name}}
+                                <a href="{{result.url}}"> {{result.name}} </a>
                             </td>
                             <td>
                                 {{result.nationality}}
-                            </td>
-                            <td>
-                                <a href="{{result.url}}"> Wiki </a>
                             </td>
                         </tr>
                         </tbody>
@@ -127,43 +121,45 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th> Date </th>
+                            <th> Season </th>
                             <th> Circuit Name </th>
-                            <th> Venue </th>
+                            <th class="dont-show-on-mobile"> Venue </th>
 
-                            <th> Constructor </th>
+                            <th class="dont-show-on-mobile"> Constructor </th>
 
-                            <th> Avg. Speed </th>
-                            <th> Fastest Lap Time </th>
-                            <th> Final time gap </th>
+                            <th class="dont-show-on-mobile"> Avg. Speed </th>
+                            <th class="dont-show-on-mobile"> Fastest Lap Time </th>
+                            <th class="dont-show-on-mobile"> Final time gap </th>
 
 
-                            <th> Grid Position </th>
-                            <th> Finising Position </th>
-                            <th> Points earned </th>
+                            <th> Qualified </th>
+                            <th> Finished </th>
+                            <th class="dont-show-on-mobile"> Points </th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="result in model.driverResultsData">
                         <tr>
                             <td>
-                                {{result.date}}
+                                {{result.season}}
                             </td>
                             <td>
                                 <a href="{{result.Circuit.url}}"> {{result.Circuit.circuitName}} </a>
                             </td>
-                            <td>
-                                {{result.Circuit.Location.locality}}, {{result.Circuit.Location.country}}, {{result.Circuit.Location.lat}} - {{result.Circuit.Location.long}} [link to google map]
+                            <td class="dont-show-on-mobile">
+                                <a href="http://maps.google.com/?q={{result.Circuit.circuitName}} {{result.Circuit.Location.locality}}, {{result.Circuit.Location.country}}">
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{result.Circuit.Location.locality}}, {{result.Circuit.Location.country}}
+                                </a>
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 <a href="{{result.Results[0].Constructor.url}}">{{result.Results[0].Constructor.name}}</a>
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.Results[0].FastestLap.AverageSpeed.speed}} {{result.Results[0].FastestLap.AverageSpeed.units}}
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.Results[0].FastestLap.Time.time}}
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.Results[0].Time.time}}
                             </td>
                             <td>
@@ -172,7 +168,7 @@
                             <td>
                                 {{result.Results[0].position}}
                             </td>
-                            <td>
+                            <td class="dont-show-on-mobile">
                                 {{result.Results[0].points}}
                             </td>
 
