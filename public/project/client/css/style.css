@@ -533,6 +533,8 @@ img {
     border: 2px solid #333;
     box-shadow: rgba(0, 0, 0, 0.57);
     margin-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .btn-user-nav:hover {
     background-color: rgba(57, 46, 255, 0.85);
