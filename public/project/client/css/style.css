@@ -260,7 +260,7 @@ body {
 }
 .navbar-collapse .navbar-nav > li > a:hover {
     color: ghostwhite;
-    background-color: darkslategrey;
+    background-color: rgba(64, 67, 69, 0.15);
 }
 .navbar-collapse .navbar-nav > li > a {
     padding: 20px 30px;
@@ -274,7 +274,7 @@ body {
     padding: 5px 30px;
 }
 .navbar-inverse .navbar-brand {
-    color: #DB1414;
+    color: white;
     font-family: "Arial Black";
     font-size: x-large;
 
@@ -1119,6 +1119,103 @@ div.stretch-redbull-image {
 }
 .card-progress-h4 {
     color: white;
+}
+
+#homepage-user-card {
+    background-color: rgba(91, 63, 242, 0.41);
+    padding: 25px;
+}
+
+.constructor-card-mercedese {
+    color: rgba(253, 238, 255, 0.73);
+    background-color: #00A39D;
+    padding: 25px;
+}
+
+.constructor-card-ferrari {
+    color: rgba(253, 238, 255, 0.73);
+    background-color: rgba(242, 0, 35, 0.73);
+    padding: 25px;
+}
+
+.constructor-card-red-bull {
+    color: #ff000e;
+    background-color: rgba(215, 75, 255, 0.33);
+    padding: 25px;
+}
+.constructor-card-red-bull .text-muted {
+    color: yellow;
+}
+
+.constructor-card-force-india {
+    color: #ff9700;
+    background-color: rgba(58, 53, 54, 0.67);
+    padding: 25px;
+}
+.constructor-card-force-india .text-muted {
+    color: #00e520
+}
+
+.constructor-card-williams {
+    color: rgba(57, 68, 198, 0.92);
+    background-color: white;
+    padding: 25px;
+}
+.constructor-card-williams .text-muted {
+    color: #e32c78;
+}
+
+.constructor-card-haas {
+    color: rgba(253, 238, 255, 0.73);
+    background-color: grey;
+    padding: 25px;
+}
+
+.constructor-card-toro-rosso {
+    color: black;   
+    background-color: rgba(57, 68, 198, 0.46);
+    padding: 25px;
+}
+
+.constructor-card-toro-rosso .text-muted {
+    color: #ff2a00;
+}
+
+.constructor-card-mclaren {
+    color: rgba(253, 238, 255, 0.73);
+    background-color: rgba(0, 0, 0, 0.46);
+    padding: 25px;
+}
+
+.constructor-card-renault {
+    color: black;
+    background-color: rgba(247, 214, 0, 0.71);
+    padding: 25px;
+}
+.constructor-card-renault .text-muted {
+    color: black
+}
+
+.constructor-card-sauber {
+    color: darkblue;
+    background-color: rgba(247, 214, 0, 0.71);
+    padding: 25px;
+}
+.constructor-card-sauber .text-muted {
+    color: black
+}
+
+.constructor-card-manor {
+    color: darkblue;
+    background-color: rgba(255, 133, 0, 0.53);
+    padding: 25px;
+}
+.constructor-card-manor .text-muted {
+    color: black
+}
+
+.card-text-info {
+    padding-top: 20px;
 }
 
 .text-muted {

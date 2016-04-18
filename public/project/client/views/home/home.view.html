@@ -1,20 +1,76 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="main stretch-redbull-image">
+        <div class="main">
 
             <div class="container">
+                <div ng-if="model.user"
+                     class="card card-inverse pull-left col-sm-6 col-xs-12">
+                    <div id="homepage-user-card" class="card-img-overlay">
+                        <h3 class="card-title" ng-if="model.user.firstName">Hi, {{model.user.firstName}}</h3>
+                        <p class="card-text-info">
+                            Username: <strong class="pull-right">{{model.user.username}}</strong> <br>
+                            Level: <strong class="pull-right">{{model.user.level}}</strong><br>
+                            Total Points Scored: <strong class="pull-right">{{model.user.score}}</strong><br>
+                            Number of quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
+                        </p>
 
-
-
-
-                <div class="card card-inverse">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
+
+                <div class="card card-inverse pull-left col-sm-6 col-xs-12">
+                    <div ng-class="model.teamColorsCard">
+                        <img ng-src="{{model.teamImageDataSrc}}" alt="My Image" />
+                        <p class="card-text-info">
+                            iSupport: <strong class="pull-right">{{model.userChoosesToSupport}}</strong> <br>
+                            Standing: <strong class="pull-right">{{model.myConstructorStanding}}</strong><br>
+                            Constructor points this season: <strong class="pull-right">{{model.constructorPoints}}</strong><br>
+                        </p>
+
+                        <p class="card-text"><small class="text-muted">Last update from Seaosn: {{model.latestRaceSeason}} Round: {{model.latestRaceRound}}</small></p>
+                    </div>
+                </div>
+
+                <div class="card card-inverse pull-left col-sm-6 col-xs-12">
+                    <div id="leaderboard-card" class="card-img-overlay">
+                        <h3 class="card-title" ng-if="model.user.firstName">F1 Explorer Leaderboard</h3>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <th> Rank </th>
+                                    <th> User </th>
+                                    <th> Level </th>
+                                    <th> Score </th>
+                                </thead>
+
+                                <tbody>
+
+                                <tr ng-repeat="user in model.leaderBoard">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+
+                                    <td>
+                                        <strong>{{user.username}}</strong>
+                                    </td>
+
+                                    <td>{{user.level}}</td>
+                                    <td>
+                                        {{user.score}}
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+
 
             </div>
         </div>
