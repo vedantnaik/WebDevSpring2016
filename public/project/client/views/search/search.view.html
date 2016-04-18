@@ -6,7 +6,9 @@
             <div class="container">
                 <div class="col-sm-6 col-xs-12">
                     <h1 class="page-header">Season progress!</h1>
-                    <p> Here you will find details of any season's standings as the rounds progressed! </p>
+                    <p> Here you will find details of any season's standings as the rounds progressed.<br>
+                        Click on the driver names to see more exciting details!
+                    </p>
                 </div>
 
                 <div class="col-sm-6 col-xs-12 alert alert-info"
@@ -88,7 +90,7 @@
 
                 <div ng-if="model.standingSearchResult" class="table-responsive margin-vertical-pad">
 
-                    <table ng-if="model.standingsSearchTypeDriver" class="table table-striped">
+                    <table ng-if="model.standingsSearchTypeDriver" class="table">
                         <thead>
                             <tr>
                                 <th class="dont-show-on-mobile"> Position </th>
@@ -97,7 +99,7 @@
                                 <th class="dont-show-on-mobile"> Constructor </th>
                                 <th class="dont-show-on-mobile"> Nationality </th>
 
-                                <th> Action </th>
+                                <th ng-if="currentUser"> Action </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="result in model.standingSearchResult">
@@ -109,7 +111,10 @@
                                     {{result.points}}
                                 </td>
                                 <td>
-                                    <a href="{{result.Driver.url}}">{{result.Driver.givenName}} {{result.Driver.familyName}}</a>
+                                    <a href="#/driver/{{result.Driver.driverId}}">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        {{result.Driver.givenName}} {{result.Driver.familyName}}
+                                    </a>
                                 </td>
                                 <td class="dont-show-on-mobile">
                                     <a href="{{result.Constructors[0].url}}">{{result.Constructors[0].name}}</a>
@@ -118,42 +123,25 @@
                                     {{result.Driver.nationality}}
                                 </td>
 
-                                <td ng-if="!currentUser">
-                                    <div class="row">
-                                        <a href="#/driver/{{result.Driver.driverId}}">
-                                            <button class="btn btn-info col-sm-9">
-                                                <span class="glyphicon glyphicon-info-sign"></span>
-                                                <div class="hide-btn-txt-in-mobile">Driver Info</div>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </td>
                                 <td ng-if="currentUser">
                                     <div class="row" align="center">
                                         <button ng-if="!result.alreadyStored"
                                                 ng-click="model.storeResult($index)"
                                                 class="btn btn-success btn-to-store col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-plus"></span>
-                                            <div class="hide-btn-txt-in-mobile">Store</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Store</div>-->
                                         </button>
                                         <button ng-if="result.alreadyStored"
                                                 ng-click="model.deleteFact(result.factId)"
                                                 class="btn btn-stored col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-ok"></span>
-                                            <div class="hide-btn-txt-in-mobile">Stored!</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Stored!</div>-->
                                         </button>
                                         <button ng-click="model.hideResult($index)"
                                                 class="btn btn-danger col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-remove"></span>
-                                            <div class="hide-btn-txt-in-mobile">Hide</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Hide</div>-->
                                         </button>
-
-                                        <a href="#/driver/{{result.Driver.driverId}}">
-                                            <button class="btn btn-info col-sm-4 col-xs-4 dont-show-on-mobile">
-                                                <span class="glyphicon glyphicon-info-sign"></span>
-                                                <div class="hide-btn-txt-in-mobile">More</div>
-                                            </button>
-                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -161,7 +149,7 @@
                     </table>
 
 
-                    <table ng-if="!model.standingsSearchTypeDriver" class="table table-striped">
+                    <table ng-if="!model.standingsSearchTypeDriver" class="table">
                         <thead>
                             <tr>
                                 <th class="dont-show-on-mobile"> Position </th>
@@ -194,18 +182,18 @@
                                                 ng-click="model.storeResult($index)"
                                                 class="btn btn-success col-sm-6 col-xs-6">
                                             <span class="glyphicon glyphicon-plus"></span>
-                                            <div class="hide-btn-txt-in-mobile">Store</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Store</div>-->
                                         </button>
                                         <button ng-if="result.alreadyStored"
                                                 ng-click="model.deleteFact(result.factId)"
                                                 class="btn btn-stored col-sm-6 col-xs-6">
                                             <span class="glyphicon glyphicon-ok"></span>
-                                            <div class="hide-btn-txt-in-mobile">Stored!</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Stored!</div>-->
                                         </button>
                                         <button ng-if="currentUser" ng-click="model.hideResult($index)"
                                                 class="btn btn-danger col-sm-6 col-xs-6">
                                             <span class="glyphicon glyphicon-remove"></span>
-                                            <div class="hide-btn-txt-in-mobile">Hide</div>
+                                            <!--<div class="hide-btn-txt-in-mobile">Hide</div>-->
                                         </button>
                                     </div>
                                 </td>
