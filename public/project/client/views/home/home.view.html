@@ -4,6 +4,13 @@
         <div class="main">
 
             <div class="container">
+                <div ng-if="!model.myConstructorStanding">
+                    <strong>ATTENTION: </strong><br>
+                    The external API we are depending on "Ergast", seems to be temporarily be down.<br>
+                    Many cool features my be unavialable at the moment<br>
+                    We apologize for the inconvenience.
+                </div>
+
                 <div ng-if="model.user"
                      class="card card-inverse pull-left col-sm-12 col-xs-12">
                     <div id="homepage-user-card" class="card-img-overlay container-fluid">
