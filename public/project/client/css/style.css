@@ -1020,10 +1020,7 @@ footer.entry-meta .meta-in {
     background-color: orangered;
 }
 
-.form-control {
-    background: whitesmoke;
-    border-color: grey;
-}
+
 
 /*********************************************************************
 
@@ -1060,6 +1057,11 @@ th {
 
 ********************************************************************/
 
+.form-control {
+    background: whitesmoke;
+    border-color: transparent;
+    border-radius: 0;
+}
 .form-control:active,
 .form-control:focus {
     border-color: rgba(126, 0, 0, 0.8);

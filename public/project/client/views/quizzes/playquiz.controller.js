@@ -103,8 +103,6 @@
                         .then(
                             function (res) {
                                 // user status updated
-                                //$location.url(locationUrlStr);
-
                                 vm.resultURLString = locationUrlStr;
                                 vm.submittedAnswersToServer = true;
                             },

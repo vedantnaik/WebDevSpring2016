@@ -46,6 +46,14 @@
                                             }
 
                                         });
+
+                                    // move played quiz to bottom of the list
+                                    vm.allQuizzes
+                                        .sort(
+                                            function(a,b){
+                                                return (a.alreadyPlayed ? 1 : 0) - (b.alreadyPlayed ? 1 : 0);
+                                            }
+                                        );
                                 },
                                 function(err){
                                     vm.message = "Unable to find list of our quizzes. Please try after sometime. Or create one!";

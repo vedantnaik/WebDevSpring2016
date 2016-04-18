@@ -11,33 +11,31 @@
             </div>
 
             <div class="container">
-                <div class="table-responsive">
-                    <div class="table">
+                <div class="table">
 
-                        <div ng-repeat="question in model.questionsInThisQuiz">
-                            <div class="row">
-                                <div id="quiz-question"
-                                     ng-class="teamColorsForUser"
-                                     class="col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 margin-vertical-pad h4">
-                                    {{$index + 1}}. {{question.questionContent}}
-                                </div>
+                    <div ng-repeat="question in model.questionsInThisQuiz">
+                        <div class="row">
+                            <div id="quiz-question"
+                                 ng-class="teamColorsForUser"
+                                 class="col-sm-10 col-sm-push-1 col-xs-10 col-xs-push-1 margin-vertical-pad h4">
+                                {{$index + 1}}. {{question.questionContent}}
+                            </div>
 
-                                <div ng-repeat="option in question.options"
-                                    class="btn-group col-sm-6 col-xs-12 align-to-center"
-                                    data-toggle="buttons">
+                            <div ng-repeat="option in question.options"
+                                 class="btn-group col-sm-6 col-xs-12 align-to-center"
+                                 data-toggle="buttons">
 
-                                    <label class="btn btn-action col-sm-8 col-sm-push-2 col-xs-8 col-xs-push-2 quiz-players-options"
-                                           ng-class="{'active':question.selectedAnswer==option}"
-                                           ng-click="model.updatedSelectedAnwer($parent.$index, option)">
-                                        <input type="radio"
-                                               value="{{option}}"
-                                               ng-model="question.selectedAnswer">
-                                        <p class="quiz-options-field"
-                                           ng-class="{'correct-answer-field': model.submittedAnswersToServer && option==question.answer}">
-                                            {{option}}
-                                        </p>
-                                    </label>
-                                </div>
+                                <label class="btn btn-action col-sm-8 col-sm-push-2 col-xs-8 col-xs-push-2 quiz-players-options"
+                                       ng-class="{'active':question.selectedAnswer==option}"
+                                       ng-click="model.updatedSelectedAnwer($parent.$index, option)">
+                                    <input type="radio"
+                                           value="{{option}}"
+                                           ng-model="question.selectedAnswer">
+                                    <p class="quiz-options-field"
+                                       ng-class="{'correct-answer-field': model.submittedAnswersToServer && option==question.answer}">
+                                        {{option}}
+                                    </p>
+                                </label>
                             </div>
                         </div>
                     </div>

@@ -5,20 +5,48 @@
 
 
             <div class="container">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="page-header">{{model.quizToEdit.title}}</h1>
-                    <h3>Quiz Editor</h3>
-                    <h4> Current status of the quiz : {{model.quizToEdit.publishedStatus}} </h4>
-                    <p> Building your quiz is so simple! <br>
-                        - Just hit the arrow next to a fact to generate a question.<br>
-                        - Go to the <a href="#/search/2016/3/Drivers">Season Progress</a> tool to bag more facts.<br>
-                        - When you are done, review the questions and publish your quiz! </p>
+                <div id="guest-user-card" class="card card-inverse pull-left col-sm-12 col-xs-12">
+                    <div class="card-img-overlay">
+                        <div class="col-sm-6 col-xs-12">
+                            <h3>Quiz Builder</h3>
+                            <h1 class="page-header">
+                                {{model.quizToEdit.title}}
+                            </h1>
+
+                            <h4> Current status : {{model.quizToEdit.publishedStatus}} </h4>
+                            <p> Building your quiz is so simple! <br>
+                                - Just hit the arrow next to a fact to generate a question.<br>
+                                - Go to the <a href="#/search/2016/3/Drivers">Season Progress</a> tool to bag more facts.<br>
+                                - When you are done, review the questions and publish your quiz! </p>
+
+                            <button type="button" class="btn btn-select-to-edit"
+                                    ng-click="model.editedQuizTitle"
+                                    data-toggle="modal" data-target="#myModal">
+                                <span class="glyphicon glyphicon-pencil"></span> Edit Title
+                            </button>
+
+                            <button class="col-sm-6 col-xs-12 btn btn-warning"
+                                    ng-if="model.quizToEdit.publishedStatus=='PUBLISHED'"
+                                    ng-click="model.unpublishQuiz()">
+                                <span class="glyphicon glyphicon-tent"></span> Unpublish quiz
+                            </button>
+
+                            <button class="col-sm-6 col-xs-12 btn btn-success"
+                                    ng-if="model.quizToEdit.publishedStatus=='NOT PUBLISHED'"
+                                    ng-click="model.publishQuiz()">
+                                <span class="glyphicon glyphicon-send"></span> Publish quiz
+                            </button>
+
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12 alert alert-info"
+                             ng-show="model.message" role="alert">
+                            {{model.message}}
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="col-sm-6 col-xs-12 alert alert-info"
-                     ng-show="model.message" role="alert">
-                    {{model.message}}
-                </div>
             </div>
 
 
@@ -233,6 +261,42 @@
                 </div>
 
             </div> <!-- both containers inside this -->
+
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Title</h4>
+                        </div>
+
+
+                        <div class="modal-body">
+                                <input ng-model="model.editedQuizTitle"
+                                       class="form-control"
+                                       type="text" placeholder="Quiz Title"/>
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button ng-click="model.updateQuizTitle(model.editedQuizTitle)"
+                                    class="btn btn-update-existing col-sm-6 col-xs-6"
+                                    data-dismiss="modal">
+                                Update
+                            </button>
+                            <button ng-click="model.dismissUpdateModal()"
+                                    type="button" class="btn btn-delete-in-row"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

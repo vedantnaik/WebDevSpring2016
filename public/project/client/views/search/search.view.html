@@ -129,18 +129,15 @@
                                                 ng-click="model.storeResult($index)"
                                                 class="btn btn-success btn-to-store col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-plus"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Store</div>-->
                                         </button>
                                         <button ng-if="result.alreadyStored"
                                                 ng-click="model.deleteFact(result.factId)"
                                                 class="btn btn-stored col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-ok"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Stored!</div>-->
                                         </button>
                                         <button ng-click="model.hideResult($index)"
                                                 class="btn btn-danger col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-remove"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Hide</div>-->
                                         </button>
                                     </div>
                                 </td>
@@ -180,20 +177,17 @@
                                     <div class="row" align="center">
                                         <button ng-if="currentUser && !result.alreadyStored"
                                                 ng-click="model.storeResult($index)"
-                                                class="btn btn-success col-sm-6 col-xs-6">
+                                                class="btn btn-success col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-plus"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Store</div>-->
                                         </button>
                                         <button ng-if="result.alreadyStored"
                                                 ng-click="model.deleteFact(result.factId)"
-                                                class="btn btn-stored col-sm-6 col-xs-6">
+                                                class="btn btn-stored col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-ok"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Stored!</div>-->
                                         </button>
                                         <button ng-if="currentUser" ng-click="model.hideResult($index)"
-                                                class="btn btn-danger col-sm-6 col-xs-6">
+                                                class="btn btn-danger col-sm-4 col-xs-4">
                                             <span class="glyphicon glyphicon-remove"></span>
-                                            <!--<div class="hide-btn-txt-in-mobile">Hide</div>-->
                                         </button>
                                     </div>
                                 </td>

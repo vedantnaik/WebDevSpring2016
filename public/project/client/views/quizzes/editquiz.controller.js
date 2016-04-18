@@ -25,6 +25,9 @@
         vm.publishQuiz = publishQuiz;
         vm.unpublishQuiz = unpublishQuiz;
 
+        vm.updateQuizTitle = updateQuizTitle;
+        vm.dismissUpdateModal = dismissUpdateModal;
+
         vm.message = null;
 
         vm.championshipType = 'Drivers';
@@ -44,7 +47,7 @@
                 .then(
                     function(res){
                         vm.quizToEdit = res.data;
-
+                        vm.editedQuizTitle = res.data.title;
                         QuestionService
                             .findQuestionsInQuizById(vm.quizToEditId)
                             .then(
@@ -333,6 +336,27 @@
                         vm.message = "Unable to take down your quiz. It is still live."
                     }
                 );
+        }
+
+        function updateQuizTitle(newTitle) {
+            vm.quizToEdit.title = newTitle;
+
+            QuizService
+                .updateQuizById(vm.quizToEditId, vm.quizToEdit)
+                .then(
+                    function (renamedQuiz) {
+                        init();
+                        vm.message = "Quiz renamed!.";
+                    },
+                    function (err) {
+                        vm.message = "Unable to update. Please try again.";
+                    }
+                );
+
+        }
+
+        function dismissUpdateModal() {
+            vm.editedQuizTitle = vm.quizToEdit.title;
         }
     }
 
