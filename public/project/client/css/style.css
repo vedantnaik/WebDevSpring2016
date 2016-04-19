@@ -263,7 +263,7 @@ body {
     background-color: rgba(64, 67, 69, 0.15);
 }
 .navbar-collapse .navbar-nav > li > a {
-    padding: 20px 30px;
+    padding: 20px 15px;
     color: lightgrey;
 }
 .dropdown ul.dropdown-menu {

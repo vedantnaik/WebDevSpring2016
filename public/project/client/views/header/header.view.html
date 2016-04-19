@@ -15,26 +15,34 @@
                 <li ng-if="currentUser"
                     ng-class="{'active': $location.url() == '/home'}">
                     <a href="#/home">
-                        Dashboard
+                        <span class="glyphicon glyphicon-dashboard"></span> Dashboard
                     </a>
                 </li>
 
                 <li ng-class="{'active': $location.url().toString().indexOf('/search') > -1}"
                     ng-click="goToSearchPage()">
-                    <a href="">Season Progress</a>
+                    <a href="">
+                        <span class="glyphicon glyphicon-stats"></span> Season Progress
+                    </a>
                 </li>
 
                 <li ng-if="!currentUser"
                     ng-class="{'active': $location.url() == '/register'}">
-                    <a href="#/register">Register</a>
+                    <a href="#/register">
+                        <span class="glyphicon glyphicon-file"></span> Register
+                    </a>
                 </li>
                 <li ng-if="!currentUser"
                     ng-class="{'active': $location.url() == '/login'}">
-                    <a href="#/login">Login</a>
+                    <a href="#/login">
+                        <span class="glyphicon glyphicon-log-in"></span> Login
+                    </a>
                 </li>
 
                 <li ng-if="currentUser" ng-click="logout()">
-                    <a href="#/">Logout</a>
+                    <a href="#/">
+                        <span class="glyphicon glyphicon-log-out"></span> Logout
+                    </a>
                 </li>
             </ul>
         </div>

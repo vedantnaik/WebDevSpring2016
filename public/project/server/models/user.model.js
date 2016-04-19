@@ -96,10 +96,6 @@ module.exports = function(db, mongoose){
 
         var deferred = q.defer();
 
-        console.log("model");
-        console.log(userId);
-        console.log(user.username);
-        console.log(user.firstName);
         var newUser = {
             username: user.username,
             password: user.password,

@@ -66,6 +66,7 @@
         // helpers
 
         $scope.$on('newUserTheme', function(event, msg) {
+            console.log("heard braodcast");
             setTeamColors(msg);
         });
 

@@ -206,30 +206,16 @@ module.exports = function(app, userModel){
         userModel
             .findUserById(userId)
             .then(
-                function(res){
-                    var user = res;
+                function(resp){
+                    var user = resp;
                     if (user.password !== userToUpdate.password){
-                        console.log("password not same");
-                        console.log(userToUpdate.username);
-                        console.log(userToUpdate.password);
-                        console.log(userToUpdate.firstName);
                         userToUpdate.password = bcrypt.hashSync(userToUpdate.password);
-                        console.log(userToUpdate.username);
-                        console.log(userToUpdate.password);
-                        console.log(userToUpdate.firstName);
-                    } else {
-                        console.log("password same");
-                        console.log(userToUpdate.username);
-                        console.log(userToUpdate.password);
-                        console.log(userToUpdate.firstName);
                     }
 
                     userModel
                         .updateUser(userId, userToUpdate)
                         .then(
                             function (doc) {
-                                console.log("user updated");
-                                console.log(doc.data.firstName);
                                 req.session.currentUser = doc;
                                 res.json(doc);
                             },

@@ -98,10 +98,12 @@
                         locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/true";
                     }
 
+                    console.log("updated");
                     UserService
                         .updateUser(vm.userWhoPlayed._id, vm.userWhoPlayed)
                         .then(
                             function (res) {
+
                                 // user status updated
                                 vm.resultURLString = locationUrlStr;
                                 vm.submittedAnswersToServer = true;

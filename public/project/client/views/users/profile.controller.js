@@ -59,7 +59,7 @@
 
         function update(user) {
 
-            //console.log("UPDATE USER IN CONTROLLER: " + vm.user._id);
+            console.log("UPDATE USER IN CONTROLLER: " + vm.user.username);
             vm.error = null;
             vm.message = null;
 

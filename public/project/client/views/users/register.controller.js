@@ -85,18 +85,6 @@
                                         $location.url("/home");
                                     }
 
-                                    //UserService
-                                    //    .findUserByUsername(userToCreate.username)
-                                    //    .then(
-                                    //        function ( respGetNewUser ) {
-                                    //            console.log("new user created. should go to home");
-                                    //            UserService.setCurrentUser(respGetNewUser.data);
-                                    //            $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);
-                                    //            $location.url("/home");
-                                    //        },
-                                    //        function ( errGettingNewUser ) {
-                                    //            alert("Could not find newly created user on server");
-                                    //        });
                                 },
                                 function ( err ) {
                                     // error creating new user
@@ -104,30 +92,6 @@
                                     vm.message = "Unable to register user. Please try again later.";
                                 });
 
-                        //UserService
-                        //    .createUser(userToCreate)
-                        //    .then(
-                        //        function ( resp ){
-                        //            // new user created
-                        //            UserService
-                        //                .findUserByUsername(userToCreate.username)
-                        //                .then(
-                        //                    function ( respGetNewUser ) {
-                        //                        console.log("new user created. should go to home");
-                        //                        UserService.setCurrentUser(respGetNewUser.data);
-                        //                        $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);
-                        //                        $location.url("/home");
-                        //                    },
-                        //                    function ( errGettingNewUser ) {
-                        //                        vm.message = "Some problem occurred. Please try again later";
-                        //                        alert("Could not find newly created user on server");
-                        //                    });
-                        //        },
-                        //        function ( err ) {
-                        //            // error creating new user
-                        //            // alert("Unable to create new user. Try Again!");
-                        //            vm.message = "Unable to register user. Please try again later.";
-                        //        });
                     }
                 });
 
