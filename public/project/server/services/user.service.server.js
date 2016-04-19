@@ -141,6 +141,7 @@ module.exports = function(app, userModel){
     }
 
     function loggedin(req, res) {
+        //console.log("give back loggedin user "+req.session.currentUser.username);
         res.json(req.session.currentUser);
     }
 

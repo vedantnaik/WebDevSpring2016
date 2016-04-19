@@ -82,6 +82,7 @@
                                         .findUserByUsername(userToCreate.username)
                                         .then(
                                             function ( respGetNewUser ) {
+                                                console.log("new user created. should go to home");
                                                 UserService.setCurrentUser(respGetNewUser.data);
                                                 $rootScope.$broadcast('newUserTheme', respGetNewUser.data.supportConstructor);
                                                 $location.url("/home");

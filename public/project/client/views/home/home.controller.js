@@ -21,7 +21,8 @@
                 .getCurrentUser()
                 .then(function (res) {
                     var userFromServer = res.data;
-
+                    console.log("got from server");
+                    console.log(userFromServer);
 
                     $rootScope.currentUser = userFromServer;
                     if (userFromServer) {
