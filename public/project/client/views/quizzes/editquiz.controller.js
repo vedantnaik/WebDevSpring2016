@@ -339,19 +339,34 @@
         }
 
         function updateQuizTitle(newTitle) {
-            vm.quizToEdit.title = newTitle;
+
 
             QuizService
-                .updateQuizById(vm.quizToEditId, vm.quizToEdit)
+                .getQuizzesByTitle(newTitle)
                 .then(
-                    function (renamedQuiz) {
-                        init();
-                        vm.message = "Quiz renamed!.";
-                    },
-                    function (err) {
-                        vm.message = "Unable to update. Please try again.";
-                    }
-                );
+                    function(res){
+                        if(res.data.length > 0){
+                            vm.message = "The quiz title has already been used. Please try with another title.";
+                            //setCurrentUserQuizzes();
+                        } else {
+                            vm.quizToEdit.title = newTitle;
+
+                            QuizService
+                                .updateQuizById(vm.quizToEditId, vm.quizToEdit)
+                                .then(
+                                    function (renamedQuiz) {
+                                        init();
+                                        vm.message = "Quiz renamed!.";
+                                    },
+                                    function (err) {
+                                        vm.message = "Unable to rename quiz. Please try again.";
+                                    }
+                                );
+                        }
+                    });
+
+
+
 
         }
 

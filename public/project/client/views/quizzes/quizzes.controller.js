@@ -69,6 +69,7 @@
 
         function updateQuiz(selectedQuiz){
             // update quiz
+            // not used for now
             vm.message = null;
 
             if(selectedQuiz){
@@ -98,12 +99,7 @@
                                                 }
                                             );
                                     }
-                                },
-                                function(err){
-
-                                }
-
-                            );
+                                });
 
 
                     });
