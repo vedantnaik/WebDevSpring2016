@@ -6,6 +6,8 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require("mongoose");
 
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function(app, userModel){
 
     var auth = authorized;
@@ -33,14 +35,14 @@ module.exports = function(app, userModel){
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByUsername(username)
             .then(
                 function (userResp) {
                     var user = userResp;
-                    if (!user) {
-                        return done(null, false);
-                    } else {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
+                    } else {
+                        return done(null, false);
                     }
                 },
                 function (err) {
@@ -76,6 +78,7 @@ module.exports = function(app, userModel){
     function register(req, res) {
         var newUser = req.body;
 
+        console.log("1. "+newUser.username);
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -84,11 +87,12 @@ module.exports = function(app, userModel){
                     if(user) {
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser);
                     }
                 },
                 function(err){
-                    console.log("register4");
+                    console.log("register5");
                     res.status(400).send(err);
                 }
             )
@@ -195,20 +199,52 @@ module.exports = function(app, userModel){
     }
 
     function updateUser(req,res){
-        var user = req.body;
+        console.log("update user");
+        var userToUpdate = req.body;
         var userId = req.params.id;
 
         userModel
-            .updateUser(userId, user)
+            .findUserById(userId)
             .then(
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
+                function(res){
+                    var user = res;
+                    if (user.password !== userToUpdate.password){
+                        console.log("password not same");
+                        console.log(userToUpdate.username);
+                        console.log(userToUpdate.password);
+                        console.log(userToUpdate.firstName);
+                        userToUpdate.password = bcrypt.hashSync(userToUpdate.password);
+                        console.log(userToUpdate.username);
+                        console.log(userToUpdate.password);
+                        console.log(userToUpdate.firstName);
+                    } else {
+                        console.log("password same");
+                        console.log(userToUpdate.username);
+                        console.log(userToUpdate.password);
+                        console.log(userToUpdate.firstName);
+                    }
+
+                    userModel
+                        .updateUser(userId, userToUpdate)
+                        .then(
+                            function (doc) {
+                                console.log("user updated");
+                                console.log(doc.data.firstName);
+                                req.session.currentUser = doc;
+                                res.json(doc);
+                            },
+                            function (err) {
+                                res.status(400).send(err);
+                            }
+                        );
                 },
-                function (err) {
-                    res.status(400).send(err);
+                function(err){
+
                 }
             );
+
+
+
     }
 
     function deleteUser(req,res){

@@ -51,11 +51,7 @@
         }
 
         function setCurrentUser(user){
-            if(user) {
-                $rootScope.currentUser = user;
-            } else {
-                $http.post('/api/f1explorer/logout');
-            }
+            $rootScope.currentUser = user;
         }
 
         function findAllUsers(){

@@ -70,13 +70,13 @@
                 .then(
                     function ( resp ) {
                         if( resp.data ) {
-                            UserService.setCurrentUser( resp.data );
+                            //UserService.setCurrentUser( resp.data );
                             vm.message = "Your profile was updated successfully!";
                             $rootScope.$broadcast('newUserTheme', resp.data.supportConstructor);
                             $location.url("/profile");
                             //console.log("Your profile was updated successfully!");
                         } else {
-                            vm.error = "Unable to update your profile. Try again!";
+                            vm.message = "Unable to update your profile. Try again!";
                             //console.log("Unable to update your profile. Try again!");
                         }
                     });
