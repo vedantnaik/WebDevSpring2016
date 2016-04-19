@@ -110,9 +110,9 @@
         });
 
         return deferred.promise;
-    }
+    };
 
-    var checkLoggedin  = function($q, $timeout, $http, $location, $rootScope){
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope){
         var deferred = $q.defer();
 
         $http.get('/api/f1explorer/loggedin').success(function(user){
@@ -122,7 +122,7 @@
                 console.log(user);
 
                 $rootScope.currentUser = user;
-                $rootScope.$broadcast('newUserTheme', user.supportConstructor);
+                //$rootScope.$broadcast('newUserTheme', user.supportConstructor);
                 deferred.resolve();
             } else {
                 deferred.reject();
@@ -131,6 +131,6 @@
         });
 
         return deferred.promise;
-    }
+    };
 
 })();

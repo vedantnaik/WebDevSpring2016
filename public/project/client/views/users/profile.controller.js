@@ -67,19 +67,24 @@
 
             UserService
                 .updateUser(vm.user._id, user)
-                .then(
-                    function ( resp ) {
-                        if( resp.data ) {
-                            //UserService.setCurrentUser( resp.data );
-                            vm.message = "Your profile was updated successfully!";
-                            $rootScope.$broadcast('newUserTheme', resp.data.supportConstructor);
-                            $location.url("/profile");
-                            //console.log("Your profile was updated successfully!");
-                        } else {
+                .then(function(res){
+                    UserService
+                        .getCurrentUser()
+                        .then(function (resp) {
+                            if( resp.data ) {
+                                vm.message = "Your profile was updated successfully!";
+                                $rootScope.$broadcast('newUserTheme', resp.data.supportConstructor);
+                                $location.url("/profile");
+                            } else {
+                                vm.message = "Unable to update your profile. Try again!";
+                            }
+                        },
+                        function (err) {
                             vm.message = "Unable to update your profile. Try again!";
-                            //console.log("Unable to update your profile. Try again!");
-                        }
-                    });
+                        });
+                });
+
+
         }
 
         function selectedConstructor(constructor){
