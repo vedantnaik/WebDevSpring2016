@@ -31,13 +31,13 @@
                             <td>
                                 <button ng-if="!quiz.alreadyPlayed"
                                         ng-click="model.selectToPlay(quiz._id)"
-                                        class="btn btn-default col-sm-12 col-xs-12">
+                                        class="btn btn-default search-view-button col-sm-12 col-xs-12">
                                     {{quiz.title}}
                                 </button>
 
                                 <button ng-if="quiz.alreadyPlayed"
-                                        class="btn btn-block col-sm-12 col-xs-12">
-                                    {{quiz.title}} | Complete
+                                        class="btn btn-block search-view-button col-sm-12 col-xs-12">
+                                    {{quiz.title}} | <small><span class="glyphicon glyphicon-ok"></span> Completed</small>
                                 </button>
                             </td>
 
