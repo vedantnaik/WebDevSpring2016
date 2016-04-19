@@ -169,7 +169,7 @@ a:focus {
 }
 
 #about {
-    height:100vh;
+    height:80vh;
 }
 
 @media(min-width:768px) {
