@@ -12,8 +12,10 @@
                             <p class="card-text-info">
                                 Username: <strong class="pull-right">{{model.user.username}}</strong> <br>
                                 Level: <strong class="pull-right">{{model.user.level}}</strong><br>
+                                Facts stored: <strong class="pull-right">{{model.userFactCount}}</strong><br>
+                                Quizzes Created: <strong class="pull-right">{{model.quizCreatedCount}}</strong><br>
                                 Total Points Scored: <strong class="pull-right">{{model.user.score}}</strong><br>
-                                Number of quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
+                                Quizzes played: <strong class="pull-right">{{model.user.quizzesTakenListOfIds.length}}</strong>
                             </p>
 
                             <p ng-if="model.user.level == 1">

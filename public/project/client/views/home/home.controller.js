@@ -15,6 +15,10 @@
 
         vm.goToSearchPage = goToSearchPage;
 
+
+        vm.userFactCount = 0;
+        vm.quizCreatedCount = 0;
+
         function init() {
 
             UserService
@@ -26,6 +30,27 @@
                     if (userFromServer) {
                         vm.user = userFromServer;
                         vm.userChoosesToSupport = vm.user.supportConstructor;
+
+                        FactService.findAllFactsForUser(vm.userEditingTheQuiz._id)
+                            .then(
+                                function( res ) {
+                                    if (res.data) {
+                                        vm.userFactCount = res.data.length;
+                                    } else {
+                                        vm.userFactCount = 0;
+                                    }
+                                });
+
+                        QuizService
+                            .getAllQuizzesForUser(loggedInUser._id)
+                            .then(
+                                function ( res  ){
+                                    if (res.data) {
+                                        vm.quizCreatedCount = res.data.length;
+                                    } else {
+                                        vm.quizCreatedCount = 0;
+                                    }
+                                });
                     } else {
                         vm.userChoosesToSupport = "Ferrari";
                     }
