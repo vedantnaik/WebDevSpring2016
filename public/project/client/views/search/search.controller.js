@@ -72,6 +72,8 @@
         function searchStanding(){
             //vm.message = null;
 
+            $rootScope.loadingData = true;
+
             vm.season = vm.queryOn.season;
             vm.round = vm.queryOn.round;
 
@@ -122,6 +124,7 @@
                                                                             }
                                                                         }
                                                                     );
+                                                                    $rootScope.loadingData = false;
                                                                 }
                                                             );
                                                     }
@@ -175,6 +178,7 @@
                                                                             }
                                                                         }
                                                                     );
+                                                                    $rootScope.loadingData = false;
                                                                 }
                                                             );
                                                     }

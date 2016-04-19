@@ -79,6 +79,16 @@ body {
  * Main content
  */
 
+.index-background-transparent {
+    background-color: transparent
+}
+
+.loading-image-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
 .main {
     padding: 2px;
     padding-top: 60px;

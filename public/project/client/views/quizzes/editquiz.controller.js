@@ -38,6 +38,7 @@
 
         function init(){
 
+            $rootScope.loadingData = true;
             var oldVmMessage = vm.message;
 
             vm.quizToEditId = $routeParams.quizId;
@@ -84,6 +85,7 @@
                                                         },
                                                         function (err)  {
                                                             console.log("UNABLE TO GET STORED FACTS TO CLIENT SIDE");
+                                                            $rootScope.loadingData = false;
                                                         }
                                                     );
 
@@ -137,6 +139,7 @@
                                 );
 
                             vm.displayStoredResults = driverStoredResult;
+                            $rootScope.loadingData = false;
                         } else {
                             vm.standingsSearchTypeDriver = false;
                             vm.displayStoredResults = null;
@@ -151,10 +154,12 @@
                                 );
 
                             vm.displayStoredResults = constructorStoredResult;
+                            $rootScope.loadingData = false;
                         }
                     },
                     function (err)  {
                         console.log("UNABLE TO GET STORED FACTS TO CLIENT SIDE");
+                        $rootScope.loadingData = false;
                     }
                 );
 
@@ -185,12 +190,14 @@
                 .then(
                     function(res) {
                         vm.questionsInThisQuiz = res.data;
+                        $rootScope.loadingData = false;
                     });
         }
 
         // making questions
 
         function convertDRRFactToQuestion(factId, index){
+            $rootScope.loadingData = true;
             QuestionService
                 .makeDRRFactQuestion(factId, vm.quizToEditId)
                 .then(
@@ -201,11 +208,13 @@
                     },
                     function(err){
                         vm.message = "Could not convert this fact into a question. It probably already exists in this quiz.";
+                        $rootScope.loadingData = false;
                     }
                 );
         }
 
         function convertCRRFactToQuestion(factId, index){
+            $rootScope.loadingData = true;
             QuestionService
                 .makeCRRFactQuestion(factId, vm.quizToEditId)
                 .then(
@@ -216,13 +225,14 @@
                     },
                     function(err){
                         vm.message = "Could not convert this fact into a question. Please try again.";
+                        $rootScope.loadingData = false;
                     }
                 );
         }
 
         function deleteAllQuestions(listOfQuestions){
             vm.message = null;
-
+            $rootScope.loadingData = true;
             QuizService
                 .getQuizById(vm.quizToEditId)
                 .then(

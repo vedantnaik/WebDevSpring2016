@@ -68,7 +68,10 @@
     </head>
 
     <div class="container-fluid index-background">
-        <body ng-controller="MainController" style="background-color: transparent">
+        <body ng-controller="MainController" class="index-background-transparent">
+            <div class="loading-image-spinner" ng-if="loadingData">
+                <img src="./images/loading.gif">
+            </div>
             <div ng-include="'views/header/header.view.html'"></div>
             <div class="container-fluid">
                 <div class="row">
