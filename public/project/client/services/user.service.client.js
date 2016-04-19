@@ -11,19 +11,36 @@
     function UserService($rootScope, $http) {
 
         var service = {
-            createUser: createUser,
+            createUser: createUser,     // register
             updateUser: updateUser,
             deleteUserById: deleteUserById,
 
+            register: register,
+
             findUserByUsername: findUserByUsername,
-            findUserByCredentials: findUserByCredentials,
+            findUserByCredentials: findUserByCredentials, // used for login
             findAllUsers: findAllUsers,
 
             setCurrentUser: setCurrentUser,
-            getCurrentUser : getCurrentUser
+            getCurrentUser : getCurrentUser,
+
+            login: login,   // should get whole user object
+            logout: logout
 
         };
         return service;
+
+        function login(user) {
+            return $http.post('/api/f1explorer/login', user);
+        }
+
+        function logout() {
+            return $http.post('/api/f1explorer/logout');
+        }
+
+        function register(user) {
+            return $http.post('/api/f1explorer/register', user);
+        }
 
         function findUserByCredentials(username, password) {
             return $http.get('/api/f1explorer/user?username='+username+"&password="+password);

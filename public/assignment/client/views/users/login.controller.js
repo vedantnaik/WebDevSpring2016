@@ -23,7 +23,7 @@
             if(!user.password) {vm.message = "Enter password!"; return;}
 
             UserService
-                .findUserByCredentials(user)
+                .findUserByCredentials(user.username, user.password)
                 .then(
                     function ( res ){
                         if(res.data){

@@ -21,8 +21,6 @@
                 .getCurrentUser()
                 .then(function (res) {
                     var userFromServer = res.data;
-                    console.log("got from server");
-                    console.log(userFromServer);
 
                     $rootScope.currentUser = userFromServer;
                     if (userFromServer) {
@@ -65,7 +63,6 @@
                                             vm.constructorOptions.push(constr.Constructor.name);
 
                                             if(constr.Constructor.name == vm.userChoosesToSupport) {
-                                                console.log(constr.Constructor.name == vm.userChoosesToSupport);
                                                 vm.myConstructorStanding = constr.position;
                                                 vm.constructorPoints = constr.points;
                                             }

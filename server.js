@@ -13,13 +13,17 @@ var session = require('express-session');
 app.use(multer());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(public_folder));
+
 app.use(session({
-    secret: 'this is the secret',
+    secret: 'this is my secret',
     resave: true,
     saveUninitialized: true
 }));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.static(public_folder));
 
 var connectionString = 'mongodb://localhost/webdev2016';
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
@@ -45,7 +49,7 @@ app.get('/project', function(req, res){
     res.sendfile('/project/client/index.html');
 });
 
-require('./public/assignment/server/app.js')(app, db, mongoose);
+//require('./public/assignment/server/app.js')(app, db, mongoose);
 require('./public/project/server/app.js')(app, db, mongoose);
 require('./public/experiments/projectPrototype/server/app.js')(app, db, mongoose);
 

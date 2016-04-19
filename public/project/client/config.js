@@ -26,32 +26,50 @@
             .when("/profile/:username?", {
                 templateUrl: "views/users/profile.view.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/quizzes", {
                 templateUrl: "views/quizzes/quizzes.view.html",
                 controller: "QuizzesController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedinQuizMaster
+                }
             })
             .when("/quizzes/editQuiz/:quizId?", {
                 templateUrl: "views/quizzes/editquiz.view.html",
                 controller: "EditQuizController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedinQuizMaster
+                }
             })
             .when("/quizzes/playQuiz/:quizId?", {
                 templateUrl: "views/quizzes/playquiz.view.html",
                 controller: "PlayQuizController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/quizzes/quizSelect/", {
                 templateUrl: "views/quizzes/quizselect.view.html",
                 controller: "QuizSelectController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/quizzes/playQuiz/:quizId?/score/:totalScore?/lvlUp/:levelFlag?", {
                 templateUrl: "views/quizzes/quizresult.view.html",
                 controller: "QuizResultController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when("/search/:season?/:round?/:championship?", {
                 templateUrl: "views/search/search.view.html",
@@ -61,7 +79,10 @@
             .when("/stored", {
                 templateUrl: "views/search/stored.view.html",
                 controller: "StoredController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .when('/driver/:driverId', {
                 templateUrl: "views/details/driver.view.html",
@@ -71,6 +92,45 @@
             .otherwise({
                 redirectTo: "/home"
             });
+    }
+
+    var checkLoggedinQuizMaster = function($q, $timeout, $http, $location, $rootScope){
+        var deferred = $q.defer();
+
+        $http.get('/api/f1explorer/loggedin').success(function(user){
+
+            if(user!=null && user.level > 1) {
+                $rootScope.currentUser = user;
+                $rootScope.$broadcast('newUserTheme', user.supportConstructor);
+                deferred.resolve();
+            } else {
+                deferred.reject();
+                $location.url('/home');
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    var checkLoggedin  = function($q, $timeout, $http, $location, $rootScope){
+        var deferred = $q.defer();
+
+        $http.get('/api/f1explorer/loggedin').success(function(user){
+
+            if(user) {
+
+                console.log(user);
+
+                $rootScope.currentUser = user;
+                $rootScope.$broadcast('newUserTheme', user.supportConstructor);
+                deferred.resolve();
+            } else {
+                deferred.reject();
+                $location.url('/home');
+            }
+        });
+
+        return deferred.promise;
     }
 
 })();

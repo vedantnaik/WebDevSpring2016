@@ -40,8 +40,18 @@
         init();
 
         function logout(){
-            $rootScope.currentUser = null;
-            UserService.setCurrentUser(null);
+
+            UserService
+                .logout()
+                .then(
+                    function(res){
+                        $rootScope.currentUser = null;
+                        setTeamColors("Ferrari");
+                        $location.url("/home");
+                    }
+                );
+            //$rootScope.currentUser = null;
+            //UserService.setCurrentUser(null);
             setTeamColors("Ferrari");
         }
 

@@ -2,7 +2,16 @@
  * Created by vedant on 3/17/16.
  */
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require("mongoose");
+
 module.exports = function(app, userModel){
+
+    var auth = authorized;
+    app.post('/api/f1explorer/login', passport.authenticate('local'), login);
+    app.post('/api/f1explorer/logout', logout);
+    app.post('/api/f1explorer/register', register);
 
     app.post('/api/f1explorer/user', createUser);
     app.get('/api/f1explorer/user', getUsersAll);
@@ -17,13 +26,96 @@ module.exports = function(app, userModel){
     app.get('/api/f1explorer/loggedin', loggedin);
     app.post('/api/f1explorer/logout', logout);
 
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByCredentials({username: username, password: password})
+            .then(
+                function (userResp) {
+                    var user = userResp;
+                    if (!user) {
+                        return done(null, false);
+                    } else {
+                        return done(null, user);
+                    }
+                },
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
+                }
+            );
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function (userResp) {
+                    done(null, userResp);
+                },
+                function (err) {
+                    done(err, null);
+                }
+            );
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function register(req, res) {
+        var newUser = req.body;
+
+        userModel
+            .findUserByUsername(newUser.username)
+            .then(
+                function (user) {
+                    console.log(user);
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return userModel.createUser(newUser);
+                    }
+                },
+                function(err){
+                    console.log("register4");
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (user) {
+                    if(user){
+                        req.login(user, function(err){
+                            if(err){
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+
+    }
+
     function createUser(req,res){
         var user = req.body;
         userModel.createUser(user)
             .then(
                 function( doc ) {
-                    console.log("USER CREATED user.service.server.js");
-                    console.log(doc);
                     res.json(doc);
                 },
                 function( err ) {
@@ -45,15 +137,12 @@ module.exports = function(app, userModel){
     }
 
     function getUserByCredentials(req,res){
-
         var credentials = { "username" : req.query.username,
                             "password" : req.query.password };
 
         userModel.findUserByCredentials(credentials)
             .then(
                 function( doc ){
-                    console.log("FOUND USER BY CREDENTIALS user.service.server.js");
-                    console.log(doc);
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
@@ -81,8 +170,6 @@ module.exports = function(app, userModel){
         userModel.findUserByUsername(username)
             .then(
                 function( doc ){
-                    console.log("FOUND USER BY USERNAME user.service.server.js");
-                    console.log(doc);
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
@@ -115,8 +202,6 @@ module.exports = function(app, userModel){
             .updateUser(userId, user)
             .then(
                 function (doc) {
-                    console.log("UPDATED USER user.service.server.js");
-                    console.log(doc);
                     req.session.currentUser = doc;
                     res.json(doc);
                 },
@@ -142,11 +227,22 @@ module.exports = function(app, userModel){
 
     function loggedin(req, res) {
         //console.log("give back loggedin user "+req.session.currentUser.username);
-        res.json(req.session.currentUser);
+        res.send(req.isAuthenticated() ? req.user : null);
     }
 
     function logout(req, res) {
-        req.session.destroy();
+        req.logout();
         res.send(200);
     }
+
+    function authorized (req,res,next){
+        if(!req.isAuthenticated())
+        {
+            res.send(401);   //Not authenticated so return error code
+        }
+        else{
+            next();
+        }
+    };
+
 }
