@@ -31,7 +31,13 @@
                     <div class="col-sm-2">
                         <label for="inputPassword3" class="col-sm-12 control-label text-left">Password:</label>
                     </div>
-                    <div class="col-sm-10">
+
+                    <div class="col-sm-3" align="center">
+                        <button ng-click="model.togglePasswordDisplay()"
+                                class="btn btn-toolbar"> Click to display field </button>
+                    </div>
+
+                    <div ng-if="model.passwordDisplay" class="col-sm-7">
                         <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
                     </div>
                 </div>

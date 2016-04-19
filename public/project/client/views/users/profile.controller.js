@@ -16,9 +16,11 @@
         vm.message = null;
         vm.update = update;
         vm.selectedConstructor = selectedConstructor;
+        vm.togglePasswordDisplay = togglePasswordDisplay;
 
         function init() {
 
+            vm.passwordDisplay = false;
             UserService
                 .getCurrentUser()
                 .then(function (res) {
@@ -89,6 +91,10 @@
 
         function selectedConstructor(constructor){
             vm.userChoosesToSupport = constructor;
+        }
+
+        function togglePasswordDisplay(){
+            vm.passwordDisplay = !vm.passwordDisplay;
         }
     }
 
