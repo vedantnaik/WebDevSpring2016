@@ -129,12 +129,15 @@
                                                             );
                                                     }
                                                 );
+                                        } else {
+                                            $rootScope.loadingData = false;
                                         }
                                     }
                                 );
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH DRIVER STANDINGS FOR ROUND");
+                            $rootScope.loadingData = false;
                         }
                     );
 
@@ -183,12 +186,15 @@
                                                             );
                                                     }
                                                 );
+                                        } else {
+                                            $rootScope.loadingData = false;
                                         }
                                     }
                                 );
                         },
                         function( err ){
                             console.log("UNABLE TO SEARCH CONSTRUCTOR STANDINGS FOR ROUND");
+                            $rootScope.loadingData = false;
                         }
                     );
             }
