@@ -1170,6 +1170,12 @@ div.stretch-redbull-image {
     padding: 25px;
 }
 
+.leaderboard-tiny {
+    font-style: italic;
+    font-size: small;
+    color: grey;
+}
+
 .constructor-card-mercedese {
     color: rgba(253, 238, 255, 0.73);
     background-color: #00A39D;
