@@ -9,7 +9,7 @@
         .module("F1ExplorerApp")
         .controller("HomeController", HomeController);
 
-    function HomeController(UserService, ErgastService, $rootScope, $location) {
+    function HomeController(UserService, FactService, QuizService, ErgastService, $rootScope, $location) {
 
         var vm  = this;
 
@@ -31,9 +31,10 @@
                         vm.user = userFromServer;
                         vm.userChoosesToSupport = vm.user.supportConstructor;
 
-                        FactService.findAllFactsForUser(vm.userEditingTheQuiz._id)
+                        FactService.findAllFactsForUser(userFromServer._id)
                             .then(
                                 function( res ) {
+                                    console.log(res);
                                     if (res.data) {
                                         vm.userFactCount = res.data.length;
                                     } else {
@@ -42,7 +43,7 @@
                                 });
 
                         QuizService
-                            .getAllQuizzesForUser(loggedInUser._id)
+                            .getAllQuizzesForUser(userFromServer._id)
                             .then(
                                 function ( res  ){
                                     if (res.data) {
