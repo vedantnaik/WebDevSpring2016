@@ -15,7 +15,8 @@
 
                             <h4> Current status : {{model.quizToEdit.publishedStatus}} </h4>
                             <p> Building your quiz is so simple! <br>
-                                - Just hit the arrow next to a fact to generate a question.<br>
+                                - Just hit the "arrow" <span class="glyphicon glyphicon-arrow-right"></span> next to a fact to generate a question.<br>
+                                - Temporarily hide facts using the "filter" <span class="glyphicon glyphicon-filter"></span> button <br>
                                 - Toggle between stored "Driver" and "Constructor" facts. <br>
                                 - Go to the <a href="#/search/2016/3/Drivers">Season Progress</a> tool to bag more facts.<br>
                                 - When you are done, review the questions and publish your quiz! </p>
@@ -40,9 +41,12 @@
 
                         </div>
 
-                        <div class="col-sm-6 col-xs-12 alert alert-info"
-                             ng-show="model.message" role="alert">
-                            {{model.message}}
+                        <div class="col-sm-6 col-xs-12">
+                            <img src="./images/pitcrew.jpg" align="center">
+                            <div class="col-sm-12 col-xs-12 alert alert-info"
+                                 ng-show="model.message" role="alert">
+                                {{model.message}}
+                            </div>
                         </div>
 
                     </div>
