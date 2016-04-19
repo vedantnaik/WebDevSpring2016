@@ -46,7 +46,8 @@
                                 <td>
                                     <button ng-click="model.goToEditQuiz(quiz._id)"
                                             class="btn btn-action col-sm-12 col-xs-12 search-view-button">
-                                        <span class="glyphicon glyphicon-cog"></span> {{quiz.title}}
+                                        <span ng-if="quiz.publishedStatus == 'NOT PUBLISHED'" class="glyphicon glyphicon-lock"></span>
+                                        <span ng-if="quiz.publishedStatus == 'PUBLISHED'" class="glyphicon glyphicon-bookmark"></span> {{quiz.title}}
                                     </button>
                                 </td>
                                 <td>
