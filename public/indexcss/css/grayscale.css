@@ -169,7 +169,7 @@ a:focus {
 }
 
 #about {
-    height:80vh;
+    height:100vh;
 }
 
 @media(min-width:768px) {
@@ -192,7 +192,7 @@ a:focus {
     height: 70px;
     margin-top: 15px;
     padding: 7px 16px;
-    border: 2px solid #d9534f;
+    border: 2px solid #ff4800;
     border-radius: 100%!important;
     font-size: 40px;
     color: #fff;
@@ -324,7 +324,7 @@ a:focus {
 
 .btn-default {
     border: 1px solid indianred;
-    color: red;
+    color: #ff4800;
     background-color: transparent;
 }
 
