@@ -16,8 +16,10 @@
                     {{model.message}}
                 </div>
 
-                <div class="col-sm-12 col-xs-12 instructions">
-                    <p ng-if="currentUser">
+                <div ng-if="currentUser"
+                     class="col-sm-12 col-xs-12 instructions">
+                    <p>
+                        <strong>Instructions:</strong>
                         Use the <span class="glyphicon glyphicon-plus"></span>/<span class="glyphicon glyphicon-ok"></span>
                         button to toggle a stored fact.
                         Clicking <span class="glyphicon glyphicon-plus"></span> stores a fact for you,
