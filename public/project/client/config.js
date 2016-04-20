@@ -118,11 +118,7 @@
         $http.get('/api/f1explorer/loggedin').success(function(user){
 
             if(user) {
-
-                console.log(user);
-
                 $rootScope.currentUser = user;
-                //$rootScope.$broadcast('newUserTheme', user.supportConstructor);
                 deferred.resolve();
             } else {
                 deferred.reject();

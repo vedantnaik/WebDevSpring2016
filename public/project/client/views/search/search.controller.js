@@ -12,25 +12,19 @@
 
         var vm = this;
 
-        vm.message = null;
         vm.searchStanding = searchStanding;
-
         vm.searchDrivers = searchDrivers;
         vm.setStandingsType = setStandingsType;
         vm.storeResult = storeResult;
-
         vm.hideResult = hideResult;
         vm.seasonUpdated = seasonUpdated;
-
         vm.roundUpdated = roundUpdated;
-
         vm.goBackOneRace = goBackOneRace;
         vm.goAheadOneRace = goAheadOneRace;
-
         vm.deleteFact = deleteFact;
 
+        vm.message = null;
         vm.userSearching = null;
-
         vm.processing = null;
 
         // Set data values

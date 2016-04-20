@@ -103,9 +103,6 @@
 
 
                     });
-
-
-
             }
         }
 
@@ -127,7 +124,6 @@
                 );
         }
 
-
         function selectQuiz(index){
             vm.message = null;
 
@@ -138,14 +134,12 @@
                         vm.selectedQuiz = res.data;
                     }
                 );
-
         }
 
 
         function goToEditQuiz(quizId){
             $location.url("/quizzes/editQuiz/" + quizId);
         }
-
 
 
         // --------------- HELPERS --------------

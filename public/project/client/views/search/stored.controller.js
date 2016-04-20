@@ -19,10 +19,8 @@
         vm.deleteStoredFact = deleteStoredFact;
 
         vm.message = null;
-
         vm.championshipType = 'Drivers';
         vm.standingsSearchTypeDriver = true;
-
 
         function init(){
             displayResults();

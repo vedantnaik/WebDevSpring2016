@@ -38,24 +38,6 @@
                         console.log("Unable to login.");
                     }
                 );
-
-            //UserService
-            //    .findUserByCredentials(user.username, user.password)
-            //    .then(
-            //        function( res ){
-            //            if(res.data){
-            //                UserService.setCurrentUser(res.data);
-            //                $rootScope.$broadcast('newUserTheme', res.data.supportConstructor);
-            //                $location.url("/home");
-            //            } else {
-            //                vm.message = "Unable to Login!";
-            //            }
-            //        },
-            //        function( err ){
-            //            vm.message = "Unable to Login!";
-            //            console.log("Unable to login.");
-            //        }
-            //    );
         }
     }
 })();

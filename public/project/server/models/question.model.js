@@ -27,8 +27,6 @@ module.exports = function (db, mongoose, quizModel) {
             .find({ questionContent: question.questionContent,
                     quizId: question.quizId },
                 function(err, doc) {
-                    console.log(question.quizId);
-                    console.log(doc);
                     if(doc.length > 0) {
                         // similar question already exists
                         deferred.reject();
@@ -202,7 +200,4 @@ module.exports = function (db, mongoose, quizModel) {
         }
         return input;
     }
-
-
-
-}
+};

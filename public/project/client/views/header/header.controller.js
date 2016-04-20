@@ -50,8 +50,6 @@
                         $location.url("/home");
                     }
                 );
-            //$rootScope.currentUser = null;
-            //UserService.setCurrentUser(null);
             setTeamColors("Ferrari");
         }
 
@@ -66,7 +64,6 @@
         // helpers
 
         $scope.$on('newUserTheme', function(event, msg) {
-            console.log("heard braodcast");
             setTeamColors(msg);
         });
 

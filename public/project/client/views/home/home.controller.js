@@ -15,7 +15,6 @@
 
         vm.goToSearchPage = goToSearchPage;
 
-
         vm.userFactCount = 0;
         vm.quizCreatedCount = 0;
 
@@ -34,7 +33,6 @@
                         FactService.findAllFactsForUser(userFromServer._id)
                             .then(
                                 function( res ) {
-                                    console.log(res);
                                     if (res.data) {
                                         vm.userFactCount = res.data.length;
                                     } else {

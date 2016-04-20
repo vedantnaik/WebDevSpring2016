@@ -78,7 +78,6 @@ module.exports = function(app, request) {
         var round = req.params.round;
         var constructorId = req.params.constructorId;
 
-        console.log("search ergast for season " + season);
         request(
             QUERY_CONSTRUCTOR_RACE_RESULT_SEASON_ROUND
                 .replace("SEASON", season)

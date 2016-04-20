@@ -40,8 +40,6 @@ module.exports = function(app, factModel) {
     function getFactsByUserId(req, res){
         var userId = req.params.userId;
 
-        console.log("get facts for user " + userId);
-
         // first find CRRs
         factModel
             .findAllConstructorRaceResultFactsForUser(userId)

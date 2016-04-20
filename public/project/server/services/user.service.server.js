@@ -26,7 +26,7 @@ module.exports = function(app, userModel){
     app.delete('/api/f1explorer/user/:id', deleteUser);
 
     app.get('/api/f1explorer/loggedin', loggedin);
-    app.post('/api/f1explorer/logout', logout);
+    //app.post('/api/f1explorer/logout', logout);
 
 
     passport.use(new LocalStrategy(localStrategy));
@@ -78,12 +78,10 @@ module.exports = function(app, userModel){
     function register(req, res) {
         var newUser = req.body;
 
-        console.log("1. "+newUser.username);
         userModel
             .findUserByUsername(newUser.username)
             .then(
                 function (user) {
-                    console.log(user);
                     if(user) {
                         res.json(null);
                     } else {
@@ -92,7 +90,6 @@ module.exports = function(app, userModel){
                     }
                 },
                 function(err){
-                    console.log("register5");
                     res.status(400).send(err);
                 }
             )
@@ -199,7 +196,6 @@ module.exports = function(app, userModel){
     }
 
     function updateUser(req,res){
-        console.log("update user");
         var userToUpdate = req.body;
         var userId = req.params.id;
 
@@ -248,7 +244,6 @@ module.exports = function(app, userModel){
     }
 
     function loggedin(req, res) {
-        //console.log("give back loggedin user "+req.session.currentUser.username);
         res.send(req.isAuthenticated() ? req.user : null);
     }
 
@@ -265,6 +260,6 @@ module.exports = function(app, userModel){
         else{
             next();
         }
-    };
+    }
 
-}
+};

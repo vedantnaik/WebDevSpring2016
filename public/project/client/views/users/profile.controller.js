@@ -26,9 +26,6 @@
                 .then(function (res) {
                     var userFromServer = res.data;
 
-                    console.log("LOGGED IN USER FROM SERVER INIT PROFILE CONTROLLER");
-                    console.log(userFromServer);
-
                     $rootScope.currentUser = userFromServer;
 
                     vm.user = userFromServer;
@@ -61,7 +58,6 @@
 
         function update(user) {
 
-            console.log("UPDATE USER IN CONTROLLER: " + vm.user.username);
             vm.error = null;
             vm.message = null;
 

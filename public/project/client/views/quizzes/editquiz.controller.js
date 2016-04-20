@@ -17,14 +17,11 @@
         vm.displayResults = displayResults;
         vm.deleteStoredFact = deleteStoredFact;
         vm.hideResult = hideResult;
-
         vm.convertDRRFactToQuestion = convertDRRFactToQuestion;
         vm.convertCRRFactToQuestion = convertCRRFactToQuestion;
-
         vm.deleteAllQuestions = deleteAllQuestions;
         vm.publishQuiz = publishQuiz;
         vm.unpublishQuiz = unpublishQuiz;
-
         vm.updateQuizTitle = updateQuizTitle;
         vm.dismissUpdateModal = dismissUpdateModal;
 
@@ -32,7 +29,6 @@
 
         vm.championshipType = 'Drivers';
         vm.standingsSearchTypeDriver = true;
-
 
         init();
 

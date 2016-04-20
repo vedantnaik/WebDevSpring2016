@@ -326,15 +326,11 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
             questionStr = "Which constructor finished at position " + finishingPosition + " in the " + season + " " + gpName + "?";
         }
 
-        console.log("makingstart " + questionStr);
-
-
         questionToCreate.userId = fact.userId; // user who created the question
         questionToCreate.quizId = quizId; // quiz to which this question belongs to
 
         questionToCreate.questionContent = questionStr; // Text asking the question
 
-        console.log("make call");
         getFourConstructorsFromYear(season, fact.constructorName)
             .then(
                 function(fourFakeOptions){
@@ -368,7 +364,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         );
                 },
                 function(err){
-                    console.log("function does not work");
                     // failed to make fake options due to API call failure
                     var failSafeOptions = ["Ferrari", "McLaren", "Lotus", "Williams"];
 
@@ -479,7 +474,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         .then(
                             function(questionsForQuiz){
                                 foundQuiz.questions = questionsForQuiz;
-                                console.log("updating quiz " + foundQuiz.title + " to have all new questions");
                                 quizModel
                                     .updateQuizById(foundQuiz._id, foundQuiz);
                             }

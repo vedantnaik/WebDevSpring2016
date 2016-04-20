@@ -17,7 +17,6 @@
         vm.updatedSelectedAnwer = updatedSelectedAnwer;
         vm.clearAllSelections = clearAllSelections;
         vm.submitAnswers = submitAnswers;
-
         vm.proceedToResults = proceedToResults;
 
         init();
@@ -48,7 +47,6 @@
         }
 
         function updatedSelectedAnwer(questionIndex, selectedOption){
-            //console.log(questionIndex, selectedOption);
             vm.questionsInThisQuiz[questionIndex].selectedAnswer = selectedOption;
         }
 
@@ -60,8 +58,6 @@
         }
 
         function submitAnswers(){
-            console.log("Start evaluating");
-
             var totalScore = 0;
             vm.questionsInThisQuiz
                 .forEach(function(ques){
@@ -73,10 +69,6 @@
                         }
                     }
                 });
-
-            console.log(totalScore);
-            console.log("Done evaluating");
-
 
             UserService
                 .getCurrentUser()
@@ -98,12 +90,10 @@
                         locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/true";
                     }
 
-                    console.log("updated");
                     UserService
                         .updateUser(vm.userWhoPlayed._id, vm.userWhoPlayed)
                         .then(
                             function (res) {
-
                                 // user status updated
                                 vm.resultURLString = locationUrlStr;
                                 vm.submittedAnswersToServer = true;
