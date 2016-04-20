@@ -90,7 +90,8 @@
 
                         </p>
 
-                        <p class="card-text"><small class="text-muted">F1 Explorer is free and always will be!</small></p>
+                        <p class="card-text"><small class="text-muted">F1 Explorer is free and always will be! <br>
+                            Checkout the demo below.</small></p>
                     </div>
                 </div>
 
@@ -145,6 +146,22 @@
                         <p class="card-text"><small class="text-muted">Last update from Seaosn: {{model.latestRaceSeason}} Round: {{model.latestRaceRound}}</small></p>
                     </div>
                 </div>
+
+
+                <div ng-if="!model.user"
+                     class="card card-inverse pull-left col-sm-6 col-xs-12">
+                    <div class="card-img-overlay">
+                        <h3 class="card-title">Demo</h3>
+
+                        <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/5z0hYNvErLY"
+                                frameborder="0" allowfullscreen></iframe>
+
+                        </div>
+
+                    </div>
+                </div>
+
 
             </div>
         </div>

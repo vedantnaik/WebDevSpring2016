@@ -455,6 +455,16 @@ a:hover {
     font-size: 1rem;
     margin: 15px 0 0;
 }
+
+.instructions {
+    background-color: rgba(0, 150, 7, 0.15);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.instructions > p {
+    margin: 0;
+}
+
 /*********************************************************************
 
 

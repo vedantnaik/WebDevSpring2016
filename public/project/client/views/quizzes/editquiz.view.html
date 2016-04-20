@@ -14,7 +14,7 @@
                             </h1>
 
                             <h4> Current status : {{model.quizToEdit.publishedStatus}} </h4>
-                            <p> Building your quiz is so simple! <br>
+                            <p> Building quizzes is so simple! <br>
                                 - Just hit the "arrow" <span class="glyphicon glyphicon-arrow-right"></span> next to a fact to generate a question.<br>
                                 - Temporarily hide facts using the "filter" <span class="glyphicon glyphicon-filter"></span> button <br>
                                 - Toggle between stored "Driver" and "Constructor" facts. <br>
@@ -80,7 +80,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <div ng-if="model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
+                            <div ng-if="model.standingsSearchTypeDriver"
+                                 class="container-fluid table-responsive margin-vertical-pad">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -119,7 +120,6 @@
 
                                             <td>
                                                 <div class="row">
-                                                    <!--<button ng-click="model.deleteStoredFact(result._id, result.driverName)"-->
                                                     <button ng-click="model.hideResult($index)"
                                                             class="btn btn-delete-in-row">
                                                         <span class="glyphicon glyphicon-filter"></span>
@@ -134,7 +134,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div ng-if="!model.standingsSearchTypeDriver" class="table-responsive margin-vertical-pad">
+                            <div ng-if="!model.standingsSearchTypeDriver" class="container-fluid table-responsive margin-vertical-pad">
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -173,7 +173,6 @@
 
                                             <td>
                                                 <div class="row">
-                                                    <!--<button ng-click="model.deleteStoredFact(result._id, result.driverName)"-->
                                                     <button ng-click="model.hideResult($index)"
                                                             class="btn btn-delete-in-row">
                                                         <span class="glyphicon glyphicon-filter"></span>
@@ -196,6 +195,14 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div  id="quizEditorQuestionsPanel" class="row">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12">
+                                    <h5 align="center">
+                                        Questions in this quiz
+                                    </h5>
+                                </div>
+                            </div>
+
                             <div class="container-fluid">
                                 <div class="table-responsive margin-vertical-pad">
                                     <table class="table">

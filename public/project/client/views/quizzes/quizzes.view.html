@@ -15,6 +15,17 @@
                      ng-show="model.message" role="alert">
                     {{model.message}}
                 </div>
+
+                <div class="col-sm-12 col-xs-12 instructions">
+                    <p ng-if="currentUser">
+                        <strong>Instructions:</strong><br>
+                        Create new quizzes using the <span class="glyphicon glyphicon-plus"></span> button.
+                        Delete any quiz using the <span class="glyphicon glyphicon-trash"></span> button.<br>
+                        <span class="glyphicon glyphicon-pushpin"></span> is used to denote published quizzes.
+                        <span class="glyphicon glyphicon-lock"></span> is used to denote unpublished quizzes.<br>
+                        Click on any quiz to edit it in the Quiz Builder tool.
+                    </p>
+                </div>
             </div>
 
             <div class="container">

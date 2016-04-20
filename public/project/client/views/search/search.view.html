@@ -16,6 +16,16 @@
                     {{model.message}}
                 </div>
 
+                <div class="col-sm-12 col-xs-12 instructions">
+                    <p ng-if="currentUser">
+                        Use the <span class="glyphicon glyphicon-plus"></span>/<span class="glyphicon glyphicon-ok"></span>
+                        button to toggle a stored fact.
+                        Clicking <span class="glyphicon glyphicon-plus"></span> stores a fact for you,
+                        and <span class="glyphicon glyphicon-ok"></span> removes a stored fact.
+                        Click <span class="glyphicon glyphicon-filter"></span> to temporarily hide any row.
+                    </p>
+                </div>
+
                 <a href="#/stored">
                     <button class="col-sm-12 col-xs-12 btn btn-action search-view-button"
                             type="button" ng-if="model.userSearching">
@@ -88,7 +98,7 @@
                     </button>
                 </div>
 
-                <div ng-if="model.standingSearchResult" class="table-responsive margin-vertical-pad">
+                <div ng-if="model.standingSearchResult" class="container-fluid table-responsive margin-vertical-pad">
 
                     <table ng-if="model.standingsSearchTypeDriver" class="table">
                         <thead>
@@ -137,7 +147,7 @@
                                         </button>
                                         <button ng-click="model.hideResult($index)"
                                                 class="btn btn-danger col-sm-4 col-xs-4">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-filter"></span>
                                         </button>
                                     </div>
                                 </td>
@@ -187,7 +197,7 @@
                                         </button>
                                         <button ng-if="currentUser" ng-click="model.hideResult($index)"
                                                 class="btn btn-danger col-sm-4 col-xs-4">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-filter"></span>
                                         </button>
                                     </div>
                                 </td>
