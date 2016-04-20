@@ -88,7 +88,6 @@
                     .getDriverStandingForSeasonRound(vm.season, vm.round)
                     .then(
                         function( res ){
-                            console.log("in search",vm.season, vm.round);
                             vm.standingsSearchTypeDriver = true;
                             vm.standingSearchResult = res.data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
 
@@ -312,8 +311,6 @@
         function goBackOneRace(){
             vm.message = null;
 
-            console.log(vm.roundsList.indexOf(+vm.queryOn.round));
-
             if( vm.roundsList.indexOf(+vm.queryOn.round) == 0 ){
                 vm.message = "This was the first round of " + vm.queryOn.season + " season.";
             } else {
@@ -324,8 +321,6 @@
 
         function goAheadOneRace(){
             vm.message = null;
-
-            console.log(vm.roundsList.indexOf(+vm.queryOn.round));
 
             if ( vm.roundsList.indexOf(+vm.queryOn.round) == (vm.roundsList.length - 1) ){
                 vm.message = "This was the last round of " + vm.queryOn.season + " season.";
