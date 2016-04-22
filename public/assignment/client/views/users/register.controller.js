@@ -40,15 +40,23 @@
             }
 
 
-            UserService.register(user)
+            UserService
+                .register(user)
 
                 .then(function(response) {
 
-                        var user = response;
+                        if(response.data != null) {
 
-                        if(user != null) {
-                            $rootScope.currentuser = user;
-                            $location.url("/profile");
+                            UserService
+                                .getCurrentUser()
+                                .then(
+                                    function(res){
+                                        $rootScope.currentUser = res.data;
+                                        $location.url("/profile");
+                                    }
+                                );
+
+
 
                         }else{
                             $scope.message = "Username already exists!";

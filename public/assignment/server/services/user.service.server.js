@@ -4,6 +4,7 @@
 
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, userModel){
 
@@ -28,13 +29,14 @@ module.exports = function(app, userModel){
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .findUserByUsername(username)
             .then(
                 function(user) {
-                    if (!user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
                         return done(null, false);
                     }
-                    return done(null, user);
                 },
                 function(err) {
                     if (err) {
@@ -68,9 +70,9 @@ module.exports = function(app, userModel){
         //console.log("in CREATE USER SERVER SERVICE");
         var newUser = req.body;
 
-        if(newUser.roles == null || newUser.roles.length < 1) {
-            newUser.roles.push("student");
-        }
+        //if(newUser.roles == null || newUser.roles.length < 1) {
+        //    newUser.roles.push("student");
+        //}
 
         // first check if a user already exists with the username
         userModel
@@ -79,7 +81,7 @@ module.exports = function(app, userModel){
                 function(user){
                     // if the user does not already exist
                     if(user == null) {
-                        // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser)
                             .then(
                                 // fetch all the users
@@ -135,26 +137,36 @@ module.exports = function(app, userModel){
         var newUser = req.body;
 
         userModel
-            .updateUser(req.params.id, newUser)
+            .findUserById(newUser._id)
             .then(
-                function(user){
-                    if(!isAdmin(req.user) || req.session.passport.user._id == req.params.id){
-                        return user;
-                    }else{
-                        return userModel.findAllUsers();
+                function(resp) {
+                    var user = resp;
+                    if (user.password !== newUser.password) {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                     }
+                    userModel
+                        .updateUser(req.params.id, newUser)
+                        .then(
+                            function(user){
+                                if(!isAdmin(req.user) || req.session.passport.user._id == req.params.id){
+                                    return user;
+                                }else{
+                                    return userModel.findAllUsers();
+                                }
 
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            )
-            .then(function(users){
-                    res.json(users);
-                },
-                function(err){
-                    res.status(400).send(err);
+                            },
+                            function(err){
+                                res.status(400).send(err);
+                            }
+                        )
+                        .then(function(users){
+                                res.json(users);
+                            },
+                            function(err){
+                                res.status(400).send(err);
+                            });
                 });
+
     }
 
     function deleteUser(req,res){
@@ -199,12 +211,7 @@ module.exports = function(app, userModel){
     function register(req, res) {
 
         var newUser = req.body;
-        if(newUser.hasOwnProperty("roles")){
-            newUser.roles.push('student');
-        }else{
-            newUser.roles = ['student'];
-        }
-
+        newUser.roles = ['student'];
 
         userModel
             .findUserByUsername(newUser.username)
@@ -213,7 +220,9 @@ module.exports = function(app, userModel){
                     if(user) {
                         res.json(null);
                     } else {
-                        return userModel.Create(newUser);
+                        console.log(newUser.password );
+                        newUser.password = bcrypt.hashSync(newUser.password);
+                        return userModel.createUser(newUser);
                     }
                 },
                 function(err){
@@ -225,6 +234,7 @@ module.exports = function(app, userModel){
                     if(user){
                         req.login(user, function(err) {
                             if(err) {
+                                console.log("login err");
                                 res.status(400).send(err);
                             } else {
                                 res.json(user);

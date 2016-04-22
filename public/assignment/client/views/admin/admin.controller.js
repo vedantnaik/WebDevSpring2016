@@ -44,45 +44,27 @@
 
         function add(user){
             var userToCreate = user;
-            if(userToCreate.emails) {
-                //userToCreate.emails = splitByCommaAndTrim(userToCreate.emails);
-                //console.log(userToCreate.emails);
-                userToCreate.emails = [userToCreate.emails];
-            } else {
-                vm.message = "Please enter an email id to register!";
-                return;
-            }
 
             UserService
-                .findUserByUsername(user.username)
-                .then(function(res){
-                    if(res.data) {
-                        vm.message = "We're sorry, another user has already taken this username! " +
-                            "Please try registering with another username.";
-                        return;
-                    } else {
+                .createUser(userToCreate)
+                .then(
+                    function ( resp ){
+                        // new user created
                         UserService
-                            .createUser(userToCreate)
+                            .findAllUsers()
                             .then(
-                                function ( resp ){
-                                    // new user created
-                                    UserService
-                                        .findAllUsers()
-                                        .then(
-                                            function (res) {
-                                                vm.users = res.data;
-                                                vm.newuser = {};
-                                            },
-                                            function (err) {
-                                                vm.error = "could not load all users";
-                                            });
+                                function (res) {
+                                    vm.users = res.data;
+                                    vm.newuser = {};
                                 },
-                                function ( err ) {
-                                    // error creating new user
-                                    alert("Unable to create new user. Try Again!");
+                                function (err) {
+                                    vm.error = "could not load all users";
                                 });
-                    }
-                });
+                    },
+                    function ( err ) {
+                        // error creating new user
+                        alert("Unable to create new user. Try Again!");
+                    });
 
         }
 

@@ -30,6 +30,7 @@
                             $rootScope.currentUser = res.data;
                             $location.url("/profile");
                         } else {
+                            console.log("Unable to login.");
                             vm.errorMessage = "Unable to Login!";
                         }
                     },
