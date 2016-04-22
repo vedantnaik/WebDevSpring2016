@@ -70,6 +70,29 @@
                                     function(a, b) {
                                     return parseInt(b.score) - parseInt(a.score);
                                 });
+
+                                var thisUser = null;
+                                var rank = 1;
+                                vm.leaderBoard
+                                    .forEach(
+                                        function(lbUser){
+                                            lbUser.rank = rank;
+                                            rank = rank + 1;
+
+                                            if(vm.user) {
+                                                if(vm.user.username == lbUser.username){
+                                                    thisUser = lbUser;
+                                                }
+                                            }
+                                        });
+
+                                vm.leaderBoard.splice(10);
+
+                                if(thisUser) {
+                                    if (thisUser.rank > 10) {
+                                        vm.leaderBoard.push(thisUser);
+                                    }
+                                }
                             }
                         );
 
