@@ -49,8 +49,8 @@ app.get('/project', function(req, res){
     res.sendfile('/project/client/index.html');
 });
 
-require('./public/assignment/server/app.js')(app, db, mongoose);
-//require('./public/project/server/app.js')(app, db, mongoose);
+//require('./public/assignment/server/app.js')(app, db, mongoose);
+require('./public/project/server/app.js')(app, db, mongoose);
 require('./public/experiments/projectPrototype/server/app.js')(app, db, mongoose);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
