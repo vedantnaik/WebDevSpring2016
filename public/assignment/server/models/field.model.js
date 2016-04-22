@@ -15,12 +15,6 @@ module.exports = function (formModel, mongoose) {
         createField: createField,
         deleteField: deleteField,
         updateField: updateField,
-
-        //createFieldInForm: createFieldInForm,
-        //deleteFieldInForm: deleteFieldInForm,
-        //findFieldInForm: findFieldInForm,
-        //updateFieldInForm: updateFieldInForm,
-        //findFieldsByFormId: findFieldsByFormId
     };
 
     return api;
