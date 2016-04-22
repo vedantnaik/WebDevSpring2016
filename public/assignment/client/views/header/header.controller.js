@@ -13,8 +13,22 @@
         $scope.$location = $location;
         $scope.logout = logout;
 
+        function init() {
+            UserService
+                .getCurrentUser()
+                .then(
+                    function(res){
+                        $rootScope.currentUser = res.data;
+                    }
+                );
+
+        }
+
+        init();
+
         function logout(){
-            UserService.setCurrentUser(null);
+            $rootScope.currentUser = null;
+            UserService.logout();
         }
 
     }

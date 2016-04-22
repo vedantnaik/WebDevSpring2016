@@ -11,44 +11,43 @@
 
     function UserService($rootScope, $http, $location) {
         var service = {
+            login: login,
+            logout: logout,
+            register: register,
+
             createUser : createUser,
-            updateUser : updateUser,
-            deleteUserById : deleteUserById,
-
-            findUserByUsername: findUserByUsername,
-            findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
-
-            setCurrentUser : setCurrentUser,
-            getCurrentUser : getCurrentUser
+            deleteUserById : deleteUserById,
+            updateUser : updateUser,
+            getCurrentUser: getCurrentUser
         };
         return service;
 
-        function findUserByCredentials(username, password) {
-            //console.log("in FIND USER CLIENT SERVICE");
-            return $http.get('/api/assignment/user?username='+username+"&password="+password);
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
         }
 
-        function findUserByUsername(username) {
-            return $http.get('/api/assignment/user?username='+username);
+        function logout() {
+            return $http.post("/api/assignment/logout");
         }
 
-        function setCurrentUser(user){
-            $rootScope.currentUser = user;
-            //console.log("SET CURRENT USER TO");
-            //console.log($rootScope.currentUser);
+        function register(user) {
+            return $http.post("/api/assignment/register", user);
+        }
+
+
+
+
+        function createUser(user){
+            return $http.post('/api/assignment/admin/user',user);
         }
 
         function findAllUsers(){
-            return $http.get('/api/assignment/user');
-        }
-
-        function createUser(user){
-            return $http.post('/api/assignment/user',user);
+            return $http.get('/api/assignment/admin/user');
         }
 
         function deleteUserById(userId){
-            return $http.delete('/api/assignment/user/'+userId);
+            return $http.delete('/api/assignment/admin/user/'+userId);
         }
 
         function updateUser(userId, user){
@@ -56,10 +55,10 @@
         }
 
         function getCurrentUser() {
-            var currentUsername = $rootScope.currentUser.username;
+            //var currentUsername = $rootScope.currentUser.username;
             //console.log("GET CURRENT USER");
             //console.log(currentUsername);
-            return $http.get('/api/assignment/user?username='+currentUsername);
+            return $http.get('/api/assignment/loggedin');
         }
     }
 

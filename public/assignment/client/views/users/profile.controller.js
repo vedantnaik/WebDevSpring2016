@@ -18,17 +18,12 @@
         function init() {
             UserService
                 .getCurrentUser()
-                .then(function (res) {
-                    var userFromServer = res.data;
-                    if(userFromServer.phones) {
-                        userFromServer.phones = makeCsvStringFromArray(userFromServer.phones);
+                .then(
+                    function(res){
+                        vm.user = res.data;
                     }
-                    if(userFromServer.emails) {
-                        userFromServer.emails = makeCsvStringFromArray(userFromServer.emails);
-                    }
+                );
 
-                    vm.user = userFromServer;
-                });
         }
         return init();
 
@@ -37,20 +32,20 @@
             //console.log("UPDATE USER IN CONTROLLER: " + vm.user._id);
             vm.error = null;
             vm.message = null;
-
-            if(user.phones.length > 0) {
-                user.phones = splitByCommaAndTrim(user.phones);
-            }
-            if(user.emails.length > 0) {
-                user.emails = splitByCommaAndTrim(user.emails);
-            }
+            //
+            //if(user.phones.length > 0) {
+            //    user.phones = splitByCommaAndTrim(user.phones);
+            //}
+            //if(user.emails.length > 0) {
+            //    user.emails = splitByCommaAndTrim(user.emails);
+            //}
 
             UserService
                 .updateUser(vm.user._id, user)
                 .then(
                     function ( resp ) {
                         if( resp.data ) {
-                            UserService.setCurrentUser( resp.data );
+                            $rootScope.currentUser = resp.data;
                             vm.message = "Your profile was updated successfully!";
                             //console.log("Your profile was updated successfully!");
                         } else {

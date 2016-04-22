@@ -23,12 +23,11 @@
             if(!user.password) {vm.message = "Enter password!"; return;}
 
             UserService
-                .findUserByCredentials(user.username, user.password)
+                .login(user)
                 .then(
                     function ( res ){
                         if(res.data){
-                            UserService.setCurrentUser(res.data);
-                            //$rootScope.currentUser = res.data;
+                            $rootScope.currentUser = res.data;
                             $location.url("/profile");
                         } else {
                             vm.errorMessage = "Unable to Login!";

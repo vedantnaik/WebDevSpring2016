@@ -39,36 +39,57 @@
                 return;
             }
 
-            UserService
-                .findUserByUsername(user.username)
-                .then(function(res){
-                    if(res.data) {
-                        vm.message = "We're sorry, another user has already taken this username! " +
-                            "Please try registering with another username.";
-                        return;
-                    } else {
-                        UserService
-                            .createUser(userToCreate)
-                            .then(
-                                function ( resp ){
-                                    // new user created
-                                    UserService
-                                        .findUserByUsername(userToCreate.username)
-                                        .then(
-                                            function ( respGetNewUser ) {
-                                                UserService.setCurrentUser(respGetNewUser.data);
-                                                $location.url("/profile");
-                                            },
-                                            function ( errGettingNewUser ) {
-                                                alert("Could not find newly created user on server");
-                                            });
-                                },
-                                function ( err ) {
-                                    // error creating new user
-                                    alert("Unable to create new user. Try Again!");
-                                });
+
+            UserService.register(user)
+
+                .then(function(response) {
+
+                        var user = response;
+
+                        if(user != null) {
+                            $rootScope.currentuser = user;
+                            $location.url("/profile");
+
+                        }else{
+                            $scope.message = "Username already exists!";
+                        }
+                    },
+                    function(err) {
+                        $scope.message = err;
                     }
-                });
+                );
+
+
+            //UserService
+            //    .findUserByUsername(user.username)
+            //    .then(function(res){
+            //        if(res.data) {
+            //            vm.message = "We're sorry, another user has already taken this username! " +
+            //                "Please try registering with another username.";
+            //            return;
+            //        } else {
+            //            UserService
+            //                .createUser(userToCreate)
+            //                .then(
+            //                    function ( resp ){
+            //                        // new user created
+            //                        UserService
+            //                            .findUserByUsername(userToCreate.username)
+            //                            .then(
+            //                                function ( respGetNewUser ) {
+            //                                    UserService.setCurrentUser(respGetNewUser.data);
+            //                                    $location.url("/profile");
+            //                                },
+            //                                function ( errGettingNewUser ) {
+            //                                    alert("Could not find newly created user on server");
+            //                                });
+            //                    },
+            //                    function ( err ) {
+            //                        // error creating new user
+            //                        alert("Unable to create new user. Try Again!");
+            //                    });
+            //        }
+            //    });
 
         }
 
