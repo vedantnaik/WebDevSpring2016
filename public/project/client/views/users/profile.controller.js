@@ -64,25 +64,35 @@
             user.supportConstructor = vm.userChoosesToSupport;
 
             UserService
-                .updateUser(vm.user._id, user)
-                .then(function(res){
-                    UserService
-                        .getCurrentUser()
-                        .then(function (resp) {
-                            if( resp.data ) {
-                                vm.message = "Your profile was updated successfully!";
-                                $rootScope.$broadcast('newUserTheme', resp.data.supportConstructor);
-                                $location.url("/profile");
-                            } else {
-                                vm.message = "Unable to update your profile. Try again!";
-                            }
-                        },
-                        function (err) {
-                            vm.message = "Unable to update your profile. Try again!";
-                        });
-                });
+                .findUserByUsername(user.username)
+                .then(
+                    function(unameRes){
 
+                        if(unameRes.data){
+                            vm.message = "Unable to update your profile. The username seems to be taken.";
+                            return;
+                        }
 
+                        UserService
+                            .updateUser(vm.user._id, user)
+                            .then(function(res){
+                                UserService
+                                    .getCurrentUser()
+                                    .then(function (resp) {
+                                            if( resp.data ) {
+                                                vm.message = "Your profile was updated successfully!";
+                                                $rootScope.$broadcast('newUserTheme', resp.data.supportConstructor);
+                                                $location.url("/profile");
+                                            } else {
+                                                vm.message = "Unable to update your profile. Try again!";
+                                            }
+                                        },
+                                        function (err) {
+                                            vm.message = "Unable to update your profile. Try again!";
+                                        });
+                            });
+                    }
+                );
         }
 
         function selectedConstructor(constructor){

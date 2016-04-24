@@ -49,6 +49,7 @@
             vm.message = null;
 
             if(!user) {vm.message = "Enter necessary details!"; return;}
+            if(!user.username) {vm.message = "Please enter some username!"; return;}
 
             if(user.password != user.confirmPassword){
                 vm.message = "Passwords do not match. Try Again!";
