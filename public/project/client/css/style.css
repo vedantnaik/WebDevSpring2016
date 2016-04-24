@@ -1393,3 +1393,8 @@ Making tables responsive
         margin-bottom:0;
     }
 }
+
+.modal-table {
+    overflow-y: scroll;
+    overflow: hidden;
+}
