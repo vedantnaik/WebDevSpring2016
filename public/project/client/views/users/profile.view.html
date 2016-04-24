@@ -16,84 +16,86 @@
             </div>
 
 
-            <form class="container form-horizontal">
+            <div class="container">
+                <form class="form-horizontal col-sm-10">
 
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label for="username" class="col-sm-12 control-label text-left">Username:</label>
-                    </div>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label for="inputPassword3" class="col-sm-12 control-label text-left">Password:</label>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="username" class="col-sm-12 control-label text-left">Username:</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+                        </div>
                     </div>
 
-                    <div class="col-sm-3" align="center">
-                        <button ng-click="model.togglePasswordDisplay()"
-                                class="btn btn-toolbar"> Click to display field </button>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="inputPassword3" class="col-sm-12 control-label text-left">Password:</label>
+                        </div>
+
+                        <div class="col-sm-3" align="center">
+                            <button ng-click="model.togglePasswordDisplay()"
+                                    class="btn btn-toolbar"> Click to display field </button>
+                        </div>
+
+                        <div ng-if="model.passwordDisplay" class="col-sm-7">
+                            <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        </div>
                     </div>
 
-                    <div ng-if="model.passwordDisplay" class="col-sm-7">
-                        <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="firstname" class="col-sm-12 control-label text-left">First Name:</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.firstName" type="text" class="form-control" id="firstname" placeholder="First Name">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label for="firstname" class="col-sm-12 control-label text-left">First Name:</label>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="lastname" class="col-sm-12 control-label text-left">Last Name:</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.lastName" type="text" class="form-control" id="lastname" placeholder="Last Name">
+                        </div>
                     </div>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.firstName" type="text" class="form-control" id="firstname" placeholder="First Name">
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label for="lastname" class="col-sm-12 control-label text-left">Last Name:</label>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <label for="inputEmail3" class="col-sm-12 control-label">Email:</label>
+                        </div>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
                     </div>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.lastName" type="text" class="form-control" id="lastname" placeholder="Last Name">
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <label for="inputEmail3" class="col-sm-12 control-label">Email:</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">iSupport :</label>
+                        <div class="btn-group col-sm-10">
+                            <button type="button"
+                                    class="btn btn-dropdown dropdown-toggle col-sm-12"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{model.userChoosesToSupport}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="constru in model.constructorOptions"
+                                    class="col-sm-12 col-xs-12">
+                                    <a ng-click="model.selectedConstructor(constru)">{{constru}}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">iSupport :</label>
-                    <div class="btn-group col-sm-10">
-                        <button type="button"
-                                class="btn btn-dropdown dropdown-toggle col-sm-12"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{model.userChoosesToSupport}} <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="constru in model.constructorOptions"
-                                class="col-sm-12 col-xs-12">
-                                <a ng-click="model.selectedConstructor(constru)">{{constru}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <a href="#/home"><button class="btn btn-delete-in-row col-xs-12 col-sm-push-1 col-sm-4"><span class="glyphicon glyphicon-dashboard"></span> Back to dashboard</button></a>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <a href="#/home"><button class="btn btn-delete-in-row col-xs-12 col-sm-push-1 col-sm-4"><span class="glyphicon glyphicon-dashboard"></span> Back to dashboard</button></a>
-
-                        <button ng-click="model.update(model.user)" type="submit" class="btn btn-update-existing col-xs-12 col-sm-push-3 col-sm-4"><span class="glyphicon glyphicon-ok"></span> Update</button>
+                            <button ng-click="model.update(model.user)" type="submit" class="btn btn-update-existing col-xs-12 col-sm-push-3 col-sm-4"><span class="glyphicon glyphicon-ok"></span> Update</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
         </div>
     </div>

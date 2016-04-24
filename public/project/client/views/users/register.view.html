@@ -19,59 +19,76 @@
             </div>
 
 
-            <form class="container form-horizontal">
+            <div class="container">
+                <form class="form-horizontal col-sm-10">
 
-                <div class="form-group">
-                    <label for="username" class="col-sm-2 control-label text-left">Username:</label>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label text-left">Username:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label text-left">Password:</label>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-2 control-label text-left">First Name:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.firstName" type="text" class="form-control" id="firstname" placeholder="First Name">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="inputPassword4" class="col-sm-2 control-label">Verify Password:</label>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.confirmPassword" type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label text-left">Last Name:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.lastName" type="text" class="form-control" id="lastname" placeholder="Last Name">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
-                    <div class="col-sm-10">
-                        <input ng-model="model.user.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Password:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label"> iSupport :</label>
-                    <div class="btn-group col-sm-10">
-                        <button type="button"
-                                class="btn btn-dropdown dropdown-toggle col-sm-12"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{model.userChoosesToSupport}} <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="season in model.constructorOptions"
-                                class="col-sm-12 col-xs-12">
-                                <a ng-click="model.selectedConstructor(season)">{{season}}</a>
-                            </li>
-                        </ul>
+                    <div class="form-group">
+                        <label for="inputPassword4" class="col-sm-2 control-label">Verify Password:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.confirmPassword" type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button ng-click="model.register(model.user)" type="submit" class="btn btn-default col-sm-12">Register</button>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input ng-model="model.user.email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"> iSupport :</label>
+                        <div class="btn-group col-sm-10">
+                            <button type="button"
+                                    class="btn btn-dropdown dropdown-toggle col-sm-12"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{model.userChoosesToSupport}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="season in model.constructorOptions"
+                                    class="col-sm-12 col-xs-12">
+                                    <a ng-click="model.selectedConstructor(season)">{{season}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button ng-click="model.register(model.user)" type="submit" class="btn btn-default col-sm-12">Register</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
 
         </div>
     </div>
