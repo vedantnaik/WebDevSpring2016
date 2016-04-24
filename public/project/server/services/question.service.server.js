@@ -94,7 +94,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                     makeDrrQuestion(factToUseForMakingQuestion, quizId)
                         .then(
                             function(doc){
-                                console.log("e le");
                                 res.json(doc);
                             },
                             function (err) {
@@ -160,8 +159,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
     function deleteQuestionById(req, res){
         var questionId = req.params.questionId;
 
-        console.log("DELETE QUESTION SERVICE SERVER " + questionId);
-
         questionModel
             .deleteQuestion(questionId)
             .then(
@@ -200,7 +197,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
         var gpName = fact.raceName;
 
         var questionStr = "";
-        console.log("makingstart " + questionStr);
         if (finishingPosition == '1') {
             questionStr = "Who won the " + season + " " + gpName + "?";
         } else if (finishingPosition == '2') {
@@ -211,7 +207,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
             questionStr = "Who finished at position " + finishingPosition + " in the " + season + " " + gpName + "?";
         }
 
-        console.log("makingstart " + questionStr);
 
 
         questionToCreate.userId = fact.userId; // user who created the question
@@ -219,7 +214,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
 
         questionToCreate.questionContent = questionStr; // Text asking the question
 
-        console.log("make call");
         getFourDriversFromYear(season, fact.driverName)
             .then(
                 function(fourFakeOptions){
@@ -253,7 +247,7 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
                         );
                 },
                 function(err){
-                    console.log("function does not work");
+                    console.log("Generate options function does not work. Ergast may be down.");
                     // failed to make fake options due to API call failure
                     var failSafeOptions = ["Micheal Schumacher", "Ayrton Senna", "Niki Lauda", "Sir Stirling Moss"];
 

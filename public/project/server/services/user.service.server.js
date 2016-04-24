@@ -20,7 +20,7 @@ module.exports = function(app, userModel){
     app.get('/api/f1explorer/user?username=username', getUserByUsername);
     app.get('/api/f1explorer/user/:id', getUserById);
 
-    app.put('/api/f1explorer/user/:id', updateUser);
+    app.put('/api/f1explorer/user/:id', auth, updateUser);
     app.delete('/api/f1explorer/user/:id', deleteUser);
 
     app.get('/api/f1explorer/loggedin', loggedin);

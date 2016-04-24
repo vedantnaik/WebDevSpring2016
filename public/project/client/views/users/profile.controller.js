@@ -29,6 +29,7 @@
                     $rootScope.currentUser = userFromServer;
 
                     vm.user = userFromServer;
+                    vm.originalUsername = userFromServer.username;
                     vm.userChoosesToSupport = vm.user.supportConstructor;
                     var currentYear = new Date().getFullYear();
                     vm.constructorOptions = [];
@@ -68,7 +69,7 @@
                 .then(
                     function(unameRes){
 
-                        if(unameRes.data){
+                        if(vm.originalUsername !== user.username && unameRes.data){
                             vm.message = "Unable to update your profile. The username seems to be taken.";
                             return;
                         }
