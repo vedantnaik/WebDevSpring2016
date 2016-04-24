@@ -84,7 +84,7 @@
                     var userNextLevelScore = userLevel * 100;
 
                     var locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/false";
-                    if ((userScore - userNextLevelScore) > 0) {
+                    if ((userScore - userNextLevelScore) >= 0) {
                         vm.userWhoPlayed.level = +vm.userWhoPlayed.level + 1;
                         $rootScope.currentUser.level = vm.userWhoPlayed.level;
                         locationUrlStr = "/quizzes/playQuiz/"+vm.quizToPlayId+"/score/"+totalScore+"/lvlUp/true";
