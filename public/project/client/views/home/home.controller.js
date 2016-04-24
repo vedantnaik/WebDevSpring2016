@@ -86,6 +86,8 @@
                                             }
                                         });
 
+                                vm.completeLeaderBoard = vm.leaderBoard;
+
                                 vm.leaderBoard.splice(10);
 
                                 if(thisUser) {

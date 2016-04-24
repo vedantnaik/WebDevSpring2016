@@ -1284,6 +1284,12 @@ div.stretch-redbull-image {
     color: black
 }
 
+.leaderboard-text-muted {
+    color: darkgray;
+    font-style: italic;
+}
+
+
 .card-text-info {
     padding-top: 20px;
 }

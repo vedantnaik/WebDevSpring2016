@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="card card-inverse pull-left col-sm-6 col-xs-12">
-                    <div id="leaderboard-card" class="card-img-overlay">
+                    <div id="leaderboard-card" class="card-img-overlay" data-toggle="modal" data-target="#leaderBoardModal">
                         <h5 class="card-title">Top 10 Leaderboard</h5>
 
                         <div class="table-responsive">
@@ -104,7 +104,7 @@
                                 <thead>
                                 <th> Rank </th>
                                 <th> User </th>
-                                <th> Level </th>
+                                <th class="dont-show-on-mobile"> Level </th>
                                 <th> Score </th>
                                 </thead>
 
@@ -120,7 +120,7 @@
                                         <strong>{{user.username}}</strong> <small class="leaderboard-tiny">{{user.supportConstructor}}</small>
                                     </td>
 
-                                    <td>{{user.level}}</td>
+                                    <td class="dont-show-on-mobile">{{user.level}}</td>
                                     <td>
                                         {{user.score}}
                                     </td>
@@ -131,6 +131,7 @@
 
                         </div>
 
+                        <small class="leaderboard-text-muted">Click card to see full list</small>
                     </div>
                 </div>
 
@@ -156,6 +157,58 @@
                         <iframe width="100%" height="100%"
                                 src="https://www.youtube.com/embed/5z0hYNvErLY"
                                 frameborder="0" allowfullscreen></iframe>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="leaderBoardModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Hall of Fame</h4>
+                            </div>
+
+
+                            <div class="modal-body">
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <th> Rank </th>
+                                        <th> User </th>
+                                        <th> Level </th>
+                                        <th> Score </th>
+                                        </thead>
+
+                                        <tbody>
+
+                                        <tr ng-repeat="user in model.completeLeaderBoard"
+                                            ng-class="{'info': model.user.username == user.username}">
+                                            <td>
+                                                {{user.rank}}
+                                            </td>
+
+                                            <td>
+                                                <strong>{{user.username}}</strong> <small class="leaderboard-tiny">{{user.supportConstructor}}</small>
+                                            </td>
+
+                                            <td>{{user.level}}</td>
+                                            <td>
+                                                {{user.score}}
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
