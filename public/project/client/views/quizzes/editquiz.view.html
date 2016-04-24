@@ -14,12 +14,6 @@
                             </h1>
 
                             <h4> Current status : {{model.quizToEdit.publishedStatus}} </h4>
-                            <p> Building quizzes is so simple! <br>
-                                - Just hit the "arrow" <span class="glyphicon glyphicon-arrow-right"></span> next to a fact to generate a question.<br>
-                                - Temporarily hide facts using the "filter" <span class="glyphicon glyphicon-filter"></span> button <br>
-                                - Toggle between stored "Driver" and "Constructor" facts. <br>
-                                - Go to the <a href="#/search/2016/3/Drivers">Season Progress</a> tool to bag more facts.<br>
-                                - When you are done, review the questions and publish your quiz! </p>
 
                             <button type="button" class="col-sm-6 col-xs-12 btn btn-select-to-edit"
                                     ng-click="model.editedQuizTitle"
@@ -39,6 +33,8 @@
                                 <span class="glyphicon glyphicon-send"></span> Publish quiz
                             </button>
 
+
+
                         </div>
 
                         <div class="col-sm-6 col-xs-12">
@@ -52,6 +48,19 @@
                     </div>
                 </div>
 
+                <button type="button" class="btn btn-instructions"
+                        data-toggle="collapse" data-target="#instructions">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    Instructions
+                </button>
+                <div id="instructions" class="collapse col-sm-12 col-xs-12 instructions">
+                    <p> Building quizzes is so simple! <br>
+                        - Just hit the "arrow" <span class="glyphicon glyphicon-arrow-right"></span> next to a fact to generate a question.<br>
+                        - Temporarily hide facts using the "filter" <span class="glyphicon glyphicon-filter"></span> button <br>
+                        - Toggle between stored "Driver" and "Constructor" facts. <br>
+                        - Go to the <a href="#/search/2016/3/Drivers">Season Progress</a> tool to bag more facts.<br>
+                        - When you are done, review the questions and publish your quiz! </p>
+                </div>
             </div>
 
 

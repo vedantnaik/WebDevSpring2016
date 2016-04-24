@@ -71,6 +71,8 @@
                                     return parseInt(b.score) - parseInt(a.score);
                                 });
 
+                                vm.completeLeaderBoard = [];
+
                                 var thisUser = null;
                                 var rank = 1;
                                 vm.leaderBoard
@@ -79,14 +81,14 @@
                                             lbUser.rank = rank;
                                             rank = rank + 1;
 
+                                            vm.completeLeaderBoard.push(lbUser);
+
                                             if(vm.user) {
                                                 if(vm.user.username == lbUser.username){
                                                     thisUser = lbUser;
                                                 }
                                             }
                                         });
-
-                                vm.completeLeaderBoard = vm.leaderBoard;
 
                                 vm.leaderBoard.splice(10);
 

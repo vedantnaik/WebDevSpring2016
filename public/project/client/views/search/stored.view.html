@@ -15,6 +15,20 @@
                     {{model.message}}
                 </div>
 
+                <div ng-if="currentUser" class="col-xs-12 col-sm-12 instructions-panel">
+                    <button type="button" class="btn btn-instructions"
+                            data-toggle="collapse" data-target="#instructions">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Instructions
+                    </button>
+                    <div id="instructions" class="collapse col-sm-12 col-xs-12 instructions">
+                        <p ng-if="currentUser">
+                            Use the <span class="glyphicon glyphicon-remove"></span>
+                            button to permanently delete your stored fact.
+                        </p>
+                    </div>
+                </div>
+
                 <a href="javascript:history.back()">
                     <button class="col-sm-12 col-xs-12 btn btn-action search-view-button"
                             type="button">

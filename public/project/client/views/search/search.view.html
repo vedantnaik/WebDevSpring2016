@@ -16,16 +16,21 @@
                     {{model.message}}
                 </div>
 
-                <div ng-if="currentUser"
-                     class="col-sm-12 col-xs-12 instructions">
-                    <p>
-                        <strong>Instructions:</strong>
-                        Use the <span class="glyphicon glyphicon-plus"></span>/<span class="glyphicon glyphicon-ok"></span>
-                        button to toggle a stored fact.
-                        Clicking <span class="glyphicon glyphicon-plus"></span> stores a fact for you,
-                        and <span class="glyphicon glyphicon-ok"></span> removes a stored fact.
-                        Click <span class="glyphicon glyphicon-filter"></span> to temporarily hide any row.
-                    </p>
+                <div ng-if="currentUser" class="col-xs-12 col-sm-12 instructions-panel">
+                    <button type="button" class="btn btn-instructions"
+                            data-toggle="collapse" data-target="#instructions">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        Instructions
+                    </button>
+                    <div id="instructions" class="collapse col-sm-12 col-xs-12 instructions">
+                        <p ng-if="currentUser">
+                            Use the <span class="glyphicon glyphicon-plus"></span>/<span class="glyphicon glyphicon-ok"></span>
+                            button to toggle a stored fact.
+                            Clicking <span class="glyphicon glyphicon-plus"></span> stores a fact for you,
+                            and <span class="glyphicon glyphicon-ok"></span> removes a stored fact.
+                            Click <span class="glyphicon glyphicon-filter"></span> to temporarily hide any row.
+                        </p>
+                    </div>
                 </div>
 
                 <a href="#/stored">

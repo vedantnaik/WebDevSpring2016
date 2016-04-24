@@ -457,7 +457,7 @@ a:hover {
 }
 
 .instructions {
-    background-color: rgba(0, 150, 7, 0.15);
+    background-color: rgba(33, 255, 50, 0.3);
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -1289,6 +1289,13 @@ div.stretch-redbull-image {
     font-style: italic;
 }
 
+.btn-instructions {
+    background-color: rgba(33, 255, 50, 0.3);
+}
+
+.instructions-panel {
+    padding: 15px;
+}
 
 .card-text-info {
     padding-top: 20px;
