@@ -19,7 +19,6 @@
         };
         return api;
 
-
         function createFactForUser(userId, fact){
             return $http.post("/api/f1explorer/user/"+userId+"/fact",fact);
         }

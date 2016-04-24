@@ -17,7 +17,6 @@ module.exports = function (app, questionModel, quizModel, factModel, request) {
     app.post("/api/f1explorer/question/fromCrrFact/:factId/addtoquiz/:quizId", makeCRRQuestionFromFact);
 
     app.put("/api/f1explorer/question/:questionId", updateQuestionById);
-
     app.delete("/api/f1explorer/question/:questionId", deleteQuestionById);
 
     // for making ergast API calls

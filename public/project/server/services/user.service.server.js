@@ -4,8 +4,6 @@
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require("mongoose");
-
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, userModel){
@@ -26,8 +24,6 @@ module.exports = function(app, userModel){
     app.delete('/api/f1explorer/user/:id', deleteUser);
 
     app.get('/api/f1explorer/loggedin', loggedin);
-    //app.post('/api/f1explorer/logout', logout);
-
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);

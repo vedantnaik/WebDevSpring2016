@@ -64,7 +64,6 @@
 
         function getConstructorStandingForSeasonRound(season, round){
 
-
             return $http.get(QUERY_CONSTRUCTOR_STANDING_SEASON_ROUND
                                             .replace("SEASON", season)
                                             .replace("ROUND", round));
